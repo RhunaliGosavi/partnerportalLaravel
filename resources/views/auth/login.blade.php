@@ -75,11 +75,12 @@
                                         <div class="m-login__desc">Enter your email to reset your password:</div>
                                     </div>
                                     <form class="m-login__form m-form" action="{{route('password.email')}}" method="POST">
+                                        @csrf
                                         <div class="form-group m-form__group">
                                             <input class="form-control m-input" type="text" placeholder="Email" name="email" id="m_email" autocomplete="off">
                                         </div>
                                         <div class="m-login__form-action">
-                                            <button id="m_login_forget_password_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Request</button>
+                                            <button id="" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" type="submit">Request</button>
                                             <button id="m_login_forget_password_cancel" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">Cancel</button>
                                         </div>
                                     </form>
@@ -90,10 +91,9 @@
                 </div>
                 <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1  m-login__content m-grid-item--center" style="background-image: url(assets/app/media/img//bg/bg-4.jpg)">
                     <div class="m-grid__item">
-                        <h3 class="m-login__welcome">Join Our Community</h3>
+                        <h3 class="m-login__welcome">AFL</h3>
                         <p class="m-login__msg">
-                            Lorem ipsum dolor sit amet, coectetuer adipiscing
-                            <br>elit sed diam nonummy et nibh euismod
+                            constantly listening and learning so that the customer has the best digital experience
                         </p>
                     </div>
                 </div>
