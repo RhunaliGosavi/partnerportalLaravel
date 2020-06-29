@@ -101,7 +101,7 @@
 		                sortable: false,
 		                overflow: 'visible',
 		                template:function(row,a,i)  {
-		                	var html = '<a href="'+base_url+'/user/delete/'+row.id+'" title="Edit User" class="dropdown-item"><i class="la la-trash"></i>Edit User</a></div>';
+		                	var html = '<a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
 		                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
                                 <i class="la la-ellipsis-h"></i>\
                             </a>\
@@ -157,7 +157,18 @@
 	                    { field: "employee_id",title:'Employee Id'},
 	                    { field: "pan_number",title:'PAN Number'},
                     	{ field: "mobile_number",title:'Mobile Number'},
-	                    { field: "status",title:'Status'},
+	                    { field: "status",title:'Status', template:function(row) {
+                    		var color='grey';
+	                    	var title = 'Deactive';
+	                    	if(row.status == 1) {
+	                    		color = 'green';
+	                    		title = "Active";
+	                    	}
+	                    		var html = '<a href="#" style="color:'+color+'" title="'+title+'" data-id="'+row.id+'" class="updateStatus"><i class="la la-check-circle"></i></a>';
+
+	                    		return html;
+		                    }
+		                },
 	                    { 
 	              			field: "Actions",
 			                width: 60,
@@ -165,7 +176,7 @@
 			                sortable: false,
 			                overflow: 'visible',
 			                template:function(row,a,i)  {
-			                	html = '<a href="'+base_url+'/user/edit/'+row.id+'" title="Edit User" class="dropdown-item"><i class="la la-edit"></i>Edit User</a></div>';
+			                	html = '<a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
 			                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
 	                                <i class="la la-ellipsis-h"></i>\
 	                            </a>\
