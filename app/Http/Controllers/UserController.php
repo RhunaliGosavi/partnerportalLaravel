@@ -42,16 +42,35 @@ class UserController extends Controller
         if($request->has('user_type') && Config::get('constant')['user_types']['AFL_EMPLOYEE'] == $request->user_type) { 
             $rules['employee_id']    = 'required';
             $rules['pan_number']     = 'required';
-            $rules['mobile_number']  = 'required';
+            $rules['mobile_number']  = 'required|numeric|regex:/(^[1-9][0-9]*$)/';
         }
 
         $request->validate($rules);
-        
-        $helper = new Helper;
-        $employee = $helper->checkEmployee();
-        print_r($employee);exit;
 
-        return redirect('users')->with('success', 'User created successfully!');
+        $helper = new Helper;
+        $employeeExists = $helper->checkEmployee();
+
+        if($employeeExists) {
+            $panResponse = $helper->checkPAN();
+
+            if($panResponse && array_key_exists('statusInfo', $panResponse) && 'SUCCESS' == $panResponse['statusInfo']['status']) {
+                $result = $panResponse['response']['result'];
+
+                $employee = new Employee;
+
+                $employee->employee_id = $post['employee_id'];
+                $employee->pan_number  = $post['pan_number'];
+                $employee->mobile_number = $post['mobile_number'];
+                $employee->name          = $result['name'];
+                $employee->password      = bcrypt('test123');
+                $employee->status        = 1;
+                $employee->save();
+
+                return redirect('users')->with('success', 'Employee created successfully!');
+            }
+        } else {
+            return redirect('users')->with('error', 'Employee not created successfully!');
+        }
     }
 
     public function fetchAFLEmployees(Request $request) {
@@ -78,5 +97,24 @@ class UserController extends Controller
         ];
 
         return json_encode($list);
+    }
+
+    public function updateEmployeeStatus(Request $request, $id) {
+        $employee = Employee::find($id);
+
+        if($employee) {
+            if($employee->status == 1) {
+                $employee->status = 0;
+            } else {
+                $employee->status = 1;
+            }
+            $employee->save();
+            
+            echo json_encode(['result' => true]);
+        } else {
+            echo json_encode(['result' => false]);
+        }
+
+        exit;
     }
 }

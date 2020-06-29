@@ -6,60 +6,95 @@ use Adldap\Laravel\Facades\Adldap;
 class Helper
 {
     public function checkEmployee() {
-    	// Construct new Adldap instance.
+    	return true;
 		$ad = new \Adldap\Adldap();
 
-		// Create a configuration array.
 		$config = [  
-		  // An array of your LDAP hosts. You can use either
-		  // the host name or the IP address of your host.
-		  'hosts'    => ['10.9.0.254'],
-
-		  // The base distinguished name of your domain to perform searches upon.
-		  'base_dn'  => 'dc=uataxisb,dc=com',
-
-		  // The account to use for querying / modifying LDAP records. This
-		  // does not need to be an admin account. This can also
-		  // be a full distinguished name of the user account.
-		  'username' => 'afl067@uataxisb.com',
-		  'password' => 'India@2019',
+		  'hosts'    => [env('LDAP_HOSTS')],
+		  'base_dn'  => env('LDAP_BASE_DN'),
+		  'username' => env('LDAP_USERNAME'),
+		  'password' => env('LDAP_PASSWORD'),
 		];
 
-		// Add a connection provider to Adldap.
 		$ad->addProvider($config);
 
 		try {
-		    // If a successful connection is made to your server, the provider will be returned.
 		    $provider = $ad->connect();
 
 		    // Performing a query.
-		    $results = $provider->search()->where('cn', '=', 'Deepak Mehta')->get();
+		    $results = $provider->search()->where('sAMAccountName', '=', $employee_id)->get();
 
-		    // Finding a record.
-		    $user = $provider->search()->find('Deepak');
-
-		    // Creating a new LDAP entry. You can pass in attributes into the make methods.
-		    $user =  $provider->make()->user([
-		        'cn'          => 'John Doe',
-		        'title'       => 'Accountant',
-		        'description' => 'User Account',
-		    ]);
-
-		    // Setting a model's attribute.
-		    $user->cn = 'John Doe';
-
-		    // Saving the changes to your LDAP server.
-		    if ($user->save()) {
-		        // User was saved!
+		    if($results) {
+		    	return true;
+		    } else {
+		    	return false;
 		    }
 		} catch (\Adldap\Auth\BindException $e) {
-
-		    // There was an issue binding / connecting to the server.
+			return false;
 		}
     }
 
     public function checkPAN() {
+    	$ch = curl_init();
 
+    	$header = [
+    		'serviceCode' => 'IN0024KARPCA',
+    		'callerIdentification' => 'PORTAL',
+    		'authorizationKey' => 'UmEdeSnOtFNcOrMGz',
+    		'trackingId' => uniqid(),
+    		'referenceId' => uniqid(),
+    		// "request" => [
+	    	// 	"consent" => "<<Y/N>>",
+	    	// 	'pan' => 'AXEPR2738K'
+	    	// ]
+
+    	];
+
+    	$post = [
+    		"request" => [
+	    		"consent" => "<<Y/N>>",
+	    		'pan' => 'AXEPR2738K'
+	    	]
+    	];
+
+		curl_setopt($ch, CURLOPT_URL,"http://".env('BASE_PAN_URL')."/V1/Karza/IN0027/PanCardAuthentication");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+
+		// Receive server response ...
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$response = curl_exec($ch);
+        $error    = curl_error($ch);
+        $errno    = curl_errno($ch);
+
+        if (is_resource($ch)) {
+            curl_close($ch);
+        }
+
+        // if (0 !== $errno) {
+        //     throw new \RuntimeException($error, $errno);
+        // }
+        $testResponse = json_encode([
+        	"statusInfo" => [
+        		"status" =>"SUCCESS",
+	            "statusCode" => "0000",
+	            "statusText" => "Text",
+        	],
+        	"response" => [
+        		"status-code" => 101,
+		        "request_id" => "73cdbde2-80f7-11e7-8f0c-e7e769f70bd1",
+		        "result" => [
+		        "name" => "OMKAR MILIND SHIRHATTI"
+		    	]
+        	]
+        ]);
+
+        $response = json_decode($testResponse, true );
+		
+
+		return $response;		
     }
 
     public function checkBankAccount() {

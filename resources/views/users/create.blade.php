@@ -19,45 +19,45 @@
 							<div class="col-md-4">
 								<select class="form-control" name="user_type" id="user_type">
 									<option value="">Select User Type</option>
-									<option value="{{\Config::get('constant')['user_types']['AFL_EMPLOYEE']}}">AFL Employee</option>
+									<option value="{{\Config::get('constant')['user_types']['AFL_EMPLOYEE']}}" @if(old('user_type') == 1) selected @endif>AFL Employee</option>
 									<option value="{{
 									Config::get('constant')['user_types']['BUSSINESS_PARTNER']
-								}}">Bussiness Partner</option>
+								}}"  @if(old('user_type') == 2) selected @endif>Bussiness Partner</option>
 								</select>
 							</div>
 						</div>
 						<hr>
 						<div class="" id="afl_employee" style="display: none">
-							<div class="form-group m-form__group row">
+							<div class="form-group m-form__group row {{ $errors->has('employee_id') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">Employee Id</label>
 								<div class="col-md-4">
-									<input type="text" name="employee_id" placeholder="Employee Id" value="{{old('employee_id')}}" required class="form-control">
+									<input type="text" name="employee_id" placeholder="Employee Id" value="{{old('employee_id')}}" class="form-control">
 									@if ($errors->has('employee_id'))
-                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('employee_id') }}</strong>
-	                                    </span>
+                                    <div class="form-control-feedback">
+	                                    {{ $errors->first('employee_id') }}
+	                                </div>
 	                                @endif
 								</div>
 							</div>
-							<div class="form-group m-form__group row">
+							<div class="form-group m-form__group row {{ $errors->has('pan_number') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">PAN Number</label>
 								<div class="col-md-4">
-									<input type="text" name="pan_number" placeholder="PAN Number" value="{{old('pan_number')}}" required class="form-control">
+									<input type="text" name="pan_number" placeholder="PAN Number" value="{{old('pan_number')}}" class="form-control">
 									@if ($errors->has('pan_number'))
-                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('pan_number') }}</strong>
-	                                    </span>
+                                    <div class="form-control-feedback">
+	                                    {{ $errors->first('pan_number') }}
+	                                </div>
 	                                @endif
 								</div>
 							</div>
-							<div class="form-group m-form__group row">
+							<div class="form-group m-form__group row {{ $errors->has('mobile_number') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">Mobile Number</label>
 								<div class="col-md-4">
-									<input type="text" name="mobile_number" placeholder="Mobile Number" value="{{old('mobile_number')}}" required class="form-control">
+									<input type="text" name="mobile_number" placeholder="Mobile Number" value="{{old('mobile_number')}}" class="form-control" maxlength="10">
 									@if ($errors->has('mobile_number'))
-                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('mobile_number') }}</strong>
-	                                    </span>
+                                    <div class="form-control-feedback">
+	                                    {{ $errors->first('mobile_number') }}
+	                                </div>
 	                                @endif
 								</div>
 							</div>

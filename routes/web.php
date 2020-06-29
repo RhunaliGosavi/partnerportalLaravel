@@ -31,5 +31,6 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('user/update/{id}', 'UserController@update');
 
 	Route::get('fetchAFLEmployees', 'UserController@fetchAFLEmployees');
-	
+	Route::get('updateEmployeeStatus/{id}','UserController@updateEmployeeStatus');
+
 });
