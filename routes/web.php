@@ -20,3 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+
+	Route::get('users', 			'UserController@index');
+	Route::get('user/create', 		'UserController@create');
+	Route::get('user/edit/{id}', 	'UserController@edit');
+	Route::get('user/delete/{id}',  'UserController@delete');
+	Route::post('user/store', 		'UserController@store');
+	Route::post('user/update/{id}', 'UserController@update');
+
+	Route::get('fetchAFLEmployees', 'UserController@fetchAFLEmployees');
+	
+});

@@ -18,12 +18,16 @@
                 sessionStorage.fonts = true;
             }
         });
+        var base_url = "{{url('/')}}";
+        var nofifySuccessMessage = "{{session('success')}}";
+        var nofifyErrorMessage = "{{session('error')}}";
     </script>
 
     <link href="{{url('assets/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/demo/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{url('assets/demo/default/media/img/logo/favicon.ico')}}" />
+    <script src="{{url('assets/js/jquery.min.js')}}" type="text/javascript"></script>
 </head>
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
@@ -41,5 +45,31 @@
     </div>
     <script src="{{url('assets/vendors/base/vendors.bundle.js')}}" type="text/javascript"></script>
     <script src="{{url('assets/demo/default/base/scripts.bundle.js')}}" type="text/javascript"></script>
+    <script type="text/javascript">
+        if('' !== nofifySuccessMessage && 'undefined' !== nofifySuccessMessage) {
+            $.notify(nofifySuccessMessage,{
+                placement: {
+                    from: "top", 
+                    align: "right"
+                },
+                delay:3000,
+                timer:3000,
+                type:'success'
+            });
+        }
+        
+
+        if('' !== nofifyErrorMessage && 'undefined' !== nofifyErrorMessage) {
+            $.notify(nofifyErrorMessage,{
+                placement: {
+                    from: "top", 
+                    align: "right"
+                },
+                delay:3000,
+                timer:3000,
+                type:'danger'
+            });
+        }
+    </script>
 </body>
 </html>
