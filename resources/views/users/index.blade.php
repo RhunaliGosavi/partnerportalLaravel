@@ -11,11 +11,26 @@
 						</div>
 					</div>
 					<div class="m-portlet__head-tools">
-						<a href="{{url('/user/create')}}" border='0'>
-                            <button id="sample_editable_1_new" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill"> Add New
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </a>
+						<div class="row">
+							<div class="col-xl-3 order-2 order-xl-1">
+								<form name="import_file" id="import_file" action="{{url('user/import')}}" method="post" enctype="multipart/form-data">
+		                            {{ csrf_field() }}
+		                            
+		                            <a href="javascript:void(0)" id="import_btn" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">Import Employees</a>
+		                            <input type="file" name="import_file" style="display: none">
+		                            
+		                        </form>
+		                    </div>
+		                    <div class="col-xl-3 order-2 order-xl-1">
+		                    </div>
+		                    <div class="col-xl-3 order-2 order-xl-1">
+								<a href="{{url('/user/create')}}" border='0'>
+		                            <button id="sample_editable_1_new" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill"> Add New
+		                                <i class="fa fa-plus"></i>
+		                            </button>
+		                        </a>
+		                    </div>
+		                </div>
 					</div>
 				</div>
 				<div class="m-portlet__body">
@@ -78,11 +93,11 @@
               	sortable: true,
               	"columns": [
               		{ field: "name",title:'Name'},
-                    { field: "email",title:'Email'},
+                    // { field: "email",title:'Email'},
                     { field: "employee_id",title:'Employee Id'},
                     { field: "pan_number",title:'PAN Number'},
                     { field: "mobile_number",title:'Mobile Number'},
-                    { field: "status",title:'Status', template:function(row) {
+                    { field: "status",title:'Status', sortable:false, template:function(row) {
                     	var color='grey';
                     	var title = 'Deactive';
                     	if(row.status == 1) {
@@ -153,11 +168,11 @@
 	              	sortable: true,
 	              	"columns": [
 	              		{ field: "name",title:'Name'},
-	                    { field: "email",title:'Email'},
+	                    // { field: "email",title:'Email'},
 	                    { field: "employee_id",title:'Employee Id'},
 	                    { field: "pan_number",title:'PAN Number'},
                     	{ field: "mobile_number",title:'Mobile Number'},
-	                    { field: "status",title:'Status', template:function(row) {
+	                    { field: "status",title:'Status', sortable:false,template:function(row) {
                     		var color='grey';
 	                    	var title = 'Deactive';
 	                    	if(row.status == 1) {
@@ -214,5 +229,14 @@
                 
             });
 		});
+
+		$('#import_btn').on('click', function() {
+	        $('input[type=file]').click();
+	        return false;
+	    })
+
+	    $('input[name=import_file]').on('change', function() {
+	        $('#import_file').submit();
+	    });
 	</script>
 @endsection

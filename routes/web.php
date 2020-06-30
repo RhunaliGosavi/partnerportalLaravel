@@ -33,4 +33,5 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('fetchAFLEmployees', 'UserController@fetchAFLEmployees');
 	Route::get('updateEmployeeStatus/{id}','UserController@updateEmployeeStatus');
 
+	Route::post('user/import','UserController@importEmployees');
 });

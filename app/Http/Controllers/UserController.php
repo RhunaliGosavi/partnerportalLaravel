@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Config, Helper;
+use Validator,Config, Helper, Excel;
 use App\Employee;
+use App\Imports\EmployeeImport;
 
 class UserController extends Controller
 {
@@ -72,7 +73,11 @@ class UserController extends Controller
 
         if(array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('pagination', $post['datatable']) && is_array($post['datatable']['pagination']) && array_key_exists('page', $post['datatable']['pagination']) && array_key_exists('perpage', $post['datatable']['pagination']) && !empty($post['datatable']['pagination']['perpage']) ) {
                 
-            $employees = Employee::limit($post['datatable']['pagination']['perpage'])->offset(($post['datatable']['pagination']['page'] -1) * $post['datatable']['pagination']['perpage'])->get()->toArray();
+            $employees = Employee::limit($post['datatable']['pagination']['perpage'])->offset(($post['datatable']['pagination']['page'] -1) * $post['datatable']['pagination']['perpage']);
+            if(array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('sort', $post['datatable']) && is_array($post['datatable']['sort']) && array_key_exists('field', $post['datatable']['sort']) && array_key_exists('sort', $post['datatable']['sort']) && !empty($post['datatable']['sort']['sort'])) {
+                $employees = $employees->orderBy($post['datatable']['sort']['field'],$post['datatable']['sort']['sort']);
+            }
+            $employees = $employees->get()->toArray();
         } else {
             $employees = Employee::get()->toArray();
         }
@@ -119,5 +124,32 @@ class UserController extends Controller
         } else {
             return redirect('users')->with('error', 'Employee not deleted successfully!');
         }
+    }
+
+    public function importEmployees(Request $request) {
+        ini_set('memory_limit', -1);
+        ini_set('max_execution_time', 0);
+
+        if ($request->method() == 'POST') {
+            $requestData = $request->all();
+            $validator = Validator::make($requestData, ['import_file' => 'required']);
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', 'Excel file format invalid.');
+            } else {
+                if ($request->hasFile('import_file') && $request->file('import_file')->isValid()) {
+                    $extensions = array("xls","xlsx");
+                    $result = array($request->file('import_file')->getClientOriginalExtension());
+
+                    if(in_array($result[0],$extensions)){
+                        $file=$request->file('import_file');
+                        
+                        Excel::import(new EmployeeImport, $file);   
+                    } else {
+                        return redirect()->back()->with('error', 'File format is invalid.');
+                    }              
+                }
+            }
+        }
+        return redirect('users')->with('success', 'Excel file imported successfully.');
     }
 }

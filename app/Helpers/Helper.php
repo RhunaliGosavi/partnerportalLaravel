@@ -5,7 +5,7 @@ use Adldap\Laravel\Facades\Adldap;
 
 class Helper
 {
-    public function checkEmployee() {
+    public function checkEmployee($employee_id) {
     	return true;
 		$ad = new \Adldap\Adldap();
 
@@ -34,7 +34,7 @@ class Helper
 		}
     }
 
-    public function checkPAN() {
+    public function checkPAN($pan_number) {
     	$ch = curl_init();
 
     	$header = [
@@ -53,29 +53,29 @@ class Helper
     	$post = [
     		"request" => [
 	    		"consent" => "<<Y/N>>",
-	    		'pan' => 'AXEPR2738K'
+	    		'pan' => $pan_number
 	    	]
     	];
 
-		curl_setopt($ch, CURLOPT_URL,env('BASE_PAN_URL'));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+		// curl_setopt($ch, CURLOPT_URL,env('BASE_PAN_URL'));
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		// curl_setopt($ch, CURLOPT_POST, true);
+		// curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 
-		// Receive server response ...
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// // Receive server response ...
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		$response = curl_exec($ch);
-        $error    = curl_error($ch);
-        $errno    = curl_errno($ch);
+		// $response = curl_exec($ch);
+  //       $error    = curl_error($ch);
+  //       $errno    = curl_errno($ch);
 
-        if (is_resource($ch)) {
-            curl_close($ch);
-        }
+  //       if (is_resource($ch)) {
+  //           curl_close($ch);
+  //       }
 
-        if (0 !== $errno) {
-            throw new \RuntimeException($error, $errno);
-        }
+  //       if (0 !== $errno) {
+  //           throw new \RuntimeException($error, $errno);
+  //       }
         $testResponse = json_encode([
         	"statusInfo" => [
         		"status" =>"SUCCESS",
