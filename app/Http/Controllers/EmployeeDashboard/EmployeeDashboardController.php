@@ -56,7 +56,7 @@ class EmployeeDashboardController extends Controller
         $file=$request->file('import_file');
 
         Excel::import(new ApplicationDetailsImport,$file);
-        return redirect('employee-application-list')->with('success', 'Excel file imported successfully.');
+        return redirect('employee-dashboard')->with('success', 'Excel file imported successfully.');
     }
 
     public function delete(Request $request, $id) {
@@ -65,9 +65,9 @@ class EmployeeDashboardController extends Controller
         if($employee) {
             $employee->delete();
             
-            return redirect('employee-application-list')->with('success', 'Employee Application record deleted successfully!');
+            return redirect('employee-dashboard')->with('success', 'Employee Application record deleted successfully!');
         } else {
-            return redirect('employee-application-list')->with('error', 'Employee Application record not deleted !');
+            return redirect('employee-dashboard')->with('error', 'Employee Application record not deleted !');
         }
     }
 
