@@ -15,12 +15,17 @@ class ApplicationDisburseDetails extends Migration
     {
         Schema::create('application_disburse_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('application_tbl_id');
+            $table->unsignedBigInteger('application_tbl_id');
+            $table->foreign('application_tbl_id')
+            ->references('id')
+            ->on('employee_application_details')
+            ->onDelete('cascade');
             $table->string('application_status');
             $table->double('disbursed_amount');
             $table->timestamp('disbursement_date')->nullable(true);
             $table->timestamp('deleted_at')->nullable(true);
             $table->timestamps();
+            
         });
     }
 

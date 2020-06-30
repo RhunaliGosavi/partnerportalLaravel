@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\EmployeeDashboard;
 
+
 use App\EmployeeDashboard\EmployeeDashboard;
 use App\Http\Controllers\Controller;
 use App\Imports\ApplicationDetailsImport;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeDashboardController extends Controller
@@ -53,9 +55,30 @@ class EmployeeDashboardController extends Controller
 
     public function import(Request $request) 
     {
-        $file=$request->file('import_file');
+        ini_set('memory_limit', -1);
+        ini_set('max_execution_time', 0);
+        if ($request->method() == 'POST') {
+            $requestData = $request->all();
+          
+            $validator = Validator::make($requestData, ['import_file' => 'required']);
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', 'Please Select File');
+            }else{
 
-        Excel::import(new ApplicationDetailsImport,$file);
+                if ($request->hasFile('import_file') && $request->file('import_file')->isValid()) {
+                    $extensions = array("xls","xlsx");
+                    $result = array($request->file('import_file')->getClientOriginalExtension());
+
+                    if(in_array($result[0],$extensions)){
+                        $file=$request->file('import_file');
+                         Excel::import(new ApplicationDetailsImport,$file);  
+                    } else {
+                        return redirect()->back()->with('error', 'File format is invalid.');
+                    }              
+                }
+              
+            }
+        }
         return redirect('employee-dashboard')->with('success', 'Excel file imported successfully.');
     }
 
