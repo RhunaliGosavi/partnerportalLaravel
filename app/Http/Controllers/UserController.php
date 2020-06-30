@@ -71,11 +71,11 @@ class UserController extends Controller
 
         $employees_count = Employee::count();
 
-        if(array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('pagination', $post['datatable']) && is_array($post['datatable']['pagination']) && array_key_exists('page', $post['datatable']['pagination']) && array_key_exists('perpage', $post['datatable']['pagination']) && !empty($post['datatable']['pagination']['perpage']) ) {
+        if(array_key_exists('pagination', $post) && is_array($post['pagination']) && array_key_exists('page', $post['pagination']) && array_key_exists('perpage', $post['pagination']) && !empty($post['pagination']['perpage']) ) {
                 
-            $employees = Employee::limit($post['datatable']['pagination']['perpage'])->offset(($post['datatable']['pagination']['page'] -1) * $post['datatable']['pagination']['perpage']);
-            if(array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('sort', $post['datatable']) && is_array($post['datatable']['sort']) && array_key_exists('field', $post['datatable']['sort']) && array_key_exists('sort', $post['datatable']['sort']) && !empty($post['datatable']['sort']['sort'])) {
-                $employees = $employees->orderBy($post['datatable']['sort']['field'],$post['datatable']['sort']['sort']);
+            $employees = Employee::limit($post['pagination']['perpage'])->offset(($post['pagination']['page'] -1) * $post['pagination']['perpage']);
+            if(array_key_exists('sort', $post) && array_key_exists('field', $post['sort']) && array_key_exists('field', $post['sort'])) {
+                $employees = $employees->orderBy($post['sort']['field'],$post['sort']['sort']);
             }
             $employees = $employees->get()->toArray();
         } else {
@@ -84,12 +84,12 @@ class UserController extends Controller
 
         $list['data'] = $employees;
         $list['meta'] = [
-            "page"      => (array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('page', $post['datatable']['pagination']))?$post['datatable']['pagination']['page']:1,
-            "pages"     => (array_key_exists('datatable', $post) && is_array($post['datatable']) && array_key_exists('pages', $post['datatable']['pagination']))?$post['datatable']['pagination']['pages']:0,
-            "perpage"   => (array_key_exists('input', $list)) ? $list['input']['datatable']['pagination']['perpage']:50,
+            "page"      => (array_key_exists('page', $post['pagination']))?$post['pagination']['page']:1,
+            "pages"     => (array_key_exists('pages', $post['pagination']))?$post['pagination']['pages']:0,
+            "perpage"   => (array_key_exists('perpage', $post['pagination'])) ? $post['pagination']['perpage']:50,
             "total"     => $employees_count,
-            "sort"      => (array_key_exists('input', $list) && array_key_exists('sort', $list['input']['datatable'])) ? $list['input']['datatable']['sort']['sort'] : '',
-            "field"     => (array_key_exists('input', $list) && array_key_exists('sort', $list['input']['datatable'])) ? $list['input']['datatable']['sort']['field'] : '',
+            "sort"      => (array_key_exists('sort', $post)) ? $post['sort']['field']:'',
+            "field"     => (array_key_exists('sort', $post)) ? $post['sort']['sort']:'',
         ];
 
         return json_encode($list);
