@@ -8,16 +8,7 @@ use App\Employee;
 
 class UserController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    
     /**
      * Show the application dashboard.
      *
@@ -116,5 +107,17 @@ class UserController extends Controller
         }
 
         exit;
+    }
+
+    public function delete(Request $request, $id) {
+        $employee = Employee::find($id);
+
+        if($employee) {
+            $employee->delete();
+            
+            return redirect('users')->with('success', 'Employee deleted successfully!');
+        } else {
+            return redirect('users')->with('error', 'Employee not deleted successfully!');
+        }
     }
 }

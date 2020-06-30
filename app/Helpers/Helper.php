@@ -57,7 +57,7 @@ class Helper
 	    	]
     	];
 
-		curl_setopt($ch, CURLOPT_URL,"http://".env('BASE_PAN_URL')."/V1/Karza/IN0027/PanCardAuthentication");
+		curl_setopt($ch, CURLOPT_URL,env('BASE_PAN_URL'));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
@@ -73,9 +73,9 @@ class Helper
             curl_close($ch);
         }
 
-        // if (0 !== $errno) {
-        //     throw new \RuntimeException($error, $errno);
-        // }
+        if (0 !== $errno) {
+            throw new \RuntimeException($error, $errno);
+        }
         $testResponse = json_encode([
         	"statusInfo" => [
         		"status" =>"SUCCESS",
