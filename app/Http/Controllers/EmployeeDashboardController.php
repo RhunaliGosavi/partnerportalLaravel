@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class EmployeeDashboardController extends Controller
 {
     public function get_employee_application_list(){
-        return view('EmployeeDashboard.employeeApplicationList');
+        return view('employeeDashboard.employeeApplicationList');
         
     }
 
