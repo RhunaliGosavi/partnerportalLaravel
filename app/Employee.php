@@ -15,4 +15,23 @@ class Employee extends Model
         'name', 'employee_id', 'password','pan_number','mobile_number','status','email_id'
     ];
 
+    // Fetch refered buddies
+    public function refered_buddies(){
+        return $this->hasMany('App\ReferBuddy','source_user_id');
+    }
+
+    // Fetch hr-staff loan leads
+    public function hr_loan_leads(){
+        return $this->hasMany('App\HrLoan','source_user_id');
+    }
+
+    // Fetch other loan product leads
+    public function other_loan_leads(){
+        return $this->hasMany('App\OtherLoan','source_user_id');
+    }
+
+    // Fetch hr-staff loan leads
+    public function dsa_leads(){
+        return $this->hasMany('App\DsaLead','source_user_id');
+    }
 }
