@@ -34,4 +34,13 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('updateEmployeeStatus/{id}','UserController@updateEmployeeStatus');
 
 	Route::post('user/import','UserController@importEmployees');
+	//employee dashboard list
+	//Application list
+	Route::get('employee-dashboard', 'EmployeeDashboard\EmployeeDashboardController@get_employee_application_list');
+	Route::get('fetch-employee-application-data', 'EmployeeDashboard\EmployeeDashboardController@fetch_employee_app_data');
+	Route::post('employee/import', 'EmployeeDashboard\EmployeeDashboardController@import');
+	Route::get('employeeApp/delete/{id}',  'EmployeeDashboard\EmployeeDashboardController@delete');
+	
+
+
 });
