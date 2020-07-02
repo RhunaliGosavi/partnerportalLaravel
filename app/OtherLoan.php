@@ -3,14 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OtherLoanProductLead extends Model
+class OtherLoan extends Model
 {
-    use SoftDeletes;
 
     protected $table = 'other_loans';
-    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'source_user_id', 'lead_generated_source', 'employee_id', 'name', 'mobile_number', 'loan_amount', 'loan_product_id', 'prefered_contact_time'
