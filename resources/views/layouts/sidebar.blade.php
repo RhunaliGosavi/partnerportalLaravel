@@ -41,7 +41,7 @@
 				<a href="{{url('employee-helpdesk')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
-						<span class="m-menu__link-wrap">
+						<span git class="m-menu__link-wrap">
 							<span class="m-menu__link-text">Employee Helpdesk</span>
 				<a href="{{url('links')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
