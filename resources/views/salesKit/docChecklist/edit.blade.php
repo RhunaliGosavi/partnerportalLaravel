@@ -11,13 +11,13 @@
 						</div>
 					</div>
 				</div>
-                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('docCheckCategory/update/'.$lProduct->id)}}" method="POST">
+                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('docCheckCategory/update/'.$dCheckCat->id)}}" method="POST">
 					@csrf
 					<div class="m-portlet__body">
                         <div class="form-group m-form__group row {{ $errors->has('name') ? 'has-danger' : ''}}">
                             <label class="col-3 col-form-label">Name</label>
                             <div class="col-md-4">
-                                <input type="text" name="name" placeholder="Product Name" value="{{ $lProduct->name }}" class="form-control">
+                                <input type="text" name="name" placeholder="Product Name" value="{{ $dCheckCat->name }}" class="form-control">
                                 @if ($errors->has('name'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('name') }}

@@ -95,6 +95,7 @@ class SalesKitProductController extends Controller
             'name'      => 'required',
             'content' => 'required'
         ];
+        $request->validate($rules);
         $skProduct = SalesKitProduct::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $skProduct->loan_product_id = $post['loan_product'];

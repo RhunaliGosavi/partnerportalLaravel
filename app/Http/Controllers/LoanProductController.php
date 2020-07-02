@@ -87,6 +87,7 @@ class LoanProductController extends Controller
             'name'      => 'required',
             'description' => 'required'
         ];
+        $request->validate($rules);
         $lProduct = LoanProduct::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $lProduct->name = $post['name'];

@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('referFriendRequests',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
-	Route::get('referFriendexport', 	   'ReferFriendController@export');
+	Route::get('referFriendExport', 	   'ReferFriendController@export');
 
 	Route::get('applyNowRequests', 	'ApplyNowRequestController@index');
 	Route::get('fetchHRLoans', 		'ApplyNowRequestController@fetchHRLoans');
