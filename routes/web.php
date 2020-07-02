@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('fetch-employee-application-data', 'EmployeeDashboardController@fetch_employee_app_data');
 	Route::post('employee/import', 'EmployeeDashboardController@import');
 	Route::get('employeeApp/delete/{id}',  'EmployeeDashboardController@delete');
-	
+
 
 	Route::get('referFriendRequests',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
@@ -60,4 +60,24 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('link/delete/{id}',  'LinkController@delete');
 	Route::post('link/store', 		'LinkController@store');
 	Route::post('link/update/{id}', 'LinkController@update');
+
+	// Loan Products CRUD
+	Route::get('loanProduct', 			'LoanProductController@index');
+	Route::get('loanProduct/create', 		'LoanProductController@create');
+	Route::get('loanProduct/edit/{id}', 	'LoanProductController@edit');
+	Route::get('loanProduct/delete/{id}',  'LoanProductController@destroy');
+	Route::post('loanProduct/store', 		'LoanProductController@store');
+	Route::post('loanProduct/update/{id}', 'LoanProductController@update');
+	Route::get('loanProduct/all', 'LoanProductController@fetchAllLoanProducts');
+
+	// Sales Kit Products CRUD
+	Route::get('salesProduct', 			'SalesKitProductController@index');
+	Route::get('salesProduct/create', 		'SalesKitProductController@create');
+	Route::get('salesProduct/edit/{id}', 	'SalesKitProductController@edit');
+	Route::get('salesProduct/delete/{id}',  'SalesKitProductController@destroy');
+	Route::post('salesProduct/store', 		'SalesKitProductController@store');
+	Route::post('salesProduct/update/{id}', 'SalesKitProductController@update');
+	Route::get('salesProduct/all', 'SalesKitProductController@fetchAllSalesProducts');
+
+
 });

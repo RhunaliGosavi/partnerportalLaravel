@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'AFL') }}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <!-- <script src="{{url('assets/js/ckeditor.js')}}" type="text/javascript"></script> -->
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     <script>
         WebFont.load({
             google: {
@@ -70,6 +72,9 @@
                 type:'danger'
             });
         }
+    </script>
+    <script>
+        CKEDITOR.replace('ckeditor-content');
     </script>
 </body>
 </html>
