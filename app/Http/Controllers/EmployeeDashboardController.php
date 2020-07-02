@@ -1,40 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\EmployeeDashboard;
+namespace App\Http\Controllers;
 
 
-use App\EmployeeDashboard\EmployeeDashboard;
+use App\EmployeeDashboard;
 use App\Http\Controllers\Controller;
 use App\Imports\ApplicationDetailsImport;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeDashboardController extends Controller
 {
     public function get_employee_application_list(){
-        return view('EmployeeDashboard.employeeApplicationList');
+        return view('employeeDashboard.employeeApplicationList');
         
     }
 
     public function fetch_employee_app_data(Request $request){
         $post = $request->all();
-
         $list = [];
 
         $employees_app_count =EmployeeDashboard::count();
+     
+        $employee_app =EmployeeDashboard::query();
+        if(isset($post['query']['generalSearch'])) {
+          
+            $employee_app = $employee_app->where('employee_name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+            ->orWhere('application_number', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+            ->orWhere('employee_id', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+            ->orWhere('product_type', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+            ->orWhere('application_status', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
+            $employees_app_count=count($employee_app->get()->toArray());
+        }
 
         if(array_key_exists('pagination', $post) && is_array($post['pagination']) && array_key_exists('page', $post['pagination']) && array_key_exists('perpage', $post['pagination']) && !empty($post['pagination']['perpage']) ) {
                 
-            $employee_app = EmployeeDashboard::limit($post['pagination']['perpage'])->offset(($post['pagination']['page'] -1) * $post['pagination']['perpage']);
+            $employee_app = $employee_app->limit($post['pagination']['perpage'])->offset(($post['pagination']['page'] -1) * $post['pagination']['perpage']);
             if(array_key_exists('sort', $post) && array_key_exists('field', $post['sort']) && array_key_exists('field', $post['sort'])) {
                 $employee_app = $employee_app->orderBy($post['sort']['field'],$post['sort']['sort']);
             }
-            $employee_app = $employee_app->get()->toArray();
+        
+           $employee_app = $employee_app->get()->toArray();
+          
         } else {
-            $employee_app = EmployeeDashboard::get()->toArray();
+            $employee_app = $employee_app->get()->toArray();
         }
       
 

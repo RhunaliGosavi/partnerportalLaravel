@@ -22,6 +22,7 @@ class CreateReferBuddiesTable extends Migration
             $table->integer('loan_product_id');
             $table->float('loan_amount')->nullable();
             $table->timestamp('prefered_contact_time')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

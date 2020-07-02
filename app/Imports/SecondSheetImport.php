@@ -3,7 +3,7 @@ namespace App\Imports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use App\EmployeeDashboard\EmployeeDashboard;
+use App\EmployeeDashboard;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;

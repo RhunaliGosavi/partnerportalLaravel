@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EmployeeDashboard;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

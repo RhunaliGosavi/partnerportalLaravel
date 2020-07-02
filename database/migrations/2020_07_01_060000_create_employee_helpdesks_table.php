@@ -18,6 +18,7 @@ class CreateEmployeeHelpdesksTable extends Migration
             $table->string('name');
             $table->string('file_path');
             $table->float('file_size_in_mb')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

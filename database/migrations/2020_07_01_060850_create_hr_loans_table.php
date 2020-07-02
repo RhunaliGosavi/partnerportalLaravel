@@ -23,6 +23,7 @@ class CreateHrLoansTable extends Migration
             $table->float('loan_amount');
             $table->string('designation')->nullable();
             $table->timestamp('prefered_contact_time')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
