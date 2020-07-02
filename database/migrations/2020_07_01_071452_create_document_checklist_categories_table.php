@@ -16,6 +16,7 @@ class CreateDocumentChecklistCategoriesTable extends Migration
         Schema::create('document_checklist_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

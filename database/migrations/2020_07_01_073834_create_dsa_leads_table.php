@@ -39,6 +39,7 @@ class CreateDsaLeadsTable extends Migration
             $table->string('gst_number')->nullable();
             $table->string('office_mobile_number')->nullable();
             $table->string('office_email')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

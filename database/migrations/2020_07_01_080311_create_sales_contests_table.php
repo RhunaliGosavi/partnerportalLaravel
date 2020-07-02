@@ -18,6 +18,7 @@ class CreateSalesContestsTable extends Migration
             $table->integer('loan_product_id');
             $table->longText('content_data')->nullable();
             $table->string('file_path')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateDsaOnboardingTable extends Migration
             $table->string('file_path')->nullable();
             $table->float('file_size_in_mb')->nullable();
             $table->boolean('is_required')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

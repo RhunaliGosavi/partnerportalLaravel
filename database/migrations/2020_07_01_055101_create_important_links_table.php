@@ -17,6 +17,7 @@ class CreateImportantLinksTable extends Migration
             $table->id();
             $table->string('portal_name');
             $table->text('web_link')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateOtherLoansTable extends Migration
             $table->float('loan_amount');
             $table->integer('loan_product_id');
             $table->timestamp('prefered_contact_time')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

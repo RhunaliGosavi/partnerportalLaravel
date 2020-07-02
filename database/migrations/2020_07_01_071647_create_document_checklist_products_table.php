@@ -18,6 +18,7 @@ class CreateDocumentChecklistProductsTable extends Migration
             $table->integer('sales_kit_product_id');
             $table->integer('document_checklist_category_id');
             $table->longText('content_data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
