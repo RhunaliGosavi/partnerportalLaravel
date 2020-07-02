@@ -92,6 +92,26 @@
 					</span>
 				</a>
 			</li>
+			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+				<a href="{{url('docCheckCategory')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Document Checklist Category</span>
+						</span>
+					</span>
+				</a>
+			</li>
+			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+				<a href="{{url('docCheckProduct')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Document Checklist Product</span>
+						</span>
+					</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 

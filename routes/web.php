@@ -88,5 +88,23 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('salesProduct/update/{id}', 'SalesKitProductController@update');
 	Route::get('salesProduct/all', 'SalesKitProductController@fetchAllSalesProducts');
 
+	// Sales Kit Products
+	// Document Checklist Category
+	Route::get('docCheckCategory', 			'DocumentChecklistController@index');
+	Route::get('docCheckCategory/create', 		'DocumentChecklistController@create');
+	Route::get('docCheckCategory/edit/{id}', 	'DocumentChecklistController@edit');
+	Route::get('docCheckCategory/delete/{id}',  'DocumentChecklistController@destroy');
+	Route::post('docCheckCategory/store', 		'DocumentChecklistController@store');
+	Route::post('docCheckCategory/update/{id}', 'DocumentChecklistController@update');
+	Route::get('docCheckCategory/all', 'DocumentChecklistController@fetchAllCategories');
+
+	// Document Checklist Category
+	Route::get('docCheckProduct', 			'DocumentChecklistProductController@index');
+	Route::get('docCheckProduct/create', 		'DocumentChecklistProductController@create');
+	Route::get('docCheckProduct/edit/{id}', 	'DocumentChecklistProductController@edit');
+	Route::get('docCheckProduct/delete/{id}',  'DocumentChecklistProductController@destroy');
+	Route::post('docCheckProduct/store', 		'DocumentChecklistProductController@store');
+	Route::post('docCheckProduct/update/{id}', 'DocumentChecklistProductController@update');
+	Route::get('docCheckProduct/all', 'DocumentChecklistProductController@fetchAllProducts');
 
 });
