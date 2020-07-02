@@ -17,6 +17,7 @@ class CreateCustomerSchemesTable extends Migration
             $table->id();
             $table->integer('loan_product_id');
             $table->string('file_path')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

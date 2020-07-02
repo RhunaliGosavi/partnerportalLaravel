@@ -18,6 +18,7 @@ class CreateMarketingVisualsTable extends Migration
             $table->integer('loan_product_id');
             $table->integer('marketing_visual_category_id');
             $table->string('name')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

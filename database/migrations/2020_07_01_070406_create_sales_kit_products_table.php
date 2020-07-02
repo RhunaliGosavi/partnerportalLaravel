@@ -18,6 +18,7 @@ class CreateSalesKitProductsTable extends Migration
             $table->integer('loan_product_id');
             $table->string('name')->nullable();
             $table->longText('content_data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

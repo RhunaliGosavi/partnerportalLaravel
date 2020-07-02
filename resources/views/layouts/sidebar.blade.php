@@ -43,6 +43,31 @@
 					<span class="m-menu__link-title">
 						<span class="m-menu__link-wrap">
 							<span class="m-menu__link-text">Employee Helpdesk</span>
+				<a href="{{url('links')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Important Links</span>
+						</span>
+					</span>
+				</a>
+			</li>
+			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+				<a href="{{url('referFriendRequests')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Refer Friend Requests</span>
+						</span>
+					</span>
+				</a>
+			</li>
+			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+				<a href="{{url('applyNowRequests')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Apply Now Requests</span>
 						</span>
 					</span>
 				</a>

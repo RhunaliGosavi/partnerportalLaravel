@@ -52,5 +52,22 @@ Route::group(['middleware' => 'auth'], function() {
 	
 	
 
+	Route::get('referFriendRequests',      'ReferFriendController@index');
+	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
+	Route::get('referFriendexport', 	   'ReferFriendController@export');
 
+	Route::get('applyNowRequests', 	'ApplyNowRequestController@index');
+	Route::get('fetchHRLoans', 		'ApplyNowRequestController@fetchHRLoans');
+	Route::get('fetchOtherLoans', 	'ApplyNowRequestController@fetchOtherLoans');
+
+	Route::get('hrExport', 		'ApplyNowRequestController@HRexport');
+	Route::get('otherExport', 	'ApplyNowRequestController@Otherexport');
+
+	Route::get('links',		 		'LinkController@index');
+	Route::get('fetchLinks', 		'LinkController@fetchLinks');
+	Route::get('link/create', 		'LinkController@create');
+	Route::get('link/edit/{id}', 	'LinkController@edit');
+	Route::get('link/delete/{id}',  'LinkController@delete');
+	Route::post('link/store', 		'LinkController@store');
+	Route::post('link/update/{id}', 'LinkController@update');
 });

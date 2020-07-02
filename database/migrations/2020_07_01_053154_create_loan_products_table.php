@@ -17,6 +17,7 @@ class CreateLoanProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
