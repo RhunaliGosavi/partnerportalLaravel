@@ -41,6 +41,15 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('employee/import', 'EmployeeDashboardController@import');
 	Route::get('employeeApp/delete/{id}',  'EmployeeDashboardController@delete');
 
+	//Employee Helpdesk
+	Route::get('employee-helpdesk','EmployeeHelpDeskController@index');
+	Route::get('employee-helpdesk/create','EmployeeHelpDeskController@create');
+	Route::post('employee-helpdesk/store','EmployeeHelpDeskController@store');
+	Route::get('employee-helpdesk/edit/{id}','EmployeeHelpDeskController@edit');
+	Route::get('employee-helpdesk/delete/{id}','EmployeeHelpDeskController@delete');
+	Route::get('fetchHelpDeskData', 'EmployeeHelpDeskController@fetchHelpDeskData');
+	Route::post('employee-helpdesk/update','EmployeeHelpDeskController@update');
+	
 
 	Route::get('referFriendRequests',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
