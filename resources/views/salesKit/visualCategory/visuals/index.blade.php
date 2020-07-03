@@ -85,7 +85,6 @@
                             return '<a href="'+base_url+'/storage/salesKit/marketingInformation/visuals/'+row.file_path+'">'+row.file_path+'</a>'; 
                         }
                     },
-                    { field: "content_data",title:'Content'},
                     { 
               			field: "Actions",
 		                width: 60,

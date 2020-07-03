@@ -87,6 +87,16 @@
 					</span>
 				</a>
 			</li> -->
+			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+				<a href="{{url('loanProduct')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Loan Product</span>
+						</span>
+					</span>
+				</a>
+			</li>
 			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
 				<a href="javascript:;" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
@@ -207,18 +217,38 @@
 								</ul>
 							</div>
 						</li>
+						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+							<a href="javascript:;" class="m-menu__link m-menu__toggle">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-text">DSA</span>
+								<i class="m-menu__ver-arrow la la-angle-right"></i>
+							</a>
+							<div class="m-menu__submenu ">
+								<span class="m-menu__arrow"></span>
+								<ul class="m-menu__subnav">
+									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+										<a href="{{url('dsaList')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">Onboarding Detail</span>
+										</a>
+									</li>
+									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+										<a href="{{url('corporateList')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">Corporate Presentation</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
 					</ul>
 				</div>
-			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-				<a href="{{url('loanProduct')}}" class="m-menu__link ">
-					<i class="m-menu__link-icon flaticon-user-settings"></i>
-					<span class="m-menu__link-title">
-						<span class="m-menu__link-wrap">
-							<span class="m-menu__link-text">Loan Product</span>
-						</span>
-					</span>
-				</a>
 			</li>
 			<!-- <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
 				<a href="{{url('docCheckCategory')}}" class="m-menu__link ">
@@ -280,7 +310,7 @@
 					</span>
 				</a>
 			</li> -->
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<!-- <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
 				<a href="{{url('dsaList')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -299,7 +329,7 @@
 						</span>
 					</span>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 
