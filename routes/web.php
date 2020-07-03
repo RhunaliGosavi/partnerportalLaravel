@@ -107,4 +107,39 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('docCheckProduct/update/{id}', 'DocumentChecklistProductController@update');
 	Route::get('docCheckProduct/all', 'DocumentChecklistProductController@fetchAllProducts');
 
+	// Sales team contests 
+	Route::get('salesContest', 			'SalesContestController@index');
+	Route::get('salesContest/create', 		'SalesContestController@create');
+	Route::get('salesContest/edit/{id}', 	'SalesContestController@edit');
+	Route::get('salesContest/delete/{id}',  'SalesContestController@destroy');
+	Route::post('salesContest/store', 		'SalesContestController@store');
+	Route::post('salesContest/update/{id}', 'SalesContestController@update');
+	Route::get('salesContest/all', 'SalesContestController@fetchAllContests');
+
+	// Customer Shemes
+	Route::get('customerScheme', 			'CustomerSchemeController@index');
+	Route::get('customerScheme/create', 		'CustomerSchemeController@create');
+	Route::get('customerScheme/edit/{id}', 	'CustomerSchemeController@edit');
+	Route::get('customerScheme/delete/{id}',  'CustomerSchemeController@destroy');
+	Route::post('customerScheme/store', 		'CustomerSchemeController@store');
+	Route::post('customerScheme/update/{id}', 'CustomerSchemeController@update');
+	Route::get('customerScheme/all', 'CustomerSchemeController@fetchAllSchemes');
+
+	// Marketing Visuals Catgory CRUD
+	Route::get('visualCategory', 			'MarketingVisualCategoryController@index');
+	Route::get('visualCategory/create', 		'MarketingVisualCategoryController@create');
+	Route::get('visualCategory/edit/{id}', 	'MarketingVisualCategoryController@edit');
+	Route::get('visualCategory/delete/{id}',  'MarketingVisualCategoryController@destroy');
+	Route::post('visualCategory/store', 		'MarketingVisualCategoryController@store');
+	Route::post('visualCategory/update/{id}', 'MarketingVisualCategoryController@update');
+	Route::get('visualCategory/all', 'MarketingVisualCategoryController@fetchAllCategories');
+
+	// Marketing Visuals Catgory CRUD
+	Route::get('marketingVisuals', 			'MarketingVisualsController@index');
+	Route::get('marketingVisuals/create', 		'MarketingVisualsController@create');
+	Route::get('marketingVisuals/edit/{id}', 	'MarketingVisualsController@edit');
+	Route::get('marketingVisuals/delete/{id}',  'MarketingVisualsController@destroy');
+	Route::post('marketingVisuals/store', 		'MarketingVisualsController@store');
+	Route::post('marketingVisuals/update/{id}', 'MarketingVisualsController@update');
+	Route::get('marketingVisuals/all', 'MarketingVisualsController@fetchAllVisuals');
 });

@@ -31,10 +31,10 @@
 							</div>
 						</div>
                         <div class="form-group m-form__group row {{ $errors->has('doc_check_category') ? 'has-danger' : ''}}">
-							<label class="col-3 col-form-label">Document Checklist Product</label>
+							<label class="col-3 col-form-label">Document Checklist Category</label>
 							<div class="col-md-4">
 								<select class="form-control" name="doc_check_category" id="doc_check_category">
-									<option value="">Select Document Checklist Product</option>
+									<option value="">Select Document Checklist Category</option>
                                     @foreach ($doc_check_categories as $doc_check_category)
                                         <option value="{{ $doc_check_category->id }}" @if($doc_check_category['id'] == $skProduct['document_checklist_category_id']) selected @endif>{{ $doc_check_category->name }}</option>
                                     @endforeach

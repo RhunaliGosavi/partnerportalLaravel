@@ -47,7 +47,6 @@ class DocumentChecklistProductController extends Controller
             'content' => 'required'
         ];
         $request->validate($rules);
-        // if($this->checkIfExist($post)) return redirect('docCheckProduct')->with('error', 'Document Checklist Product already exist!');
         $docCheckProduct = new DocumentChecklistProduct;
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
@@ -76,7 +75,7 @@ class DocumentChecklistProductController extends Controller
     public function edit($id)
     {
         $docCheckProduct = DocumentChecklistProduct::find($id);
-        return view('salesKit.edit', [
+        return view('salesKit.docChecklist.products.edit', [
             'sales_kit_products' => SalesKitProduct::all(),
             'doc_check_categories' => DocumentChecklistCategory::all(),
             'docCheckProduct' => $docCheckProduct
@@ -99,7 +98,6 @@ class DocumentChecklistProductController extends Controller
             'content' => 'required'
         ];
         $docCheckProduct = DocumentChecklistProduct::find($id);
-        // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
         $docCheckProduct->content_data  = $post['content'];
