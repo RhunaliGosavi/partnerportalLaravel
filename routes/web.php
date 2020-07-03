@@ -159,4 +159,10 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('corporatePpt/edit/{id}',    'CorporatePptController@edit');
 	Route::post('corporatePpt/update/{id}', 'CorporatePptController@update');
 	Route::get('corporatePpt/delete/{id}',  'CorporatePptController@delete');
+
+	// DSA Lead CRUD
+	Route::get('dsaLead', 			'DsaLeadController@index');
+	Route::get('dsaLead/delete/{id}',  'DsaLeadController@destroy');
+	Route::post('dsaLead/import', 		'DsaLeadController@import');
+	Route::get('dsaLead/all', 'DsaLeadController@fetchAllLeads');
 });
