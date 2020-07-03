@@ -21,39 +21,32 @@ class EmployeeHelpDeskController extends Controller
     public function store(Request $request){
         ini_set('memory_limit', -1);
         ini_set('max_execution_time', 0);
-     
-        $validator = Validator::make($request->all(), ['file' => 'required','title'=>'required']);
-        if ($validator->fails()) {
-            return redirect()->back()->with('error', 'Please Fill Required data');
-        } else {
-        
-         if($request->hasFile('file')){
+        $rules = [
+            'file' => 'required|mimes:pdf',
+            'title'    => 'required',
+        ];
 
-            $extensions = array("pdf");
-            $result = array($request->file('file')->getClientOriginalExtension());
-            if(in_array($result[0],$extensions)){
-                $title=$request->input('title');
-                $filenameWithExt = $request->file('file')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $filename = preg_replace('/\s+/', '_',trim($filename));
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $filesize=$request->file('file')->getSize();
-                $filesize=number_format($filesize / 1048576,2);
-                $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
-                $process = EmployeeHelpdesk::create(
-                    ['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize]
-                 );
-                 if(! $process){
-                    return redirect()->back()->with('error', 'Failed To Update Data'); 
-                 }
+        $request->validate($rules);
+        if($request->hasFile('file')){
 
-            }else{
-                return redirect()->back()->with('error', 'File format is invalid.');
-            }
+           
+            $title=$request->input('title');
+            $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_',trim($filename));
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $filesize=$request->file('file')->getSize();
+            $filesize=number_format($filesize / 1048576,2);
+            $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
+            $process = EmployeeHelpdesk::create(
+                ['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize]
+                );
+                if(! $process){
+                return redirect()->back()->with('error', 'Failed To Update Data'); 
+                }
         }
-    }
-    return redirect('employee-helpdesk')->with('success', 'Data Updated successfully.');
+    return redirect('employee-helpdesk')->with('success', 'Data added successfully.');
      
     }
 
@@ -113,38 +106,31 @@ class EmployeeHelpDeskController extends Controller
      
        if($request->file('file')){
               
-              $validator = Validator::make($request->all(), ['file' => 'required','title'=>'required']);
-                if ($validator->fails()) {
-                    return redirect()->back()->with('error', 'Please Fill Required data');
-                } else {
-                    $extensions = array("pdf");
-                    $result = array($request->file('file')->getClientOriginalExtension());
-                    if(in_array($result[0],$extensions)){
-                        $title=$request->input('title');
-                        $filenameWithExt = $request->file('file')->getClientOriginalName();
-                        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                        $extension = $request->file('file')->getClientOriginalExtension();
-                        $filename = preg_replace('/\s+/', '_',trim($filename));
-                        $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                        $filesize=$request->file('file')->getSize();
-                        $filesize=number_format($filesize / 1048576,2);
-                        $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
-                       
-                }else{
-                    return redirect()->back()->with('error', 'File format is invalid.');
-                }
-           
-        }
+            $rules = [
+                'file' => 'required|mimes:pdf',
+                'title'    => 'required',
+            ];
 
-       }else{
-        $fileNameToStore=$request->input('file_old');
-        $title=$request->input('title');
-        $filesize=$request->input('file_size_in_mb');
+            $request->validate($rules);
+            $title=$request->input('title');
+            $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_',trim($filename));
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $filesize=$request->file('file')->getSize();
+            $filesize=number_format($filesize / 1048576,2);
+            $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
         
-         if(empty($fileNameToStore) || empty($title))
-         {
-            return redirect()->back()->with('error', 'Please Fill Required data'); 
-         }
+       }else{
+            $fileNameToStore=$request->input('file_old');
+            $title=$request->input('title');
+            $filesize=$request->input('file_size_in_mb');
+            
+            if(empty($fileNameToStore) || empty($title))
+            {
+                return redirect()->back()->with('error', 'Please Fill Required data'); 
+            }
 
        }
 
@@ -156,8 +142,6 @@ class EmployeeHelpDeskController extends Controller
         }
        
         return redirect('employee-helpdesk')->with('success', 'Data Updated successfully.');
-      
-     
     }
 
 

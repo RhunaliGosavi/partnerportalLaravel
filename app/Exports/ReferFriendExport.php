@@ -11,7 +11,7 @@ class ReferFriendExport implements FromView
     public function view(): View
     {
         return view('exports.refer_friend', [
-            'loans' => ReferBuddy::with('employee')->all()
+            'loans' => ReferBuddy::with('employee')->get()
         ]);
     }
 }

@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('referFriendRequests',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
-	Route::get('referFriendexport', 	   'ReferFriendController@export');
+	Route::get('referFriendExport', 	   'ReferFriendController@export');
 
 	Route::get('applyNowRequests', 	'ApplyNowRequestController@index');
 	Route::get('fetchHRLoans', 		'ApplyNowRequestController@fetchHRLoans');
@@ -142,4 +142,21 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('marketingVisuals/store', 		'MarketingVisualsController@store');
 	Route::post('marketingVisuals/update/{id}', 'MarketingVisualsController@update');
 	Route::get('marketingVisuals/all', 'MarketingVisualsController@fetchAllVisuals');
+
+	Route::get('dsaList',		   'DsaController@index');
+	Route::get('fetchDsaList',	   'DsaController@fetchDsaList');
+	Route::get('dsa/create', 	   'DsaController@create');
+	Route::post('dsa/store',       'DsaController@store');
+	Route::get('dsa/edit/{id}',    'DsaController@edit');
+	Route::post('dsa/update/{id}', 'DsaController@update');
+	Route::get('dsa/delete/{id}',  'DsaController@delete');
+
+
+	Route::get('corporateList',		    	'CorporatePptController@index');
+	Route::get('fetchcorporatePptList',	    'CorporatePptController@fetchcorporatePptList');
+	Route::get('corporatePpt/create', 	    'CorporatePptController@create');
+	Route::post('corporatePpt/store',       'CorporatePptController@store');
+	Route::get('corporatePpt/edit/{id}',    'CorporatePptController@edit');
+	Route::post('corporatePpt/update/{id}', 'CorporatePptController@update');
+	Route::get('corporatePpt/delete/{id}',  'CorporatePptController@delete');
 });

@@ -84,6 +84,7 @@ class DocumentChecklistController extends Controller
         $rules = [
             'name'      => 'required'
         ];
+        $request->validate($rules);
         $dCheckCat = DocumentChecklistCategory::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $dCheckCat->name = $post['name'];

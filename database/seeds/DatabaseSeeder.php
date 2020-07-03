@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,9 @@ class DatabaseSeeder extends Seeder
             CustomerSchemeSeeder::class,
             DsaOnboardingSeeder::class,
             CorporatePresentationSeeder::class,
+            SalesKitProductSeeder::class,
+            DocumentChecklistCategorySeeder::class,
+            DocumentChecklistProductSeeder::class
             
         ]);      
     }

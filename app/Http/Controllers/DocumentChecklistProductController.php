@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\DocumentChecklistCategory;
 use App\DocumentChecklistProduct;
 use App\SalesKitProduct;
+use Illuminate\Support\Facades\DB;
 
 class DocumentChecklistProductController extends Controller
 {
@@ -78,7 +79,7 @@ class DocumentChecklistProductController extends Controller
         return view('salesKit.docChecklist.products.edit', [
             'sales_kit_products' => SalesKitProduct::all(),
             'doc_check_categories' => DocumentChecklistCategory::all(),
-            'docCheckProduct' => $docCheckProduct
+            'skProduct' => $docCheckProduct
         ]);
     }
 
@@ -91,18 +92,23 @@ class DocumentChecklistProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
         $post = $request->all();
+        
         $rules = [
-            'sales_kit_product' => 'required',
+            'sale_kit_product' => 'required',
             'doc_check_category' => 'required',
             'content' => 'required'
         ];
+       
+        $request->validate($rules);
         $docCheckProduct = DocumentChecklistProduct::find($id);
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
         $docCheckProduct->content_data  = $post['content'];
-        $docCheckProduct->save();
-        return redirect('docCheckProduct')->with('success', 'Document Checklist Product updated successfully!');
+        $dat=$docCheckProduct->save();
+       
+         return redirect('docCheckProduct')->with('success', 'Document Checklist Product updated successfully!');
     }
 
     /**

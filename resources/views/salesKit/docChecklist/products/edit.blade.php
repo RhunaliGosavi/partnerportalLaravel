@@ -20,7 +20,7 @@
 								<select class="form-control" name="sale_kit_product" id="sale_kit_product">
 									<option value="">Select Sales Kit Product</option>
                                     @foreach ($sale_kit_products as $sale_kit_product)
-                                        <option value="{{ $sale_kit_product->id }}" @if($sale_kit_product['id'] == $skProduct['sale_kit_product_id']) selected @endif>{{ $sale_kit_product->name }}</option>
+                                        <option value="{{ $sale_kit_product->id }}" @if($sale_kit_product['id'] == $skProduct['sales_kit_product_id']) selected @endif>{{ $sale_kit_product->name }}</option>
                                     @endforeach
 								</select>
                                 @if ($errors->has('sale_kit_product'))

@@ -31,7 +31,7 @@
 							<div class="form-group m-form__group row {{ $errors->has('employee_id') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">Employee Id</label>
 								<div class="col-md-4">
-									<input type="text" name="employee_id" placeholder="Employee Id" value="{{old('employee_id')}}" class="form-control">
+									<input type="text" name="employee_id" placeholder="Employee Id" value="{{old('employee_id')}}" class="form-control" >
 									@if ($errors->has('employee_id'))
                                     <div class="form-control-feedback">
 	                                    {{ $errors->first('employee_id') }}
@@ -42,7 +42,7 @@
 							<div class="form-group m-form__group row {{ $errors->has('pan_number') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">PAN Number</label>
 								<div class="col-md-4">
-									<input type="text" name="pan_number" placeholder="PAN Number" value="{{old('pan_number')}}" class="form-control">
+									<input type="text" name="pan_number" placeholder="PAN Number" value="{{old('pan_number')}}" class="form-control" >
 									@if ($errors->has('pan_number'))
                                     <div class="form-control-feedback">
 	                                    {{ $errors->first('pan_number') }}
@@ -53,7 +53,7 @@
 							<div class="form-group m-form__group row {{ $errors->has('mobile_number') ? 'has-danger' : ''}}">
 								<label class="col-3 col-form-label">Mobile Number</label>
 								<div class="col-md-4">
-									<input type="text" name="mobile_number" placeholder="Mobile Number" value="{{old('mobile_number')}}" class="form-control" maxlength="10">
+									<input type="text" name="mobile_number" placeholder="Mobile Number" value="{{old('mobile_number')}}" class="form-control" maxlength="10" required>
 									@if ($errors->has('mobile_number'))
                                     <div class="form-control-feedback">
 	                                    {{ $errors->first('mobile_number') }}
