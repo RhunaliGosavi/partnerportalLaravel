@@ -261,6 +261,16 @@
 					</ul>
 				</div>
 			</li>
+			<li class="m-menu__item  <?php if(preg_match("/\bcalculator-policy\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+				<a href="{{url('calculator-policy')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Calculator Policy</span>
+						</span>
+					</span>
+				</a>
+			</li>
 			<!-- <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
 				<a href="{{url('docCheckCategory')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>

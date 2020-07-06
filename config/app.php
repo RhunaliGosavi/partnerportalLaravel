@@ -228,6 +228,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helpers\Helper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'calPMTHelper' => App\Helpers\calPMTHelper::class,
+        
     ],
 
 ];
