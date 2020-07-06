@@ -1,3 +1,6 @@
+<?php 
+    $urlString = url()->current();
+?>
 <!-- BEGIN: Left Aside -->
 <button class="m-aside-left-close  m-aside-left-close--skin-dark " id="m_aside_left_close_btn">
 	<i class="la la-close"></i>
@@ -7,8 +10,8 @@
 	<!-- BEGIN: Aside Menu -->
 	<div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="1" m-menu-dropdown-timeout="500" style="position: relative;">
 		<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-				<a href="#" class="m-menu__link ">
+			<li class="m-menu__item  <?php if(preg_match("/\bhome\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+				<a href="{{url('home')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-line-graph"></i>
 					<span class="m-menu__link-title">
 						<span class="m-menu__link-wrap">
@@ -17,7 +20,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\busers\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('users')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -27,7 +30,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\bemployee-dashboard\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('employee-dashboard')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -37,7 +40,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\bemployee-helpdesk\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('employee-helpdesk')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -47,7 +50,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\blinks\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('links')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -57,7 +60,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\breferFriendRequests\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('referFriendRequests')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -67,7 +70,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\bapplyNowRequests\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('applyNowRequests')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -87,7 +90,7 @@
 					</span>
 				</a>
 			</li> -->
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+			<li class="m-menu__item  <?php if(preg_match("/\bloanProduct\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('loanProduct')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -97,7 +100,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+			<li class="m-menu__item  <?php if(preg_match("/\bsalesProduct\b/i", $urlString) || preg_match("/\bsalesContest\b/i", $urlString) || preg_match("/\bcustomerScheme\b/i", $urlString) || preg_match("/\bvisualCategory\b/i", $urlString) || preg_match("/\bdocCheckProduct\b/i", $urlString) || preg_match("/\bdocCheckCategory\b/i", $urlString) || preg_match("/\bdsaList\b/i", $urlString) || preg_match("/\bdsaLead\b/i", $urlString) || preg_match("/\bcorporateList\b/i", $urlString) || preg_match("/\bmarketingVisuals\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--expanded m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 				<a href="javascript:;" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -115,7 +118,7 @@
 								<span class="m-menu__link-text">Sales Kit</span>
 							</span>
 						</li>
-						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+						<li class="m-menu__item  <?php if(preg_match("/\bsalesProduct\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 							<a href="{{url('salesProduct')}}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
@@ -127,7 +130,7 @@
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+						<li class="m-menu__item  <?php if(preg_match("/\bdocCheckCategory\b/i", $urlString) || preg_match("/\bdocCheckProduct\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 							<a href="javascript:;" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
@@ -138,7 +141,7 @@
 							<div class="m-menu__submenu ">
 								<span class="m-menu__arrow"></span>
 								<ul class="m-menu__subnav">
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bdocCheckCategory\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('docCheckCategory')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -146,7 +149,7 @@
 											<span class="m-menu__link-text">Category</span>
 										</a>
 									</li>
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bdocCheckProduct\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('docCheckProduct')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -157,7 +160,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+						<li class="m-menu__item  <?php if(preg_match("/\bsalesContest\b/i", $urlString) || preg_match("/\bcustomerScheme\b/i", $urlString) || preg_match("/\bvisualCategory\b/i", $urlString) || preg_match("/\bmarketingVisuals\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 							<a href="javascript:;" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
@@ -168,7 +171,7 @@
 							<div class="m-menu__submenu ">
 								<span class="m-menu__arrow"></span>
 								<ul class="m-menu__subnav">
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bsalesContest\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('salesContest')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -176,7 +179,7 @@
 											<span class="m-menu__link-text">Team Contests</span>
 										</a>
 									</li>
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bcustomerScheme\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('customerScheme')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -184,7 +187,7 @@
 											<span class="m-menu__link-text">Customer Schemes</span>
 										</a>
 									</li>
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+									<li class="m-menu__item  <?php if(preg_match("/\bvisualCategory\b/i", $urlString) || preg_match("/\bmarketingVisuals\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 										<a href="javascript:;" class="m-menu__link m-menu__toggle">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -195,7 +198,7 @@
 										<div class="m-menu__submenu ">
 											<span class="m-menu__arrow"></span>
 											<ul class="m-menu__subnav">
-												<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+												<li class="m-menu__item  <?php if(preg_match("/\bvisualCategory\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 													<a href="{{url('visualCategory')}}" class="m-menu__link ">
 														<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 															<span></span>
@@ -203,7 +206,7 @@
 														<span class="m-menu__link-text">Category</span>
 													</a>
 												</li>
-												<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+												<li class="m-menu__item  <?php if(preg_match("/\bmarketingVisuals\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 													<a href="{{url('marketingVisuals')}}" class="m-menu__link ">
 														<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 															<span></span>
@@ -217,7 +220,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" m-menu-submenu-toggle="hover">
+						<li class="m-menu__item  <?php if(preg_match("/\bdsaList\b/i", $urlString) || preg_match("/\bdsaLead\b/i", $urlString) || preg_match("/\bcorporateList\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 							<a href="javascript:;" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
@@ -228,7 +231,7 @@
 							<div class="m-menu__submenu ">
 								<span class="m-menu__arrow"></span>
 								<ul class="m-menu__subnav">
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bdsaList\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('dsaList')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -236,7 +239,7 @@
 											<span class="m-menu__link-text">Onboarding Detail</span>
 										</a>
 									</li>
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item   <?php if(preg_match("/\bcorporateList\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('corporateList')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
@@ -244,7 +247,7 @@
 											<span class="m-menu__link-text">Corporate Presentation</span>
 										</a>
 									</li>
-									<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
+									<li class="m-menu__item  <?php if(preg_match("/\bdsaLead\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 										<a href="{{url('dsaLead')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
