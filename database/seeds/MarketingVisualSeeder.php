@@ -18,7 +18,7 @@ class MarketingVisualSeeder extends Seeder
               'id'=>1,
               'loan_product_id' => 2,
               'marketing_visual_category_id' => 1,
-               'name'=>'Branding & Marketing Banners',
+              'file_path'=>'test.pdf',
               'created_at'=>now(),
               'updated_at'=>now()
             ),
@@ -26,7 +26,7 @@ class MarketingVisualSeeder extends Seeder
                 'id'=>2,
                 'loan_product_id' => 1,
                 'marketing_visual_category_id' => 3,
-                'name'=>'Advertisement Banners',
+                'file_path'=>'test1.pdf',
                 'created_at'=>now(),
                 'updated_at'=>now()
             ),
@@ -34,7 +34,7 @@ class MarketingVisualSeeder extends Seeder
                 'id'=>3,
                 'loan_product_id' => 3,
                 'marketing_visual_category_id' => 2,
-                'name'=>'Offer or Scheme Related Banners',
+                'file_path'=>'test12.pdf',
                 'created_at'=>now(),
                 'updated_at'=>now()
             ),
