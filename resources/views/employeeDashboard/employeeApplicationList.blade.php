@@ -27,18 +27,22 @@
 		                </div>
 					</div>
 				</div>
-				<div class="col-md-4">
-													<div class="m-input-icon m-input-icon--left">
-														<input type="text" class="form-control m-input m-input--solid" placeholder="Search..." id="generalSearch">
-														<span class="m-input-icon__icon m-input-icon__icon--left">
-															<span>
-																<i class="la la-search"></i>
-															</span>
-														</span>
-													</div>
-												</div>
 				<div class="m-portlet__body">
-                     <div class="tab-content">
+					<div class="row" style="margin-bottom:10px">
+						<div class="col-md-9">
+						</div>
+						<div class="col-md-3">
+							<div class="m-input-icon m-input-icon--left">
+								<input type="text" class="form-control m-input m-input--solid" placeholder="Search..." id="generalSearch">
+								<span class="m-input-icon__icon m-input-icon__icon--left">
+									<span>
+										<i class="la la-search"></i>
+									</span>
+								</span>
+							</div>
+						</div>
+					</div>
+                    <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
                             <div id="applicationdata">
                             </div>

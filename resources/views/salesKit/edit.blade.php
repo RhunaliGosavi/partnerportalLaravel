@@ -43,9 +43,9 @@
                         </div>
                         <div class="form-group m-form__group row {{ $errors->has('content') ? 'has-danger' : ''}}">
                             <label class="col-3 col-form-label">Content</label>
-                            <div class="col-md-4">
+                            <div class="col-md-9">
                                 <!-- <input type="text" name="content" placeholder="Content" value="{{ $skProduct['content_data'] }}" class="form-control"> -->
-                                <textarea name="content" id="ckeditor-content" placeholder="Content" class="form-control">
+                                <textarea name="content" id="ckeditor-content" placeholder="Content" class="form-control summernote">
                                     {{ $skProduct['content_data'] }}
                                 </textarea>
                                 @if ($errors->has('content'))

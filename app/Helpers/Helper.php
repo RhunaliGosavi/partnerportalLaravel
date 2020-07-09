@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class Helper
 {
@@ -99,5 +101,32 @@ class Helper
 
     public function checkBankAccount() {
 
+	}
+	
+	public function upload_image($images, $path, $type)
+    {
+		// if($type === 'update') 
+        // {
+        //     $files = Storage::allFiles('public/'.$path);
+        //     Storage::delete($files);
+        // }
+        foreach($images as $img){
+            $src = $img->getAttribute('src');
+            if(preg_match('/data:image/', $src)){ 
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];  
+                $filename = uniqid().'_'.time().'.'.$mimetype;
+                $filepath = $path."/".$filename;
+                $image = Image::make($src)
+                    // ->resize(300, 200)
+                    ->encode($mimetype, 100);
+                Storage::put('public/'.$filepath, $image->__toString());
+                $url = Storage::url($filepath);
+                $new_src = asset($url);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+        return $images;
     }
 }

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\DocumentChecklistCategory;
 use App\DocumentChecklistProduct;
 use App\SalesKitProduct;
-use Illuminate\Support\Facades\DB;
+use DB, Image, Helper;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentChecklistProductController extends Controller
 {
@@ -48,10 +49,18 @@ class DocumentChecklistProductController extends Controller
             'content' => 'required'
         ];
         $request->validate($rules);
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $statement = DB::select("show table status like 'document_checklist_products'");
+        $id = $statement[0]->Auto_increment;
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/checklistProduct/".$id, 'store');
         $docCheckProduct = new DocumentChecklistProduct;
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
-        $docCheckProduct->content_data  = $post['content'];
+        $docCheckProduct->content_data  = $dom->saveHTML();
         $docCheckProduct->save();
         return redirect('docCheckProduct')->with('success', 'Document Checklist Product added successfully!');
     }
@@ -79,7 +88,7 @@ class DocumentChecklistProductController extends Controller
         return view('salesKit.docChecklist.products.edit', [
             'sales_kit_products' => SalesKitProduct::all(),
             'doc_check_categories' => DocumentChecklistCategory::all(),
-            'skProduct' => $docCheckProduct
+            'docCheckProduct' => $docCheckProduct
         ]);
     }
 
@@ -96,16 +105,22 @@ class DocumentChecklistProductController extends Controller
         $post = $request->all();
         
         $rules = [
-            'sale_kit_product' => 'required',
+            'sales_kit_product' => 'required',
             'doc_check_category' => 'required',
             'content' => 'required'
         ];
        
         $request->validate($rules);
         $docCheckProduct = DocumentChecklistProduct::find($id);
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/checklistProduct/".$docCheckProduct->id, 'update');
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
-        $docCheckProduct->content_data  = $post['content'];
+        $docCheckProduct->content_data  = $dom->saveHTML();
         $dat=$docCheckProduct->save();
        
          return redirect('docCheckProduct')->with('success', 'Document Checklist Product updated successfully!');
@@ -121,6 +136,9 @@ class DocumentChecklistProductController extends Controller
     {
         $docCheckProduct = DocumentChecklistProduct::find($id);
         if($docCheckProduct) {
+            $directory = "salesKit/checklistProduct/".$docCheckProduct->id;
+            $files = Storage::allFiles('public/'.$directory);
+            Storage::delete($files);
             $docCheckProduct->delete();
             return redirect('docCheckProduct')->with('success', 'Document Checklist Product deleted successfully!');
         } else {

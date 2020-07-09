@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SalesKitProduct;
 use App\LoanProduct;
+use Illuminate\Support\Facades\Storage;
+use Image, DB, Helper;
 
 class SalesKitProductController extends Controller
 {
@@ -46,10 +48,18 @@ class SalesKitProductController extends Controller
         ];
         $request->validate($rules);
         if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Sales Kit Product already exist!');
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $statement = DB::select("show table status like 'sales_kit_products'");
+        $id = $statement[0]->Auto_increment;
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/products/".$id, 'store');
         $skProduct = new SalesKitProduct;
         $skProduct->loan_product_id = $post['loan_product'];
         $skProduct->name = $post['name'];
-        $skProduct->content_data  = $post['content'];
+        $skProduct->content_data  = $dom->saveHTML();
         $skProduct->save();
         return redirect('salesProduct')->with('success', 'Sales Kit Product added successfully!');
     }
@@ -98,9 +108,15 @@ class SalesKitProductController extends Controller
         $request->validate($rules);
         $skProduct = SalesKitProduct::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/products/".$skProduct->id, 'update');
         $skProduct->loan_product_id = $post['loan_product'];
         $skProduct->name = $post['name'];
-        $skProduct->content_data  = $post['content'];
+        $skProduct->content_data  = $dom->saveHTML();
         $skProduct->save();
         return redirect('salesProduct')->with('success', 'Sales Kit Product updated successfully!');
     }
@@ -115,6 +131,9 @@ class SalesKitProductController extends Controller
     {
         $skProduct = SalesKitProduct::find($id);
         if($skProduct) {
+            $directory = "salesKit/products/".$skProduct->id;
+            $files = Storage::allFiles('public/'.$directory);
+            Storage::delete($files);
             $skProduct->delete();
             return redirect('salesProduct')->with('success', 'Sales Kit Product deleted successfully!');
         } else {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\LoanProduct;
 use App\SalesContest;
 use Illuminate\Support\Facades\Storage;
+use Image, DB, Helper;
 
 class SalesContestController extends Controller
 {
@@ -49,6 +50,14 @@ class SalesContestController extends Controller
         ];
         $request->validate($rules);
         // if($this->checkIfExist($post)) return redirect('salesContest')->with('error', 'Sales team contest already exist!');
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $statement = DB::select("show table status like 'sales_contests'");
+        $id = $statement[0]->Auto_increment;
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/salesContest/uploads/".$id, 'store');
         if($request->hasFile('file')){
             $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
             $result = array($request->file('file')->getClientOriginalExtension());
@@ -63,7 +72,7 @@ class SalesContestController extends Controller
                 $filesize=number_format($filesize / 1048576,2);
                 $request->file('file')->storeAs('public/salesKit/marketingInformation/salesContest',$fileNameToStore);
                 $process = SalesContest::create(
-                    ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore,'content_data'=>$post['content']]
+                    ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
                  );
                  if(! $process){
                     return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -118,6 +127,12 @@ class SalesContestController extends Controller
             'content' => 'required'
         ];
         $sContest = SalesContest::find($id);
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "salesKit/salesContest/uploads/".$sContest->id, 'update');
         $fileNameToStore = NULL;
         if($request->hasFile('file')){
             $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
@@ -139,7 +154,7 @@ class SalesContestController extends Controller
         }
         $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $sContest->file_path;
         $process = $sContest->update(
-            ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore,'content_data'=>$post['content']]
+            ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
         );
         if(! $process){
         return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -158,6 +173,9 @@ class SalesContestController extends Controller
         $sContest = SalesContest::find($id);
         if($sContest) {
             Storage::disk('local')->delete('public/salesKit/marketingInformation/salesContest/'.$sContest->file_path);
+            $directory = "salesKit/salesContest/uploads/".$sContest->id;
+            $files = Storage::allFiles('public/'.$directory);
+            Storage::delete($files);
             $sContest->delete();
             return redirect('salesContest')->with('success', 'Sales Team Contest deleted successfully!');
         } else {

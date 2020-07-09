@@ -11,16 +11,16 @@
 						</div>
 					</div>
 				</div>
-                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('docCheckProduct/update/'.$skProduct->id)}}" method="POST">
+                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('docCheckProduct/update/'.$docCheckProduct->id)}}" method="POST">
 					@csrf
 					<div class="m-portlet__body">
                         <div class="form-group m-form__group row {{ $errors->has('sale_kit_product') ? 'has-danger' : ''}}">
 							<label class="col-3 col-form-label">Sales Kit Product</label>
 							<div class="col-md-4">
-								<select class="form-control" name="sale_kit_product" id="sale_kit_product">
+								<select class="form-control" name="sales_kit_product" id="sale_kit_product">
 									<option value="">Select Sales Kit Product</option>
-                                    @foreach ($sale_kit_products as $sale_kit_product)
-                                        <option value="{{ $sale_kit_product->id }}" @if($sale_kit_product['id'] == $skProduct['sales_kit_product_id']) selected @endif>{{ $sale_kit_product->name }}</option>
+                                    @foreach ($sales_kit_products as $sale_kit_product)
+                                        <option value="{{ $sale_kit_product->id }}" @if($sale_kit_product['id'] == $docCheckProduct['sales_kit_product_id']) selected @endif>{{ $sale_kit_product->name }}</option>
                                     @endforeach
 								</select>
                                 @if ($errors->has('sale_kit_product'))
@@ -36,7 +36,7 @@
 								<select class="form-control" name="doc_check_category" id="doc_check_category">
 									<option value="">Select Document Checklist Category</option>
                                     @foreach ($doc_check_categories as $doc_check_category)
-                                        <option value="{{ $doc_check_category->id }}" @if($doc_check_category['id'] == $skProduct['document_checklist_category_id']) selected @endif>{{ $doc_check_category->name }}</option>
+                                        <option value="{{ $doc_check_category->id }}" @if($doc_check_category['id'] == $docCheckProduct['document_checklist_category_id']) selected @endif>{{ $doc_check_category->name }}</option>
                                     @endforeach
 								</select>
                                 @if ($errors->has('doc_check_category'))
@@ -48,10 +48,10 @@
 						</div>
                         <div class="form-group m-form__group row {{ $errors->has('content') ? 'has-danger' : ''}}">
                             <label class="col-3 col-form-label">Content</label>
-                            <div class="col-md-4">
-                                <!-- <input type="text" name="content" placeholder="Content" value="{{ $skProduct['content_data'] }}" class="form-control"> -->
-                                <textarea name="content" id="ckeditor-content" placeholder="Content" class="form-control">
-                                    {{ $skProduct['content_data'] }}
+                            <div class="col-md-9">
+                                <!-- <input type="text" name="content" placeholder="Content" value="{{ $docCheckProduct['content_data'] }}" class="form-control"> -->
+                                <textarea name="content" id="ckeditor-content" placeholder="Content" class="form-control summernote">
+                                    {{ $docCheckProduct['content_data'] }}
                                 </textarea>
                                 @if ($errors->has('content'))
                                 <div class="form-control-feedback">

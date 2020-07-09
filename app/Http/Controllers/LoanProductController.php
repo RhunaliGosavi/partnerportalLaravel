@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Config, Helper, Excel;
+use Validator,Config, Helper, Excel, DB, Image;
+use Illuminate\Support\Facades\Storage;
 use App\LoanProduct;
 
 class LoanProductController extends Controller
@@ -43,9 +44,17 @@ class LoanProductController extends Controller
         ];
         $request->validate($rules);
         if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
+        $content = $request->input('description');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $statement = DB::select("show table status like 'loan_products'");
+        $id = $statement[0]->Auto_increment;
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "loanProducts/".$id, 'store');
         $lProduct = new LoanProduct;
         $lProduct->name = $post['name'];
-        $lProduct->description  = $post['description'];
+        $lProduct->description  = $dom->saveHTML();
         $lProduct->save();
         return redirect('loanProduct')->with('success', 'Loan Product added successfully!');
     }
@@ -90,8 +99,14 @@ class LoanProductController extends Controller
         $request->validate($rules);
         $lProduct = LoanProduct::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
+        $content = $request->input('description');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "loanProducts/".$lProduct->id, 'update');
         $lProduct->name = $post['name'];
-        $lProduct->description  = $post['description'];
+        $lProduct->description  = $dom->saveHTML();
         $lProduct->save();
         return redirect('loanProduct')->with('success', 'Loan Product updated successfully!');
     }
@@ -106,6 +121,9 @@ class LoanProductController extends Controller
     {
         $lProduct = LoanProduct::find($id);
         if($lProduct) {
+            $directory = "loanProducts/".$lProduct->id;
+            $files = Storage::allFiles('public/'.$directory);
+            Storage::delete($files);
             $lProduct->delete();
             return redirect('loanProduct')->with('success', 'Loan Product deleted successfully!');
         } else {

@@ -27,8 +27,9 @@
                         </div>
                         <div class="form-group m-form__group row {{ $errors->has('description') ? 'has-danger' : ''}}">
                             <label class="col-3 col-form-label">Description</label>
-                            <div class="col-md-4">
-                                <input type="text" name="description" placeholder="Description" value="{{old('description')}}" class="form-control">
+                            <div class="col-md-9">
+                                <!-- <input type="text" name="description" placeholder="Description" value="{{old('description')}}" class="form-control"> -->
+                                <textarea name="description" id="ckeditor-content" placeholder="Content" class="form-control summernote" value="{{old('description')}}">{{old('description')}}</textarea>
                                 @if ($errors->has('description'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('description') }}
