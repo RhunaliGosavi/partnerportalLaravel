@@ -165,4 +165,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('dsaLead/delete/{id}',  'DsaLeadController@destroy');
 	Route::post('dsaLead/import', 		'DsaLeadController@import');
 	Route::get('dsaLead/all', 'DsaLeadController@fetchAllLeads');
+
+    //calculator policy CRUD
+	Route::get('calculator-policy', 'CalculatorPolicyController@index');
+	Route::post('calculator-policy/store/{id?}',       'CalculatorPolicyController@store');
+	Route::get('calculator', 'TestCalculator@index');
 });

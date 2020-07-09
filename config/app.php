@@ -230,6 +230,7 @@ return [
         'Helper' => App\Helpers\Helper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'calPMTHelper' => App\Helpers\calPMTHelper::class,
     ],
 
 ];

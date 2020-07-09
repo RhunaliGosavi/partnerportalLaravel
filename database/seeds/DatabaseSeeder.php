@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
        
         $this->call([
             UserTableSeeder::class,
+            IncentiveSlabSeeder::class,//production
+            CalculatorPoliciesSeeder::class,//production
             LoadProductSeeder::class,
             MarketingVisualCategorySeeder::class,
             MarketingVisualSeeder::class,
@@ -25,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SalesKitProductSeeder::class,
             DocumentChecklistCategorySeeder::class,
             DocumentChecklistProductSeeder::class
+            
             
         ]);      
     }
