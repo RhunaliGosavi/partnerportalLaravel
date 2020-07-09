@@ -2,7 +2,8 @@
 namespace App\Helpers;
 
 class calCollectionIncentiveHelper
-{
+{    //$type: preference,pick up
+    //$bucketTYpe: 1.bucket1,bucket2,bucket3,bucket4
     public function __construct($type,$emiCollect,$noOfCases,$bucketTYpe,$rollback,$posOd,$posForOdCollected)
     {
        $this->type=$type;
@@ -16,8 +17,19 @@ class calCollectionIncentiveHelper
     }
 
     public function calculateCollectionIncentive(){
-
-       return ($this->type=='pick up') ? $this->getPickUpDetails() : $this->getReferenceDetails();
+        $error='';
+        $error.=empty($this->type) ? 'Type' :'';
+        $error.=empty($this->emiCollect) ? (!empty($error)? ',':'').' EMI collect' : '';
+        $error.=empty($this->noOfCases) ? (!empty($error)? ',':'').' No of cases' : '';
+        $error.=($this->type=='preference' && empty($this->bucketTYpe)) ? (!empty($error)? ',':'').' Bucket type' : '';
+        $error.=($this->type=='preference' && empty($this->rollback)) ? (!empty($error)? ',':'').' Rollback' : '';
+        $error.=($this->type=='preference' && empty($this->posOd)) ? (!empty($error)? ',':'').' POS OD' : '';
+        $error.=($this->type=='preference' && empty($this->posForOdCollected)) ? (!empty($error)? ',':'').' POS for OD collected' : '';
+        $error.=!empty($error) ? ' Can not be empty' : '';
+       if(empty($error)){
+             return ($this->type=='pick up') ? $this->getPickUpDetails() : $this->getReferenceDetails();
+        }
+       return array('error'=>$error);
 
     }
     public function getPickUpDetails(){
@@ -92,9 +104,9 @@ class calCollectionIncentiveHelper
             default:
                 $comission=6;
         }
-        $incentiveAmount= $comission*$this->rollback;
+        $incentiveAmount= ($comission*$this->rollback)/100;
        
-        return array('rollback'=>$rollback,'resolution'=>$resolution,'comission'=>$comission,'incentiveAmount'=>$incentiveAmount);
+        return array('rollback'=>$rollback,'resolution'=>$resolution,'comission'=>round($comission),'incentiveAmount'=>$incentiveAmount);
         
     }
     public function getbucketTwo()
