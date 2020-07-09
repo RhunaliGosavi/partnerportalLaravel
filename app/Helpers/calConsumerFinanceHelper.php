@@ -6,20 +6,31 @@ use App\CalculatorPolicy;
 
 class calConsumerFinanceHelper
 {
+
+    public function __construct($roi,$loanTenure,$loanAmount,$advancedEMI)
+    {
+     
+        $this->roi=$roi;
+        $this->loanTenure=$loanTenure;
+        $this->loanAmount=$loanAmount;
+        $this->advancedEMI=$advancedEMI;
+        
+    }
+    
     //$policyFOIR,$policyROI,$expectedROI in percentage
-    public function calculateConsumerFinance($roi,$loanTenure,$loanAmount,$advancedEMI) 
+    public function calculateConsumerFinance() 
     {
        
         $error='';
-        $error.=empty($roi) ? 'Ret Of Interest' :'';
-        $error.=empty($loanTenure) ? (!empty($error)? ',':'').' Loan Tenure' : '';
-        $error.=empty($loanAmount) ? (!empty($error)? ',':'').' Loan Amount' : '';
-        $error.=empty($advancedEMI) ? (!empty($error)? ',':'').' Advance EMI' : '';
+        $error.=empty($this->roi) ? 'Ret Of Interest' :'';
+        $error.=empty($this->loanTenure) ? (!empty($error)? ',':'').' Loan Tenure' : '';
+        $error.=empty($this->loanAmount) ? (!empty($error)? ',':'').' Loan Amount' : '';
+        $error.=empty($this->advancedEMI) ? (!empty($error)? ',':'').' Advance EMI' : '';
         $error.=!empty($error) ? ' Can not be empty' : '';
        if(empty($error)){
-            $Emi=round($this->getEmi($roi,$loanTenure,$loanAmount));
-            $advancedEmi=round($this->getAdvancedEmi($roi,$loanTenure,$loanAmount,$advancedEMI));
-            $netLoan=round($this->getNetLoan($roi,$loanTenure,$loanAmount,$advancedEMI));
+            $Emi=round($this->getEmi());
+            $advancedEmi=round($this->getAdvancedEmi());
+            $netLoan=round($this->getNetLoan());
 
             return array('Emi'=>$Emi,'AdvancedEMI'=>$advancedEmi,'NetLoan'=>$netLoan);
         }
@@ -27,19 +38,19 @@ class calConsumerFinanceHelper
       
     } 
 
-    public function getEmi($roi,$loanTenure,$loanAmount){
+    public function getEmi(){
       $calPMTHelper= new calPMTHelper();
-      return $calPMTHelper->calPmt($roi,$loanTenure,$loanAmount);
+      return $calPMTHelper->calPmt($this->roi,$this->loanTenure,$this->loanAmount);
     }
 
-    public function getAdvancedEmi($roi,$loanTenure,$loanAmount,$advancedEMI){
-        $emi=$this->getEmi($roi,$loanTenure,$loanAmount);
-        return  $emi*$advancedEMI;
+    public function getAdvancedEmi(){
+        $emi=$this->getEmi();
+        return  $emi*$this->advancedEMI;
     }
-    public function getNetLoan($roi,$loanTenure,$loanAmount,$advancedEMI){
+    public function getNetLoan(){
 
-        $advemi=$this->getAdvancedEmi($roi,$loanTenure,$loanAmount,$advancedEMI);
-        return $loanAmount - $advemi;
+        $advemi=$this->getAdvancedEmi();
+        return $this->loanAmount - $advemi;
    }
    
         
