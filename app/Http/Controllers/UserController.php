@@ -33,33 +33,56 @@ class UserController extends Controller
 
         if($request->has('user_type') && Config::get('constant')['user_types']['AFL_EMPLOYEE'] == $request->user_type) { 
             $rules['employee_id']    = 'required';
-            $rules['pan_number']     = 'required';
+            // $rules['pan_number']     = 'required';
+            $rules['email']     = 'required';
+            $rules['name']     = 'required';
+            $rules['middle_name']     = 'required';
+            $rules['last_name']     = 'required';
             $rules['mobile_number']  = 'required|numeric|regex:/(^[1-9][0-9]*$)/';
+            $rules['hub_name']     = 'required';
+            $rules['company_name']     = 'required';
+            $rules['state']     = 'required';
+            $rules['department']     = 'required';
+            $rules['designation']     = 'required';
+            $rules['work_location']     = 'required';
+            $rules['job_role']     = 'required';
+            $rules['product']     = 'required';
+            $rules['reporting_manager_name']     = 'required';
+            $rules['manager_employee_id']     = 'required';
+            $rules['manager_employee_id']     = 'required';
         }
 
         $request->validate($rules);
 
         $helper = new Helper;
-        $employeeExists = $helper->checkEmployee();
+        $employeeExists = $helper->checkEmployee($post['employee_id']);
 
         if($employeeExists) {
-            $panResponse = $helper->checkPAN();
+            $employee = new Employee;
 
-            if($panResponse && array_key_exists('statusInfo', $panResponse) && 'SUCCESS' == $panResponse['statusInfo']['status']) {
-                $result = $panResponse['response']['result'];
+            $employee->employee_id = $post['employee_id'];
+            $employee->mobile_number = $post['mobile_number'];
+            $employee->name          = $post['name'];
+            $employee->middle_name   = $post['middle_name'];
+            $employee->last_name   = $post['last_name'];
+            $employee->hub_name   = $post['hub_name'];
+            $employee->company_name   = $post['company_name'];
+            $employee->work_location   = $post['work_location'];
+            $employee->state   = $post['state'];
+            $employee->department   = $post['department'];
+            $employee->designation   = $post['designation'];
+            $employee->job_role   = $post['job_role'];
+            $employee->product   = $post['product'];
+            $employee->reporting_manager_name   = $post['reporting_manager_name'];
+            $employee->manager_employee_id   = $post['manager_employee_id'];
+            $employee->password      = bcrypt('test123');
+            $employee->status        = $post['status'];
+            $employee->product       = $post['product'];
+            $employee->email         = $post['email'];
+            $employee->save();
 
-                $employee = new Employee;
-
-                $employee->employee_id = $post['employee_id'];
-                $employee->pan_number  = $post['pan_number'];
-                $employee->mobile_number = $post['mobile_number'];
-                $employee->name          = $result['name'];
-                $employee->password      = bcrypt('test123');
-                $employee->status        = 1;
-                $employee->save();
-
-                return redirect('users')->with('success', 'Employee created successfully!');
-            }
+            return redirect('users')->with('success', 'Employee created successfully!');
+    
         } else {
             return redirect('users')->with('error', 'Employee not created successfully!');
         }
@@ -137,20 +160,88 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->with('error', 'Excel file format invalid.');
             } else {
-                if ($request->hasFile('import_file') && $request->file('import_file')->isValid()) {
+                if ($request->hasFile('import_file')) {
                     $extensions = array("xls","xlsx");
                     $result = array($request->file('import_file')->getClientOriginalExtension());
 
                     if(in_array($result[0],$extensions)){
                         $file=$request->file('import_file');
-                        
+
                         Excel::import(new EmployeeImport, $file);   
                     } else {
                         return redirect()->back()->with('error', 'File format is invalid.');
                     }              
                 }
             }
+            return redirect('users')->with('success', 'Excel file imported successfully.');
+        } else {
+            return redirect('users')->with('error', 'Excel file not imported successfully.');
         }
-        return redirect('users')->with('success', 'Excel file imported successfully.');
+    }
+
+    public function edit(Request $request, $id) {
+        $data['employee'] = Employee::Find($id);
+
+        return view('users.edit', $data); 
+    }
+
+    public function update(Request $request, $id) {
+        $post = $request->all();
+
+        $rules = [
+            'user_type'      => 'required',
+        ];
+
+        if($request->has('user_type') && Config::get('constant')['user_types']['AFL_EMPLOYEE'] == $request->user_type) { 
+            $rules['employee_id']    = 'required';
+            // $rules['pan_number']     = 'required';
+            $rules['email']     = 'required';
+            $rules['name']     = 'required';
+            $rules['middle_name']     = 'required';
+            $rules['last_name']     = 'required';
+            $rules['mobile_number']  = 'required|numeric|regex:/(^[1-9][0-9]*$)/';
+            $rules['hub_name']     = 'required';
+            $rules['company_name']     = 'required';
+            $rules['state']     = 'required';
+            $rules['department']     = 'required';
+            $rules['designation']     = 'required';
+            $rules['work_location']     = 'required';
+            $rules['job_role']     = 'required';
+            $rules['product']     = 'required';
+            $rules['reporting_manager_name']     = 'required';
+            $rules['manager_employee_id']     = 'required';
+            $rules['manager_employee_id']     = 'required';
+        }
+
+        $request->validate($rules);
+
+        $employee = Employee::find($id);
+        if($employee) {
+
+            $employee->employee_id = $post['employee_id'];
+            $employee->mobile_number = $post['mobile_number'];
+            $employee->name          = $post['name'];
+            $employee->middle_name   = $post['middle_name'];
+            $employee->last_name   = $post['last_name'];
+            $employee->hub_name   = $post['hub_name'];
+            $employee->company_name   = $post['company_name'];
+            $employee->work_location   = $post['work_location'];
+            $employee->state   = $post['state'];
+            $employee->department   = $post['department'];
+            $employee->designation   = $post['designation'];
+            $employee->job_role   = $post['job_role'];
+            $employee->product   = $post['product'];
+            $employee->reporting_manager_name   = $post['reporting_manager_name'];
+            $employee->manager_employee_id   = $post['manager_employee_id'];
+            $employee->password      = bcrypt('test123');
+            $employee->status        = $post['status'];
+            $employee->product       = $post['product'];
+            $employee->email         = $post['email'];
+            $employee->save();
+
+            return redirect('users')->with('success', 'Employee updated successfully!');    
+        } else {
+            return redirect('users')->with('error', 'Employee not updated successfully!');
+        }
     }
 }

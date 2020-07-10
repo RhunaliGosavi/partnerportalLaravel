@@ -12,7 +12,7 @@ class Employee extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'employee_id', 'password','pan_number','mobile_number','status','email_id'
+        'name', 'employee_id', 'password','pan_number','mobile_number','status','email','middle_name','hub_name','company_name','work_location','state','department','designation','job_role','product','last_name','reporting_manager_name','manager_employee_id'
     ];
 
     // Fetch refered buddies
