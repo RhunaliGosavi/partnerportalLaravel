@@ -27,7 +27,7 @@
                             <div class="m-login__wrapper">
                                 <div class="m-login__logo">
                                     <a href="#">
-                                        <img src="{{url('assets/app/media/img/logos/axis_finance_logo.svg')}}">
+                                        <img src="{{url('assets/app/media/img/logos/login_logo.png')}}">
                                     </a>
                                 </div>
                                 <div class="m-login__signin">
