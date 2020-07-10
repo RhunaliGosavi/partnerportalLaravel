@@ -26,7 +26,12 @@ class DatabaseSeeder extends Seeder
             CorporatePresentationSeeder::class,
             SalesKitProductSeeder::class,
             DocumentChecklistCategorySeeder::class,
-            DocumentChecklistProductSeeder::class
+            DocumentChecklistProductSeeder::class,
+            EmployeeSeeder::class,
+            ReferFriendSeeder::class,
+            HrLoanSeeder::class,
+            OtherLoanSeeder::class,
+            DsaLeadSeeder::class
             
             
         ]);      
