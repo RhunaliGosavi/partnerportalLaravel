@@ -95,7 +95,7 @@
               		{ field: "name",title:'Name'},
                     // { field: "email",title:'Email'},
                     { field: "employee_id",title:'Employee Id'},
-                    { field: "pan_number",title:'PAN Number'},
+                    { field: "email",title:'Email'},
                     { field: "mobile_number",title:'Mobile Number'},
                     { field: "status",title:'Status', sortable:false, template:function(row) {
                     	var color='grey';
@@ -116,7 +116,7 @@
 		                sortable: false,
 		                overflow: 'visible',
 		                template:function(row,a,i)  {
-		                	var html = '<a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
+		                	var html = '<a href="'+base_url+'/user/edit/'+row.id+'" title="Edit User" class="dropdown-item"><i class="la la-pencil"></i>Edit User</a><a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
 		                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
                                 <i class="la la-ellipsis-h"></i>\
                             </a>\
@@ -168,9 +168,9 @@
 	              	sortable: true,
 	              	"columns": [
 	              		{ field: "name",title:'Name'},
-	                    // { field: "email",title:'Email'},
 	                    { field: "employee_id",title:'Employee Id'},
-	                    { field: "pan_number",title:'PAN Number'},
+	                    { field: "email",title:'Email'},
+	                    // { field: "pan_number",title:'PAN Number'},
                     	{ field: "mobile_number",title:'Mobile Number'},
 	                    { field: "status",title:'Status', sortable:false,template:function(row) {
                     		var color='grey';
@@ -191,7 +191,7 @@
 			                sortable: false,
 			                overflow: 'visible',
 			                template:function(row,a,i)  {
-			                	html = '<a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
+			                	html = '<a href="'+base_url+'/user/edit/'+row.id+'" title="Edit User" class="dropdown-item"><i class="la la-pencil"></i>Edit User</a><a href="'+base_url+'/user/delete/'+row.id+'" title="Delete User" class="dropdown-item"><i class="la la-trash"></i>Delete User</a></div>';
 			                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
 	                                <i class="la la-ellipsis-h"></i>\
 	                            </a>\
