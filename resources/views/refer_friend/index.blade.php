@@ -53,7 +53,7 @@
               	// column sorting
               	sortable: true,
               	"columns": [
-              		{ field: "applicant_name",title:'Applicant Name'},
+              		{ field: "name",title:'Applicant Name'},
                     { field: "email",title:'Email'},
                     { field: "mobile_number",title:'Mobile Number'},
                     { field: "loan_product",title:'Loan Product', template:function(row) {
@@ -66,8 +66,8 @@
 	                },
 	                { field: "loan_amount",title:'Loan Amount (INR)'},
 	                { field: "prefered_contact_time",title:'Prefered Contact Time'},
-                    { field: "employee_id",title:'Added By', template:function(row) {
-                    		if(row.employee_id && row.employee.name) {
+                    { field: "employee",title:'Added By', template:function(row) {
+                    		if(row.employee && row.employee.name) {
                     			return row.employee.name;
                     		} else {
                     			return '';
