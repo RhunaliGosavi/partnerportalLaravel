@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<head>
+    <link href="{{url('assets/css/summernote.min.css')}}" rel="stylesheet"> 
+</head>
 @section('content')
     <div class="row">
 		<div class="col-md-12">
@@ -77,4 +79,13 @@
             </div>
 		</div>
 	</div>
+	<script src="{{url('assets/js/summernote.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 200,
+                placeholder: "Content here..."
+            });
+        });
+    </script>
 @endsection
