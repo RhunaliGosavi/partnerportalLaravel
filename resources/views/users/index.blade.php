@@ -98,13 +98,13 @@
                     { field: "email",title:'Email'},
                     { field: "mobile_number",title:'Mobile Number'},
                     { field: "status",title:'Status', sortable:false, template:function(row) {
-                    	var color='grey';
+                    	var color='secondary';
                     	var title = 'Deactive';
                     	if(row.status == 1) {
-                    		color = 'green';
+                    		color = 'success';
                     		title = "Active";
                     	}
-                    		var html = '<a href="#" style="color:'+color+'" title="'+title+'" data-id="'+row.id+'" class="updateStatus"><i class="la la-check-circle"></i></a>';
+                    		var html = '<a href="#" title="'+title+'" data-id="'+row.id+'" class="updateStatus"><span class="m-badge m-badge--'+color+' m-badge--wide">'+title+'</span></a>';
 
                     		return html;
 	                    }
@@ -173,13 +173,13 @@
 	                    // { field: "pan_number",title:'PAN Number'},
                     	{ field: "mobile_number",title:'Mobile Number'},
 	                    { field: "status",title:'Status', sortable:false,template:function(row) {
-                    		var color='grey';
-	                    	var title = 'Deactive';
+                    		var color='secondary';
+                    		var title = 'Deactive';
 	                    	if(row.status == 1) {
-	                    		color = 'green';
+	                    		color = 'success';
 	                    		title = "Active";
 	                    	}
-	                    		var html = '<a href="#" style="color:'+color+'" title="'+title+'" data-id="'+row.id+'" class="updateStatus"><i class="la la-check-circle"></i></a>';
+	                    		var html = '<a href="#" style="color:'+color+'" title="'+title+'" data-id="'+row.id+'" class="updateStatus"><span class="m-badge m-badge--'+color+' m-badge--wide">'+title+'</span></a>';
 
 	                    		return html;
 		                    }
