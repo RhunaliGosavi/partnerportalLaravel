@@ -11,8 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <!-- <script src="{{url('assets/js/ckeditor.js')}}" type="text/javascript"></script> -->
     <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
-    <link href="{{url('assets/css/summernote.min.css')}}" rel="stylesheet">
-    <script src="{{url('assets/js/summernote.min.js')}}"></script>
+    
     <script>
         WebFont.load({
             google: {
@@ -74,13 +73,6 @@
                 type:'danger'
             });
         }
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 200,
-            });
-        });
     </script>
 </body>
 </html>
