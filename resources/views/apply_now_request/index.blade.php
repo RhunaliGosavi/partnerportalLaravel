@@ -182,7 +182,7 @@
 	              		{ field: "name",title:'Applicant Name'},
 	              		{ field: "mobile_number",title:'Mobile Number'},
 	              		{ field: "loan_product",title:'Loan Product', template:function(row) {
-                    			if(row.loan_product_id && row.loan_product.name) {
+                    			if(row.loan_product_id && row.loan_product) {
                     				return row.loan_product.name;
                     			} else {
                     				return '-';
