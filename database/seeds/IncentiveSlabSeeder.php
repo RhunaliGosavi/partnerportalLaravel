@@ -51,8 +51,8 @@ class IncentiveSlabSeeder extends Seeder
             array(
                 'value' =>  7000000,
                 'incentive_payout' => 0.30,
-                'min'=>0,
-                'max'=>7100000,
+                'min'=>7000000,
+                'max'=>0,
                 'type'=>'sales officer',
                 'created_at'=>now(),
                 'updated_at'=>now()
@@ -87,9 +87,45 @@ class IncentiveSlabSeeder extends Seeder
             array(
                 'value' =>  22500000 ,
                 'incentive_payout' => 0.100,
-                'min'=>0,
-                'max'=>22600000,
+                'min'=>22500000,
+                'max'=>0,
                 'type'=>'portfolio manager',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'value' => 90000000 ,
+                'incentive_payout' => 0.015,
+                'min'=>90000000,
+                'max'=>120000000,
+                'type'=>'area sales manager',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'value' =>  120000000,
+                'incentive_payout' => 0.020,
+                'min'=>120000000,
+                'max'=>180000000,
+                'type'=>'area sales manager',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'value' =>  180000000,
+                'incentive_payout' => 0.025,
+                'min'=>180000000,
+                'max'=>240000000,
+                'type'=>'area sales manager',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'value' =>  240000000,
+                'incentive_payout' => 0.030,
+                'min'=>240000000,
+                'max'=>0,
+                'type'=>'area sales manager',
                 'created_at'=>now(),
                 'updated_at'=>now()
             )
