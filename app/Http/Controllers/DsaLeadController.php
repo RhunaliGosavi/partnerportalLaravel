@@ -7,6 +7,7 @@ use Validator,Config, Helper, Excel;
 use App\Imports\DsaLeadImport;
 use App\DsaLead;
 use App\Employee;
+use App\Exports\DsaLeadExport;
 
 class DsaLeadController extends Controller
 {
@@ -101,4 +102,8 @@ class DsaLeadController extends Controller
             return redirect('dsaLead')->with('error', 'DSA Lead record not deleted !');
         }
     }
+
+    public function export() {
+    	return Excel::download(new DsaLeadExport, 'DSA_onboarding_leads.xlsx');
+	}
 }

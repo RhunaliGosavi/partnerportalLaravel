@@ -12,6 +12,15 @@
 					</div>
 					<div class="m-portlet__head-tools">
 						<div class="row">
+							<div class="col-xl-2 order-2 order-xl-1">
+								<a href="{{url('/user/download')}}" border='0'>
+		                            <button id="sample_editable_1_new" class="btn btn-info m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill"> Download
+		                                <i class="fa fa-download"></i>
+		                            </button>
+		                        </a>
+		                    </div>
+		                    <div class="col-xl-1 order-2 order-xl-1">
+		                    </div>
 							<div class="col-xl-3 order-2 order-xl-1">
 								<form name="import_file" id="import_file" action="{{url('user/import')}}" method="post" enctype="multipart/form-data">
 		                            {{ csrf_field() }}
@@ -21,7 +30,7 @@
 		                            
 		                        </form>
 		                    </div>
-		                    <div class="col-xl-3 order-2 order-xl-1">
+		                    <div class="col-xl-1 order-2 order-xl-1">
 		                    </div>
 		                    <div class="col-xl-3 order-2 order-xl-1">
 								<a href="{{url('/user/create')}}" border='0'>
@@ -92,11 +101,27 @@
               	// column sorting
               	sortable: true,
               	"columns": [
-              		{ field: "name",title:'Name'},
+              		{ field: "hub_name",title:'Hub Name'},
+              		{ field: "employee_type",title:'Employee Type', template:function() {
+                    		return 'AFL Employees';
+	                    }
+					},
+              		{ field: "company_name",title:'Company Name'},
+              		{ field: "work_location",title:'Work Location'},
+              		{ field: "state",title:'State'},
+              		{ field: "department",title:'Department'},
+              		{ field: "designation",title:'Designation'},
+              		{ field: "job_role",title:'Job Role'},
+              		{ field: "product",title:'Product'},
+              		{ field: "name",title:'First Name'},
+              		{ field: "middle_name",title:'Middle Name'},
+              		{ field: "last_name",title:'Last Name'},
                     // { field: "email",title:'Email'},
                     { field: "employee_id",title:'Employee Id'},
-                    { field: "email",title:'Email'},
+                    { field: "email",title:'Official Email ID'},
                     { field: "mobile_number",title:'Mobile Number'},
+                    { field: "reporting_manager_name",title:'Reporting Manager Name'},
+                    { field: "manager_employee_id",title:'Manager Emp ID'},
                     { field: "status",title:'Status', sortable:false, template:function(row) {
                     	var color='secondary';
                     	var title = 'Deactive';

@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('user/delete/{id}',  'UserController@delete');
 	Route::post('user/store', 		'UserController@store');
 	Route::post('user/update/{id}', 'UserController@update');
+	Route::get('user/download', 'UserController@download');
 
 	Route::get('fetchAFLEmployees', 'UserController@fetchAFLEmployees');
 	Route::get('updateEmployeeStatus/{id}','UserController@updateEmployeeStatus');
@@ -165,6 +166,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('dsaLead/delete/{id}',  'DsaLeadController@destroy');
 	Route::post('dsaLead/import', 		'DsaLeadController@import');
 	Route::get('dsaLead/all', 'DsaLeadController@fetchAllLeads');
+	Route::get('dsaLeadExport', 'DsaLeadController@export');
 
     //calculator policy CRUD
 	Route::get('calculator-policy', 'CalculatorPolicyController@index');
