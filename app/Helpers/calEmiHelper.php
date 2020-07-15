@@ -26,7 +26,9 @@ class calEmiHelper
         $error.=!empty($error) ? ' Can not be empty' : '';
        if(empty($error)){
             $Emi=round($this->getEmi());
-            return array('Emi'=>$Emi);
+            $interestPiad=$this->gerInterestPaid();
+            $totalOutFlow=$this->getTotalOutflow();
+            return array('Emi'=>$Emi,'intetest_paid'=>round($interestPiad),'total_overflow'=>round($totalOutFlow));
         }
         return array('error'=>$error);
       
@@ -35,6 +37,22 @@ class calEmiHelper
     public function getEmi(){
       $calPMTHelper= new calPMTHelper();
       return $calPMTHelper->calPmt($this->roi,$this->loanTenure,$this->loanAmount);
+    }
+    public function gerInterestPaid(){
+        $calPMTHelper= new AmortizationHelper();
+        //$amount,$rate,$emi
+        $schedule=$calPMTHelper->getAmortizationTbl($this->loanAmount,$this->roi,$this->getEmi());
+        return $schedule['sum_interest'];
+
+    }
+    public function getTotalOutflow(){
+        $calPMTHelper= new AmortizationHelper();
+        //$amount,$rate,$emi
+        $schedule=$calPMTHelper->getAmortizationTbl($this->loanAmount,$this->roi,$this->getEmi());
+       
+        return $schedule['sum_interest'] + $schedule['sum_principal'];
+
+
     }
 
    

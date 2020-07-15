@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             ReferFriendSeeder::class,
             HrLoanSeeder::class,
             OtherLoanSeeder::class,
-            DsaLeadSeeder::class
+            DsaLeadSeeder::class,
+            CollectionIncentiveSeeder::class//production
             
             
         ]);      

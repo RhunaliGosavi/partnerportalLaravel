@@ -16,6 +16,7 @@ class calPartPaymentHelper
         $this->existingTenure=$existingTenure;
         $this->existingOutstanding=$existingOutstanding;
         $this->type=$type;
+  
         
     }
     
@@ -60,7 +61,11 @@ class calPartPaymentHelper
         return $this->getExistingEMI();
     }
     public function getRevisedTenure(){
-
+       
+        $calPMTHelper= new AmortizationHelper();
+   
+        $schedule=$calPMTHelper->getAmortizationTbl($this->getRevisedOutstanding(),$this->existingroi,$this->getRevisedEMI());
+        return $schedule['month'];
 
     }
 
