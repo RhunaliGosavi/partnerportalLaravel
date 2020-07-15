@@ -169,5 +169,7 @@ Route::group(['middleware' => 'auth'], function() {
     //calculator policy CRUD
 	Route::get('calculator-policy', 'CalculatorPolicyController@index');
 	Route::post('calculator-policy/store/{id?}',       'CalculatorPolicyController@store');
+
+	
 	Route::get('calculator', 'TestCalculator@index');
 });
