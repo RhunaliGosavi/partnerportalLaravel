@@ -12,7 +12,7 @@
 					</div>
 					<div class="m-portlet__head-tools">
 						<div class="row">
-							<div class="col-xl-3 order-2 order-xl-1">
+							<!-- <div class="col-xl-3 order-2 order-xl-1">
 								<form name="import_file" id="import_file" action="{{url('dsaLead/import')}}" method="post" enctype="multipart/form-data">
 		                            {{ csrf_field() }}
 		                            
@@ -20,10 +20,10 @@
 		                            <input type="file" name="import_file" style="display: none">
 		                            
 		                        </form>
-		                    </div>
-		                    <div class="col-xl-3 order-2 order-xl-1">
-		                    </div>
-		                
+		                    </div> -->
+		                    <div class="col-xl-3 order-1 order-xl-2">
+								<a href="{{url('dsaLeadExport')}}" id="btnDownload" class="btn btn-danger download">Excel </a>
+							</div>
 		                </div>
 					</div>
 				</div>
@@ -89,10 +89,17 @@
 				  
               	"columns": [
                     { field: "employee.name",title:'Employee Name'},
-                    { field: "employee.employee_id",title:'Employee Id'},
-                    { field: "lead_generated_source",title:'Lead generated Source'},
-                    { field: "name",title:"Applicant's Name"},
+                    { field: "employee.employee_id",title:'Employee ID'},
+                    // { field: "lead_generated_source",title:'Lead generated Source', template:function(row) {
+                    // 		if(row.lead_generated_source) {
+                    // 			return (row.lead_generated_source == 1) ? 'AFL Employee' : 'Bussiness Partner';
+                    // 		} else {
+                    // 			return '';
+                    // 		}
+	                //     }
+					// },
                     { field: "pan_number",title:"Applicant's PAN"},
+                    { field: "name",title:"Applicant's Name"},
                     { field: "dob",title:'DOB'},
                     { field: "gender",title:'Gender'},
                     { field: "mobile_number",title:'Mobile Number'},
@@ -102,7 +109,7 @@
                     { field: "bank_name",title:'Bank Name'},
                     { field: "branch_name",title:'Branch Name'},
                     { field: "upi_id",title:'UPI ID'},
-                    { field: "address_proof_doc",title:'Address Proof'},
+                    // { field: "address_proof_doc",title:'Address Proof'},
                     { field: "address_type",title:'Address Type'},
                     { field: "address_line1",title:'Address Line1'},
                     { field: "address_line2",title:'Address Line2'},

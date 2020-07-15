@@ -53,7 +53,30 @@
               	// column sorting
               	sortable: true,
               	"columns": [
-              		{ field: "name",title:'Applicant Name'},
+              		{ field: "source_user_id",title:'Lead Genrated Source', template:function(row) {
+                    		if(row.source_user_id && row.employee.name) {
+                    			return 'AFL Employee';
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
+              		{ field: "employee.name",title:'Source Name', template:function(row) {
+                    		if(row.source_user_id && row.employee.name) {
+                    			return row.employee.name;
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
+              		{ field: "employee.employee_id",title:'Source ID', template:function(row) {
+                    		if(row.source_user_id && row.employee.employee_id) {
+                    			return row.employee.employee_id;
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
                     { field: "email",title:'Email'},
                     { field: "mobile_number",title:'Mobile Number'},
                     { field: "loan_product",title:'Loan Product', template:function(row) {
@@ -65,15 +88,7 @@
 	                    }
 	                },
 	                { field: "loan_amount",title:'Loan Amount (INR)'},
-	                { field: "prefered_contact_time",title:'Prefered Contact Time'},
-                    { field: "employee",title:'Added By', template:function(row) {
-                    		if(row.employee && row.employee.name) {
-                    			return row.employee.name;
-                    		} else {
-                    			return '';
-                    		}
-	                    }
-	                },
+	                { field: "prefered_contact_time",title:'Prefered Contact Time'}
               	]
       		});
 		});

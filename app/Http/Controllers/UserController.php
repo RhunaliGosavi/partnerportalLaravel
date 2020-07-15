@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Config, Helper, Excel;
+use Validator,Config, Helper, Excel, Response;
 use App\Employee;
 use App\Imports\EmployeeImport;
 
@@ -243,5 +243,12 @@ class UserController extends Controller
         } else {
             return redirect('users')->with('error', 'Employee not updated successfully!');
         }
+    }
+
+    public function download()
+    {
+        $file = public_path()."/assets/docs/Employee_portal_Ūser_creation_template.xlsx";
+        $headers = array('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',);
+        return Response::download($file, 'Employee_portal_Ūser_creation_template.xlsx',$headers);
     }
 }

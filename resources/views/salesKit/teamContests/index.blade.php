@@ -96,7 +96,7 @@
 		                sortable: false,
 		                overflow: 'visible',
 		                template:function(row,a,i)  {
-		                	var html = '<a href="'+base_url+'/salesContest/delete/'+row.id+'" title="Delete Record" class="dropdown-item"><i class="la la-trash"></i>Delete Record</a><a href="'+base_url+'/salesContest/edit/'+row.id+'" title="Delete Record" class="dropdown-item"><i class="la la-trash"></i>Edit Record</a></div>';
+		                	var html = '<a href="'+base_url+'/salesContest/edit/'+row.id+'" title="Edit Record" class="dropdown-item"><i class="la la-pencil"></i>Edit Record</a><a href="'+base_url+'/salesContest/delete/'+row.id+'" title="Delete Record" class="dropdown-item"><i class="la la-trash"></i>Delete Record</a></div>';
 		                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
                                 <i class="la la-ellipsis-h"></i>\
                             </a>\

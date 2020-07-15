@@ -75,20 +75,36 @@
               	// column sorting
               	sortable: true,
               	"columns": [
-              		{ field: "employee_id",title:'Employee Id'},
+					{ field: "source_user_id",title:'Lead Genrated Source', template:function(row) {
+                    		if(row.source_user_id && row.employee.name) {
+                    			return 'AFL Employee';
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
+              		{ field: "employee.name",title:'Source Name', template:function(row) {
+                    		if(row.source_user_id && row.employee.name) {
+                    			return row.employee.name;
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
+              		// { field: "employee.employee_id",title:'Source ID', template:function(row) {
+                    // 		if(row.source_user_id && row.employee.employee_id) {
+                    // 			return row.employee.employee_id;
+                    // 		} else {
+                    // 			return '-';
+                    // 		}
+	                //     }
+					// },
+              		{ field: "employee_id",title:'Source ID'},
               		{ field: "name",title:'Applicant Name'},
               		{ field: "mobile_number",title:'Mobile Number'},
                     { field: "designation",title:'Designation'},
                     { field: "prefered_contact_time",title:'Date of Confirmation'},
-	                { field: "loan_amount",title:'Loan Amount (INR)'},
-                    { field: "employee",title:'Added By', template:function(row) {
-                    		if(row.employee_id ) {
-                    			return row.employee.name;
-                    		} else {
-                    			return '';
-                    		}
-	                    }
-	                },
+	                { field: "loan_amount",title:'Loan Amount (INR)'}
               	]
       		});
 		});
@@ -132,20 +148,36 @@
 	              	// column sorting
 	              	sortable: true,
 	              	"columns": [
-	              		{ field: "employee_id",title:'Employee Id'},
+						{ field: "source_user_id",title:'Lead Genrated Source', template:function(row) {
+								if(row.source_user_id && row.employee.name) {
+									return 'AFL Employee';
+								} else {
+									return '-';
+								}
+							}
+						},
+						{ field: "employee.name",title:'Source Name', template:function(row) {
+								if(row.source_user_id && row.employee.name) {
+									return row.employee.name;
+								} else {
+									return '-';
+								}
+							}
+						},
+						// { field: "employee.employee_id",title:'Source ID', template:function(row) {
+						// 		if(row.source_user_id && row.employee.employee_id) {
+						// 			return row.employee.employee_id;
+						// 		} else {
+						// 			return '-';
+						// 		}
+						//     }
+						// },
+						{ field: "employee_id",title:'Source ID'},
 	              		{ field: "name",title:'Applicant Name'},
 	              		{ field: "mobile_number",title:'Mobile Number'},
 	                    { field: "designation",title:'Designation'},
 	                    { field: "prefered_contact_time",title:'Date of Confirmation'},
-		                { field: "loan_amount",title:'Loan Amount (INR)'},
-	                    { field: "employee",title:'Added By', template:function(row) {
-	                    		if(row.employee_id) {
-	                    			return row.employee.name;
-	                    		} else {
-	                    			return '';
-	                    		}
-		                    }
-		                },
+		                { field: "loan_amount",title:'Loan Amount (INR)'}
 	              	]
 		    	});
 		    }
@@ -178,7 +210,31 @@
 	              	// column sorting
 	              	sortable: true,
 	              	"columns": [
-	              		{ field: "employee_id",title:'Employee Id'},
+						{ field: "source_user_id",title:'Lead Genrated Source', template:function(row) {
+								if(row.source_user_id && row.employee.name) {
+									return 'AFL Employee';
+								} else {
+									return '-';
+								}
+							}
+						},
+						{ field: "employee.name",title:'Source Name', template:function(row) {
+								if(row.source_user_id && row.employee.name) {
+									return row.employee.name;
+								} else {
+									return '-';
+								}
+							}
+						},
+						// { field: "employee.employee_id",title:'Source ID', template:function(row) {
+						// 		if(row.source_user_id && row.employee.employee_id) {
+						// 			return row.employee.employee_id;
+						// 		} else {
+						// 			return '-';
+						// 		}
+						//     }
+						// },
+						{ field: "employee_id",title:'Source ID'},
 	              		{ field: "name",title:'Applicant Name'},
 	              		{ field: "mobile_number",title:'Mobile Number'},
 	              		{ field: "loan_product",title:'Loan Product', template:function(row) {
@@ -190,15 +246,7 @@
 		                    }
 		                },
 	                    { field: "prefered_contact_time",title:'Preferred Time to Contact'},
-		                { field: "loan_amount",title:'Loan Amount (INR)'},
-	                    { field: "employee",title:'Added By', template:function(row) {
-	                    		if(row.employee_id) {
-	                    			return row.employee.name;
-	                    		} else {
-	                    			return '';
-	                    		}
-		                    }
-		                },
+		                { field: "loan_amount",title:'Loan Amount (INR)'}
 	              	]
 		    	});
 		    }
