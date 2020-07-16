@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Frontend\LoginController@index');
 Route::post('employee/login', 'Frontend\LoginController@login');
+Route::get('dashboard','Frontend\DashboardController@index');
 
 
 Auth::routes();
