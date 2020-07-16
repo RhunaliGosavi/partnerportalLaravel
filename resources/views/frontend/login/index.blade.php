@@ -28,6 +28,9 @@
         </div>
         <h1>Welcome !</h1>
         <h2>Sign in to your account</h2>
+        <?php
+        print_r($errors);
+        ?>
         <div class="login-form-in">
           <form action="{{url('employee/login')}}" method="post">
             {{ csrf_field() }}

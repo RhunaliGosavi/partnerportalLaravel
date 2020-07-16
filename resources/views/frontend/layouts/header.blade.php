@@ -22,7 +22,7 @@
             </ul>
           </nav>
           <div class="user-info">
-            <a href="#">
+            <a href="{{url('employee/logout')}}">
               <img src="{{url('/assets_frontend/images/user-icon.png')}}">
             </a>
           </div>

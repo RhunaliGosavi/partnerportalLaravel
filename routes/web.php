@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Frontend\LoginController@index');
 Route::post('employee/login', 'Frontend\LoginController@login');
-Route::get('dashboard','Frontend\DashboardController@index');
+Route::get('employee/logout','Frontend\LoginController@logout');
+
+Route::group(['middleware' => ['web','auth:employees']], function() {
+	Route::get('dashboard','Frontend\DashboardController@index');
+});
 
 
 Auth::routes();
