@@ -19,6 +19,8 @@ Route::get('employee/logout','Frontend\LoginController@logout');
 
 Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('dashboard','Frontend\DashboardController@index');
+	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
+	
 });
 
 
