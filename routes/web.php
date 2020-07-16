@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Frontend\LoginController@index');
+Route::post('employee/login', 'Frontend\LoginController@login');
+
 
 Auth::routes();
 
