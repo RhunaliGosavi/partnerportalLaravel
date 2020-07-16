@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'Frontend\LoginController@index');
+Route::post('employee/login', 'Frontend\LoginController@login');
+Route::get('employee/logout','Frontend\LoginController@logout');
+
+Route::group(['middleware' => ['web','auth:employees']], function() {
+	Route::get('dashboard','Frontend\DashboardController@index');
 });
+
 
 Auth::routes();
 
@@ -171,5 +176,7 @@ Route::group(['middleware' => 'auth'], function() {
     //calculator policy CRUD
 	Route::get('calculator-policy', 'CalculatorPolicyController@index');
 	Route::post('calculator-policy/store/{id?}',       'CalculatorPolicyController@store');
+
+	
 	Route::get('calculator', 'TestCalculator@index');
 });

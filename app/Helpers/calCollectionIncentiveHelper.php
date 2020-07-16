@@ -1,9 +1,11 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\DB;
+
 class calCollectionIncentiveHelper
 {    //$type: preference,pick up
-    //$bucketTYpe: 1.bucket1,bucket2,bucket3,bucket4
+    //$bucketTYpe: 1.bkt1,bkt2,bkt3,bkt4
     public function __construct($type,$emiCollect,$noOfCases,$bucketTYpe,$rollback,$posOd,$posForOdCollected)
     {
        $this->type=$type;
@@ -60,23 +62,7 @@ class calCollectionIncentiveHelper
     }
 
     public function getReferenceDetails(){
-
-        switch($this->bucketTYpe){
-
-            case 'bucket1':
-                $getResult=$this->getbucketOne();
-                break;
-            case 'bucket2':
-                $getResult=$this->getbucketTwo();
-                break;
-            case 'bucket3':
-                $getResult=$this->getbucketThree();
-                break;
-            case 'bucket4':
-                $getResult=$this->getbucketFour();
-                break;
-          
-        }
+        $getResult=($this->bucketTYpe =="bkt1")?  $this->getbucketOne() :$this->getbucketTwo_three_four();
         return $getResult;
         
     }
@@ -84,43 +70,43 @@ class calCollectionIncentiveHelper
     {
         $rollback=($this->rollback/ $this->posOd)*100;
         $resolution=($this->posForOdCollected/$this->posOd)*100;
-        switch($resolution){
-            case $resolution > 85:
-                $comission=8.5;
-                break;
-            case  $resolution > 80 :
-                $comission=8.0;
-                break;
-            case $resolution > 75 :
-                $comission= 7.5;
-                break;
-            case $resolution > 70:
-                $comission= 7.0;
-                break;
-            case $resolution >= 65:
-                $comission=  6.5;
-                break;
 
-            default:
-                $comission=6;
+        $comm = DB::table('collection_incentive')->select("bkt1")
+        ->whereRaw("CASE WHEN min_resolution = 0  THEN  $resolution < max_resolution WHEN max_resolution = 0  THEN $resolution > min_resolution WHEN max_resolution !=0 and min_resolution!=0 THEN $resolution > min_resolution and $resolution <=max_resolution END and type='bkt1'")
+        ->get();
+       
+        if(empty($comm->toArray())){
+            return array('rollback'=>$rollback,'resolution'=>$resolution,'comission'=>0,'incentiveAmount'=>0);
         }
+        $comission=$comm[0]->bkt1;
         $incentiveAmount= ($comission*$this->rollback)/100;
        
-        return array('rollback'=>$rollback,'resolution'=>$resolution,'comission'=>round($comission),'incentiveAmount'=>$incentiveAmount);
+        return array('rollback'=>round($rollback),'resolution'=>round($resolution),'comission'=>round($comission),'incentiveAmount'=>$incentiveAmount);
         
     }
-    public function getbucketTwo()
+    public function getbucketTwo_three_four()
     {
+ 
+        $rollback=($this->rollback/ $this->posOd)*100;
+        $resolution=($this->posForOdCollected/$this->posOd)*100;
+     
+        $bktType=($this->bucketTYpe=='bkt2'|| $this->bucketTYpe=='bkt3') ? 'bkt2_bkt3' : $this->bucketTYpe;
+        $comm = DB::table('collection_incentive')->select('bkt2','bkt3','bkt4')
+        ->whereRaw("CASE WHEN max_resolution = 0 and max_rollback != 0 and min_rollback != 0   THEN $rollback >=min_rollback and $rollback <=max_rollback and  $resolution >=min_resolution  WHEN max_resolution = 0 and max_rollback = 0   THEN $rollback >=min_rollback and  $resolution >=min_resolution   WHEN max_rollback = 0 THEN $rollback >=min_rollback  and $resolution BETWEEN min_resolution and max_resolution  WHEN max_resolution = 0 and min_rollback = 0   THEN $rollback <=max_rollback and  $resolution >=min_resolution WHEN min_rollback = 0 THEN $rollback <=max_rollback  and $resolution BETWEEN min_resolution and max_resolution  WHEN  max_rollback != 0 and min_rollback != 0  THEN $rollback >=min_rollback and $rollback <=max_rollback and $resolution BETWEEN min_resolution and max_resolution  END and type='$bktType'")
+        ->get();
         
-    }
-    public function getbucketThree()
-    {
-        
-    }
-    public function getbucketFour()
-    {
-        
-    }
+    
+        if(empty($comm->toArray())){
+            return array('rollback'=>$rollback,'resolution'=>$resolution,'comission'=>0,'incentiveAmount'=>0);
+        }
+        $comission=($this->bucketTYpe=='bkt2') ? $comm[0]->bkt2 :(($this->bucketTYpe=='bkt3') ? $comm[0]->bkt3 :$comm[0]->bkt4);
 
+        $incentiveAmount= ($comission*$this->rollback)/100;
+       
+        return array('rollback'=>round($rollback),'resolution'=>round($resolution),'comission'=>$comission,'incentiveAmount'=>$incentiveAmount);
+        
+    }
+  
+    
 }
 ?>

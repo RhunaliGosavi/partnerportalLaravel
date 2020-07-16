@@ -29,14 +29,15 @@ class calRepricingHelper
          
           $revisedOutStanding=$this->getRevisedOutstanding();
           $revisedEMI=$this->getRevisedEMI();
-          return array('revisedOutStanding'=>round($revisedOutStanding),'revisedEMI'=>$revisedEMI);
+          $revisedTenure=$this->getRevisedTenure();
+          return array('revisedOutStanding'=>round($revisedOutStanding),'revisedEMI'=>$revisedEMI,'revisedTenure'=>$revisedTenure);
         }
         return array('error'=>$error);
     } 
     public function getRevisedOutstanding(){
       
         if($this->type=='part payment'){
-            return $partPaid=$this->getPartPaidAmount();
+            $partPaid=$this->getPartPaidAmount();
             return $this->existingOutstanding-$partPaid;
          }
         return $this->existingOutstanding;
@@ -64,6 +65,14 @@ class calRepricingHelper
         $calPMTHelper= new calPMTHelper();
         return $calPMTHelper->calPmt($this->existingROI, $this->balanceTenure, $this->existingOutstanding);	
    		
+    }
+    public function getRevisedTenure(){
+          
+        $calPMTHelper= new AmortizationHelper();
+   
+        $schedule=$calPMTHelper->getAmortizationTbl($this->getRevisedOutstanding(),$this->proposedROI,$this->getRevisedEMI());
+        if($schedule['month']==0 && $this->type=='change in tenure'){ return "Please Select Option A or C";}
+        return $schedule['month'];
     }
 
 

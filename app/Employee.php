@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Employee extends Model
+class Employee extends Authenticatable
 {
     use SoftDeletes;
 
@@ -15,6 +16,14 @@ class Employee extends Model
         'name', 'employee_id', 'password','pan_number','mobile_number','status','email','middle_name','hub_name','company_name','work_location','state','department','designation','job_role','product','last_name','reporting_manager_name','manager_employee_id'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+     protected $hidden = [
+     'password'
+     ];
     // Fetch refered buddies
     public function refered_buddies(){
         return $this->hasMany('App\ReferBuddy','source_user_id');
