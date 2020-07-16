@@ -13,7 +13,8 @@ class SecondSheetImport implements ToCollection,WithStartRow
 {
     public function collection(Collection $rows)
     {
-  
+        ini_set('memory_limit', -1);
+        ini_set('max_execution_time', 0);
      
         foreach ($rows as $row) 
         {
@@ -45,7 +46,8 @@ class SecondSheetImport implements ToCollection,WithStartRow
                  if(trim($new_str)=='PartiallyDisbursed'){
                     $id = $res->id;
                     $setData=['application_tbl_id' => $id,'application_status'=>$row[6],'disbursed_amount'=>(double)$row[9],'disbursement_date'=>Carbon::parse(Date::excelToDateTimeObject($row[13])),'updated_at'=>now(), 'created_at'=>now()];
-                    DB::table('application_disburse_details')->insert($setData);
+                    $res= DB::table('application_disburse_details')->updateOrInsert(['application_tbl_id'=>$id,'disbursement_date'=>Carbon::parse(Date::excelToDateTimeObject($row[13]))],$setData);
+                   // DB::table('application_disburse_details')->insert($setData);
                  }
              //}
             }
