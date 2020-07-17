@@ -23,15 +23,13 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
-<<<<<<< HEAD
+
 	Route::get('importantLinks','Frontend\LinkController@index');
 	Route::get('refer_friend', 'Frontend\ReferFriendController@index');
 	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');
 
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
 	Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
-=======
->>>>>>> 48bb92bebb8d374aeddeec6a0c6f71fcf1fe2b84
 });
 
 
