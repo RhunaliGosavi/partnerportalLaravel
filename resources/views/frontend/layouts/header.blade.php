@@ -1,4 +1,7 @@
 
+<?php 
+    $urlString = url()->current();
+?>
 <!--header start-->
 <header>
   <div class="container-fluid ">
@@ -14,8 +17,8 @@
         <div class="menu-sec">
           <nav class="dashboard-menu">
             <ul>
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Sales Kit</a></li>
+              <li class="<?php if(preg_match("/\bdashboard\b/i", $urlString)) { echo 'active'; } ?>"><a href="#">Home</a></li>
+              <li class="<?php if(preg_match("/\bsalesKit\b/i", $urlString)) { echo 'active'; } ?>"><a href="/salesKit">Sales Kit</a></li>
               <li><a href="#">Application Status Tracker</a></li>
               <li><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
               <li><a href="{{url('apply_now')}}">Apply Now</a></li>
