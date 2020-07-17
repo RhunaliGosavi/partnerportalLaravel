@@ -62,14 +62,7 @@
                       <tr>
                         <td>{{$dsadoc->title}}</td>
                         <td>{{$dsadoc->	file_size_in_mb.' MB'}}</td>
-                        <td id="{{$key}}" class="getDialog">View
-                            <div id={{'dialog_'.$key}} style="display:none">
-                                <div>
-                                <iframe src="http://www.onlineicttutor.com/wp-content/uploads/2016/04/pdf-at-iframe.pdf" width="100%" height="300">Close</iframe>
-
-                                </div>
-                            </div>
-                        </td>   
+                        <td class=""><a href="#" class="tamplate-view getDialog" data-toggle="modal" data-target="#myModal" data-url="{{"/storage/dsa/".$dsadoc->file_path }}">View</a></td>
                         <td><a href="{{'/storage/dsa/'.$dsadoc->file_path}}" download="{{'/storage/dsa/'.$dsadoc->file_path}}"><img src="{{url('/assets_frontend/images/download.png')}}" class="img-fluid" alt="download"></a></td>
                       </tr>
                      @endforeach
@@ -85,13 +78,22 @@
           </div>
         </section>
       </div>
+      <div class="modal custom-model-popup" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <iframe src="" width="100%" height="500" id="docPath">Close</iframe>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
-
-        $('.getDialog').on('click',function(){
-           $('#dialog_'+this.id).show();
-        });
+    $('.getDialog').click(function () {
+        var url = $(this).attr('data-url');
+        $("#docPath").attr("src", url);
+    });
+    
     </script>
   
 @endsection
