@@ -20,7 +20,12 @@ Route::get('employee/logout','Frontend\LoginController@logout');
 Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('dashboard','Frontend\DashboardController@index');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
-	
+	Route::get('importantLinks','Frontend\LinkController@index');
+	Route::get('refer_friend', 'Frontend\ReferFriendController@index');
+	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');
+
+	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
+	Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
 });
 
 

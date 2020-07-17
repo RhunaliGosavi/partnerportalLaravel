@@ -3,8 +3,7 @@
 	Dashboard
 @endsection
 @section('content')
-<main>
-      <div class="banner-sec">
+    <div class="banner-sec">
         <div class="owl-carousel owl-theme">
           <div class="item">
             <div class="item-box">
@@ -157,9 +156,7 @@
             </div>
           </div>
         </div>
-      </div>
-	</main>
-	
+    </div>	
 <script>
 
 $( document ).ready(function() {

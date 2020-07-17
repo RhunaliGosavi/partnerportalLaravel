@@ -17,12 +17,16 @@
 <body>
   @include('frontend.layouts.header')
   <main>
-    @yield('content')
+    <div class="container-fluid page-padding">
+      @yield('breadcum')
+      @yield('content')
+    </div>
   </main>
   @include('frontend.layouts.footer')
 
   <!--js start-->
  <!-- <script src="{{url('/assets_frontend/js/jquery.min.js')}}"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script src="{{url('/assets_frontend/js/bootstrap.min.js')}}"></script>
   <script src="{{url('/assets_frontend/js/owl.carousel.js')}}"></script>
   <script src="{{url('/assets_frontend/js/custom.js')}}"></script>

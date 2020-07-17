@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-9 p-0 right-sec">
         <div class="top-sec">
-          <a href="#" class="links">Important Links</a>
+          <a href="{{url('importantLinks')}}" class="links">Important Links</a>
           <a href="#" class="help">Employee Helpdesk</a>
         </div>
         <div class="menu-sec">
@@ -17,8 +17,8 @@
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#">Sales Kit</a></li>
               <li><a href="#">Application Status Tracker</a></li>
-              <li><a href="#">Refer Your Friend</a></li>
-              <li><a href="#">Apply Now</a></li>
+              <li><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
+              <li><a href="{{url('apply_now')}}">Apply Now</a></li>
             </ul>
           </nav>
           <div class="user-info">
