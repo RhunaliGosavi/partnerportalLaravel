@@ -8,6 +8,7 @@ use App\LoanProduct;
 use App\SalesKitProduct;
 use App\DocumentChecklistCategory;
 use App\DocumentChecklistProduct;
+use App\DsaOnboarding;
 
 class SalesKitController extends Controller
 {
@@ -29,5 +30,11 @@ class SalesKitController extends Controller
         $checklistProducts = DocumentChecklistProduct::with(['sales_kit_product', 'document_checklist_category'])
             ->where('document_checklist_category_id', $request->id)->get();
         return ($checklistProducts);
+    }
+    public function DSAOnboarding(){
+
+        return view('frontend.salesKit.DsaOnboarding', [
+            'dsa_onboarding' => DsaOnboarding::all()
+        ]);
     }
 }

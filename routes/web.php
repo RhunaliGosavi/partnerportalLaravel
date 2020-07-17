@@ -20,6 +20,7 @@ Route::get('employee/logout','Frontend\LoginController@logout');
 Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('dashboard','Frontend\DashboardController@index');
 	Route::get('salesKit','Frontend\SalesKitController@index');
+	Route::get('salesKit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
 	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
