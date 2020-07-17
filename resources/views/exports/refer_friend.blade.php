@@ -5,7 +5,7 @@
 			<th>Lead Genrated Source</th>
 			<th>Source Name</th>
 			<th>Source ID</th>
-			<th>Applicant Name</th>
+			<th>Applicants Name</th>
 			<th>Mobile Number</th>
 			<th>Email ID</th>
 			<th>Loan Product</th>

@@ -6,9 +6,8 @@
 			<th>Source Name</th>
 			<th>Source ID</th>
 			<th>Applicants Name</th>
-			<!-- <th>Employee Id</th> -->
 			<th>Mobile Number</th>
-			<!-- <th>Email ID</th> -->
+			<th>Email ID</th>
 			<th>Loan Product</th>
 			<th>Loan Amount</th>
 			<th>Preferred time to contact</th>
@@ -23,9 +22,8 @@
 				<td>@if(isset($loan->employee)){{$loan->employee->name}}@endif</td>
 				<td>{{$loan->employee_id}}</td>
 				<td>{{$loan->name}}</td>
-				<!-- <td>{{$loan->employee_id}}</td> -->
 				<td>{{$loan->mobile_number}}</td>
-				<!-- <td>{{$loan->email}}</td> -->
+				<td>@if(isset($loan->employee)){{$loan->employee->email}}@endif</td>
 				<td>@if(isset($loan->loan_product)){{$loan->loan_product->name}}@endif</td>
 				<td>{{$loan->loan_amount}}</td>
 				<td>{{$loan->prefered_contact_time}}</td>

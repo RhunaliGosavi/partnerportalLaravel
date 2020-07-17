@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HrLoan extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'hr_loans';
 
     protected $fillable = [
