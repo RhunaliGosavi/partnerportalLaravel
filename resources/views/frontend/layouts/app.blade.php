@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{url('/assets_frontend/css/style.css')}}">
   <script src="{{url('/assets_frontend/js/jquery.min.js')}}"></script>
   <script>
-    var base_url = "{{url('/')}}";
+     var base_url = "{{url('/')}}";
   </script>
 </head>
 

@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('salesKit','Frontend\SalesKitController@index');
 	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
+	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
 });
 
 
