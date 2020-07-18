@@ -19,24 +19,25 @@ Route::get('employee/logout','Frontend\LoginController@logout');
 
 Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('dashboard','Frontend\DashboardController@index');
-	Route::get('salesKit','Frontend\SalesKitController@index');
-	Route::get('salesKit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
-	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
-	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
+	Route::get('sales/kit','Frontend\SalesKitController@index');
+	Route::get('sales/kit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
+	Route::get('sales/kit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
+	Route::get('sales/kit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
-	Route::get('salesKit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');
+	Route::get('sales/kit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');
 
-	Route::get('importantLinks','Frontend\LinkController@index');
-	Route::get('refer_friend', 'Frontend\ReferFriendController@index');
-	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');
+	Route::get('important/links','Frontend\LinkController@index');
+	Route::get('refer/friend', 'Frontend\ReferFriendController@index');
+	Route::get('apply/now', 'Frontend\ApplyNowRequestController@index');
 
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
     Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
 
-	Route::get('application_status_tracker', 'Frontend\ApplicationStatusTracker@index');
-	Route::post('application_status', 'Frontend\ApplicationStatusTracker@getAppStatus');
-	
+	Route::get('application/status/tracker', 'Frontend\ApplicationStatusTracker@index');
+	Route::post('application/status', 'Frontend\ApplicationStatusTracker@getAppStatus');
+    Route::get('employee/helpdesk', 'Frontend\EmployeeHelpDeskController@index');
+    Route::get('search', 'Frontend\EmployeeHelpDeskController@search');
 });
 
 

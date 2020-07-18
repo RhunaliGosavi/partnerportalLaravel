@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{url('application_status_tracker')}}">Application status tracker</a></li>
+            <li class="breadcrumb-item"><a href="{{url('application/status/tracker')}}">Application status tracker</a></li>
           </ol>
         </nav>
       </div>
@@ -125,7 +125,7 @@
         var MobNum= $('#MobNum').val();
         
         $.ajax({
-            url: base_url+'/application_status',
+            url: base_url+'/application/status',
             type: "post",
             data: {'appId':appId,'appName':appName,'datepicker':datepicker,'MobNum':MobNum,_token: '{{csrf_token()}}'} ,
             success: function (response) {

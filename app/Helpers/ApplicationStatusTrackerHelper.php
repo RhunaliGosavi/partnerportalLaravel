@@ -22,19 +22,21 @@ class ApplicationStatusTrackerHelper
     		'authorizationKey' => $authorizationKey,
     		'trackingId' =>$trackingID,
     		'referenceId' =>  $referenceID,
-    	];
+        ];
+        $date=date_create($dob);
+        $dob= date_format($date,"d-m-y");
 
     	$post = [
     		"request" => [
 	    		"APPLICATION_NO" => $applicationNo,
                 'APPLICANT_NAME' => $applicationName,
-                'DOB'=>$dob,
+                'DOB'=> $dob,
                 'MOBILE'=>$mobile
 	    	]
     	];
 
         
-		 curl_setopt($ch, CURLOPT_URL,$baseURL.'/V1/AFL/IN0147/StatusApi');
+		curl_setopt($ch, CURLOPT_URL,$baseURL.'/V1/AFL/IN0147/StatusApi');
 		 curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		 curl_setopt($ch, CURLOPT_POST, true);
 		 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));//http_build_query($post)
@@ -77,7 +79,7 @@ class ApplicationStatusTrackerHelper
         	]
         ]);*/
 
-       /*  $response = json_encode([
+       /*$response = json_encode([
         	"statusInfo" => [
                 "status"=> "FAIL",
                 "statusCode"=>"9000",

@@ -60,7 +60,7 @@ class MarketingVisualsController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/visuals',$fileNameToStore);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/visuals',$fileNameToStore);
                 $process = MarketingVisual::create(
                     ['loan_product_id' => $post['loan_product'],'marketing_visual_category_id' => $post['visual_category'],'file_path' =>$fileNameToStore]
                  );
@@ -131,8 +131,8 @@ class MarketingVisualsController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                Storage::disk('local')->delete('public/salesKit/marketingInformation/visuals/'.$marketingVisual->file_path);
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/visuals',$fileNameToStore);
+                Storage::disk('local')->delete('public/sales/kit/marketinginformation/visuals/'.$marketingVisual->file_path);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/visuals',$fileNameToStore);
             }else{
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
