@@ -34,7 +34,9 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
     Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
 
-    Route::get('application_status_tracker', 'Frontend\ApplicationStatusTracker@index');
+	Route::get('application_status_tracker', 'Frontend\ApplicationStatusTracker@index');
+	Route::post('application_status', 'Frontend\ApplicationStatusTracker@getAppStatus');
+	
 });
 
 

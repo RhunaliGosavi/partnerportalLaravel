@@ -19,7 +19,7 @@
             <ul>
               <li class="<?php if(preg_match("/\bdashboard\b/i", $urlString)) { echo 'active'; } ?>"><a href="#">Home</a></li>
               <li class="<?php if(preg_match("/\bsalesKit\b/i", $urlString)) { echo 'active'; } ?>"><a href="/salesKit">Sales Kit</a></li>
-              <li><a href="#">Application Status Tracker</a></li>
+              <li class="<?php if(preg_match("/\bapplication_status_tracker\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('application_status_tracker')}}"> Application Status Tracker</a></li>
               <li class="<?php if(preg_match("/\brefer_friend\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
               <li class="<?php if(preg_match("/\bapply_now\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('apply_now')}}">Apply Now</a></li>
             </ul>

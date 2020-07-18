@@ -2,10 +2,8 @@
 @section('title')
     DSA Onboarding
 @endsection
-@section('content')
-<main>
-      <div class="container-fluid page-padding">
-        <section class="page-top">
+@section('breadcum')
+<section class="page-top">
           <div class="back-btn">
              <button class="btn" href="{{ url()->previous() }}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></button>
           </div>
@@ -13,13 +11,17 @@
             <h1>DSA Onboarding Details</h1>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-dark">DSA Onboarding Details</a></li>
+                <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{url('salesKit')}}">Sales Kit</a></li>
+                <li class="breadcrumb-item"><a href="{{url('salesKit/DsaOnboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
               </ol>
             </nav>
           </div>
         </section>
+@endsection
+@section('content')
+
+       
         <section class="page-content-box">
           <div class="tab-sec">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -77,7 +79,7 @@
             </div>
           </div>
         </section>
-      </div>
+   
       <div class="modal custom-model-popup" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -86,7 +88,7 @@
           </div>
         </div>
       </div>
-    </main>
+ 
 
     <script>
     $('.getDialog').click(function () {
