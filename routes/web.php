@@ -30,7 +30,9 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');
 
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
-	Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
+    Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
+
+    Route::get('application_status_tracker', 'Frontend\ApplicationStatusTracker@index');
 });
 
 
@@ -67,7 +69,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('employee-helpdesk/delete/{id}','EmployeeHelpDeskController@delete');
 	Route::get('fetchHelpDeskData', 'EmployeeHelpDeskController@fetchHelpDeskData');
 	Route::post('employee-helpdesk/update','EmployeeHelpDeskController@update');
-	
+
 
 	Route::get('referFriendRequests',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
@@ -125,7 +127,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('docCheckProduct/update/{id}', 'DocumentChecklistProductController@update');
 	Route::get('docCheckProduct/all', 'DocumentChecklistProductController@fetchAllProducts');
 
-	// Sales team contests 
+	// Sales team contests
 	Route::get('salesContest', 			'SalesContestController@index');
 	Route::get('salesContest/create', 		'SalesContestController@create');
 	Route::get('salesContest/edit/{id}', 	'SalesContestController@edit');
@@ -189,6 +191,6 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('calculator-policy', 'CalculatorPolicyController@index');
 	Route::post('calculator-policy/store/{id?}',       'CalculatorPolicyController@store');
 
-	
+
 	Route::get('calculator', 'TestCalculator@index');
 });
