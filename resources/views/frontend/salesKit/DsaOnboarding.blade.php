@@ -1,4 +1,25 @@
 @extends('frontend.layouts.app')
+<style>
+  a.btn.document-button {
+  background: #97144D;
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'latosemibold';
+  padding: 14px 50px;
+  margin-right: 40px; }
+
+.document-content_button {
+  padding: 40px 40px 30px; }
+
+a.btn.document-button:hover {
+  border: 1px solid #97144D;
+  color: #97144D;
+  background: transparent;
+  transition: 0.5s; }
+
+a.btn.document-button:focus {
+  box-shadow: none; }
+</style>
 @section('title')
     DSA Onboarding
 @endsection
@@ -41,7 +62,7 @@
                     @endforeach
                     <div class="document-content_button">
                         <button type="button" class="btn document-button" >Corporate Presentations</button>
-                        <button type="button" class="btn document-button" >Generate DSA Lead</button>
+                        <a href="{{url('salesKit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
                     </div>
                 </div>
               </div>
@@ -70,7 +91,7 @@
                   </table>
                   <div class="document-content_button">
                     <button type="button" class="btn document-button">Corporate Presentations</button>
-                    <button type="button" class="btn document-button">Generate DSA Lead</button>
+                    <a href="{{url('salesKit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
                 </div>
                 </div>
               </div>

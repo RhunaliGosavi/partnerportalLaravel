@@ -71,7 +71,7 @@
                 <div class="col-md-4">
                     <div class="dsa-verify">
                         <a href="">Verify Details</a>
-                        <span>Verified Sucessfully</button>
+                        <span style="display: none">Verified Sucessfully</span>
                     </div>
                 </div>
             </div>
@@ -203,8 +203,9 @@
     </div>
     <div class="application-status dsa-lead-generation">
         <h2 class="mb-3">Document Upload</h2>
-        <form>
-            <div class="row">
+        
+        <div>
+            <div class="row" id="files">
                 <div class="col-md-4">
                     <div class="form-group">
                         <div class="import_upload">
@@ -232,17 +233,18 @@
                     </div>
                 </div>
                 <div class="col-md-1">
-                    <div class="form-group">
-                        <img src="{{url('assets_frontend/images/close.png')}}" class="img-fluid add-field" alt="add" />
+                        <div class="form-group">
+                            <img src="{{url('assets_frontend/images/close.png')}}" class="img-fluid add-field" alt="add" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-upload m-0">Upload</button>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-upload m-0">Upload</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </section> 
 <script type="text/javascript">
