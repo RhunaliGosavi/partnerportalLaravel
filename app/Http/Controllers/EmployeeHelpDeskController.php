@@ -38,7 +38,7 @@ class EmployeeHelpDeskController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             $filesize=$request->file('file')->getSize();
             $filesize=number_format($filesize / 1048576,2);
-            $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
+            $request->file('file')->storeAs('public/employee/helpdesk/upload',$fileNameToStore);
             $process = EmployeeHelpdesk::create(
                 ['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize]
                 );
@@ -120,7 +120,7 @@ class EmployeeHelpDeskController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             $filesize=$request->file('file')->getSize();
             $filesize=number_format($filesize / 1048576,2);
-            $request->file('file')->storeAs('public/employeeHelpDeskUpload',$fileNameToStore);
+            $request->file('file')->storeAs('public/employee/helpdesk/upload',$fileNameToStore);
         
        }else{
             $fileNameToStore=$request->input('file_old');

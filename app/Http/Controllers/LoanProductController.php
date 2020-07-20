@@ -51,7 +51,7 @@ class LoanProductController extends Controller
         $statement = DB::select("show table status like 'loan_products'");
         $id = $statement[0]->Auto_increment;
         $helper = new Helper;
-        $images = $helper->upload_image($images, "loanProducts/".$id, 'store');
+        $images = $helper->upload_image($images, "loanproducts/".$id, 'store');
         $lProduct = new LoanProduct;
         $lProduct->name = $post['name'];
         $lProduct->description  = $dom->saveHTML();
@@ -104,7 +104,7 @@ class LoanProductController extends Controller
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
-        $images = $helper->upload_image($images, "loanProducts/".$lProduct->id, 'update');
+        $images = $helper->upload_image($images, "loan/products/".$lProduct->id, 'update');
         $lProduct->name = $post['name'];
         $lProduct->description  = $dom->saveHTML();
         $lProduct->save();
@@ -121,7 +121,7 @@ class LoanProductController extends Controller
     {
         $lProduct = LoanProduct::find($id);
         if($lProduct) {
-            $directory = "loanProducts/".$lProduct->id;
+            $directory = "loanproducts/".$lProduct->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);
             $lProduct->delete();

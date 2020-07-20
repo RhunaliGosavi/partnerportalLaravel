@@ -58,7 +58,7 @@ class CustomerSchemeController extends Controller
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $filename = preg_replace('/\s+/', '_',trim($filename));
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/customerScheme',$fileNameToStore);
+                $request->file('file')->storeAs('public/salesKit/marketingInformation/customerscheme',$fileNameToStore);
                 $process = CustomerScheme::create(
                     ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore]
                 );
@@ -127,8 +127,8 @@ class CustomerSchemeController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                Storage::disk('local')->delete('public/salesKit/marketingInformation/customerScheme/'.$custScheme->file_path);
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/customerScheme',$fileNameToStore);
+                Storage::disk('local')->delete('public/sales/kit/marketinginformation/customerscheme/'.$custScheme->file_path);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/customerscheme',$fileNameToStore);
             }else{
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
@@ -153,7 +153,7 @@ class CustomerSchemeController extends Controller
     {
         $custScheme = CustomerScheme::find($id);
         if($custScheme) {
-            Storage::disk('local')->delete('public/salesKit/marketingInformation/customerScheme/'.$custScheme->file_path);
+            Storage::disk('local')->delete('public/sales/kit/marketinginformation/customerscheme/'.$custScheme->file_path);
             $custScheme->delete();
             return redirect('customerScheme')->with('success', 'Sales Team Contest deleted successfully!');
         } else {

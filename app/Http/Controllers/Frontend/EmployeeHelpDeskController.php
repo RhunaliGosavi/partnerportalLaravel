@@ -21,7 +21,7 @@ class EmployeeHelpDeskController extends Controller
 
     		if($helpdesks) {
     			foreach($helpdesks as $desk) {
-    				$str .= '<tr><td>'.$desk->name.'</td><td>'.$desk->file_size_in_mb.'</td><td><a href="'.url("/storage/employeeHelpDeskUpload/").'/'.$desk->file_path.'" target="_blank">View</a></td><td><a href="'.url("/storage/employeeHelpDeskUpload/").'/'.$desk->file_path.'" download="'.$desk->file_path.'"><img src="'.url("/assets_frontend/images/down-arrow.png").'" alt="download" class="img-fluid"/></a></td></tr>';
+    				$str .= '<tr><td>'.$desk->name.'</td><td>'.$desk->file_size_in_mb.'</td><td><a href="'.url("/storage/employee/helpdesk/upload/").'/'.$desk->file_path.'" target="_blank">View</a></td><td><a href="'.url("/storage/employee/helpdesk/upload/").'/'.$desk->file_path.'" download="'.$desk->file_path.'"><img src="'.url("/assets_frontend/images/down-arrow.png").'" alt="download" class="img-fluid"/></a></td></tr>';
     			}
     		}
     	} else {
@@ -29,7 +29,7 @@ class EmployeeHelpDeskController extends Controller
 
     		if($helpdesks) {
     			foreach($helpdesks as $desk) {
-    				$str .= '<tr><td>'.$desk->name.'</td><td>'.$desk->file_size_in_mb.'</td><td><a href="'.url("/storage/employeeHelpDeskUpload/").'/'.$desk->file_path.'" target="_blank">View</a></td><td><a href="'.url("/storage/employeeHelpDeskUpload/").'/'.$desk->file_path.'" download="'.$desk->file_path.'"><img src="'.url("/assets_frontend/images/down-arrow.png").'" alt="download" class="img-fluid"/></a></td></tr>';
+    				$str .= '<tr><td>'.$desk->name.'</td><td>'.$desk->file_size_in_mb.'</td><td><a href="'.url("/storage/employee/helpdesk/upload/").'/'.$desk->file_path.'" target="_blank">View</a></td><td><a href="'.url("/storage/employee/helpdesk/upload/").'/'.$desk->file_path.'" download="'.$desk->file_path.'"><img src="'.url("/assets_frontend/images/down-arrow.png").'" alt="download" class="img-fluid"/></a></td></tr>';
     			}
     		}
     	}

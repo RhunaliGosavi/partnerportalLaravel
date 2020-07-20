@@ -85,7 +85,7 @@
                         field: "file_path",
                         title:'File Link',
                         template: function(row, index, datatable) {	
-                            return '<a href="'+base_url+'/storage/salesKit/marketingInformation/customerScheme/'+row.file_path+'">'+row.file_path+'</a>'; 
+                            return '<a href="'+base_url+'/storage/sales/kit/marketinginformation/customerscheme/'+row.file_path+'">'+row.file_path+'</a>'; 
                         }
                     },
                     { 

@@ -80,7 +80,7 @@
 							title: 'File Path',
 							template: function(row, index, datatable) {
 							
-								return '<a href="'+base_url+'/storage/employeeHelpDeskUpload/'+row.file_path+'">'+row.file_path+'</a>'; 
+								return '<a href="'+base_url+'/storage/employee/helpdesk/upload/'+row.file_path+'">'+row.file_path+'</a>'; 
 							}
 					},
 				   {

@@ -55,7 +55,7 @@ class SalesKitProductController extends Controller
         $statement = DB::select("show table status like 'sales_kit_products'");
         $id = $statement[0]->Auto_increment;
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/products/".$id, 'store');
+        $images = $helper->upload_image($images, "sales/kit/products/".$id, 'store');
         $skProduct = new SalesKitProduct;
         $skProduct->loan_product_id = $post['loan_product'];
         $skProduct->name = $post['name'];
@@ -113,7 +113,7 @@ class SalesKitProductController extends Controller
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/products/".$skProduct->id, 'update');
+        $images = $helper->upload_image($images, "sales/kit/products/".$skProduct->id, 'update');
         $skProduct->loan_product_id = $post['loan_product'];
         $skProduct->name = $post['name'];
         $skProduct->content_data  = $dom->saveHTML();
@@ -131,7 +131,7 @@ class SalesKitProductController extends Controller
     {
         $skProduct = SalesKitProduct::find($id);
         if($skProduct) {
-            $directory = "salesKit/products/".$skProduct->id;
+            $directory = "sales/kit/products/".$skProduct->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);
             $skProduct->delete();
