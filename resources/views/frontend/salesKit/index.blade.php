@@ -12,7 +12,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{url('salesKit')}}">Sales Kit</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
                 <li class="breadcrumb-item active" aria-current="page"> Loan Product</li>
                 </ol>
             </nav>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="product-box-content">
                         <p>{{$loan_product->description}} </p>
-                        <a href="{{url('salesKit/products').'/'.$loan_product->id}}">Know More</a>
+                        <a href="{{url('sales/kit/products').'/'.$loan_product->id}}">Know More</a>
                         </div>
                     </div>
                 </div>

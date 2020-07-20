@@ -172,7 +172,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing-info/contests',
+                url: base_url+'/salesKit/marketing/contests',
                 success: function(res) {
                     if(res){
                         var items = [];
@@ -200,7 +200,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing-info/schemes',
+                url: base_url+'/salesKit/marketing/schemes',
                 success: function(res) {
                     if(res){
                         var items = [];
@@ -223,7 +223,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing-info/visuals',
+                url: base_url+'/salesKit/marketing/visuals',
                 success: function(res) {
                     if(res){
                         var tabs = [];

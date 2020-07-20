@@ -57,7 +57,7 @@ class SalesContestController extends Controller
         $statement = DB::select("show table status like 'sales_contests'");
         $id = $statement[0]->Auto_increment;
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/salesContest/uploads/".$id, 'store');
+        $images = $helper->upload_image($images, "sales/kit/salescontest/uploads/".$id, 'store');
         if($request->hasFile('file')){
             $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
             $result = array($request->file('file')->getClientOriginalExtension());
@@ -70,7 +70,7 @@ class SalesContestController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/salesContest',$fileNameToStore);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/salescontest',$fileNameToStore);
                 $process = SalesContest::create(
                     ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
                  );
@@ -146,8 +146,8 @@ class SalesContestController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                Storage::disk('local')->delete('public/salesKit/marketingInformation/salesContest/'.$sContest->file_path);
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/salesContest',$fileNameToStore);
+                Storage::disk('local')->delete('public/sales/kit/marketinginformation/salescontest/'.$sContest->file_path);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/salescontest',$fileNameToStore);
             }else{
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
@@ -172,7 +172,7 @@ class SalesContestController extends Controller
     {
         $sContest = SalesContest::find($id);
         if($sContest) {
-            Storage::disk('local')->delete('public/salesKit/marketingInformation/salesContest/'.$sContest->file_path);
+            Storage::disk('local')->delete('public/sales/kit/marketinginformation/salesContest/'.$sContest->file_path);
             $directory = "salesKit/salesContest/uploads/".$sContest->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);

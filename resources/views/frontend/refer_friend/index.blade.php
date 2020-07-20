@@ -12,7 +12,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{url('refer_friend')}}">Refer your friend</a></li>
+            <li class="breadcrumb-item"><a href="{{url('refer/friend')}}">Refer your friend</a></li>
           </ol>
         </nav>
       </div>

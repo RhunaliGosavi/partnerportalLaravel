@@ -117,7 +117,7 @@ class DocumentChecklistProductController extends Controller
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/checklistProduct/".$docCheckProduct->id, 'update');
+        $images = $helper->upload_image($images, "sales/kit/checklistproduct/".$docCheckProduct->id, 'update');
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
         $docCheckProduct->content_data  = $dom->saveHTML();
@@ -136,7 +136,7 @@ class DocumentChecklistProductController extends Controller
     {
         $docCheckProduct = DocumentChecklistProduct::find($id);
         if($docCheckProduct) {
-            $directory = "salesKit/checklistProduct/".$docCheckProduct->id;
+            $directory = "sales/kit/checklistproduct/".$docCheckProduct->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);
             $docCheckProduct->delete();
