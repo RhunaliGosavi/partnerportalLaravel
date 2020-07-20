@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title')
-	Apply Now
+	Application Status Tracker
 @endsection
 @section('breadcum')
 
@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{url('application_status_tracker')}}">Application status tracker</a></li>
+            <li class="breadcrumb-item"><a href="{{url('application/status/tracker')}}">Application status tracker</a></li>
           </ol>
         </nav>
       </div>
@@ -24,50 +24,69 @@
           <div class="application-status">
               <h2 class="mb-3">Application Status Tracker</h2>
               <p>Kindly enter following information in order to check your application status.</p>
-              <form>
-                  <div class="row">
+              <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+               </div>
+                    <div class="row">
                       <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group {{ $errors->has('appId') ? 'has-danger' : ''}}">
                               <label for="appId">Application ID</label>
-                              <input type="number" class="form-control" placeholder="Enter ID" id="appId">
+                              <input type="number" class="form-control" placeholder="Enter ID" id="appId" name="appId" value="{{old('appId')}}">
+                            
+                                <div class="form-control-feedback" id="appIdError" style="display:none">
+                                  
+                                </div>
+                              
                           </div>
                       </div>
                       <div class="col-md-1">
                           <span>or</span>
                       </div>
                       <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group {{ $errors->has('appName') ? 'has-danger' : ''}}">
                               <label for="appName">Applicant's name</label>
-                              <input type="text" class="form-control" placeholder="Enter Name" id="appName">
+                              <input type="text" class="form-control" placeholder="Enter Name" id="appName" name="appName"  value="{{old('appName')}}">
+                           
+                                <div class="form-control-feedback" id="appNameError" style="display:none;">
+                                 
+                                </div>
+                               
                           </div>
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group " >
                               <label for="datepicker">Date of birth</label>
-                              <input type="text" id="datepicker" class="form-control input-group date" />
+                              <input type="text" id="datepicker" class="form-control input-group date" name="datepicker" value="{{old('datepicker')}}"/>
                               <img src="{{url('assets_frontend/images/calendar.svg')}}" class="img-fluid calender" alt="calender" />
+                                <div class="form-control-feedback " id="datepickerError" style="display:none;">
+                                   
+                                </div>
+                             
                           </div>
                       </div>
                       <div class="col-md-1">
                       </div>
                       <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group ">
                               <label for="MobNum">Registered Mobile Number</label>
-                              <input type="number" class="form-control" placeholder="Enter Mobile Number" id="MobNum">
+                              <input type="number" class="form-control" placeholder="Enter Mobile Number" id="MobNum" name="MobNum" value="{{old('MobNum')}}">
+                             
+                                <div class="form-control-feedback" id="mobError" style="display:none;">
+                                 </div>
+                               
                           </div>
                       </div>
                   </div>
                   <div class="form_btn">
-                      <button type="button" class="btn btn-primary btn-search">Search</button>
-                      <button type="button" class="btn btn-primary btn-clear">Clear</button>
+                      <button type="button" id="search" class="btn btn-primary btn-search">Search</button>
+                      <button type="reset" class="btn btn-primary btn-clear">Clear</button>
                   </div>
-              </form>
+          
           </div>
       </section>
 
-      <section class="page-content-box">
+      <section class="page-content-box" style="display:none" id="detailSec">
           <div class="application-status application_tracker">
               <h2 class="mb-4">Details</h2>
               <table class="table table-responsive">
@@ -79,94 +98,82 @@
                           <th>Application Status</th>
                       </tr>
                   </thead>
-                  <tbody>
-                      <tr>
-                          <td>AX000123</td>
-                          <td>Steven smith</td>
-                          <td>Personal loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
-                      <tr>
-                          <td>AX000124</td>
-                          <td>Steven smith</td>
-                          <td>Car loan</td>
-                          <td>Completed</td>
-                      </tr>
+                  <tbody id="appDetails">
+                     
                   </tbody>
               </table>
           </div>
       </section>
 
 <!--main end-->
-    <script type="text/javascript">
-    	$(document).on('change','#loan-type', function() {
-    		var type = $('#loan-type option:selected').val();
 
-    		if(type == 1) {
-    			$('#hr_loan').show();
-    			$('#other_loan').hide();
-    		} else {
-    			$('#hr_loan').hide();
-    			$('#other_loan').show();
-    		}
-    	});
-    	var type = $('#loan-type option:selected').val();
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker({
+        });
+    });
 
-		if(type == 1) {
-			$('#hr_loan').show();
-			$('#other_loan').hide();
-		} else {
-			$('#hr_loan').hide();
-			$('#other_loan').show();
-		}
+    $(document).on('click','#search', function() {
+        $("#mobError").text('');
+        $("#appIdError").text('');
+        $("#appNameError").text('');
+        $("#datepickerError").text('');
+        
+        var appId= $('#appId').val();
+        var appName= $('#appName').val();
+        var datepicker= $('#datepicker').val();
+        var MobNum= $('#MobNum').val();
+        
+        $.ajax({
+            url: base_url+'/application/status',
+            type: "post",
+            data: {'appId':appId,'appName':appName,'datepicker':datepicker,'MobNum':MobNum,_token: '{{csrf_token()}}'} ,
+            success: function (response) {
+                
+                var res=JSON.parse(response);
+                if(res.statusInfo.status=='SUCCESS'){
+                    
+                   html='';
+                   var app_name=res.response.APPLICANT_NAME;
+                   var appdet=res.response.APPLICATION_DETAILS;
+                    $.each(appdet, function(key, value) {
+                        if(appdet.length>0){
+                            html+=' <tr> <td>'+appdet[key]['APPLICATION_NO']+'</td> <td>'+app_name+'</td><td>'+appdet[key]['PRODUCT']+'</td> <td>'+appdet[key]['STATUS']+'</td> </tr>';
+                        }
+                    });
+                    html=(html!='') ? html : '<tr><td colspan="2" class="text-center">NO DATA AVAILABLE</td></tr>';
+                    $('#appDetails').append(html);
+                    $('#detailSec').show();
+                }else{
+                    $('.showError').show();
+                    $('.showError').text(res.response);
+                    setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if(jqXHR.responseJSON.errors.MobNum){
+                    $('#mobError').show();
+                    $("#mobError").append('<span style="color:red">'+jqXHR.responseJSON.errors.MobNum[0]+'</span>');
+                }
+                
+                if(jqXHR.responseJSON.errors.appId){
+                    
+                    $('#appIdError').show();
+                    $("#appIdError").append('<span style="color:red">'+jqXHR.responseJSON.errors.appId[0]+'</span>');
+                }
+                if(jqXHR.responseJSON.errors.appName){
+                    
+                    $('#appNameError').show();
+                    $("#appNameError").append('<span style="color:red">'+jqXHR.responseJSON.errors.appName[0]+'</span>');
+                }
+                if(jqXHR.responseJSON.errors.datepicker){
+                    
+                    $('#datepickerError').show();
+                    $("#datepickerError").append('<span style="color:red">'+jqXHR.responseJSON.errors.datepicker[0]+'</span>');
+                }
+           }
+        });
+    });
+    
     </script>
 @endsection

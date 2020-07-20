@@ -23,10 +23,8 @@ a.btn.document-button:focus {
 @section('title')
     DSA Onboarding
 @endsection
-@section('content')
-<main>
-      <div class="container-fluid page-padding">
-        <section class="page-top">
+@section('breadcum')
+<section class="page-top">
           <div class="back-btn">
              <button class="btn" href="{{ url()->previous() }}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></button>
           </div>
@@ -41,6 +39,10 @@ a.btn.document-button:focus {
             </nav>
           </div>
         </section>
+@endsection
+@section('content')
+
+       
         <section class="page-content-box">
           <div class="tab-sec">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -98,7 +100,7 @@ a.btn.document-button:focus {
             </div>
           </div>
         </section>
-      </div>
+   
       <div class="modal custom-model-popup" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -107,7 +109,7 @@ a.btn.document-button:focus {
           </div>
         </div>
       </div>
-    </main>
+ 
 
     <script>
     $('.getDialog').click(function () {
