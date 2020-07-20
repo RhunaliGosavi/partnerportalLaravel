@@ -20,14 +20,17 @@
               <li class="<?php if(preg_match("/\bdashboard\b/i", $urlString)) { echo 'active'; } ?>"><a href="#">Home</a></li>
               <li class="<?php if(preg_match("/\bsalesKit\b/i", $urlString)) { echo 'active'; } ?>"><a href="/salesKit">Sales Kit</a></li>
               <li><a href="#">Application Status Tracker</a></li>
-              <li><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
-              <li><a href="{{url('apply_now')}}">Apply Now</a></li>
+              <li class="<?php if(preg_match("/\brefer_friend\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
+              <li class="<?php if(preg_match("/\bapply_now\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('apply_now')}}">Apply Now</a></li>
             </ul>
           </nav>
           <div class="user-info">
-            <a href="{{url('employee/logout')}}">
+            <a href="#" class="user-icon">
               <img src="{{url('/assets_frontend/images/user-icon.png')}}">
             </a>
+            <div class="submenu-box logout-btn">
+              <a href="{{url('employee/logout')}}">Logout</a>
+            </div>
           </div>
         </div>
       </div>

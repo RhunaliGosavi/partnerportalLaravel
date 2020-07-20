@@ -42,7 +42,7 @@ class ApplyNowRequestController extends Controller
 		$loan->name 			= $request->name;
 		$loan->mobile_number  	= $request->mobile_number;
 		$loan->loan_amount 	    = $request->loan_amount;
-		$loan->prefered_contact_time = date('Y-m-d H:i:s',strtotime(date('Y-m-d-').$request->prefered_contact_time));
+		$loan->prefered_contact_time = date('Y-m-d H:i:s',strtotime($request->prefered_contact_time));
 		$loan->source_user_id  = Auth::user()->id;
 		$loan->save();
 

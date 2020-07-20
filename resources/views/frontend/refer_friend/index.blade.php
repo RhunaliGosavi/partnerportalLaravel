@@ -104,7 +104,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="preferTime">Prefered time to contact</label>
-                                    <input type="time" class="form-control" placeholder="HH:MM" id="preferTime" name="prefered_contact_time">
+                                    <input type="text" class="form-control" placeholder="00/00/0000 HH:MM" id="datetimepicker1" name="prefered_contact_time">
                                     @if ($errors->has('prefered_contact_time'))
                                     <div class="form-control-feedback">
 	                                    {{ $errors->first('prefered_contact_time') }}
@@ -115,7 +115,7 @@
                         </div>
                         <div class="form_btn">
                             <button type="submit" class="btn btn-primary btn-search">Submit</button>
-                            <button type="button" class="btn btn-primary btn-clear">Clear</button>
+                            <button type="reset" class="btn btn-primary btn-clear">Clear</button>
                         </div>
                     </form>
                 </div>

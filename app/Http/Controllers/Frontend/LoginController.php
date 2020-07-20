@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Auth;
 
 class LoginController extends Controller
@@ -32,8 +33,16 @@ class LoginController extends Controller
 		return redirect()->back()->withInput($request->only('employee_id'));
     }
 
-    public function logout() {
-		Auth::guard('employees')->logout();
-		return redirect('/');
-	}
+    public function logout(Request $request)
+    {
+        Auth::guard('employees')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/');
+    }
 }
