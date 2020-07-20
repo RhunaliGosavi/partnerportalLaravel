@@ -34,9 +34,9 @@ a.btn.document-button:focus {
             <h1>DSA Onboarding Details</h1>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-dark">DSA Onboarding Details</a></li>
+                <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit/DsaOnboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
               </ol>
             </nav>
           </div>

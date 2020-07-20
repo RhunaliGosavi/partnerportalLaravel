@@ -12,9 +12,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{url('salesKit')}}">Sales Kit</a></li>
+        <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
         <li class="breadcrumb-item"><a href="#"> DSA Onboarding Details</a></li>
-        <li class="breadcrumb-item"><a class="text-dark" href="{{url('salesKit/DSALeadGeneration')}}">DSA Lead Generation</a></li>
+        <li class="breadcrumb-item"><a class="text-dark" href="{{url('sales/kit/DSALeadGeneration')}}">DSA Lead Generation</a></li>
       </ol>
     </nav>
   </div>
