@@ -37,4 +37,8 @@ class SalesKitController extends Controller
             'dsa_onboarding' => DsaOnboarding::all()
         ]);
     }
+
+    public function DSALeadGeneration(Request $request) {
+        return view('frontend.salesKit.DsaLeadGeneration');
+    }
 }

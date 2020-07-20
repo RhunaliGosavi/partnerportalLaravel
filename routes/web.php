@@ -25,6 +25,8 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
+	Route::get('salesKit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');
+
 	Route::get('importantLinks','Frontend\LinkController@index');
 	Route::get('refer_friend', 'Frontend\ReferFriendController@index');
 	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');

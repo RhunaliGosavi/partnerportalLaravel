@@ -47,4 +47,6 @@ $(document).ready(function(){
         $(".logout-btn").slideToggle();
         $(".overlay").toggle();
       });
+
+      $('#datetimepicker1').datetimepicker();
 });

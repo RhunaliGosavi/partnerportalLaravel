@@ -37,7 +37,7 @@ class ReferFriendController extends Controller
 		$refer->email 			= $request->email;
 		$refer->loan_product_id = $request->loan_product_id;
 		$refer->loan_amount 	= $request->loan_amount;
-		$refer->prefered_contact_time = date('Y-m-d H:i:s',strtotime(date('Y-m-d-').$request->prefered_contact_time));
+		$refer->prefered_contact_time = date('Y-m-d H:i:s',strtotime($request->prefered_contact_time));
 		$refer->source_user_id  = Auth::user()->id;
 		$refer->save();
 
