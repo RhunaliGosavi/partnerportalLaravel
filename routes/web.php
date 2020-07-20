@@ -23,6 +23,10 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('salesKit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
 	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
+	Route::get('salesKit/marketing-info','Frontend\SalesKitController@fetchMarketingInformation');
+	Route::get('salesKit/marketing-info/contests','Frontend\SalesKitController@fetchTeamContests');
+	Route::get('salesKit/marketing-info/schemes','Frontend\SalesKitController@fetchCustomerSchemes');
+	Route::get('salesKit/marketing-info/visuals','Frontend\SalesKitController@fetchMarketingVisuals');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
 	Route::get('salesKit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');

@@ -9,6 +9,9 @@ use App\SalesKitProduct;
 use App\DocumentChecklistCategory;
 use App\DocumentChecklistProduct;
 use App\DsaOnboarding;
+use App\SalesContest;
+use App\CustomerScheme;
+use App\MarketingVisualCategory;
 
 class SalesKitController extends Controller
 {
@@ -40,5 +43,29 @@ class SalesKitController extends Controller
 
     public function DSALeadGeneration(Request $request) {
         return view('frontend.salesKit.DsaLeadGeneration');
+    }
+
+    public function fetchMarketingInformation(Request $request) {
+        return view('frontend.salesKit.marketingInfo', [
+            'loan_products' => LoanProduct::all(),
+            'team_contests' => SalesContest::all(),
+            'customer_schemes' => CustomerScheme::all(),
+            'visual_categories' => MarketingVisualCategory::with('marketing_visual_category')->get()
+        ]);
+    }
+
+    public function fetchTeamContests(Request $request) {
+        $teamContests = SalesContest::where('loan_product_id', $request->id)->get();
+        return ($teamContests);
+    }
+
+    public function fetchCustomerSchemes(Request $request) {
+        $customerSchemes = CustomerScheme::where('loan_product_id', $request->id)->get();
+        return ($customerSchemes);
+    }
+
+    public function fetchMarketingVisuals(Request $request) {
+        $visuals = MarketingVisualCategory::with('marketing_visual_category')->where('loan_product_id', $request->id)->get();
+        return ($visuals);
     }
 }
