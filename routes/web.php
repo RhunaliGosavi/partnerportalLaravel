@@ -28,8 +28,8 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('salesKit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');
 
 	Route::get('importantLinks','Frontend\LinkController@index');
-	Route::get('refer_friend', 'Frontend\ReferFriendController@index');
-	Route::get('apply_now', 'Frontend\ApplyNowRequestController@index');
+	Route::get('refer/friend', 'Frontend\ReferFriendController@index');
+	Route::get('apply/now', 'Frontend\ApplyNowRequestController@index');
 
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
     Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
