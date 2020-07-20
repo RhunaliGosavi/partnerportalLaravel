@@ -35,6 +35,8 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
     Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
 
     Route::get('application_status_tracker', 'Frontend\ApplicationStatusTracker@index');
+    Route::get('employeeHelpdesk', 'Frontend\EmployeeHelpDeskController@index');
+    Route::get('search', 'Frontend\EmployeeHelpDeskController@search');
 });
 
 

@@ -12,12 +12,12 @@
       <div class="col-md-9 p-0 right-sec">
         <div class="top-sec">
           <a href="{{url('importantLinks')}}" class="links">Important Links</a>
-          <a href="#" class="help">Employee Helpdesk</a>
+          <a href="{{url('employeeHelpdesk')}}" class="help">Employee Helpdesk</a>
         </div>
         <div class="menu-sec">
           <nav class="dashboard-menu">
             <ul>
-              <li class="<?php if(preg_match("/\bdashboard\b/i", $urlString)) { echo 'active'; } ?>"><a href="#">Home</a></li>
+              <li class="<?php if(preg_match("/\bdashboard\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('dashboard')}}">Home</a></li>
               <li class="<?php if(preg_match("/\bsalesKit\b/i", $urlString)) { echo 'active'; } ?>"><a href="/salesKit">Sales Kit</a></li>
               <li><a href="#">Application Status Tracker</a></li>
               <li class="<?php if(preg_match("/\brefer_friend\b/i", $urlString)) { echo 'active'; } ?>"><a href="{{url('refer_friend')}}">Refer Your Friend</a></li>
