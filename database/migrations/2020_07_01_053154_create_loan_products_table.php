@@ -16,6 +16,7 @@ class CreateLoanProductsTable extends Migration
         Schema::create('loan_products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('icon')->nullable();
             $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

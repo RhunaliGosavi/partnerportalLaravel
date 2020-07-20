@@ -13,7 +13,7 @@
 						</div>
 					</div>
 				</div>
-                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('loanProduct/store')}}" method="POST">
+                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('loanProduct/store')}}" method="POST" enctype="multipart/form-data">
 					@csrf
 					<div class="m-portlet__body">
                         <div class="form-group m-form__group row {{ $errors->has('name') ? 'has-danger' : ''}}">
@@ -23,6 +23,17 @@
                                 @if ($errors->has('name'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('name') }}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row {{ $errors->has('icon') ? 'has-danger' : ''}}">
+                            <label class="col-3 col-form-label">Select ICON</label>
+                            <div class="col-md-4">
+                                <input type="file" name="icon"  id="icon" value="{{old('icon')}}" class="form-control">
+                                @if ($errors->has('icon'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('icon') }}
                                 </div>
                                 @endif
                             </div>

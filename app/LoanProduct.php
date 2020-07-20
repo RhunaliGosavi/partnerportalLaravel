@@ -12,7 +12,7 @@ class LoanProduct extends Model
     protected $table = 'loan_products';
 
     protected $fillable = [
-        'name', 'description'
+        'name', 'icon', 'description'
     ];
 
     // Fetch refered buddies

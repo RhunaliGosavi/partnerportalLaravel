@@ -81,6 +81,13 @@
 				  
               	"columns": [
                     { field: "name",title:'Name'},
+					{ 
+                        field: "icon",
+                        title:'Icon',
+                        template: function(row, index, datatable) {	
+                            return '<a href="'+base_url+'/storage/loanproduct/'+row.icon+'">'+row.icon+'</a>'; 
+                        }
+                    },
                     { field: "description",title:'Description'},
                     { 
               			field: "Actions",

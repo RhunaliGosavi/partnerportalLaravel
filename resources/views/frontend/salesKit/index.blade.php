@@ -25,7 +25,11 @@
                     <div class="product-box">
                         <div class="product-box-head">
                         <div class="product-pic">
+                        @if ($loan_product->icon !== NULL)
+                            <img src="{{url('/storage/loanproduct/'.$loan_product->icon)}}">
+                        @else
                             <img src="{{url('/assets_frontend/images/product-pic1.png')}}">
+                        @endif
                         </div>
                         <div class="product-name">
                             <h2>{{$loan_product->name}}</h2>

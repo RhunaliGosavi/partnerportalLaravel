@@ -40,6 +40,7 @@ class LoanProductController extends Controller
         $post = $request->all();
         $rules = [
             'name'      => 'required',
+            'icon'      => 'required',
             'description' => 'required'
         ];
         $request->validate($rules);
@@ -52,10 +53,30 @@ class LoanProductController extends Controller
         $id = $statement[0]->Auto_increment;
         $helper = new Helper;
         $images = $helper->upload_image($images, "loanproducts/".$id, 'store');
-        $lProduct = new LoanProduct;
-        $lProduct->name = $post['name'];
-        $lProduct->description  = $dom->saveHTML();
-        $lProduct->save();
+        if($request->hasFile('icon')){
+            $extensions = array("png","jpeg","jpg");
+            $result = array($request->file('icon')->getClientOriginalExtension());
+            if(in_array($result[0],$extensions)){
+                $title=$request->input('title');
+                $filenameWithExt = $request->file('icon')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('icon')->getClientOriginalExtension();
+                $filename = preg_replace('/\s+/', '_',trim($filename));
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                $filesize=$request->file('icon')->getSize();
+                $filesize=number_format($filesize / 1048576,2);
+                $request->file('icon')->storeAs('public/loanproduct',$fileNameToStore);
+                $process = LoanProduct::create(
+                    ['name' => $post['name'],'icon' =>$fileNameToStore,'description'=>$dom->saveHTML()]
+                 );
+                 if(! $process){
+                    return redirect()->back()->with('error', 'Failed To Update Data'); 
+                 }
+
+            }else{
+                return redirect()->back()->with('error', 'File format is invalid.');
+            }
+        }
         return redirect('loanProduct')->with('success', 'Loan Product added successfully!');
     }
 
@@ -94,6 +115,7 @@ class LoanProductController extends Controller
         $post = $request->all();
         $rules = [
             'name'      => 'required',
+            'icon'      => 'required',
             'description' => 'required'
         ];
         $request->validate($rules);
@@ -105,9 +127,32 @@ class LoanProductController extends Controller
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
         $images = $helper->upload_image($images, "loan/products/".$lProduct->id, 'update');
-        $lProduct->name = $post['name'];
-        $lProduct->description  = $dom->saveHTML();
-        $lProduct->save();
+        $fileNameToStore = NULL;
+        if($request->hasFile('icon')){
+            $extensions = array("png","jpeg","jpg");
+            $result = array($request->file('icon')->getClientOriginalExtension());
+            if(in_array($result[0],$extensions)){
+                $title=$request->input('title');
+                $filenameWithExt = $request->file('icon')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('icon')->getClientOriginalExtension();
+                $filename = preg_replace('/\s+/', '_',trim($filename));
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                $filesize=$request->file('icon')->getSize();
+                $filesize=number_format($filesize / 1048576,2);
+                if($lProduct->icon !== NULL) Storage::disk('local')->delete('public/loanproduct'.$lProduct->icon);
+                $request->file('icon')->storeAs('public/loanproduct',$fileNameToStore);
+            }else{
+                return redirect()->back()->with('error', 'File format is invalid.');
+            }
+        }
+        $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $lProduct->icon;
+        $process = $lProduct->update(
+            ['name' => $post['name'],'icon' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
+        );
+        if(! $process){
+            return redirect()->back()->with('error', 'Failed To Update Data'); 
+        }
         return redirect('loanProduct')->with('success', 'Loan Product updated successfully!');
     }
 
@@ -121,6 +166,7 @@ class LoanProductController extends Controller
     {
         $lProduct = LoanProduct::find($id);
         if($lProduct) {
+            Storage::disk('local')->delete('public/loanproduct/'.$lProduct->icon);
             $directory = "loanproducts/".$lProduct->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);
@@ -138,7 +184,7 @@ class LoanProductController extends Controller
 
         $query = LoanProduct::query();
         if(isset($post['query']['generalSearch'])) {
-            $query = $query->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
+            $query = $query->orWhere('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->orWhere('icon', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
         }
         $lProducts = $query->get();
         $lProducts_count = count($lProducts);
