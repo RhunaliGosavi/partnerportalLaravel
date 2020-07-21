@@ -254,13 +254,14 @@
 
 		$(document).on('click','.download',function() {
     		var selectedTab = $('.nav-tabs li a.active').data('status');
+		    var url = base_url+'/hrExport';
 		    
-		    var selectedTable = '';
-		    if(1 == selectedTab) {
-				var url = base_url+'/hrExport';
-			} else {
-				var url = base_url+'/otherExport';
-			}
+		 //    var selectedTable = '';
+		 //    if(1 == selectedTab) {
+			// 	var url = base_url+'/hrExport';
+			// } else {
+			// 	var url = base_url+'/otherExport';
+			// }
 			window.location.href = url;
 		});
 	</script>

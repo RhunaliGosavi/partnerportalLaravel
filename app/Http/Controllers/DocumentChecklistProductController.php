@@ -56,7 +56,7 @@ class DocumentChecklistProductController extends Controller
         $statement = DB::select("show table status like 'document_checklist_products'");
         $id = $statement[0]->Auto_increment;
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/checklistProduct/".$id, 'store');
+        $images = $helper->upload_image($images, "sales/kit/checklistproduct/".$id, 'store');
         $docCheckProduct = new DocumentChecklistProduct;
         $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];

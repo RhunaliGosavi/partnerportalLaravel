@@ -58,7 +58,7 @@ class CustomerSchemeController extends Controller
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $filename = preg_replace('/\s+/', '_',trim($filename));
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $request->file('file')->storeAs('public/salesKit/marketingInformation/customerscheme',$fileNameToStore);
+                $request->file('file')->storeAs('public/sales/kit/marketinginformation/customerscheme',$fileNameToStore);
                 $process = CustomerScheme::create(
                     ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore]
                 );

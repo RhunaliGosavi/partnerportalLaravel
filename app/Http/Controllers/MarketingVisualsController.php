@@ -157,7 +157,7 @@ class MarketingVisualsController extends Controller
     {
         $marketingVisual = MarketingVisual::find($id);
         if($marketingVisual) {
-            Storage::disk('local')->delete('public/salesKit/marketingInformation/visuals/'.$marketingVisual->file_path);
+            Storage::disk('local')->delete('public/sales/kit/marketinginformation/visuals/'.$marketingVisual->file_path);
             $marketingVisual->delete();
             return redirect('marketingVisuals')->with('success', 'Marketing visual deleted successfully!');
         } else {
