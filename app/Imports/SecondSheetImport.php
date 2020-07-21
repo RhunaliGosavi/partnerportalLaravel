@@ -15,12 +15,12 @@ class SecondSheetImport implements ToCollection,WithStartRow
     {
         ini_set('memory_limit', -1);
         ini_set('max_execution_time', 0);
-     
-        foreach ($rows as $row) 
+
+        foreach ($rows as $row)
         {
          if(!empty($row[1])){
             $res=EmployeeDashboard::updateOrCreate(['employee_id'=>$row[2],'application_number'=>$row[3]],[
-              
+
                 'employee_name'=>$row[1],
                 'employee_id'=>$row[2],
                 'application_number'=>$row[3],
@@ -40,13 +40,13 @@ class SecondSheetImport implements ToCollection,WithStartRow
                 'sourcing_agency'=>$row[17],
                 'updated_at'=>now(),
              ]);
-            
+
             // if ($res->wasRecentlyCreated) {
                 $new_str = str_replace(' ', '', $row[6]);//in case csv have (Partially  Disbursed) column with multiple spaces
                  if(trim($new_str)=='PartiallyDisbursed'){
                     $id = $res->id;
                     $setData=['application_tbl_id' => $id,'application_status'=>$row[6],'disbursed_amount'=>(double)$row[9],'disbursement_date'=>Carbon::parse(Date::excelToDateTimeObject($row[13])),'updated_at'=>now(), 'created_at'=>now()];
-                    $res= DB::table('application_disburse_details')->updateOrInsert(['application_tbl_id'=>$id,'disbursement_date'=>Carbon::parse(Date::excelToDateTimeObject($row[13]))],$setData);
+                    $res= DB::table('application_disburse_details')->updateOrInsert(['employee_id'=>$row[2],'application_number'=>$row[3],'application_tbl_id'=>$id,'disbursement_date'=>Carbon::parse(Date::excelToDateTimeObject($row[13]))],$setData);
                    // DB::table('application_disburse_details')->insert($setData);
                  }
              //}

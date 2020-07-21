@@ -128,28 +128,28 @@
               <div class="col-md-3">
                 <div class="content-box">
                   <h3>Total Logins</h3>
-                  <div class="num" id="logCount"></div>
+                    <a onclick="redirectToDetails('login')" style="cursor: pointer;"><div class="num" id="logCount"></div></a>
                   <div class="date"><span class="asOndate"></span></div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="content-box">
                   <h3>Sanctioned Cases</h3>
-                  <div class="num" id="sanctionedCount"></div>
+                  <a onclick="redirectToDetails('sanctioned')" style="cursor: pointer;"><div class="num" id="sanctionedCount"></div></a>
                   <div class="date"><span class="asOndate"></span></div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="content-box">
                   <h3>Declined Cases</h3>
-                  <div class="num" id="declinedCount"></div>
+                  <a onclick="redirectToDetails('decline')" style="cursor: pointer;"><div class="num" id="declinedCount"></div></a>
                   <div class="date"><span class="asOndate"></span></div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="content-box">
                   <h3>Disbursed Cases</h3>
-                  <div class="num" id="disbursedCount"></div>
+                  <a onclick="redirectToDetails('disbursed')" style="cursor: pointer;"><div class="num" id="disbursedCount"></div></a>
                   <div class="date"><span class="asOndate"></span></div>
                 </div>
               </div>
@@ -165,8 +165,8 @@ $( document ).ready(function() {
 	var to_month=  $('#to_month').val();
 	var from_year= $('#from_year').val();
 	var from_month=$('#from_month').val();
-	var start_date=to_year+'-'+to_month+'-1';
-    var end_date=to_year+'-'+to_month+'-31';
+	var start_date=from_year+'-'+from_month+'-1';
+	var end_date=to_year+'-'+to_month+'-31';
 	getAppDetails(start_date,end_date,to_month,to_year);
 });
 
@@ -197,6 +197,32 @@ $( document ).ready(function() {
 
 	   getAppDetails(start_date,end_date,to_month,to_year);
     });
+    function redirectToDetails(type){
+
+        var to_year=$('#to_year').val();
+		var to_month=  $('#to_month').val();
+		var from_year= $('#from_year').val();
+		var from_month=$('#from_month').val();
+        var start_date=from_year+'-'+from_month+'-1';
+		var end_date=to_year+'-'+to_month+'-31';
+        var redirUrl='/dashboard/totallogins/';
+        if(type=="login"){
+            redirUrl='/dashboard/totallogins/'
+
+        }
+        if(type=="sanctioned"){
+
+           redirUrl='/dashboard/sanctiondcases/';
+        }
+        if(type=='decline'){
+            redirUrl='/dashboard/declinedcases/';
+        }
+        if(type="disbursed"){
+            redirUrl='/dashboard/disbursedcases/';
+        }
+        window.location = base_url+redirUrl + start_date+"/"+end_date;
+
+    }
 
 function getAppDetails(start_date,end_date,to_month,to_year){
 	$.ajax({

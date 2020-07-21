@@ -18,8 +18,14 @@ Route::post('employee/login', 'Frontend\LoginController@login');
 Route::get('employee/logout','Frontend\LoginController@logout');
 
 Route::group(['middleware' => ['web','auth:employees']], function() {
-	Route::get('dashboard','Frontend\DashboardController@index');
-	Route::get('salesKit','Frontend\SalesKitController@index');
+    Route::get('dashboard','Frontend\DashboardController@index');
+    Route::post('dashboard/gettotallogins','Frontend\DashboardController@getAppDetails');
+    Route::get('dashboard/totallogins/{to_date?}/{from_date?}','Frontend\DashboardController@totalLogins');
+    Route::get('dashboard/sanctiondcases/{to_date?}/{from_date?}','Frontend\DashboardController@sanctionCasesDetails');
+    Route::get('dashboard/declinedcases/{to_date?}/{from_date?}','Frontend\DashboardController@declinedCasesDetails');
+    Route::get('dashboard/disbursedcases/{to_date?}/{from_date?}','Frontend\DashboardController@disbursedDetails');
+
+    Route::get('salesKit','Frontend\SalesKitController@index');
 	Route::get('salesKit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
 	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');

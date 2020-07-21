@@ -13,7 +13,7 @@ class ApplicationStatusTrackerHelper
         $authorizationKey = env('AUTHORIZATION_KEY', '');
         $trackingID = env('TRACKING_ID', uniqid());
         $referenceID = env('REFERENCE_ID', uniqid());
-        
+
 
     	$header = [
             'Content-Type'=> 'application/json',
@@ -35,7 +35,7 @@ class ApplicationStatusTrackerHelper
 	    	]
     	];
 
-        
+
 		curl_setopt($ch, CURLOPT_URL,$baseURL.'/V1/AFL/IN0147/StatusApi');
 		 curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		 curl_setopt($ch, CURLOPT_POST, true);
@@ -63,7 +63,7 @@ class ApplicationStatusTrackerHelper
                 "APPLICANT_NAME" => "AHA",
                 "DOB"=>"19-10-19",
                 "MOBILE"=>"9067543212",
-		       
+
 		        "APPLICATION_DETAILS" => [
 		            [
                         "STATUS"=> "DISBURSED",
@@ -74,7 +74,7 @@ class ApplicationStatusTrackerHelper
                         "STATUS"=> "PARTIALLY DISBURSED",
                         "PRODUCT"=>"AP",
                         "APPLICATION_NO"=>"AHA00001230"
-                    ] 
+                    ]
 		    	]
         	]
         ]);*/
@@ -86,10 +86,10 @@ class ApplicationStatusTrackerHelper
                 "statusText"=> "Record Not Found"
               ],
         	"response" => [
-                
+
         	]
         ]);*/
-       
+
 
         $response = json_decode($response, true );
         $msg=$this->checkStatus($response['statusInfo']['statusCode']);
@@ -97,7 +97,7 @@ class ApplicationStatusTrackerHelper
            $response['response']=$msg;
         }
 
-		return $response;	
+		return $response;
     }
 
     public function checkStatus($status){
@@ -114,7 +114,7 @@ class ApplicationStatusTrackerHelper
             case '4000':
                 $msg="Service is unavailable ,Please try after some time";
                 break;
-            
+
             case '5000':
                 $msg="Service is unavailable ,Please try after some time";
                 break;
@@ -127,11 +127,11 @@ class ApplicationStatusTrackerHelper
             case '9000':
                 $msg="Something went wrong , Please try after some time";
                 break;
-          
+
        }
 
        return $msg;
 
     }
-    
+
 }
