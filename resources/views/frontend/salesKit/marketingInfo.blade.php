@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="action-sec">
                                         <a href="#" class="view-link getDialog" data-toggle="modal" data-target="#myModal" data-url="{{"/storage/salesKit/marketingInformation/salesContest/".$team_contest->file_path }}"><img src="{{url('/assets_frontend/images/pdf-icon.png')}}">View Contest Details</a>
-                                        <a href="{{'/storage/salesKit/marketingInformation/salesContest/'.$team_contest->file_path}}" download="{{'/storage/salesKit/marketingInformation/salesContest/'.$team_contest->file_path}}"   class="download-link"><img src="{{url('/assets_frontend/images/download-icon.png')}}"></a>
+                                        <a href="{{'/storage/sales/kit/marketinginformation/salescontest/'.$team_contest->file_path}}" download="{{'/storage/salesKit/marketingInformation/salesContest/'.$team_contest->file_path}}"   class="download-link"><img src="{{url('/assets_frontend/images/download-icon.png')}}"></a>
                                     </div>
                                 </div>
                             @endforeach
@@ -96,7 +96,7 @@
                                 @foreach($customer_schemes as $customer_scheme)
                                     <li>
                                         <div class="list-box">
-                                            <a href="{{'/storage/salesKit/marketingInformation/customerScheme/'.$customer_scheme->file_path}}" download="{{'/storage/salesKit/marketingInformation/customerScheme/'.$customer_scheme->file_path}}" >Download {{$customer_scheme->file_path}} Here</a>
+                                            <a href="{{'/storage/sales/kit/marketinginformation/customerscheme/'.$customer_scheme->file_path}}" download="{{'/storage/sales/kit/marketinginformation/customerscheme/'.$customer_scheme->file_path}}" >Download {{$customer_scheme->file_path}} Here</a>
                                                 <img src="{{url('/assets_frontend/images/pdf-icon.svg')}}" class="icon">
                                         </div>
                                     </li>
@@ -172,7 +172,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing/contests',
+                url: base_url+'/sales/kit/marketing/contests',
                 success: function(res) {
                     if(res){
                         var items = [];
@@ -184,8 +184,8 @@
                                     <p>'+ res[i].content_data +'</p>\
                                 </div>\
                                 <div class="action-sec">\
-                                    <a href="#" class="view-link getDialog" data-toggle="modal" data-target="#myModal" data-url="/storage/salesKit/marketingInformation/salesContest/'+res[i].file_path+'"><img src="'+base_url+'/assets_frontend/images/pdf-icon.png">View Contest Details</a>\
-                                    <a href="/storage/salesKit/marketingInformation/salesContest/'+res[i].file_path+'" download="/storage/salesKit/marketingInformation/salesContest/'+res[i].file_path+'" class="download-link"><img src="'+base_url+'/assets_frontend/images/download-icon.png" alt="download"></a>\
+                                    <a href="#" class="view-link getDialog" data-toggle="modal" data-target="#myModal" data-url="/storage/sales/kit/marketinginformation/salescontest/'+res[i].file_path+'"><img src="'+base_url+'/assets_frontend/images/pdf-icon.png">View Contest Details</a>\
+                                    <a href="/storage/sales/kit/marketinginformation/salescontest/'+res[i].file_path+'" download="/storage/sales/kit/marketinginformation/salescontest/'+res[i].file_path+'" class="download-link"><img src="'+base_url+'/assets_frontend/images/download-icon.png" alt="download"></a>\
                                 </div>\
                             </div>');
                         }
@@ -200,14 +200,14 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing/schemes',
+                url: base_url+'/sales/kit/marketing/schemes',
                 success: function(res) {
                     if(res){
                         var items = [];
                         for (var i = 0; i < res.length; i++) {
                             items.push('<li>\
                                         <div class="list-box">\
-                                            <a href="/storage/salesKit/marketingInformation/customerScheme/'+res[i].file_path+'" download="/storage/salesKit/marketingInformation/customerScheme/'+res[i].file_path+'" >Download '+res[i].file_path+' Here</a>\
+                                            <a href="/storage/sales/kit/marketinginformation/customerscheme/'+res[i].file_path+'" download="/storage/sales/kit/marketinginformation/customerscheme/'+res[i].file_path+'" >Download '+res[i].file_path+' Here</a>\
                                                 <img src="'+base_url+'/assets_frontend/images/pdf-icon.svg" class="icon">\
                                         </div>\
                                     </li>');
@@ -223,7 +223,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/marketing/visuals',
+                url: base_url+'/sales/kit/marketing/visuals',
                 success: function(res) {
                     if(res){
                         var tabs = [];

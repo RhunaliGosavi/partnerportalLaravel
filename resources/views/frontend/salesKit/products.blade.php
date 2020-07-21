@@ -12,8 +12,8 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{url('salesKit')}}">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="{{url('salesKit/products/'.$loan_products->id)}}">Loan Product</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit/products/'.$loan_products->id)}}">Loan Product</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@if($loan_products) {{$loan_products->name}} @endIf </li>
             </ol>
             </nav>
@@ -74,7 +74,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/salesKit/docChecklistProduct',
+                url: base_url+'/sales/kit/docChecklistProduct',
                 success: function(res) {
                     if(res){
                         var items = [];

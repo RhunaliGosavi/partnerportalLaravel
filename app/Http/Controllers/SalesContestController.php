@@ -132,7 +132,7 @@ class SalesContestController extends Controller
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
-        $images = $helper->upload_image($images, "salesKit/salesContest/uploads/".$sContest->id, 'update');
+        $images = $helper->upload_image($images, "sales/kit/salescontest/uploads/".$sContest->id, 'update');
         $fileNameToStore = NULL;
         if($request->hasFile('file')){
             $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
@@ -172,8 +172,8 @@ class SalesContestController extends Controller
     {
         $sContest = SalesContest::find($id);
         if($sContest) {
-            Storage::disk('local')->delete('public/sales/kit/marketinginformation/salesContest/'.$sContest->file_path);
-            $directory = "salesKit/salesContest/uploads/".$sContest->id;
+            Storage::disk('local')->delete('public/sales/kit/marketinginformation/salescontest/'.$sContest->file_path);
+            $directory = "sales/kit/salescontest/uploads/".$sContest->id;
             $files = Storage::allFiles('public/'.$directory);
             Storage::delete($files);
             $sContest->delete();
