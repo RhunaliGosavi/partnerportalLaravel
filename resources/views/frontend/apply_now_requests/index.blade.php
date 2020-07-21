@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="empId">Employee ID</label>
                                     <input type="text" class="form-control" placeholder="Enter Employee ID" id="empId" name="employee_id" value="{{old('employee_id')}}">
@@ -60,11 +60,11 @@
 	                                </div>
 	                                @endif
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="empName">Employee Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Employee Name" id="empName" name="name" value="{{old('name')}}">
+                                    <label for="empName">Applicant Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter Applicant Name" id="empName" name="name" value="{{old('name')}}">
                                     @if ($errors->has('name'))
                                     <div class="form-control-feedback">
 	                                    {{ $errors->first('name') }}

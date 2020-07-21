@@ -29,5 +29,19 @@
 				<td>{{$loan->prefered_contact_time}}</td>
 			</tr>
 		@endforeach
+		@foreach($otherloans as $loan)
+			<tr>
+                <td>{{$i++}}</td>
+				<td>@if(isset($loan->employee)){{'AFL Employee'}}@endif</td>
+				<td>@if(isset($loan->employee)){{$loan->employee->name}}@endif</td>
+				<td>{{$loan->employee_id}}</td>
+				<td>{{$loan->name}}</td>
+				<td>{{$loan->mobile_number}}</td>
+				<td>@if(isset($loan->employee)){{$loan->employee->email}}@endif</td>
+				<td>@if(isset($loan->loan_product)){{$loan->loan_product->name}}@endif</td>
+				<td>{{$loan->loan_amount}}</td>
+				<td>{{$loan->prefered_contact_time}}</td>
+			</tr>
+		@endforeach
 	</tbody>
 </table>

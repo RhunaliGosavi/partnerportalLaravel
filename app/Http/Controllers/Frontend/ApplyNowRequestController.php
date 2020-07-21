@@ -20,7 +20,7 @@ class ApplyNowRequestController extends Controller
 		
 		$rules = [
 			'loan_type'		=> 'required',
-			'employee_id'   => 'required',
+			// 'employee_id'   => 'required',
 			'name' 			=> 'required',
 			'mobile_number' => 'required',
 			'loan_product_id' 		=> 'required',
@@ -38,7 +38,7 @@ class ApplyNowRequestController extends Controller
 			$loan = new OtherLoan;
 			$loan->loan_product_id  = $request->loan_product_id;
 		}
-		$loan->employee_id      = $request->employee_id;
+		$loan->employee_id      = Auth::user()->employee_id;
 		$loan->name 			= $request->name;
 		$loan->mobile_number  	= $request->mobile_number;
 		$loan->loan_amount 	    = $request->loan_amount;
@@ -46,6 +46,6 @@ class ApplyNowRequestController extends Controller
 		$loan->source_user_id  = Auth::user()->id;
 		$loan->save();
 
-		return redirect('apply_now')->with('success','Request added successfully.');
+		return redirect('apply/now')->with('success','Request added successfully.');
 	}
 }

@@ -41,6 +41,6 @@ class ReferFriendController extends Controller
 		$refer->source_user_id  = Auth::user()->id;
 		$refer->save();
 
-		return redirect('refer_friend')->with('success','Refer friend added successfully.');
+		return redirect('refer/friend')->with('success','Refer friend added successfully.');
 	}
 }
