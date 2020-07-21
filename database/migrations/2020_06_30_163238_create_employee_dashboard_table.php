@@ -34,7 +34,7 @@ class CreateEmployeeDashboardTable extends Migration
             $table->string('sourcing_agency');
             $table->timestamp('deleted_at')->nullable(true);
             $table->timestamps();
-            // $table->unique(['employee_id', 'application_number'],'empId_appId');
+            $table->unique(['employee_id', 'application_number'],'empId_appId');
         });
     }
 
