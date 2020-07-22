@@ -25,14 +25,14 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
     Route::get('dashboard/declinedcases/{to_date?}/{from_date?}','Frontend\DashboardController@declinedCasesDetails');
     Route::get('dashboard/disbursedcases/{to_date?}/{from_date?}','Frontend\DashboardController@disbursedDetails');
 
-    Route::get('salesKit','Frontend\SalesKitController@index');
-	Route::get('salesKit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
-	Route::get('salesKit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
-	Route::get('salesKit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
-	Route::get('salesKit/marketing','Frontend\SalesKitController@fetchMarketingInformation');
-	Route::get('salesKit/marketing/contests','Frontend\SalesKitController@fetchTeamContests');
-	Route::get('salesKit/marketing/schemes','Frontend\SalesKitController@fetchCustomerSchemes');
-	Route::get('salesKit/marketing/visuals','Frontend\SalesKitController@fetchMarketingVisuals');
+    Route::get('sales/kit','Frontend\SalesKitController@index');
+	Route::get('sales/kit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
+	Route::get('sales/kit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
+	Route::get('sales/kit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
+	Route::get('sales/kit/marketing','Frontend\SalesKitController@fetchMarketingInformation');
+	Route::get('sales/kit/marketing/contests','Frontend\SalesKitController@fetchTeamContests');
+	Route::get('sales/kit/marketing/schemes','Frontend\SalesKitController@fetchCustomerSchemes');
+	Route::get('sales/kit/marketing/visuals','Frontend\SalesKitController@fetchMarketingVisuals');
 	Route::post('dashboard/getAppdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
 	Route::get('sales/kit/DSALeadGeneration','Frontend\SalesKitController@DSALeadGeneration');
