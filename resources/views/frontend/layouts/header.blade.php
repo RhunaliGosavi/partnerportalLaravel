@@ -52,7 +52,7 @@
 
                         <a class="dropdown-item" href="{{url('/sales/kit')}}">Loan Product</a>
                         <a class="dropdown-item" href="{{url('/sales/kit/marketing')}}">Marketing Information</a>
-                        <a class="dropdown-item" href="#">On-Screen Calculator</a>
+                        <a class="dropdown-item" href="{{url('/sales/kit/calculator')}}">On-Screen Calculator</a>
                         <a class="dropdown-item" href="{{url('sales/kit/Dsaonboarding')}}">DSA Onboarding Details</a>
                       </div>
                     </li>

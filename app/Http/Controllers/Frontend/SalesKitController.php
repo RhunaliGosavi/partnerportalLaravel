@@ -11,6 +11,7 @@ use App\DocumentChecklistProduct;
 use App\DsaOnboarding;
 use App\SalesContest;
 use App\CustomerScheme;
+use App\Helpers\calPersonalLoanHelper;
 use App\MarketingVisualCategory;
 
 class SalesKitController extends Controller
@@ -67,5 +68,40 @@ class SalesKitController extends Controller
     public function fetchMarketingVisuals(Request $request) {
         $visuals = MarketingVisualCategory::with('marketing_visual_category')->where('loan_product_id', $request->id)->get();
         return ($visuals);
+    }
+    public function onScreenCalculator(){
+        return view('frontend.salesKit.onScreenCalculator');
+
+    }
+    public function getPersonalLoan(Request $request){
+        $monthlyIncome=$request->input('montly_income');
+        $obligation=$request->input('Obligation');
+        $loanTenure=$request->input('loan_tenure');
+        $expectedROI=$request->input('rate_of_interest');
+
+        $calPersonalLoanHelper=new calPersonalLoanHelper($monthlyIncome,$obligation,$loanTenure,$expectedROI);
+        $result=$calPersonalLoanHelper->calculatePersonalLoan();
+        dd($result);
+
+    }
+
+    public function getSelectedview(Request $request){
+        $type=$request->input('type');
+       switch ($type) {
+            case 'personal_loan':
+               $view=view('frontend.salesKit.personalLoanCalculator');
+               break;
+            case 'loan_against_property':
+                $view=view('frontend.salesKit.loanAgainstProperty');
+                break;
+            case 'consumer_product_finance':
+                $view=view('frontend.salesKit.consumerProductFinace');
+                break;
+
+
+
+       }
+       return $view;
+
     }
 }

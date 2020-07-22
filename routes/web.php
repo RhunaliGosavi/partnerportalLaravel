@@ -48,6 +48,12 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::post('application/status', 'Frontend\ApplicationStatusTracker@getAppStatus');
     Route::get('employee/helpdesk', 'Frontend\EmployeeHelpDeskController@index');
     Route::get('search', 'Frontend\EmployeeHelpDeskController@search');
+    Route::get('sales/kit/calculator','Frontend\SalesKitController@onScreenCalculator');
+    Route::post('sales/kit/get_personal_loan','Frontend\SalesKitController@getPersonalLoan');
+    Route::post('sales/kit/get_selected_view','Frontend\SalesKitController@getSelectedview');
+
+
+
 });
 
 
