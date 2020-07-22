@@ -42,7 +42,7 @@ a.btn.document-button:focus {
 @endsection
 @section('content')
 
-       
+
         <section class="page-content-box">
           <div class="tab-sec">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -64,7 +64,7 @@ a.btn.document-button:focus {
                     @endforeach
                     <div class="document-content_button">
                         <button type="button" class="btn document-button" >Corporate Presentations</button>
-                        <a href="{{url('salesKit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
+                        <a href="{{url('sales/kit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
                     </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ a.btn.document-button:focus {
             </div>
           </div>
         </section>
-   
+
       <div class="modal custom-model-popup" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -109,14 +109,14 @@ a.btn.document-button:focus {
           </div>
         </div>
       </div>
- 
+
 
     <script>
     $('.getDialog').click(function () {
         var url = $(this).attr('data-url');
         $("#docPath").attr("src", url);
     });
-    
+
     </script>
-  
+
 @endsection

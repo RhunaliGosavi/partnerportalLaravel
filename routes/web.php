@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
     Route::get('dashboard/disbursedcases/{to_date?}/{from_date?}','Frontend\DashboardController@disbursedDetails');
 
     Route::get('sales/kit','Frontend\SalesKitController@index');
-	Route::get('sales/kit/DsaOnboarding','Frontend\SalesKitController@DSAOnboarding');
+	Route::get('sales/kit/Dsaonboarding','Frontend\SalesKitController@DSAOnboarding');
 	Route::get('sales/kit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('sales/kit/docChecklistProduct','Frontend\SalesKitController@fetchDocChecklistProduct');
 	Route::get('sales/kit/marketing','Frontend\SalesKitController@fetchMarketingInformation');
