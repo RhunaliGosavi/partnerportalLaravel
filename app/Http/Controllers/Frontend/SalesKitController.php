@@ -12,6 +12,7 @@ use App\DsaOnboarding;
 use App\SalesContest;
 use App\CustomerScheme;
 use App\MarketingVisualCategory;
+use App\CorporatePresentation;
 
 class SalesKitController extends Controller
 {
@@ -67,5 +68,11 @@ class SalesKitController extends Controller
     public function fetchMarketingVisuals(Request $request) {
         $visuals = MarketingVisualCategory::with('marketing_visual_category')->where('loan_product_id', $request->id)->get();
         return ($visuals);
+    }
+
+    public function corporatepresentation() {
+        $data['corporatepresentations'] = CorporatePresentation::get();
+
+        return view('frontend.salesKit.CorporatePresentation', $data);
     }
 }

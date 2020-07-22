@@ -74,7 +74,7 @@
             $.ajax({
                 type: "GET",
                 data: { id: selected },
-                url: base_url+'/sales/kit/docChecklistProduct',
+                url: base_url+'/sales/kit/docchecklistproduct',
                 success: function(res) {
                     if(res){
                         var items = [];
