@@ -103,29 +103,29 @@ class ApplicationStatusTrackerHelper
     public function checkStatus($status){
        switch ($status) {
             case '0000':
-               $msg="Data fetched Successfully";
+               $msg="0000:Data fetched Successfully";
                break;
             case '1000':
-                $msg="Authentication Failed";
+                $msg="1000:Authentication Failed";
             break;
             case '2000':
-                $msg="Invalid Details";
+                $msg="2000:Invalid Details";
                 break;
             case '4000':
-                $msg="Service is unavailable ,Please try after some time";
+                $msg="4000:Service is unavailable ,Please try after some time";
                 break;
 
             case '5000':
-                $msg="Service is unavailable ,Please try after some time";
+                $msg="5000:Service is unavailable ,Please try after some time";
                 break;
             case '6000':
-                $msg="Service is unavailable ,Please try after some time";
+                $msg="6000:Service is unavailable ,Please try after some time";
                 break;
             case '8000':
-                $msg="Service is unavailable ,Please try after some time";
+                $msg="8000:Service is unavailable ,Please try after some time";
                 break;
             case '9000':
-                $msg="Something went wrong , Please try after some time";
+                $msg="9000:Something went wrong , Please try after some time";
                 break;
 
        }

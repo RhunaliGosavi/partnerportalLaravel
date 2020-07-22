@@ -31,11 +31,11 @@
                           <div class="form-group {{ $errors->has('appId') ? 'has-danger' : ''}}">
                               <label for="appId">Application ID</label>
                               <input type="number" class="form-control" placeholder="Enter ID" id="appId" name="appId" value="{{old('appId')}}">
-                            
+
                                 <div class="form-control-feedback" id="appIdError" style="display:none">
-                                  
+
                                 </div>
-                              
+
                           </div>
                       </div>
                       <div class="col-md-1">
@@ -45,11 +45,11 @@
                           <div class="form-group {{ $errors->has('appName') ? 'has-danger' : ''}}">
                               <label for="appName">Applicant's name</label>
                               <input type="text" class="form-control" placeholder="Enter Name" id="appName" name="appName"  value="{{old('appName')}}">
-                           
+
                                 <div class="form-control-feedback" id="appNameError" style="display:none;">
-                                 
+
                                 </div>
-                               
+
                           </div>
                       </div>
                   </div>
@@ -60,9 +60,9 @@
                               <input type="text" id="datepicker" class="form-control input-group date" name="datepicker" value="{{old('datepicker')}}"/>
                               <img src="{{url('assets_frontend/images/calendar.svg')}}" class="img-fluid calender" alt="calender" />
                                 <div class="form-control-feedback " id="datepickerError" style="display:none;">
-                                   
+
                                 </div>
-                             
+
                           </div>
                       </div>
                       <div class="col-md-1">
@@ -71,18 +71,18 @@
                           <div class="form-group ">
                               <label for="MobNum">Registered Mobile Number</label>
                               <input type="number" class="form-control" placeholder="Enter Mobile Number" id="MobNum" name="MobNum" value="{{old('MobNum')}}">
-                             
+
                                 <div class="form-control-feedback" id="mobError" style="display:none;">
                                  </div>
-                               
+
                           </div>
                       </div>
                   </div>
                   <div class="form_btn">
                       <button type="button" id="search" class="btn btn-primary btn-search">Search</button>
-                      <button type="reset" class="btn btn-primary btn-clear">Clear</button>
+                      <button type="reset" class="btn btn-primary btn-clear"  id="clearData">Clear</button>
                   </div>
-          
+
           </div>
       </section>
 
@@ -99,7 +99,7 @@
                       </tr>
                   </thead>
                   <tbody id="appDetails">
-                     
+
                   </tbody>
               </table>
           </div>
@@ -112,27 +112,33 @@
         $('#datepicker').datepicker({
         });
     });
+    $('#clearData').on('click',function(){
+        $('#appId').val('');
+        $('#appName').val('');
+        $('#datepicker').val('');
+        $('#MobNum').val('');
 
+    });
     $(document).on('click','#search', function() {
         $("#mobError").text('');
         $("#appIdError").text('');
         $("#appNameError").text('');
         $("#datepickerError").text('');
-        
+
         var appId= $('#appId').val();
         var appName= $('#appName').val();
         var datepicker= $('#datepicker').val();
         var MobNum= $('#MobNum').val();
-        
+
         $.ajax({
             url: base_url+'/application/status',
             type: "post",
             data: {'appId':appId,'appName':appName,'datepicker':datepicker,'MobNum':MobNum,_token: '{{csrf_token()}}'} ,
             success: function (response) {
-                
+
                 var res=JSON.parse(response);
                 if(res.statusInfo.status=='SUCCESS'){
-                    
+
                    html='';
                    var app_name=res.response.APPLICANT_NAME;
                    var appdet=res.response.APPLICATION_DETAILS;
@@ -151,29 +157,38 @@
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                //console.log(jqXHR);
+            if(jqXHR.responseJSON.errors){
               if(jqXHR.responseJSON.errors.MobNum){
                     $('#mobError').show();
                     $("#mobError").append('<span style="color:red">'+jqXHR.responseJSON.errors.MobNum[0]+'</span>');
                 }
-                
+
                 if(jqXHR.responseJSON.errors.appId){
-                    
+
                     $('#appIdError').show();
                     $("#appIdError").append('<span style="color:red">'+jqXHR.responseJSON.errors.appId[0]+'</span>');
                 }
                 if(jqXHR.responseJSON.errors.appName){
-                    
+
                     $('#appNameError').show();
                     $("#appNameError").append('<span style="color:red">'+jqXHR.responseJSON.errors.appName[0]+'</span>');
                 }
                 if(jqXHR.responseJSON.errors.datepicker){
-                    
+
                     $('#datepickerError').show();
                     $("#datepickerError").append('<span style="color:red">'+jqXHR.responseJSON.errors.datepicker[0]+'</span>');
                 }
-           }
+              }else{
+
+                $('.showError').show();
+                    $('.showError').text('Something went wrong, Please try after some time');
+                    setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+
+              }
+            }
         });
     });
-    
+
     </script>
 @endsection
