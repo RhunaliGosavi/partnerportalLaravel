@@ -88,26 +88,31 @@ class DashboardController extends Controller
        }
        if($type=='disbursed'){
                $result->leftJoin('application_disburse_details', 'employee_application_details.id', '=', 'application_disburse_details.application_tbl_id')
-
+                    ->select("employee_application_details.*", DB::raw("DATE_FORMAT(application_disburse_details.disbursement_date, '%d/%m/%Y') as disbursement_date_partial,DATE_FORMAT(employee_application_details.sanctioned_date, '%d/%m/%Y') as sanctioned_date , DATE_FORMAT(employee_application_details.disbursement_date, '%d/%m/%Y') as disbursement_date,DATE_FORMAT(employee_application_details.application_login_date, '%d/%m/%Y') as application_login_date,application_disburse_details.disbursed_amount as disbursed_amount_partial"))
                     ->where('employee_application_details.disbursement_date','>=',$startDate)
                     ->where('employee_application_details.disbursement_date','<=',$enddate)
-                    ->where('employee_application_details.application_status','=', 'Disbursed');
-
-
-       }
-       $result->where('employee_application_details.employee_id',Auth::user()->id);
-
-       if(!empty($search_val)){
-            $result->Where('application_status', 'like', '%' .$search_val. '%')
-                   ->orWhere('customer_name', 'like', '%' .$search_val. '%')
-                    ->orWhere('sales_officer_name', 'like', '%' .$search_val. '%')
-                    ->orWhere('sales_supervisors_name', 'like', '%' .$search_val. '%')
-                    ->orWhere('product_type', 'like', '%' .$search_val. '%');
+                    ->where(function($q) {
+                        $q->where('employee_application_details.application_status','=', 'Disbursed')
+                          ->orWhere('employee_application_details.application_status','=', 'Partially Disbursed');
+                    });
 
         }
 
+       if(!empty($search_val)){
+            $result->where(function($r) use($search_val) {
+                $r->Where('employee_application_details.application_status', 'like', '%' .$search_val. '%')
+                ->orWhere('employee_application_details.customer_name', 'like', '%' .$search_val. '%')
+                ->orWhere('employee_application_details.sales_officer_name', 'like', '%' .$search_val. '%')
+                ->orWhere('employee_application_details.sales_supervisors_name', 'like', '%' .$search_val. '%')
+                ->orWhere('employee_application_details.product_type', 'like', '%' .$search_val. '%');;
+            });
+
+
+        }
+        $result->where('employee_application_details.employee_id',Auth::user()->id);
+
         $result=$result->get()->toArray();
-      // dd(DB::getQueryLog());
+   //dd(DB::getQueryLog());
         return json_encode($result);
 
 

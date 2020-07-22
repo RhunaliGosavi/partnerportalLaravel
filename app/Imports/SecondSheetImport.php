@@ -19,6 +19,10 @@ class SecondSheetImport implements ToCollection,WithStartRow
         foreach ($rows as $row)
         {
          if(!empty($row[1])){
+
+            $output = preg_replace('!\s+!', ' ',$row[6]);
+            $application_status=trim($output);
+
             $res=EmployeeDashboard::updateOrCreate(['employee_id'=>$row[2],'application_number'=>$row[3]],[
 
                 'employee_name'=>$row[1],
@@ -26,7 +30,7 @@ class SecondSheetImport implements ToCollection,WithStartRow
                 'application_number'=>$row[3],
                 'customer_name'=>$row[4],
                 'product_type'=>$row[5],
-                'application_status'=>$row[6],
+                'application_status'=>$application_status,
                 'applied_amount'=>(double)$row[7],
                 'sanctioned_amount'=>(double)$row[8],
                 'disbursed_amount'=>(double)$row[9],
