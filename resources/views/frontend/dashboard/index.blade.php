@@ -226,7 +226,7 @@ $( document ).ready(function() {
 
 function getAppDetails(start_date,end_date,to_month,to_year){
 	$.ajax({
-		url: base_url+'/dashboard/getAppdetails',
+		url: base_url+'/dashboard/getappdetails',
 		type: "post",
 		data: {'start_date':start_date,'end_date':end_date,'to_month':to_month,'to_year':to_year,_token: '{{csrf_token()}}'} ,
 		success: function (response) {

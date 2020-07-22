@@ -13,6 +13,7 @@ use App\SalesContest;
 use App\CustomerScheme;
 use App\Helpers\calPersonalLoanHelper;
 use App\MarketingVisualCategory;
+use App\CorporatePresentation;
 
 class SalesKitController extends Controller
 {
@@ -103,5 +104,10 @@ class SalesKitController extends Controller
        }
        return $view;
 
+    }
+    public function corporatepresentation() {
+        $data['corporatepresentations'] = CorporatePresentation::get();
+
+        return view('frontend.salesKit.CorporatePresentation', $data);
     }
 }

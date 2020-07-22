@@ -63,7 +63,7 @@ a.btn.document-button:focus {
                     <p class="document-content_para">{{$dsadoc->title}}</p>
                     @endforeach
                     <div class="document-content_button">
-                        <button type="button" class="btn document-button" >Corporate Presentations</button>
+                        <a href="{{url('sales/kit/corporatepresentation')}}" class="btn document-button">Corporate Presentations</a>
                         <a href="{{url('sales/kit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ a.btn.document-button:focus {
                     </tbody>
                   </table>
                   <div class="document-content_button">
-                    <button type="button" class="btn document-button">Corporate Presentations</button>
+                    <a href="{{url('sales/kit/corporatepresentation')}}" class="btn document-button">Corporate Presentations</a>
                     <a href="{{url('salesKit/DSALeadGeneration')}}" class="btn document-button">Generate DSA Lead</a>
                 </div>
                 </div>
