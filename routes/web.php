@@ -27,8 +27,8 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 
     Route::get('sales/kit','Frontend\SalesKitController@index');
 	Route::get('sales/kit/dsaonboarding','Frontend\SalesKitController@DSAOnboarding');
-	Route::get('sales/kit/products/{id}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('sales/kit/docchecklistproduct','Frontend\SalesKitController@fetchDocChecklistProduct');
+	Route::get('sales/kit/products/{slug}','Frontend\SalesKitController@fetchKitProducts');
 	Route::get('sales/kit/marketing','Frontend\SalesKitController@fetchMarketingInformation');
 	Route::get('sales/kit/marketing/contests','Frontend\SalesKitController@fetchTeamContests');
 	Route::get('sales/kit/marketing/schemes','Frontend\SalesKitController@fetchCustomerSchemes');
@@ -148,6 +148,15 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('docCheckProduct/store', 		'DocumentChecklistProductController@store');
 	Route::post('docCheckProduct/update/{id}', 'DocumentChecklistProductController@update');
 	Route::get('docCheckProduct/all', 'DocumentChecklistProductController@fetchAllProducts');
+
+	// Customer Shemes
+	Route::get('currentOffer', 			'CurrentOfferController@index');
+	Route::get('currentOffer/create', 		'CurrentOfferController@create');
+	Route::get('currentOffer/edit/{id}', 	'CurrentOfferController@edit');
+	Route::get('currentOffer/delete/{id}',  'CurrentOfferController@destroy');
+	Route::post('currentOffer/store', 		'CurrentOfferController@store');
+	Route::post('currentOffer/update/{id}', 'CurrentOfferController@update');
+	Route::get('currentOffer/all', 'CurrentOfferController@fetchAllOffers');
 
 	// Sales team contests
 	Route::get('salesContest', 			'SalesContestController@index');

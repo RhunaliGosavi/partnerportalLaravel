@@ -29,7 +29,7 @@ class DocumentChecklistProductController extends Controller
     public function create()
     {
         return view('salesKit.docChecklist.products.create', [
-            'sales_kit_products' => SalesKitProduct::all(),
+            // 'sales_kit_products' => SalesKitProduct::all(),
             'doc_check_categories' => DocumentChecklistCategory::all()
         ]);
     }
@@ -44,7 +44,7 @@ class DocumentChecklistProductController extends Controller
     {
         $post = $request->all();
         $rules = [
-            'sales_kit_product' => 'required',
+            // 'sales_kit_product' => 'required',
             'doc_check_category' => 'required',
             'content' => 'required'
         ];
@@ -58,7 +58,7 @@ class DocumentChecklistProductController extends Controller
         $helper = new Helper;
         $images = $helper->upload_image($images, "sales/kit/checklistproduct/".$id, 'store');
         $docCheckProduct = new DocumentChecklistProduct;
-        $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
+        // $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
         $docCheckProduct->content_data  = $dom->saveHTML();
         $docCheckProduct->save();
@@ -86,7 +86,7 @@ class DocumentChecklistProductController extends Controller
     {
         $docCheckProduct = DocumentChecklistProduct::find($id);
         return view('salesKit.docChecklist.products.edit', [
-            'sales_kit_products' => SalesKitProduct::all(),
+            // 'sales_kit_products' => SalesKitProduct::all(),
             'doc_check_categories' => DocumentChecklistCategory::all(),
             'docCheckProduct' => $docCheckProduct
         ]);
@@ -105,7 +105,7 @@ class DocumentChecklistProductController extends Controller
         $post = $request->all();
         
         $rules = [
-            'sales_kit_product' => 'required',
+            // 'sales_kit_product' => 'required',
             'doc_check_category' => 'required',
             'content' => 'required'
         ];
@@ -118,7 +118,7 @@ class DocumentChecklistProductController extends Controller
         $images = $dom->getElementsByTagName('img');
         $helper = new Helper;
         $images = $helper->upload_image($images, "sales/kit/checklistproduct/".$docCheckProduct->id, 'update');
-        $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
+        // $docCheckProduct->sales_kit_product_id = $post['sales_kit_product'];
         $docCheckProduct->document_checklist_category_id = $post['doc_check_category'];
         $docCheckProduct->content_data  = $dom->saveHTML();
         $dat=$docCheckProduct->save();
@@ -151,15 +151,15 @@ class DocumentChecklistProductController extends Controller
         $post = $request->all();
         $list = [];
 
-        $query = DocumentChecklistProduct::with(['sales_kit_product', 'document_checklist_category']);
+        $query = DocumentChecklistProduct::with(['document_checklist_category']);
         if(isset($post['query']['generalSearch'])) {
-            $skProducts = SalesKitProduct::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
+            // $skProducts = SalesKitProduct::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
             $doccheckCats = DocumentChecklistCategory::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
             $search_ids = [];
-            if(count($skProducts) > 0){
-                foreach($skProducts as $skProduct){ array_push($search_ids, $skProduct->id); }
-                $query = $query->whereIn('sales_kit_product_id', $search_ids);
-            }
+            // if(count($skProducts) > 0){
+            //     foreach($skProducts as $skProduct){ array_push($search_ids, $skProduct->id); }
+            //     $query = $query->whereIn('sales_kit_product_id', $search_ids);
+            // }
             if(count($doccheckCats) > 0){
                 foreach($doccheckCats as $doccheckCat){ array_push($search_ids, $doccheckCat->id); }
                 $query = $query->whereIn('document_checklist_category_id', $search_ids);

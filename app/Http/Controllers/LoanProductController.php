@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator,Config, Helper, Excel, DB, Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\LoanProduct;
 
 class LoanProductController extends Controller
@@ -51,6 +52,7 @@ class LoanProductController extends Controller
         $images = $dom->getElementsByTagName('img');
         $statement = DB::select("show table status like 'loan_products'");
         $id = $statement[0]->Auto_increment;
+        $slug = $this->createSlug($post['name']);
         $helper = new Helper;
         $images = $helper->upload_image($images, "loanproducts/".$id, 'store');
         if($request->hasFile('icon')){
@@ -67,7 +69,7 @@ class LoanProductController extends Controller
                 $filesize=number_format($filesize / 1048576,2);
                 $request->file('icon')->storeAs('public/loanproduct',$fileNameToStore);
                 $process = LoanProduct::create(
-                    ['name' => $post['name'],'icon' =>$fileNameToStore,'description'=>$dom->saveHTML()]
+                    ['name' => $post['name'], 'slug' => $slug, 'icon' =>$fileNameToStore,'description'=>$dom->saveHTML()]
                  );
                  if(! $process){
                     return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -120,6 +122,10 @@ class LoanProductController extends Controller
         ];
         $request->validate($rules);
         $lProduct = LoanProduct::find($id);
+        $slug = $lProduct->slug;
+        if (array_key_exists('name', $post) && $lProduct->name != $post['name']) {
+            $slug = $this->createSlug($post['name'], $id);
+        }
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $content = $request->input('description');
         $dom = new \DOMDocument();
@@ -148,7 +154,7 @@ class LoanProductController extends Controller
         }
         $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $lProduct->icon;
         $process = $lProduct->update(
-            ['name' => $post['name'],'icon' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
+            ['name' => $post['name'], 'slug' => $slug,'icon' =>$fileNameToStore,'content_data'=>$dom->saveHTML()]
         );
         if(! $process){
             return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -220,5 +226,35 @@ class LoanProductController extends Controller
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param $title
+     * @param int $id
+     * @return string
+     */
+    public function createSlug($title, $id = 0)
+    {
+        $slug = Str::slug($title);
+        $allSlugs = $this->getRelatedSlugs($slug, $id);
+
+        if (! $allSlugs->contains('slug', $slug)){
+            return $slug;
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            $newSlug = $slug.'-'.$i;
+            if (! $allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+        return $slug;
+    }
+
+    protected function getRelatedSlugs($slug, $id = 0)
+    {
+        return LoanProduct::select('slug')->where('slug', 'like', $slug.'%')
+            ->where('id', '<>', $id)
+            ->get();
     }
 }

@@ -7,13 +7,13 @@
 				<div class="m-portlet__head">
 					<div class="m-portlet__head-caption">
 						<div class="m-portlet__head-title">
-							<h3 class="m-portlet__head-text"> Document Checklist Products</h3>
+							<h3 class="m-portlet__head-text"> Current Offers</h3>
 						</div>
 					</div>
 					<div class="m-portlet__head-tools">
 						<div class="row">
                             <div class="col-xl-3 order-2 order-xl-1">
-								<a href="{{url('/docCheckProduct/create')}}" border='0'>
+								<a href="{{url('/currentOffer/create')}}" border='0'>
 		                            <button id="sample_editable_1_new" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill"> Add New
 		                                <i class="fa fa-plus"></i>
 		                            </button>
@@ -39,7 +39,7 @@
                 	</div>
                      <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
-                            <div id="docCheckProductData">
+                            <div id="currentOfferData">
                             </div>
                         </div>
                    </div>
@@ -49,14 +49,14 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			table = $('#docCheckProductData').mDatatable( {
+			table = $('#currentOfferData').mDatatable( {
                 data: {
                     type: 'remote',
                     source: {
                       	read: {
                         // sample GET method
 	                        method: 'get',
-	                        url: base_url+'/docCheckProduct/all',
+	                        url: base_url+'/currentOffer/all',
 	                        map: function(raw) {
 	                            // sample data mapping
 	                          	var dataSet = raw;
@@ -80,9 +80,13 @@
               	sortable: true,
 				  
               	"columns": [
-                    // { field: "sales_kit_product.name",title:'Sales Kit Product'},
-                    { field: "document_checklist_category.name",title:'Document Checklist Product'},
-                    { field: "content_data",title:'Content'},
+                    { 
+                        field: "file_path",
+                        title:'File Link',
+                        template: function(row, index, datatable) {	
+                            return '<a href="'+base_url+'/storage/sales/kit/currentoffer/'+row.file_path+'">'+row.file_path+'</a>'; 
+                        }
+                    },
                     { 
               			field: "Actions",
 		                width: 60,
@@ -90,7 +94,7 @@
 		                sortable: false,
 		                overflow: 'visible',
 		                template:function(row,a,i)  {
-		                	var html = '<a href="'+base_url+'/docCheckProduct/edit/'+row.id+'" title="Edit Record" class="dropdown-item"><i class="la la-pencil"></i>Edit Record</a><a href="'+base_url+'/docCheckProduct/delete/'+row.id+'" title="Delete Record" class="dropdown-item"><i class="la la-trash"></i>Delete Record</a></div>';
+		                	var html = '<a href="'+base_url+'/currentOffer/edit/'+row.id+'" title="Edit Record" class="dropdown-item"><i class="la la-pencil"></i>Edit Record</a><a href="'+base_url+'/currentOffer/delete/'+row.id+'" title="Delete Record" class="dropdown-item"><i class="la la-trash"></i>Delete Record</a></div>';
 		                	return '<div class="dropdown ' + (i.getPageSize()-a<=4? 'dropup':'' ) + '"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
                                 <i class="la la-ellipsis-h"></i>\
                             </a>\

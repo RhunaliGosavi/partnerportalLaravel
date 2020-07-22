@@ -130,6 +130,18 @@
 								</span>
 							</a>
 						</li>
+						<li class="m-menu__item  <?php if(preg_match("/\bcurrentOffer\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+							<a href="{{url('currentOffer')}}" class="m-menu__link ">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-title">
+									<span class="m-menu__link-wrap">
+										<span class="m-menu__link-text">Current Offer</span>
+									</span>
+								</span>
+							</a>
+						</li>
 						<li class="m-menu__item  <?php if(preg_match("/\bdocCheckCategory\b/i", $urlString) || preg_match("/\bdocCheckProduct\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 							<a href="javascript:;" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">

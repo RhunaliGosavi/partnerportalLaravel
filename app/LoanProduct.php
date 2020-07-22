@@ -12,8 +12,13 @@ class LoanProduct extends Model
     protected $table = 'loan_products';
 
     protected $fillable = [
-        'name', 'icon', 'description'
+        'name', 'slug', 'icon', 'description'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     // Fetch refered buddies
     public function refered_buddies(){

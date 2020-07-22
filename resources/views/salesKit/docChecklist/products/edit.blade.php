@@ -16,22 +16,6 @@
                 <form class="m-form m-form--fit m-form--label-align-right" action="{{url('docCheckProduct/update/'.$docCheckProduct->id)}}" method="POST">
 					@csrf
 					<div class="m-portlet__body">
-                        <div class="form-group m-form__group row {{ $errors->has('sale_kit_product') ? 'has-danger' : ''}}">
-							<label class="col-3 col-form-label">Sales Kit Product</label>
-							<div class="col-md-4">
-								<select class="form-control" name="sales_kit_product" id="sale_kit_product">
-									<option value="">Select Sales Kit Product</option>
-                                    @foreach ($sales_kit_products as $sale_kit_product)
-                                        <option value="{{ $sale_kit_product->id }}" @if($sale_kit_product['id'] == $docCheckProduct['sales_kit_product_id']) selected @endif>{{ $sale_kit_product->name }}</option>
-                                    @endforeach
-								</select>
-                                @if ($errors->has('sale_kit_product'))
-                                <div class="form-control-feedback">
-                                    {{ $errors->first('sale_kit_product') }}
-                                </div>
-                                @endif
-							</div>
-						</div>
                         <div class="form-group m-form__group row {{ $errors->has('doc_check_category') ? 'has-danger' : ''}}">
 							<label class="col-3 col-form-label">Document Checklist Category</label>
 							<div class="col-md-4">

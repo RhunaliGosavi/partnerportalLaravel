@@ -2,7 +2,7 @@
 @section('title')
     Sales Kit
 @endsection
-@section('content')
+@section('breadcum')
     <section class="page-top">
         <div class="back-btn">
             <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
@@ -18,6 +18,8 @@
             </nav>
         </div>
     </section>
+@endsection
+@section('content')
     <section class="product-sec">
         <div class="row">
             @foreach($loan_products as $loan_product)
@@ -36,8 +38,8 @@
                         </div>
                         </div>
                         <div class="product-box-content">
-                        <p>{{$loan_product->description}} </p>
-                        <a href="{{url('sales/kit/products').'/'.$loan_product->id}}">Know More</a>
+                        <p>{{strlen($loan_product->description) > 160 ? substr($loan_product->description,0,160)."..." : $loan_product->description}} </p>
+                        <a href="{{url('sales/kit/products').'/'.$loan_product->slug}}">Know More</a>
                         </div>
                     </div>
                 </div>

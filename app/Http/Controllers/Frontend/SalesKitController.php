@@ -12,6 +12,7 @@ use App\DsaOnboarding;
 use App\SalesContest;
 use App\CustomerScheme;
 use App\Helpers\calPersonalLoanHelper;
+use App\CurrentOffer;
 use App\MarketingVisualCategory;
 use App\CorporatePresentation;
 
@@ -23,10 +24,12 @@ class SalesKitController extends Controller
         ]);
     }
 
-    public function fetchKitProducts(Request $request, $id) {
+    public function fetchKitProducts(Request $request, $slug) {
+        $loan_product = LoanProduct::where('slug', $slug)->first();
         return view('frontend.salesKit.products', [
-            'products' => SalesKitProduct::with('loan_product')->where('loan_product_id', $id)->get(),
-            'loan_products' => LoanProduct::find($id),
+            'products' => SalesKitProduct::with('loan_product')->where('loan_product_id', $loan_product->id)->get(),
+            'loan_products' => $loan_product,
+            'current_offers' => CurrentOffer::all(),
             'doc_check_categories' => DocumentChecklistCategory::all()
         ]);
     }

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\LoanProduct;
-use App\CustomerScheme;
+use App\CurrentOffer;
 use Illuminate\Support\Facades\Storage;
 
-class CustomerSchemeController extends Controller
+class CurrentOfferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CustomerSchemeController extends Controller
      */
     public function index()
     {
-        return view('salesKit.customerSchemes.index');
+        return view('salesKit.currentOffers.index');
     }
 
     /**
@@ -26,9 +25,7 @@ class CustomerSchemeController extends Controller
      */
     public function create()
     {
-        return view('salesKit.customerSchemes.create', [
-            'loan_products' => LoanProduct::all()
-        ]);
+        return view('salesKit.currentOffers.create');
     }
 
     /**
@@ -43,7 +40,6 @@ class CustomerSchemeController extends Controller
         ini_set('max_execution_time', 0);
         $post = $request->all();
         $rules = [
-            'loan_product' => 'required',
             'file'      => 'required',
         ];
         $request->validate($rules);
@@ -58,9 +54,9 @@ class CustomerSchemeController extends Controller
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $filename = preg_replace('/\s+/', '_',trim($filename));
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $request->file('file')->storeAs('public/sales/kit/marketinginformation/customerscheme',$fileNameToStore);
-                $process = CustomerScheme::create(
-                    ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore]
+                $request->file('file')->storeAs('public/sales/kit/currentoffer',$fileNameToStore);
+                $process = CurrentOffer::create(
+                    ['file_path' =>$fileNameToStore]
                 );
                 if(! $process){
                 return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -70,7 +66,7 @@ class CustomerSchemeController extends Controller
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
         }
-        return redirect('customerScheme')->with('success', 'Customer Scheme added successfully!');
+        return redirect('currentOffer')->with('success', 'Current Offer added successfully!');
     }
 
     /**
@@ -92,10 +88,9 @@ class CustomerSchemeController extends Controller
      */
     public function edit($id)
     {
-        $custScheme = CustomerScheme::find($id);
-        return view('salesKit.customerSchemes.edit', [
-            'loan_products' => LoanProduct::all(),
-            'custScheme' => $custScheme
+        $currentOffer = CurrentOffer::find($id);
+        return view('salesKit.currentOffers.edit', [
+            'currentOffer' => $currentOffer
         ]);
     }
 
@@ -110,9 +105,9 @@ class CustomerSchemeController extends Controller
     {
         $post = $request->all();
         $rules = [
-            'loan_product' => 'required'
+            'file' => 'required'
         ];
-        $custScheme = CustomerScheme::find($id);
+        $currentOffer = CurrentOffer::find($id);
         // if($this->checkIfExist($post)) return redirect('salesProduct')->with('error', 'Loan Product already exist!');
         $fileNameToStore = NULL;
         if($request->hasFile('file')){
@@ -127,20 +122,20 @@ class CustomerSchemeController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $filesize=$request->file('file')->getSize();
                 $filesize=number_format($filesize / 1048576,2);
-                Storage::disk('local')->delete('public/sales/kit/marketinginformation/customerscheme/'.$custScheme->file_path);
-                $request->file('file')->storeAs('public/sales/kit/marketinginformation/customerscheme',$fileNameToStore);
+                Storage::disk('local')->delete('public/sales/kit/currentoffer/'.$currentOffer->file_path);
+                $request->file('file')->storeAs('public/sales/kit/currentoffer',$fileNameToStore);
             }else{
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
         }
-        $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $custScheme->file_path;
-        $process = $custScheme->update(
-            ['loan_product_id' => $post['loan_product'],'file_path' =>$fileNameToStore]
+        $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $currentOffer->file_path;
+        $process = $currentOffer->update(
+            ['file_path' =>$fileNameToStore]
         );
         if(! $process){
-        return redirect()->back()->with('error', 'Failed To Update Data'); 
+            return redirect()->back()->with('error', 'Failed To Update Data'); 
         }
-        return redirect('customerScheme')->with('success', 'Customer Scheme updated successfully!');
+        return redirect('currentOffer')->with('success', 'Current Offer updated successfully!');
     }
 
     /**
@@ -151,52 +146,46 @@ class CustomerSchemeController extends Controller
      */
     public function destroy($id)
     {
-        $custScheme = CustomerScheme::find($id);
-        if($custScheme) {
-            Storage::disk('local')->delete('public/sales/kit/marketinginformation/customerscheme/'.$custScheme->file_path);
-            $custScheme->delete();
-            return redirect('customerScheme')->with('success', 'Customer Scheme deleted successfully!');
+        $currentOffer = CurrentOffer::find($id);
+        if($currentOffer) {
+            Storage::disk('local')->delete('public/sales/kit/currentoffer/'.$currentOffer->file_path);
+            $currentOffer->delete();
+            return redirect('currentOffer')->with('success', 'Current offer deleted successfully!');
         } else {
-            return redirect('customerScheme')->with('error', 'Customer Scheme not deleted successfully!');
+            return redirect('currentOffer')->with('error', 'Current offer not deleted successfully!');
         }
     }
 
-    public function fetchAllSchemes(Request $request)
+    public function fetchAllOffers(Request $request)
     {
         $post = $request->all();
         $list = [];
 
-        $query = CustomerScheme::with('loan_product');
+        $query = CurrentOffer::query();
         if(isset($post['query']['generalSearch'])) {
-            $lProducts = LoanProduct::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
-            if(count($lProducts) > 0){
-                $lProduct_Ids = [];
-                foreach($lProducts as $lProduct){ array_push($lProduct_Ids, $lProduct->id); }
-                $query = $query->whereIn('loan_product_id', $lProduct_Ids);
-            }
             $query = $query->orWhere('file_path', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
         }
-        $custSchemes = $query->get();
-        $custSchemes_count = count($custSchemes);
+        $currentOffers = $query->get();
+        $currentOffers_count = count($currentOffers);
         if(array_key_exists('pagination', $post) && is_array($post['pagination']) && array_key_exists('page', $post['pagination']) && array_key_exists('perpage', $post['pagination']) && !empty($post['pagination']['perpage']) ) {
                 
-            $custSchemes = $query->limit($post['pagination']['perpage'])->offset(($post['pagination']['page'] -1) * $post['pagination']['perpage']);
+            $currentOffers = $query->limit($post['pagination']['perpage'])->offset(($post['pagination']['page'] -1) * $post['pagination']['perpage']);
             if(array_key_exists('sort', $post) && array_key_exists('field', $post['sort']) && array_key_exists('field', $post['sort'])) {
-                $custSchemes = $custSchemes->orderBy($post['sort']['field'],$post['sort']['sort']);
+                $currentOffers = $currentOffers->orderBy($post['sort']['field'],$post['sort']['sort']);
             }
-            $custSchemes = $custSchemes->get()->toArray();
+            $currentOffers = $currentOffers->get()->toArray();
             $list['meta'] = [
                 "page"      => (array_key_exists('page', $post['pagination']))?$post['pagination']['page']:1,
                 "pages"     => (array_key_exists('pages', $post['pagination']))?$post['pagination']['pages']:0,
                 "perpage"   => (array_key_exists('perpage', $post['pagination'])) ? $post['pagination']['perpage']:50,
-                "total"     => $custSchemes_count,
+                "total"     => $currentOffers_count,
                 "sort"      => (array_key_exists('sort', $post)) ? $post['sort']['field']:'',
                 "field"     => (array_key_exists('sort', $post)) ? $post['sort']['sort']:'',
             ];
         } else {
-            $custSchemes = $custSchemes->toArray();
+            $currentOffers = $currentOffers->toArray();
         }
-        $list['data'] = $custSchemes;
+        $list['data'] = $currentOffers;
 
         return json_encode($list);
     }

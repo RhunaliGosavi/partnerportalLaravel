@@ -2,7 +2,7 @@
 @section('title')
     Sales Kit @if($loan_products) {{$loan_products->name}} @endIf
 @endsection
-@section('content')
+@section('breadcum')
     <section class="page-top">
         <div class="back-btn">
             <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
@@ -19,6 +19,8 @@
             </nav>
         </div>
     </section>
+@endsection
+@section('content')
     <section class="page-content-box">
         <div class="tab-sec">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -33,7 +35,7 @@
             <div class="tab-content" id="myTabContent">
                 @if($products)
                     @foreach($products as $count => $product)
-                        @if($product->name !== Config::get('constant')['sales_kit_products']['DOCUMENT_CHECKLIST'])
+                        @if($product->name !== Config::get('constant')['sales_kit_products']['DOCUMENT_CHECKLIST'] && $product->name !== Config::get('constant')['sales_kit_products']['CURRENT_OFFERS'])
                             <div class="tab-pane fade<?php if($count == 0) { echo ' show active'; } ?>" id="tab{{$product->id}}" role="tabpanel" aria-labelledby="tab-name{{$product->id}}">
                                 @if($product->name === Config::get('constant')['sales_kit_products']['PRODUCT_FAQ'])
                                     <div class="faq-search-sec">
@@ -42,6 +44,22 @@
                                     </div>
                                 @endif
                                 {!! $product->content_data !!}
+                            </div>
+                        @endif
+                        @if($product->name !== Config::get('constant')['sales_kit_products']['DOCUMENT_CHECKLIST'] && $product->name == Config::get('constant')['sales_kit_products']['CURRENT_OFFERS'])
+                            <div class="tab-pane fade<?php if($count == 0) { echo ' show active'; } ?>" id="tab{{$product->id}}" role="tabpanel" aria-labelledby="tab-name{{$product->id}}">
+                                <div class="offer-list">
+                                    <ul>
+                                    @foreach($current_offers as $current_offer)
+                                        <li>
+                                            <div class="list-box">
+                                                <a href="{{'/storage/sales/kit/currentoffer/'.$current_offer->file_path}}" download="{{'/storage/salesKit/currentoffer/'.$current_offer->file_path}}">Download {{$current_offer->file_path}}</a>
+                                                <img src="{{url('/assets_frontend/images/pdf-icon.svg')}}" class="icon">
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         @endif
                         @if($product->name === Config::get('constant')['sales_kit_products']['DOCUMENT_CHECKLIST'])

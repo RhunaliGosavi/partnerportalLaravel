@@ -13,13 +13,14 @@ class DocumentChecklistProduct extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'sales_kit_product_id', 'document_checklist_category_id', 'content_data'
+        // 'sales_kit_product_id', 
+        'document_checklist_category_id', 'content_data'
     ];
 
     // Fetch sales kit product
-    public function sales_kit_product(){
-        return $this->belongsTo('App\SalesKitProduct','sales_kit_product_id');
-    }
+    // public function sales_kit_product(){
+    //     return $this->belongsTo('App\SalesKitProduct','sales_kit_product_id');
+    // }
 
     // Fetch document checklist category
     public function document_checklist_category(){

@@ -8,6 +8,6 @@ return [
 	'sales_kit_products' => [
 		'DOCUMENT_CHECKLIST' => 'Document Checklist',
 		'PRODUCT_FAQ' => 'Product FAQ',
-		'CURRENT OFFERS' => 'Current Offers'
+		'CURRENT_OFFERS' => 'Current Offers'
 	]
 ];
