@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<head>
+    <link href="{{url('assets/css/summernote.min.css')}}" rel="stylesheet"> 
+</head>
 @section('content')
     <div class="row">
 		<div class="col-md-12">
@@ -11,25 +13,9 @@
 						</div>
 					</div>
 				</div>
-                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('marketingVisuals/store')}}" method="POST" enctype="multipart/form-data">
+                <form class="m-form m-form--fit m-form--label-align-right" action="{{url('marketingVisuals/store')}}" method="POST">
 					@csrf
 					<div class="m-portlet__body">
-                        <div class="form-group m-form__group row {{ $errors->has('loan_product') ? 'has-danger' : ''}}">
-							<label class="col-3 col-form-label">Loan Product</label>
-							<div class="col-md-4">
-								<select class="form-control" name="loan_product" id="loan_product">
-									<option value="">Select Loan Product</option>
-                                    @foreach ($loan_products as $loan_product)
-                                        <option value="{{ $loan_product->id }}" @if(old('loan_product') == $loan_product['id']) selected @endif>{{ $loan_product->name }}</option>
-                                    @endforeach
-								</select>
-                                @if ($errors->has('loan_product'))
-                                <div class="form-control-feedback">
-                                    {{ $errors->first('loan_product') }}
-                                </div>
-                                @endif
-							</div>
-						</div>
                         <div class="form-group m-form__group row {{ $errors->has('visual_category') ? 'has-danger' : ''}}">
 							<label class="col-3 col-form-label">Visual Category</label>
 							<div class="col-md-4">
@@ -46,13 +32,13 @@
                                 @endif
 							</div>
 						</div>
-                        <div class="form-group m-form__group row {{ $errors->has('file') ? 'has-danger' : ''}}">
-                            <label class="col-3 col-form-label">Select File</label>
-                            <div class="col-md-4">
-                                <input type="file" name="file"  id="file" value="{{old('file')}}" class="form-control">
-                                @if ($errors->has('file'))
+						<div class="form-group m-form__group row {{ $errors->has('content') ? 'has-danger' : ''}}">
+                            <label class="col-3 col-form-label">Content</label>
+                            <div class="col-md-9">
+                                <textarea name="content" id="ckeditor-content" placeholder="Content" value="{{old('content')}}" class="form-control summernote">{{old('content')}}</textarea>
+                                @if ($errors->has('content'))
                                 <div class="form-control-feedback">
-                                    {{ $errors->first('file') }}
+                                    {{ $errors->first('content') }}
                                 </div>
                                 @endif
                             </div>

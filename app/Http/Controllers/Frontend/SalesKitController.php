@@ -35,7 +35,7 @@ class SalesKitController extends Controller
     }
 
     public function fetchDocChecklistProduct(Request $request) {
-        $checklistProducts = DocumentChecklistProduct::with(['sales_kit_product', 'document_checklist_category'])
+        $checklistProducts = DocumentChecklistProduct::with(['document_checklist_category'])
             ->where('document_checklist_category_id', $request->id)->get();
         return ($checklistProducts);
     }

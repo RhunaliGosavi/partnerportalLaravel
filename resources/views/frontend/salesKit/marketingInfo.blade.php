@@ -2,10 +2,10 @@
 @section('title')
     Sales Kit Marketing Information
 @endsection
-@section('content')
+@section('breadcum')
     <section class="page-top">
         <div class="back-btn">
-            <button class="btn"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></button>
+            <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
         </div>
         <div class="page-heading">
             <h1>Marketing Information</h1>
@@ -18,6 +18,8 @@
             </nav>
         </div>
     </section>
+@endsection
+@section('content')
     <section class="page-content-box">
         <div class="tab-sec">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -140,7 +142,7 @@
                                         @foreach($visual_categories as $count => $visual_category)
                                         @foreach($visual_category->marketing_visual_category as $visuals)
                                             <div class="tab-pane fade <?php if($count == 0) { echo ' show active'; } ?>" id="visual{{$visual_category->id}}" role="tabpanel" aria-labelledby="visual{{$visual_category->id}}-tab">
-                                                {!! $visuals->file_path !!}
+                                                {!! $visuals->content_data !!}
                                             </div>
                                         @endforeach
                                         @endforeach
@@ -237,7 +239,7 @@
 
                             for (var j = 0; j < res[i].marketing_visual_category.length; j++) {
                                 tabItems.push('<div class="tab-pane fade '+ tabActiveClass + '"          id="visual'+res[i].id+'" role="tabpanel" aria-labelledby="visual'+res[i].id+'-tab">\
-                                '+res[i].marketing_visual_category[j].file_path+'</div>');
+                                '+res[i].marketing_visual_category[j].content_data+'</div>');
                             }
                         }
                         $('.nav-pills').html(tabs.join(''));

@@ -7,6 +7,7 @@ use App\MarketingVisualCategory;
 use App\MarketingVisual;
 use App\LoanProduct;
 use Illuminate\Support\Facades\Storage;
+use DB, Helper;
 
 class MarketingVisualsController extends Controller
 {
@@ -28,7 +29,7 @@ class MarketingVisualsController extends Controller
     public function create()
     {
         return view('salesKit.visualCategory.visuals.create', [
-            'loan_products' => LoanProduct::all(),
+            // 'loan_products' => LoanProduct::all(),
             'visual_categories' => MarketingVisualCategory::all()
         ]);
     }
@@ -43,35 +44,24 @@ class MarketingVisualsController extends Controller
     {
         $post = $request->all();
         $rules = [
-            'loan_product' => 'required',
+            // 'loan_product' => 'required',
             'visual_category' => 'required',
-            'file' => 'required'
+            'content' => 'required'
+            // 'file' => 'required'
         ];
         $request->validate($rules);
-        if($request->hasFile('file')){
-            $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
-            $result = array($request->file('file')->getClientOriginalExtension());
-            if(in_array($result[0],$extensions)){
-                $title=$request->input('title');
-                $filenameWithExt = $request->file('file')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $filename = preg_replace('/\s+/', '_',trim($filename));
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $filesize=$request->file('file')->getSize();
-                $filesize=number_format($filesize / 1048576,2);
-                $request->file('file')->storeAs('public/sales/kit/marketinginformation/visuals',$fileNameToStore);
-                $process = MarketingVisual::create(
-                    ['loan_product_id' => $post['loan_product'],'marketing_visual_category_id' => $post['visual_category'],'file_path' =>$fileNameToStore]
-                 );
-                 if(! $process){
-                    return redirect()->back()->with('error', 'Failed To Update Data'); 
-                 }
-
-            }else{
-                return redirect()->back()->with('error', 'File format is invalid.');
-            }
-        }
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $statement = DB::select("show table status like 'sales_kit_products'");
+        $id = $statement[0]->Auto_increment;
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "sales/kit/marketinginformation/visuals/".$id, 'store');
+        $visuals = new MarketingVisual;
+        $visuals->marketing_visual_category_id = $post['visual_category'];
+        $visuals->content_data  = $dom->saveHTML();
+        $visuals->save();
         return redirect('marketingVisuals')->with('success', 'Marketing visual added successfully!');
     }
 
@@ -96,7 +86,7 @@ class MarketingVisualsController extends Controller
     {
         $marketingVisual = MarketingVisual::find($id);
         return view('salesKit.visualCategory.visuals.edit', [
-            'loan_products' => LoanProduct::all(),
+            // 'loan_products' => LoanProduct::all(),
             'visual_categories' => MarketingVisualCategory::all(),
             'marketingVisual' => $marketingVisual
         ]);
@@ -113,37 +103,21 @@ class MarketingVisualsController extends Controller
     {
         $post = $request->all();
         $rules = [
-            'loan_product' => 'required',
+            // 'loan_product' => 'required',
             'visual_category' => 'required',
-            'file' => 'required'
+            // 'file' => 'required',
+            'content' => 'required'
         ];
-        $marketingVisual = MarketingVisual::find($id);
-        $fileNameToStore = NULL;
-        if($request->hasFile('file')){
-            $extensions = array("pdf","doc","docx","xlsx","xls","ppt");
-            $result = array($request->file('file')->getClientOriginalExtension());
-            if(in_array($result[0],$extensions)){
-                $title=$request->input('title');
-                $filenameWithExt = $request->file('file')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $filename = preg_replace('/\s+/', '_',trim($filename));
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $filesize=$request->file('file')->getSize();
-                $filesize=number_format($filesize / 1048576,2);
-                Storage::disk('local')->delete('public/sales/kit/marketinginformation/visuals/'.$marketingVisual->file_path);
-                $request->file('file')->storeAs('public/sales/kit/marketinginformation/visuals',$fileNameToStore);
-            }else{
-                return redirect()->back()->with('error', 'File format is invalid.');
-            }
-        }
-        $fileNameToStore = ($fileNameToStore) ? $fileNameToStore : $marketingVisual->file_path;
-        $process = $marketingVisual->update(
-            ['loan_product_id' => $post['loan_product'],'marketing_visual_category_id' => $post['visual_category'],'file_path' =>$fileNameToStore]
-        );
-        if(! $process){
-            return redirect()->back()->with('error', 'Failed To Update Data'); 
-        }
+        $visual = MarketingVisual::find($id);
+        $content = $request->input('content');
+        $dom = new \DOMDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        $helper = new Helper;
+        $images = $helper->upload_image($images, "sales/kit/marketinginformation/visuals/".$visual->id, 'update');
+        $visual->marketing_visual_category_id = $post['visual_category'];
+        $visual->content_data  = $dom->saveHTML();
+        $visual->save();
         return redirect('marketingVisuals')->with('success', 'Marketing visual updated successfully!');
     }
 
@@ -155,10 +129,12 @@ class MarketingVisualsController extends Controller
      */
     public function destroy($id)
     {
-        $marketingVisual = MarketingVisual::find($id);
-        if($marketingVisual) {
-            Storage::disk('local')->delete('public/sales/kit/marketinginformation/visuals/'.$marketingVisual->file_path);
-            $marketingVisual->delete();
+        $visual = MarketingVisual::find($id);
+        if($visual) {
+            $directory = "sales/kit/marketinginformation/visuals/".$visual->id;
+            $files = Storage::allFiles('public/'.$directory);
+            Storage::delete($files);
+            $visual->delete();
             return redirect('marketingVisuals')->with('success', 'Marketing visual deleted successfully!');
         } else {
             return redirect('marketingVisuals')->with('error', 'Marketing visual not deleted successfully!');
@@ -170,20 +146,20 @@ class MarketingVisualsController extends Controller
         $post = $request->all();
         $list = [];
 
-        $query = MarketingVisual::with(['loan_product', 'marketing_visual_category']);
+        $query = MarketingVisual::with(['marketing_visual_category']);
         if(isset($post['query']['generalSearch'])) {
-            $lProducts = LoanProduct::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
+            // $lProducts = LoanProduct::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
             $visualcats = MarketingVisualCategory::select('id')->where('name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")->get();
             $search_ids = [];
-            if(count($lProducts) > 0){
-                foreach($lProducts as $lProduct){ array_push($search_ids, $lProduct->id); }
-                $query = $query->whereIn('loan_product_id', $search_ids);
-            }
+            // if(count($lProducts) > 0){
+            //     foreach($lProducts as $lProduct){ array_push($search_ids, $lProduct->id); }
+            //     $query = $query->whereIn('loan_product_id', $search_ids);
+            // }
             if(count($visualcats) > 0){
                 foreach($visualcats as $visualcat){ array_push($search_ids, $visualcat->id); }
                 $query = $query->whereIn('marketing_visual_category_id', $search_ids);
             }
-            $query = $query->orWhere('file_path', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
+            $query = $query->orWhere('content_data', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
         }
         $marketingVisuals = $query->get();
         $marketingVisuals_count = count($marketingVisuals);

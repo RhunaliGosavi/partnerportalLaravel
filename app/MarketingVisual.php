@@ -13,13 +13,14 @@ class MarketingVisual extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'loan_product_id', 'marketing_visual_category_id', 'file_path'
+        // 'loan_product_id', 
+        'marketing_visual_category_id', 'content_data'
     ];
 
     // Fetch loan product
-    public function loan_product(){
-        return $this->belongsTo('App\LoanProduct','loan_product_id');
-    }
+    // public function loan_product(){
+    //     return $this->belongsTo('App\LoanProduct','loan_product_id');
+    // }
 
     // Fetch marketing visual category
     public function marketing_visual_category(){

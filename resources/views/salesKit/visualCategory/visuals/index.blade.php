@@ -80,15 +80,16 @@
               	sortable: true,
 				  
               	"columns": [
-                    { field: "loan_product.name",title:'Loan Product'},
+                    // { field: "loan_product.name",title:'Loan Product'},
                     { field: "marketing_visual_category.name",title:'Visual Category'},
-                    { 
-                        field: "file_path",
-                        title:'File Link',
-                        template: function(row, index, datatable) {	
-                            return '<a href="'+base_url+'/storage/sales/kit/marketinginformation/visuals/'+row.file_path+'">'+row.file_path+'</a>'; 
-                        }
-                    },
+					{ field: "content_data",title:'Content'},
+                    // { 
+                    //     field: "file_path",
+                    //     title:'File Link',
+                    //     template: function(row, index, datatable) {	
+                    //         return '<a href="'+base_url+'/storage/sales/kit/marketinginformation/visuals/'+row.file_path+'">'+row.file_path+'</a>'; 
+                    //     }
+                    // },
                     { 
               			field: "Actions",
 		                width: 60,
