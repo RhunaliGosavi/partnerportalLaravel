@@ -217,7 +217,7 @@ $( document ).ready(function() {
         if(type=='decline'){
             redirUrl='/dashboard/declinedcases/';
         }
-        if(type="disbursed"){
+        if(type=="disbursed"){
             redirUrl='/dashboard/disbursedcases/';
         }
         window.location = base_url+redirUrl + start_date+"/"+end_date;
