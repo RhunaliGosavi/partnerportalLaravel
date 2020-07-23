@@ -34,7 +34,7 @@ a.btn.document-button:focus {
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="{{url('sales/kit/DsaOnboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
               </ol>
             </nav>
           </div>

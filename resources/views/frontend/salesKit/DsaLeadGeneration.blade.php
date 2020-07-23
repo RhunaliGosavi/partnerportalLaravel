@@ -14,7 +14,7 @@
         <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
         <li class="breadcrumb-item"><a href="#"> DSA Onboarding Details</a></li>
-        <li class="breadcrumb-item"><a class="text-dark" href="{{url('sales/kit/DSALeadGeneration')}}">DSA Lead Generation</a></li>
+        <li class="breadcrumb-item"><a class="text-dark" href="{{url('sales/kit/dsaleadgeneration')}}">DSA Lead Generation</a></li>
       </ol>
     </nav>
   </div>
