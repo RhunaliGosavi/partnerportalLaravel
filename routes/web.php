@@ -51,8 +51,27 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
     Route::get('employee/helpdesk', 'Frontend\EmployeeHelpDeskController@index');
     Route::get('search', 'Frontend\EmployeeHelpDeskController@search');
     Route::get('sales/kit/calculator','Frontend\SalesKitController@onScreenCalculator');
+
+    /****eligibility calculator****/
     Route::post('sales/kit/get_personal_loan','Frontend\SalesKitController@getPersonalLoan');
     Route::post('sales/kit/get_selected_view','Frontend\SalesKitController@getSelectedview');
+    Route::post('sales/kit/get_loan_against_property','Frontend\SalesKitController@getLoanAgainstProperty');
+    Route::post('sales/kit/get_consumer_product_finance','Frontend\SalesKitController@getConsumerProductFinance');
+    /*****common calculator****/
+    Route::post('sales/kit/get_part_payment','Frontend\SalesKitController@getPartPayment');
+    Route::post('sales/kit/get_repricing','Frontend\SalesKitController@getRepricing');
+    Route::post('sales/kit/get_balance_transfer','Frontend\SalesKitController@balanceTransfer');
+    Route::post('sales/kit/get_area_conversion','Frontend\SalesKitController@areaConversion');
+    Route::post('sales/kit/get_emi_calculator','Frontend\SalesKitController@emiCalculator');
+
+    /*******Incentive Calculator*****/
+    Route::post('sales/kit/get_collection_incentive','Frontend\SalesKitController@getCollectionIncentive');
+    Route::post('sales/kit/get_lap_incentive','Frontend\SalesKitController@getLapIncentive');
+
+
+
+
+
 
 	Route::get('verify/pan', 'Frontend\VerifyDetailsController@panVerify');
 	Route::get('verify/bank/account', 'Frontend\VerifyDetailsController@bankAccountVerify');
