@@ -5,7 +5,7 @@
 @section('breadcum')
 <section class="page-top">
   <div class="back-btn">
-    <button class="btn"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></button>
+    <a class="btn" href="{{ url()->previous() }}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
   </div>
   <div class="page-heading">
     <h1>DSA Lead Generation</h1>
@@ -13,7 +13,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
-        <li class="breadcrumb-item"><a href="#"> DSA Onboarding Details</a></li>
+        <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}"> DSA Onboarding Details</a></li>
         <li class="breadcrumb-item"><a class="text-dark" href="{{url('sales/kit/dsaleadgeneration')}}">DSA Lead Generation</a></li>
       </ol>
     </nav>
