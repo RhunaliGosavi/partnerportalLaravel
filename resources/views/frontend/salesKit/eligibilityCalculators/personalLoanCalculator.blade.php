@@ -2,7 +2,7 @@
 <div class="col-md-7 border-right">
     <div class="calculate_slider">
         <div class="slider_bar">
-            <p>Monthly Income (in INR)</p>
+            <p>personal loan:Monthly Income (in INR)</p>
             <input type="range" min="50000" max="1500000" value="50000" class="slider" id="myRange1" onchange="getPresonalLoan()">
         </div>
         <span id="slider_range"></span>
@@ -23,23 +23,14 @@
     </div>
     <div class="calculate_slider">
         <div class="slider_bar">
-            <p>Rate of Interest (in %)</p>
-            <input type="range" min="12" max="24" value="12"  step="0.5" class="slider" id="myRange5" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range4"></span>
-    </div>
-
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Property Value</p>
+            <p>Expected Loan Amount (in INR)</p>
             <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange4" onchange="getPresonalLoan()">
         </div>
         <span id="slider_range3"></span>
     </div>
-
     <div class="calculate_slider">
         <div class="slider_bar">
-            <p>Expected Loan Amount (in INR)</p>
+            <p>Expected Rate of Interest (in %)</p>
             <input type="range" min="12" max="24" value="12"  step="0.5" class="slider" id="myRange5" onchange="getPresonalLoan()">
         </div>
         <span id="slider_range4"></span>

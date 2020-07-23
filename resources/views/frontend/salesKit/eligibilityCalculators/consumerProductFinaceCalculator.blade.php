@@ -2,7 +2,7 @@
 <div class="col-md-7 border-right">
     <div class="calculate_slider">
         <div class="slider_bar">
-            <p>Monthly Income (in INR)</p>
+            <p>Consumer Finance:Monthly Income (in INR)</p>
             <input type="range" min="50000" max="1500000" value="50000" class="slider" id="myRange1" onchange="getPresonalLoan()">
         </div>
         <span id="slider_range"></span>

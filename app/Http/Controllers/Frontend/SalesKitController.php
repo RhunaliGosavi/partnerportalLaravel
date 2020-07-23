@@ -93,14 +93,36 @@ class SalesKitController extends Controller
         $type=$request->input('type');
        switch ($type) {
             case 'personal_loan':
-               $view=view('frontend.salesKit.personalLoanCalculator');
+               $view=view('frontend.salesKit.eligibilityCalculators.personalLoanCalculator');
                break;
             case 'loan_against_property':
-                $view=view('frontend.salesKit.loanAgainstProperty');
+                $view=view('frontend.salesKit.eligibilityCalculators.loanAgainstPropertyCalculator');
                 break;
             case 'consumer_product_finance':
-                $view=view('frontend.salesKit.consumerProductFinace');
+                $view=view('frontend.salesKit.eligibilityCalculators.consumerProductFinaceCalculator');
                 break;
+            case 'part_payment':
+                $view=view('frontend.salesKit.commonCalculators.partPaymentCalculator');
+                break;
+            case 'repricing':
+                $view=view('frontend.salesKit.commonCalculators.repricingCalculator');
+                break;
+            case 'balance_transfer':
+                $view=view('frontend.salesKit.commonCalculators.balanceTransferCalculator');
+                break;
+            case 'area_conversion':
+                $view=view('frontend.salesKit.commonCalculators.areaConversionCalculator');
+                break;
+            case 'emi':
+                $view=view('frontend.salesKit.commonCalculators.emiCalculator');
+                break;
+            case 'collection_incentive':
+                $view=view('frontend.salesKit.incentivecalculator.collectionIncentiveCalculator');
+                break;
+            case 'lap_incentive':
+                $view=view('frontend.salesKit.incentivecalculator.lapIncentCalculator');
+                break;
+
 
 
 
