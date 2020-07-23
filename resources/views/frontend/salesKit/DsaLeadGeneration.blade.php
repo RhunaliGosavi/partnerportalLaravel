@@ -22,230 +22,409 @@
 @endsection
 @section('content')
 <section class="page-content-box">
-    <div class="application-status dsa-lead-generation">
-        <h2 class="mb-3">Bank Account Details</h2>
-        <form>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="accNum">Bank Account Number</label>
-                        <input type="number" class="form-control" placeholder="Enter Account Number" id="accNum" name="bank_acc_number">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="ifsc">IFSC Code</label>
-                        <input type="number" class="form-control" placeholder="Enter IFSC Code" id="ifsc" name="ifsc_code">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BankName">Bank Name</label>
-                        <span class="custome-select" id="BankName">
-                            <select name="bank_name">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BranchName">Branch Name</label>
-                        <span class="custome-select" id="BranchName">
-                            <select name="branch_name">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="upi">UPI ID</label>
-                        <input type="number" class="form-control" placeholder="Enter UPI ID" id="upi" name="upi_id">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="dsa-verify">
-                        <a href="">Verify Details</a>
-                        <span style="display: none">Verified Sucessfully</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="application-status dsa-lead-generation">
-        <h2 class="mb-3">Personal Information</h2>
-        <form>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="accNum">Name</label>
-                        <input type="number" class="form-control" placeholder="Enter Account Number" id="name" name="name">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="ifsc">Mobile Number</label>
-                        <input type="number" class="form-control" placeholder="Enter Mobile Number" id="mobile_number" name="mobile_number">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="datepicker1">Date of birth</label>
-                        <input type="text" id="datepicker1" class="form-control input-group date" data-date-format="mm-dd-yyyy" name="dob">
-                        <img src="{{url('assets_frontend/images/calendar.svg')}}" class="img-fluid calender" alt="calender" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BranchName">Email ID</label>
-                        <input type="number" class="form-control" placeholder="Enter Email Id" id="email" name="email">       
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="upi">Gender</label>
-                        <span class="custome-select" id="BranchName" name="gender">
-                            <select>
-                              <option>Male</option>
-                              <option>Female</option>
-                              <option>Other</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="application-status dsa-lead-generation">
-        <h2 class="mb-3">Address Information</h2>
-        <form>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="accNum">Type of Address</label>
-                        <span class="custome-select" id="BankName">
-                            <select>
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="ifsc">Address Line 1</label>
-                        <input type="text" class="form-control" placeholder="Enter Address Line 1" id="address1" name="address_line1">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BankName">Address Line 2</label>
-                        <input type="text" class="form-control" placeholder="Enter Address Line 2" id="address2" name="address_line2">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BranchName">Pin Code</label>
-                        <input type="text" class="form-control" placeholder="Enter Pin Code" id="pin_code" name="pincode">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="upi">City</label>
-                        <input type="text" class="form-control" placeholder="Enter City" id="city" name="city">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="upi">State</label>
-                        <input type="text" class="form-control" placeholder="Enter State" id="state" name="state">
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="application-status dsa-lead-generation">
-        <h2 class="mb-3">Agency Information</h2>
-        <form>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="accNum">Agency Name</label>
-                        <input type="text" class="form-control" placeholder="Enter Agency Name" id="agencyName" name="agency_name">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="ifsc">GST Number</label>
-                        <input type="text" class="form-control" placeholder="Enter GST Number" id="gst" name="gst_number">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BankName">Official Email ID</label>
-                        <input type="text" class="form-control" placeholder="Enter Email Id" id="official_email" name="official_email">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="BranchName">Official Mobile Number</label>
-                        <input type="text" class="form-control" placeholder="Enter Mobile Number" id="official_mobile" name="official_mobile_number">
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="application-status dsa-lead-generation">
-        <h2 class="mb-3">Document Upload</h2>
-        
-        <div>
-            <div class="row" id="files">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="import_upload">
-                            <input type="file" name="file1" id="file" class="input-file">
-                            <label for="file" class="btn btn-tertiary js-labelFile">
-                                <span class="js-fileName">
-                                    
-                                </span>
-                                <img src="{{url('assets_frontend/images/upload.png')}}" class="img-fluid upload-file" alt="add" />
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="import_upload">
-                            <input type="file" name="file2" id="file2" class="input-file2">
-                            <label for="file2" class="btn btn-tertiary js-labelFile2">
-                                <span class="js-fileName2">
-                                    
-                                </span>
-                                <img src="{{url('assets_frontend/images/upload.png')}}" class="img-fluid upload-file" alt="add" />
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1">
+    <form action="{{url('sales/kit/dsaleadgeneration')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="application-status dsa-lead-generation">
+            <h2 class="mb-3">Bank Account Details</h2>
+            <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <img src="{{url('assets_frontend/images/close.png')}}" class="img-fluid add-field" alt="add" />
+                            <label for="accNum">Bank Account Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Account Number" id="accNum" name="bank_acc_number" value="{{old('bank_acc_number')}}">
+                            @if ($errors->has('bank_acc_number'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('bank_acc_number') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <button type="button" class="btn btn-upload m-0">Upload</button>
+                            <label for="ifsc">IFSC Code</label>
+                            <input type="text" class="form-control" placeholder="Enter IFSC Code" id="ifsc" name="ifsc_code" value="{{old('ifsc_code')}}">
+                            @if ($errors->has('ifsc_code'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('ifsc_code') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BankName">Bank Name</label>
+                            <!-- <span class="custome-select" id="BankName">
+                                <select name="bank_name">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                </select>
+                            </span> -->
+                            <input type="text" class="form-control" placeholder="Enter Bank Name" id="BankName" name="bank_name" value="Axis Bank" readonly>
+                            @if ($errors->has('bank_name'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('bank_name') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BranchName">Branch Name</label>
+                            <!-- <span class="custome-select" id="BranchName">
+                                <select name="branch_name">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                </select>
+                            </span> -->
+                            <input type="text" class="form-control" placeholder="Enter Banch Name" id="BranchName" name="branch_name" value="Mumbai" readonly>
+                            @if ($errors->has('branch_name'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('branch_name') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="upi">UPI ID</label>
+                            <input type="text" class="form-control" placeholder="Enter UPI ID" id="upi" name="upi_id" value="{{old('upi_id')}}">
+                            @if ($errors->has('upi_id'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('upi_id') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dsa-verify">
+                            <a href="" id="verify_bank_details">Verify Details</a>
+                            <span class="verify_bank_details" style="display: none">Verified Sucessfully</span>
                         </div>
                     </div>
                 </div>
+            <!-- </form> -->
+        </div>
+        <div class="application-status dsa-lead-generation">
+            <h2 class="mb-3">Personal Information</h2>
+            <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="accNum">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Your Name" id="name" name="name" value="{{old('name')}}">
+                            @if ($errors->has('name'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ifsc">Mobile Number</label>
+                            <input type="number" class="form-control" placeholder="Enter Mobile Number" id="mobile_number" name="mobile_number" value="{{old('mobile_number')}}">
+                            @if ($errors->has('mobile_number'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('mobile_number') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datepicker1">Date of birth</label>
+                            <input type="text" id="datepicker1" class="form-control input-group date" data-date-format="mm-dd-yyyy" name="dob" value="{{old('dob')}}">
+                            <img src="{{url('assets_frontend/images/calendar.svg')}}" class="img-fluid calender" alt="calender" />
+                            @if ($errors->has('dob'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('dob') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BranchName">Email ID</label>
+                            <input type="text" class="form-control" placeholder="Enter Email Id" id="email" name="email" value="{{old('email')}}">  
+                            @if ($errors->has('email'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif     
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="upi">Gender</label>
+                            <span class="custome-select">
+                                <select id="gender" name="gender">
+                                    <option value="Male" @if(old('gender') == 'Male') selected @endif>Male</option>
+                                    <option value="Female" @if(old('gender') == 'Female') selected @endif>Female</option>
+                                    <option value="Other" @if(old('gender') == 'Other') selected @endif>Other</option>
+                                </select>
+                            </span>
+                            @if ($errors->has('gender'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('gender') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="upi">PAN Number</label>
+                            <input type="text" class="form-control" placeholder="Enter PAN Number" id="pan_number" name="pan_number" value="{{old('pan_number')}}">
+                            @if ($errors->has('pan_number'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('pan_number') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dsa-verify">
+                            <a href="" id="verify_pan">Verify PAN</a>
+                            <span class="verify_pan" style="display: none">Verified Sucessfully</span>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div class="application-status dsa-lead-generation">
+            <h2 class="mb-3">Address Information</h2>
+            <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="accNum">Type of Address</label>
+                            <span class="custome-select">
+                                <select id="address_type" name="address_type">
+                                <option value="Office" @if(old('address_type') == 'Office') selected @endif>Office</option>
+                                <option value="Home" @if(old('address_type') == 'Home') selected @endif>Home</option>
+                                </select>
+                            </span>
+                            @if ($errors->has('address_type'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('address_type') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ifsc">Address Line 1</label>
+                            <input type="text" class="form-control" placeholder="Enter Address Line 1" id="address1" name="address_line1" value="{{old('address_line1')}}">
+                            @if ($errors->has('address_line1'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('address_line1') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BankName">Address Line 2</label>
+                            <input type="text" class="form-control" placeholder="Enter Address Line 2" id="address2" name="address_line2" value="{{old('address_line2')}}">
+                            @if ($errors->has('address_line2'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('address_line2') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BranchName">Pin Code</label>
+                            <input type="text" class="form-control" placeholder="Enter Pin Code" id="pin_code" name="pincode" value="{{old('pincode')}}">
+                            @if ($errors->has('pincode'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('pincode') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="upi">City</label>
+                            <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" value="Mumbai" readonly>
+                            @if ($errors->has('city'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('city') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="upi">State</label>
+                            <input type="text" class="form-control" placeholder="Enter State" id="state" name="state" value="Maharashtra" readonly>
+                            @if ($errors->has('state'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('state') }}
+                                </div>
+                            @endif 
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div class="application-status dsa-lead-generation">
+            <h2 class="mb-3">Agency Information</h2>
+            <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="accNum">Agency Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Agency Name" id="agencyName" name="agency_name" value="{{old('agency_name')}}">
+                            @if ($errors->has('agency_name'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('agency_name') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BankName">Official Email ID</label>
+                            <input type="text" class="form-control" placeholder="Enter Email Id" id="official_email" name="official_email" value="{{old('official_email')}}">
+                            @if ($errors->has('official_email'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('official_email') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BranchName">Official Mobile Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Mobile Number" id="official_mobile" name="official_mobile_number" value="{{old('official_mobile_number')}}">
+                            @if ($errors->has('official_mobile_number'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('official_mobile_number') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ifsc">GST Number</label>
+                            <input type="text" class="form-control" placeholder="Enter GST Number" id="gst" name="gst_number" value="{{old('gst_number')}}">
+                            @if ($errors->has('gst_number'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('gst_number') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dsa-verify">
+                            <a href="#" id="verify_gst_number">Verify Details</a>
+                            <span class="verify_gst_number" style="display: none">Verified Sucessfully</span>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div class="application-status dsa-lead-generation">
+            <h2 class="mb-3">Address Proof Details</h2>
+            <!-- <h2 class="mb-3">Document Upload</h2> -->
+            
+            <div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <!-- <label for="accNum">Address Proof Type</label> -->
+                            <span class="custome-select">
+                                <select id="address_proof_type" name="address_proof_type">
+                                    <option value="">Select Address Proof Type</option>
+                                    <option value="Adhar Card" @if(old('address_proof_type') == 'Adhar Card') selected @endif>Adhar Card</option>
+                                    <option value="Voter Card" @if(old('address_proof_type') == 'Voter Card') selected @endif>Voter Card</option>
+                                    <option value="Passport" @if(old('address_proof_type') == 'Passport') selected @endif>Passport</option>
+                                </select>
+                                @if ($errors->has('address_proof_type'))
+                                    <div class="form-control-feedback">
+                                        {{ $errors->first('address_proof_type') }}
+                                    </div>
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="address_proof_doc" name="address_proof_doc">
+                                <label class="custom-file-label" for="customFile">Address Proof</label>
+                                </div>
+                                @if ($errors->has('address_proof_doc'))
+                                    <div class="form-control-feedback">
+                                        {{ $errors->first('address_proof_doc') }}
+                                    </div>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="pan_card_doc" name="pan_card_doc">
+                                <label class="custom-file-label" for="customFile">Upload PAN Card Here</label>
+                                </div>
+                                @if ($errors->has('pan_card_doc'))
+                                    <div class="form-control-feedback">
+                                        {{ $errors->first('pan_card_doc') }}
+                                    </div>
+                                @endif
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row" id="files">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="import_upload">
+                                <input type="file" name="file1" id="file" class="input-file">
+                                <label for="file" class="btn btn-tertiary js-labelFile">
+                                    <span class="js-fileName">
+                                        
+                                    </span>
+                                    <img src="{{url('assets_frontend/images/upload.png')}}" class="img-fluid upload-file" alt="add" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="import_upload">
+                                <input type="file" name="file2" id="file2" class="input-file2">
+                                <label for="file2" class="btn btn-tertiary js-labelFile2">
+                                    <span class="js-fileName2">
+                                        
+                                    </span>
+                                    <img src="{{url('assets_frontend/images/upload.png')}}" class="img-fluid upload-file" alt="add" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                            <div class="form-group">
+                                <img src="{{url('assets_frontend/images/close.png')}}" class="img-fluid add-field" alt="add" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-upload m-0">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <hr>
+            <div class="form_btn">
+                <button type="submit" class="btn btn-primary btn-search">Submit</button>
+                <!-- <button type="reset" class="btn btn-primary btn-clear">Clear</button> -->
             </div>
         </div>
-    </div>
+    </form>
 </section> 
 <script type="text/javascript">
     $(function () {
@@ -282,5 +461,69 @@
         });
     
     })();
+
+    $("#verify_pan").on("click", function(event){
+        event.preventDefault();
+        var pan_number = $("input[name=pan_number]").val();
+        $.ajax({
+            type: "GET",
+            data: { pan_number : pan_number },
+            url: base_url+'/verify/pan',
+            success: function(response) {
+                var res = JSON.parse(response);
+                if(res && res.status == "SUCCESS"){
+                    console.log(res);
+                    $(".verify_pan").css({
+                        'display' : 'block'
+                    });
+                }else{
+                    console.log('error');
+                }
+            }
+        });
+    });
+
+    $("#verify_bank_details").on("click", function(event){
+        event.preventDefault();
+        var bank_acc_number = $("input[name=bank_acc_number]").val();
+        var ifsc_code = $("input[name=ifsc_code]").val();
+        $.ajax({
+            type: "GET",
+            data: { bank_acc_number : bank_acc_number, ifsc_code : ifsc_code },
+            url: base_url+'/verify/bank/account',
+            success: function(response) {
+                var res = JSON.parse(response);
+                if(res && res.status == "SUCCESS"){
+                    console.log(res);
+                    $(".verify_bank_details").css({
+                        'display' : 'block'
+                    });
+                }else{
+                    console.log(res);
+                }
+            }
+        });
+    });
+
+    $("#verify_gst_number").on("click", function(event){
+        event.preventDefault();
+        var gst_number = $("input[name=gst_number]").val();
+        $.ajax({
+            type: "GET",
+            data: { gst_number : gst_number },
+            url: base_url+'/verify/gstnumber',
+            success: function(response) {
+                var res = JSON.parse(response);
+                if(res && res.status == "SUCCESS"){
+                    console.log(res);
+                    $(".verify_gst_number").css({
+                        'display' : 'block'
+                    });
+                }else{
+                    console.log('error');
+                }
+            }
+        });
+    });
   </script> 
 @endsection

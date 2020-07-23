@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::post('dashboard/getappdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
 	Route::get('sales/kit/dsaleadgeneration','Frontend\SalesKitController@DSALeadGeneration');
+	Route::post('sales/kit/dsaleadgeneration','Frontend\SalesKitController@addDSALead');
 	Route::get('sales/kit/corporatepresentation','Frontend\SalesKitController@corporatepresentation');
 
 	Route::get('important/links','Frontend\LinkController@index');
@@ -53,7 +54,9 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
     Route::post('sales/kit/get_personal_loan','Frontend\SalesKitController@getPersonalLoan');
     Route::post('sales/kit/get_selected_view','Frontend\SalesKitController@getSelectedview');
 
-
+	Route::get('verify/pan', 'Frontend\VerifyDetailsController@panVerify');
+	Route::get('verify/bank/account', 'Frontend\VerifyDetailsController@bankAccountVerify');
+	Route::get('verify/gstnumber', 'Frontend\VerifyDetailsController@gstNumberVerify');
 
 });
 
