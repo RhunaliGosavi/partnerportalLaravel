@@ -1,8 +1,8 @@
 <div class="col-md-7 border-right">
     <div class="calculate_slider">
         <div class="slider_bar">
-            <p>area conversion cal:Existing Outstanding (in INR)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange6">
+            <p>area conversion cal:Unit</p>
+            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange6" onchange="getAreaConversion()">
         </div>
         <span id="slider_range6"></span>
     </div>
@@ -67,3 +67,31 @@
     </div>
   </div>
   <script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+  <script>
+    function getAreaConversion(){
+
+        var metrics='biswa';
+        var unit=2;
+
+        $.ajax({
+            url: base_url+'/sales/kit/get_area_conversion',
+            type: "post",
+            data: {'metrics':metrics,'unit':unit,_token: '{{csrf_token()}}'} ,
+            success: function (response) {
+
+                var res=JSON.parse(response);
+
+
+                console.log(res);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#error_alert').text('Something went wrong ,Please try again');
+                $('#alertMsg').show();
+            }
+        });
+
+
+    }
+    </script>
+

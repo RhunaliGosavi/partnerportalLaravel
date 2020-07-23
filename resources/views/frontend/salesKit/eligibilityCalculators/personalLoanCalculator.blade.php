@@ -54,4 +54,34 @@
     </div>
 </div>
 <script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+<script>
+function getPresonalLoan(){
 
+var monthly_income=$('#myRange1').val();
+var Obligation=$('#myRange2').val();
+var loan_tenure=$('#myRange3').val();
+var expected_loan_amount=$('#myRange4').val();
+var rate_of_interest=$('#myRange5').val();
+
+
+$.ajax({
+    url: base_url+'/sales/kit/get_personal_loan',
+    type: "post",
+    data: {'montly_income':monthly_income,'Obligation':Obligation,'loan_tenure':loan_tenure,'expected_loan_amount':expected_loan_amount,'rate_of_interest':rate_of_interest,_token: '{{csrf_token()}}'} ,
+    success: function (response) {
+
+        var res=JSON.parse(response);
+
+
+        console.log(res);
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        $('#error_alert').text('Something went wrong ,Please try again');
+        $('#alertMsg').show();
+    }
+});
+
+
+}
+</script>
