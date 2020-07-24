@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{url('/assets_frontend/css/bootstrap-datetimepicker.min.css')}}">
   <link rel="stylesheet" href="{{url('/assets_frontend/css/style.css')}}">
   <script src="{{url('/assets_frontend/js/jquery.min.js')}}"></script>
+  <script src="{{url('/assets_frontend/js/highChart.js')}}"></script>
   <script>
      var base_url = "{{url('/')}}";
   </script>

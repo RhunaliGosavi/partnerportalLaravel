@@ -1,0 +1,24 @@
+#semiChart path {
+    fill: none;
+    stroke-width:  0 !important;
+}
+#desiredSemiChart path {
+    fill: none;
+    stroke-width:  0 !important;
+}
+.semiChart {
+    margin-top:  20px;
+    border:  solid 1px #d5d5d5;
+    padding:  0 0 4px;
+}
+.highcharts-point.highcharts-color-0  {
+    fill: #ae285d !important;
+}
+.highcharts-point.highcharts-color-1  {
+    fill: #818181 !important;
+}
+
+.highcharts-exporting-group,  .highcharts-credits {
+    display:  none;
+}
+

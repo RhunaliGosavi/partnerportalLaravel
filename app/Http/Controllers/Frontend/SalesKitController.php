@@ -92,10 +92,12 @@ class SalesKitController extends Controller
         $obligation=$request->input('Obligation');
         $loanTenure=$request->input('loan_tenure');
         $expectedROI=$request->input('rate_of_interest');
+        $expectedLoanAmount=$request->input('expected_loan_amount');
 
-        $calPersonalLoanHelper=new calPersonalLoanHelper($monthlyIncome,$obligation,$loanTenure,$expectedROI);
+        $calPersonalLoanHelper=new calPersonalLoanHelper($monthlyIncome,$obligation,$loanTenure,$expectedROI,$expectedLoanAmount);
+        //$calPersonalLoanHelper=new calPersonalLoanHelper(180000,9000,24,8,100000);
         $result=$calPersonalLoanHelper->calculatePersonalLoan();
-        dd($result);
+        return json_encode($result);
 
     }
     public function getLoanAgainstProperty(Request $request){
@@ -107,8 +109,9 @@ class SalesKitController extends Controller
         $propertyValue=$request->input('propery_value');
 
         $calLoanAgainstProperty=new calLoanAgainstPropertyHelper($roi,$loanTenure,$monthlyIncome,$monthlyObligation,$expectedLoanAmount,$propertyValue);
+       // $calLoanAgainstProperty=new calLoanAgainstPropertyHelper(10,24,1000000,380000,10000000,5000000);
         $result=$calLoanAgainstProperty->calLoanAgainstPropert();
-        dd($result);
+        return json_encode($result);
 
     }
     public function getConsumerProductFinance(Request $request){

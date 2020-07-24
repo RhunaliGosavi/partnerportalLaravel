@@ -9,18 +9,18 @@ class calConsumerFinanceHelper
 
     public function __construct($roi,$loanTenure,$loanAmount,$advancedEMI)
     {
-     
+
         $this->roi=$roi;
         $this->loanTenure=$loanTenure;
         $this->loanAmount=$loanAmount;
         $this->advancedEMI=$advancedEMI;
-        
+
     }
-    
+
     //$policyFOIR,$policyROI,$expectedROI in percentage
-    public function calculateConsumerFinance() 
+    public function calculateConsumerFinance()
     {
-       
+
         $error='';
         $error.=empty($this->roi) ? 'Ret Of Interest' :'';
         $error.=empty($this->loanTenure) ? (!empty($error)? ',':'').' Loan Tenure' : '';
@@ -35,8 +35,8 @@ class calConsumerFinanceHelper
             return array('Emi'=>$Emi,'AdvancedEMI'=>$advancedEmi,'NetLoan'=>$netLoan);
         }
         return array('error'=>$error);
-      
-    } 
+
+    }
 
     public function getEmi(){
       $calPMTHelper= new calPMTHelper();
@@ -52,8 +52,8 @@ class calConsumerFinanceHelper
         $advemi=$this->getAdvancedEmi();
         return $this->loanAmount - $advemi;
    }
-   
-        
+
+
 }
 
 ?>

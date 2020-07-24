@@ -7,17 +7,18 @@ use App\CalculatorPolicy;
 class calPersonalLoanHelper
 {
     //$policyFOIR,$policyROI,$expectedROI in percentage
-    public function __construct($monthlyIncome,$obligation,$loanTenure,$expectedROI)
+    public function __construct($monthlyIncome,$obligation,$loanTenure,$expectedROI,$expectedLoanAmount)
     {
-     
+
         $this->monthlyIncome=$monthlyIncome;
         $this->obligation=$obligation;
         $this->loanTenure=$loanTenure;
         $this->expectedROI=$expectedROI;
-       
+        $this->expectedLoanAmount=$expectedLoanAmount;
+
     }
-    
-    public function calculatePersonalLoan() 
+
+    public function calculatePersonalLoan()
     {
         $calData=CalculatorPolicy::first();
         $error='';
@@ -35,12 +36,14 @@ class calPersonalLoanHelper
             $desiredEMI=$this->getDesiredEMI();
             $desiredFOIR=round($this->getDesiredFOIR($policyFOIR));
             $desiredROI= $this->getDesiredROI($policyROI);
+            $getApplicableAmortizationDetails=$this->getApplicableAmortizationDetails($applicableLoanAmt,$applicableEMI,$policyROI);
+            $getDesiredAmortizationDetails=$this->getDesiredAmortizationDetails($desiredEMI);
 
-            return array('ApplicableAmt'=>$applicableLoanAmt,'ApplicableEMI'=>$applicableEMI,'DesiredEmai'=>$desiredEMI,'DesiredFOIR'=>$desiredFOIR,'DesiredROI'=>$desiredROI);
+            return array('ApplicableAmt'=>$applicableLoanAmt,'ApplicableEMI'=>$applicableEMI,'DesiredEmai'=>$desiredEMI,'DesiredFOIR'=>$desiredFOIR,'DesiredROI'=>$desiredROI,'applicable_amortization_details'=>$getApplicableAmortizationDetails,'getDesiredAmortizationDetails'=>$getDesiredAmortizationDetails);
         }
         return array('error'=>$error);
-      
-    } 
+
+    }
     public function getApplicableLoadAmt($policyFOIR,$policyROI){
 
         $applicableEMI=$this->getApplicableEmi($policyFOIR);
@@ -60,7 +63,7 @@ class calPersonalLoanHelper
     public function getDesiredEMI(){
 
         $calPMTHelper= new calPMTHelper();
-        return $calPMTHelper->calPmt($this->expectedROI,$this->loanTenure,1000000);
+        return $calPMTHelper->calPmt($this->expectedROI,$this->loanTenure,$this->expectedLoanAmount);
     }
 
     public function getDesiredFOIR($policyFOIR){
@@ -73,7 +76,28 @@ class calPersonalLoanHelper
 
        return $this->expectedROI-$policyROI;
     }
-        
+
+    public function getApplicableAmortizationDetails($applicableLoanAmt,$applicableEMI,$policyROI){
+        ini_set('max_execution_time', 0);
+
+            $calPMTHelper= new AmortizationHelper();
+            //$amount,$rate,$emi
+            $schedule=$calPMTHelper->getAmortizationTbl($applicableLoanAmt,$policyROI,$applicableEMI);
+
+            return array('sum_interest'=>round($schedule['sum_interest']),'sum_interest_text'=>number_format($schedule['sum_interest'],0),'sum_principal'=>round($schedule['sum_principal']),'sum_principal_text'=>number_format($schedule['sum_principal'],0));
+    }
+    public function getDesiredAmortizationDetails($desiredEMI){
+        ini_set('max_execution_time', 0);
+
+            $calPMTHelper= new AmortizationHelper();
+            //$amount,$rate,$emi
+            $schedule=$calPMTHelper->getAmortizationTbl($this->expectedLoanAmount,$this->expectedROI,$desiredEMI);
+
+            return array('sum_interest'=>round($schedule['sum_interest']),'sum_interest_text'=>number_format($schedule['sum_interest'],0),'sum_principal'=>round($schedule['sum_principal']),'sum_principal_text'=>number_format($schedule['sum_principal'],0));
+
+    }
+
+
 }
 
 ?>
