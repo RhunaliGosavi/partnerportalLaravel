@@ -117,7 +117,7 @@ class LoanProductController extends Controller
         $post = $request->all();
         $rules = [
             'name'      => 'required',
-            'icon'      => 'required',
+            // 'icon'      => 'required',
             'description' => 'required'
         ];
         $request->validate($rules);

@@ -26,6 +26,12 @@
         @csrf
         <div class="application-status dsa-lead-generation">
             <h2 class="mb-3">Bank Account Details</h2>
+            @if(session('success'))
+                <p>{{session('success')}}</p>
+            @endif
+            @if(session('error'))
+                <p>{{session('error')}}</p>
+            @endif
             <!-- <form> -->
                 <div class="row">
                     <div class="col-md-4">
@@ -420,8 +426,8 @@
             </div>
             <hr>
             <div class="form_btn">
-                <button type="submit" class="btn btn-primary btn-search">Submit</button>
-                <!-- <button type="reset" class="btn btn-primary btn-clear">Clear</button> -->
+                <button type="submit" id="btnSubmit" class="btn btn-primary btn-search" disabled="disabled" >Submit</button>
+                <button type="reset" class="btn btn-primary btn-clear">Clear</button>
             </div>
         </div>
     </form>
@@ -472,10 +478,16 @@
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res && res.status == "SUCCESS"){
-                    console.log(res);
+                    // console.log(res);
                     $(".verify_pan").css({
                         'display' : 'block'
                     });
+                    if($('.verify_pan').css('display') === 'block' && $('.verify_bank_details').css('display') === 'block' && $('.verify_gst_number').css('display') === 'block')
+                    {
+                        $("#btnSubmit").attr("disabled", false);
+                    } else {
+                        $("#btnSubmit").attr("disabled", true);
+                    }
                 }else{
                     console.log('error');
                 }
@@ -494,10 +506,16 @@
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res && res.status == "SUCCESS"){
-                    console.log(res);
+                    // console.log(res);
                     $(".verify_bank_details").css({
                         'display' : 'block'
                     });
+                    if($('.verify_pan').css('display') === 'block' && $('.verify_bank_details').css('display') === 'block' && $('.verify_gst_number').css('display') === 'block')
+                    {
+                        $("#btnSubmit").attr("disabled", false);
+                    } else {
+                        $("#btnSubmit").attr("disabled", true);
+                    }
                 }else{
                     console.log(res);
                 }
@@ -515,10 +533,16 @@
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res && res.status == "SUCCESS"){
-                    console.log(res);
+                    // console.log(res);
                     $(".verify_gst_number").css({
                         'display' : 'block'
                     });
+                    if($('.verify_pan').css('display') === 'block' && $('.verify_bank_details').css('display') === 'block' && $('.verify_gst_number').css('display') === 'block')
+                    {
+                        $("#btnSubmit").attr("disabled", false);
+                    } else {
+                        $("#btnSubmit").attr("disabled", true);
+                    }
                 }else{
                     console.log('error');
                 }
