@@ -8,6 +8,11 @@ return [
 	'sales_kit_products' => [
 		'DOCUMENT_CHECKLIST' => 'Document Checklist',
 		'PRODUCT_FAQ' => 'Product FAQ',
-		'CURRENT_OFFERS' => 'Current Offers'
+		'CURRENT_OFFERS' => 'Current Offers',
+		'MARKETING_INFORMATION' => [
+			'VISUAL_CATEGORY' => [
+				'BANNER' => 'Offer or Scheme Related Banners'
+			]
+		]
 	]
 ];

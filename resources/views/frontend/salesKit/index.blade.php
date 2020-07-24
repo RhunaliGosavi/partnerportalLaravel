@@ -38,7 +38,9 @@
                         </div>
                         </div>
                         <div class="product-box-content">
-                        <p>{{strlen($loan_product->description) > 160 ? substr($loan_product->description,0,160)."..." : $loan_product->description}} </p>
+                        <span data-toggle="tooltip" data-html="true" data-placement="top" data-container="body" title="{{$loan_product->description}}">
+                            <p>{!! strlen($loan_product->description) > 160 ? substr($loan_product->description,0,160)."..." : $loan_product->description !!} </p>
+                        </span>
                         <a href="{{url('sales/kit/products').'/'.$loan_product->slug}}">Know More</a>
                         </div>
                     </div>
@@ -46,4 +48,9 @@
             @endforeach
         </div>
     </section>
+    <script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 @endsection
