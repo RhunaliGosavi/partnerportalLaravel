@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::post('dashboard/getappdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
 	Route::get('sales/kit/dsaleadgeneration','Frontend\SalesKitController@DSALeadGeneration');
+	Route::post('sales/kit/dsaleadgeneration','Frontend\SalesKitController@addDSALead');
 	Route::get('sales/kit/corporatepresentation','Frontend\SalesKitController@corporatepresentation');
 
 	Route::get('important/links','Frontend\LinkController@index');
@@ -71,7 +72,10 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 
 
 
-
+	//Verify APIs
+	Route::get('verify/pan', 'Frontend\VerifyDetailsController@panVerify');
+	Route::get('verify/bank/account', 'Frontend\VerifyDetailsController@bankAccountVerify');
+	Route::get('verify/gstnumber', 'Frontend\VerifyDetailsController@gstNumberVerify');
 
 
 });
@@ -243,4 +247,18 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 	Route::get('calculator', 'TestCalculator@index');
+
+	//City state Import
+	Route::get('city_state', 'CityStateController@index');
+	Route::post('city_state/import', 'CityStateController@import');
+	Route::get('city_state/delete/{id}',  'CityStateController@destroy');
+	Route::get('city_state/all', 'CityStateController@fetchAllRecords');
+
+	//Baank branch Import
+	Route::get('banks', 'BankBranchController@index');
+	Route::post('banks/import', 'BankBranchController@import');
+	Route::get('banks/delete/{id}',  'BankBranchController@destroy');
+	Route::get('banks/all', 'BankBranchController@fetchAllRecords');
+	Route::get('banks/list', 'Frontend\VerifyDetailsController@getBankListByIfsc');
+
 });

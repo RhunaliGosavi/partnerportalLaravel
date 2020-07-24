@@ -45,11 +45,6 @@ class Helper
     		'authorizationKey' => 'UmEdeSnOtFNcOrMGz',
     		'trackingId' => uniqid(),
     		'referenceId' => uniqid(),
-    		// "request" => [
-	    	// 	"consent" => "<<Y/N>>",
-	    	// 	'pan' => 'AXEPR2738K'
-	    	// ]
-
     	];
 
     	$post = [
@@ -68,16 +63,16 @@ class Helper
 		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		// $response = curl_exec($ch);
-  //       $error    = curl_error($ch);
-  //       $errno    = curl_errno($ch);
+		// $error    = curl_error($ch);
+		// $errno    = curl_errno($ch);
 
-  //       if (is_resource($ch)) {
-  //           curl_close($ch);
-  //       }
+		// if (is_resource($ch)) {
+		// 	curl_close($ch);
+		// }
 
-  //       if (0 !== $errno) {
-  //           throw new \RuntimeException($error, $errno);
-  //       }
+		// if (0 !== $errno) {
+		// 	throw new \RuntimeException($error, $errno);
+		// }
         $testResponse = json_encode([
         	"statusInfo" => [
         		"status" =>"SUCCESS",
@@ -99,8 +94,128 @@ class Helper
 		return $response;		
     }
 
-    public function checkBankAccount() {
+    public function checkBankAccount($bank_acc_number, $ifsc_code) {
+		$ch = curl_init();
 
+    	$header = [
+    		'serviceCode' => 'IN0024KARBAV',
+    		'callerIdentification' => 'INDUS',
+    		'authorizationKey' => 'AD9E01A5DC7BEE2C2B828D208182A611',
+    		'trackingId' => uniqid(),  //rand(1111111111,9999999999)
+    	];
+
+		$post = [
+			"request" => [
+				"consent" => "Y",
+				"ifsc" => $ifsc_code,
+				"accountNumber" => $bank_acc_number
+			]
+		];
+
+		// curl_setopt($ch, CURLOPT_URL,env('BASE_BANK_URL'));
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		// curl_setopt($ch, CURLOPT_POST, true);
+		// curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+
+		// // Receive server response ...
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		// $response = curl_exec($ch);
+		// $error    = curl_error($ch);
+		// $errno    = curl_errno($ch);
+
+		// if (is_resource($ch)) {
+		// 	curl_close($ch);
+		// }
+
+		// if (0 !== $errno) {
+		// 	throw new \RuntimeException($error, $errno);
+		// }
+        $testResponse = json_encode([
+        	"statusInfo" => [
+        		"status" =>"SUCCESS",
+	            "statusCode" => "0000",
+	            "statusText" => "Text",
+        	],
+        	"response" => [
+        		"status-code" => 101,
+		        "request_id" => "1e5a875e-e590-11e7-a842-373db1bff361",
+		        "result" => [
+					"bankTxnStatus" => true,
+					"accountNumber" => "32XXXXXXXXX",
+					"ifsc" => "SBINXXXXX",
+					"accountName" => "Mr MD ZAFAR EQUBAL",
+					"bankResponse" => "Transaction Successful"
+		    	]
+        	]
+        ]);
+
+        $response = json_decode($testResponse, true );
+		
+
+		return $response;
+	}
+
+	public function checkGSTNumber($gst_number) {
+		$ch = curl_init();
+
+    	$header = [
+    		'serviceCode' => 'IN0159KARGST',
+    		'callerIdentification' => 'INDUS',
+    		'authorizationKey' => 'AD9E01A5DC7BEE2C2B828D208182A611',
+    		'trackingId' => uniqid(),  //rand(1111111111,9999999999)
+    	];
+
+		$post = [
+			"request" => [
+				"gstin" => "27AAACR5055K1Z7"
+			]
+		];
+
+		// curl_setopt($ch, CURLOPT_URL,env('BASE_GST_URL'));
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		// curl_setopt($ch, CURLOPT_POST, true);
+		// curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+
+		// // Receive server response ...
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		// $response = curl_exec($ch);
+		// $error    = curl_error($ch);
+		// $errno    = curl_errno($ch);
+
+		// if (is_resource($ch)) {
+		// 	curl_close($ch);
+		// }
+
+		// if (0 !== $errno) {
+		// 	throw new \RuntimeException($error, $errno);
+		// }
+        $testResponse = json_encode([
+        	"statusInfo" => [
+        		"status" =>"SUCCESS",
+	            "statusCode" => "0000",
+	            "statusText" => "Text",
+        	],
+        	"response" => [
+        		"statusCode" => 101,
+		        "requestId" => "c77c8741-208f-11e9-9fb6-f954fdad8f0c",
+		        "result" => [
+					"mbr" => [],
+					"canFlag" => "NA",
+					"pradr" => [],
+					"tradeNam" => "RELIANCE INDUSTRIES LIMITED",
+					"sts" => "Active",
+					"gstin" => "27AAACR5055K1Z7",
+					"lgnm" => "RELIANCE INDUSTRIES LIMITED",
+		    	]
+        	]
+        ]);
+
+        $response = json_decode($testResponse, true );
+		
+
+		return $response;
 	}
 	
 	public function upload_image($images, $path, $type)

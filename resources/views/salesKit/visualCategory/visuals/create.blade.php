@@ -60,4 +60,13 @@
             </div>
 		</div>
 	</div>
+	<script src="{{url('assets/js/summernote.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 200,
+                placeholder: "Content here..."
+            });
+        });
+    </script>
 @endsection

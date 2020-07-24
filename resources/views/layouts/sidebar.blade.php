@@ -100,7 +100,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  <?php if(preg_match("/\bsalesProduct\b/i", $urlString) || preg_match("/\bsalesContest\b/i", $urlString) || preg_match("/\bcustomerScheme\b/i", $urlString) || preg_match("/\bvisualCategory\b/i", $urlString) || preg_match("/\bdocCheckProduct\b/i", $urlString) || preg_match("/\bdocCheckCategory\b/i", $urlString) || preg_match("/\bdsaList\b/i", $urlString) || preg_match("/\bdsaLead\b/i", $urlString) || preg_match("/\bcorporateList\b/i", $urlString) || preg_match("/\bmarketingVisuals\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--expanded m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
+			<li class="m-menu__item  <?php if(preg_match("/\bsalesProduct\b/i", $urlString) || preg_match("/\bsalesContest\b/i", $urlString) || preg_match("/\bcustomerScheme\b/i", $urlString) || preg_match("/\bvisualCategory\b/i", $urlString) || preg_match("/\bdocCheckProduct\b/i", $urlString) || preg_match("/\bdocCheckCategory\b/i", $urlString) || preg_match("/\bdsaList\b/i", $urlString) || preg_match("/\bdsaLead\b/i", $urlString) || preg_match("/\bcorporateList\b/i", $urlString) || preg_match("/\bmarketingVisuals\b/i", $urlString) || preg_match("/\bcurrentOffer\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--expanded m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
 				<a href="javascript:;" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -282,6 +282,51 @@
 						</span>
 					</span>
 				</a>
+			</li>
+			<li class="m-menu__item  <?php if(preg_match("/\bcity_state\b/i", $urlString) || preg_match("/\bbanks\b/i", $urlString)) { echo 'm-menu__item--active m-menu__item--expanded m-menu__item--open'; } ?>" aria-haspopup="true" m-menu-submenu-toggle="hover">
+				<a href="javascript:;" class="m-menu__link m-menu__toggle">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Masters</span>
+						</span>
+					</span>
+					<i class="m-menu__ver-arrow la la-angle-right"></i>
+				</a>
+				<div class="m-menu__submenu ">
+					<span class="m-menu__arrow"></span>
+					<ul class="m-menu__subnav">
+						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+							<span class="m-menu__link">
+								<span class="m-menu__link-text">Sales Kit</span>
+							</span>
+						</li>
+						<li class="m-menu__item  <?php if(preg_match("/\bcity_state\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+							<a href="{{url('city_state')}}" class="m-menu__link ">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-title">
+									<span class="m-menu__link-wrap">
+										<span class="m-menu__link-text">City</span>
+									</span>
+								</span>
+							</a>
+						</li>
+						<li class="m-menu__item  <?php if(preg_match("/\bbanks\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+							<a href="{{url('banks')}}" class="m-menu__link ">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-title">
+									<span class="m-menu__link-wrap">
+										<span class="m-menu__link-text">Bank Branch</span>
+									</span>
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</li>
 			<!-- <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
 				<a href="{{url('docCheckCategory')}}" class="m-menu__link ">
