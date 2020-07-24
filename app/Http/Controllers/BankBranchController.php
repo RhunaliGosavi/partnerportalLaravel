@@ -15,9 +15,9 @@ class BankBranchController extends Controller
 
     public function import(Request $request) 
     {
-        ini_set('memory_limit', 8);
-        ini_set('max_execution_time', 600);
-        ini_set('max_input_time', 60);
+        ini_set('memory_limit', -1);
+        ini_set('max_execution_time', 0);
+        // ini_set('max_input_time', 60);
 
         if ($request->method() == 'POST') {
             $requestData = $request->all();
@@ -28,7 +28,6 @@ class BankBranchController extends Controller
                 if ($request->hasFile('import_file') && $request->file('import_file')->isValid()) {
                     $extensions = array("xls","xlsx");
                     $result = array($request->file('import_file')->getClientOriginalExtension());
-
                     if(in_array($result[0],$extensions)){
                         $file=$request->file('import_file');
                         
@@ -98,9 +97,9 @@ class BankBranchController extends Controller
     public function getBankListByIfsc(Request $request) {
         $rules = [
 			'ifsc_code'   => 'required'
-		];
+        ];
         $request->validate($rules);
-        $banks = BankBranch::select('id', 'ifsc', 'bank','branch')->where('ifsc', $request->ifsc_code)->get();
+        $banks = BankBranch::select('id', 'bank','branch')->where('ifsc', $request->ifsc_code)->get();
         return $banks;
     }
 }

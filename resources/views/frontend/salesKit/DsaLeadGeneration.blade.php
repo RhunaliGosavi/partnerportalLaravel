@@ -48,7 +48,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ifsc">IFSC Code</label>
-                            <input type="text" class="form-control" placeholder="Enter IFSC Code" id="ifsc" name="ifsc_code" value="{{old('ifsc_code')}}">
+                            <input type="text" class="form-control" placeholder="Enter IFSC Code" id="ifsc_code" name="ifsc_code" value="{{old('ifsc_code')}}">
                             @if ($errors->has('ifsc_code'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('ifsc_code') }}
@@ -59,14 +59,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="BankName">Bank Name</label>
-                            <!-- <span class="custome-select" id="BankName">
-                                <select name="bank_name">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                            <span class="custome-select">
+                                <select id="BankName" name="bank_name">
+                                <option value="">Select Bank Name</option>
+                                <!-- <option>2</option>
+                                <option>3</option> -->
                                 </select>
-                            </span> -->
-                            <input type="text" class="form-control" placeholder="Enter Bank Name" id="BankName" name="bank_name" value="Axis Bank" readonly>
+                            </span>
+                            <!-- <input type="text" class="form-control" placeholder="Enter Bank Name" id="BankName" name="bank_name" value="Axis Bank" readonly> -->
                             @if ($errors->has('bank_name'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('bank_name') }}
@@ -77,14 +77,12 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="BranchName">Branch Name</label>
-                            <!-- <span class="custome-select" id="BranchName">
-                                <select name="branch_name">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                            <span class="custome-select">
+                                <select id="BranchName" name="branch_name">
+                                <option value="">Select Branch Name</option>
                                 </select>
-                            </span> -->
-                            <input type="text" class="form-control" placeholder="Enter Banch Name" id="BranchName" name="branch_name" value="Mumbai" readonly>
+                            </span>
+                            <!-- <input type="text" class="form-control" placeholder="Enter Banch Name" id="BranchName" name="branch_name" value="Mumbai" readonly> -->
                             @if ($errors->has('branch_name'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('branch_name') }}
@@ -489,7 +487,9 @@
                         $("#btnSubmit").attr("disabled", true);
                     }
                 }else{
-                    console.log('error');
+                    $(".verify_pan").css({
+                        'display' : 'none'
+                    });
                 }
             }
         });
@@ -506,7 +506,6 @@
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res && res.status == "SUCCESS"){
-                    // console.log(res);
                     $(".verify_bank_details").css({
                         'display' : 'block'
                     });
@@ -517,7 +516,9 @@
                         $("#btnSubmit").attr("disabled", true);
                     }
                 }else{
-                    console.log(res);
+                    $(".verify_bank_details").css({
+                        'display' : 'none'
+                    });
                 }
             }
         });
@@ -533,7 +534,6 @@
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res && res.status == "SUCCESS"){
-                    // console.log(res);
                     $(".verify_gst_number").css({
                         'display' : 'block'
                     });
@@ -544,10 +544,40 @@
                         $("#btnSubmit").attr("disabled", true);
                     }
                 }else{
-                    console.log('error');
+                    $(".verify_gst_number").css({
+                        'display' : 'none'
+                    });
                 }
             }
         });
     });
+
+    $("#ifsc_code").on("change paste keyup", function(event){
+        event.preventDefault();
+        var ifsc_code = $(this).val();
+        $.ajax({
+            type: "GET",
+            data: { ifsc_code : ifsc_code },
+            url: base_url+'/banks/list',
+            success: function(res) {
+                if(res.length !== 0){
+                    $('select[name="bank_name"]').empty();
+                    $.each(res, function(key, value) {
+                        $('select[name="bank_name"]').append('<option value="'+ value.bank +'">'+ value.bank +'</option>');
+                    });
+                    $('select[name="branch_name"]').empty();
+                    $.each(res, function(key, value) {
+                        $('select[name="branch_name"]').append('<option value="'+ value.branch +'">'+ value.branch +'</option>');
+                    });
+                }else{
+                    $('select[name="bank_name"]').empty();
+                    $('select[name="bank_name"]').append('<option value="">Select Bank Name</option>');
+                    $('select[name="branch_name"]').empty();
+                    $('select[name="branch_name"]').append('<option value="">Select Branch Name</option>');
+                }
+            }
+        });
+    });
+    
   </script> 
 @endsection

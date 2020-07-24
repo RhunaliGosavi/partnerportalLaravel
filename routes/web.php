@@ -259,6 +259,6 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('banks/import', 'BankBranchController@import');
 	Route::get('banks/delete/{id}',  'BankBranchController@destroy');
 	Route::get('banks/all', 'BankBranchController@fetchAllRecords');
-	Route::get('banks/list', 'Frontend\VerifyDetailsController@getBankListByIfsc');
+	Route::get('banks/list', 'BankBranchController@getBankListByIfsc');
 
 });
