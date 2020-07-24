@@ -21,6 +21,7 @@
       </section>
 @endsection
 @section('content')
+<link rel="stylesheet" href="{{url('/assets_frontend/css/highchart.css')}}">
     <section class="page-content-box">
         <div class="tab-sec">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -74,25 +75,11 @@
                             </span>
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-8 col-xl-7">
-                        <div class="form-group d-lg-flex d-md-block">
-                          <label for="choose-balance">Choose Balance Transfer Preference:</label>
-                            <span class="custome-select" id="choose-balance">
-                                <select>
-                                    <option>BT-Existing Tenor & Change in EMI</option>
-                                    <option>BT-Existing Tenor & Change in EMI</option>
-                                    <option>BT-Existing Tenor & Change in EMI</option>
-                                </select>
-                            </span>
-                        </div>
-                      </div>
                     </div>
                   </form>
-                  <div class="row" id="commonCal">
-
-                  </div>
-              </div>
-              </div>
+                  <div class="row" id="commonCal"></div>
+                </div>
+            </div>
               <div class="tab-pane fade p-0" id="tab3" role="tabpanel" aria-labelledby="tab-name3">
                 <div class="calculator_content incentive_calculator">
                   <div class="row">
@@ -141,6 +128,7 @@
                     //console.log(response);
 
                     if(response){
+                        console.log(divId);
                         $('#'+divId).html(response);
                     }
 
@@ -160,5 +148,54 @@
 
             getCalView('personal_loan');
         });
+
+        /*Semi Chart start */
+
+       function semiHightChart(loanAmt, intRate,divid) {
+            Highcharts.chart(divid, {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
+                title: {
+                    text: '',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 40
+                },
+                tooltip: {
+                    pointFormat: ''
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            distance: -50,
+                            style: {
+                                fontWeight: 'bold',
+                                color: 'white'
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '120%'],
+                        size: '240%'
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '',
+                    innerSize: '70%',
+                    data: [
+                        ['', loanAmt],
+                        ['', intRate]
+                    ]
+                }]
+            });
+        }
+
+    /*<!-- Semi Chart end -->*/
+
  </script>
 @endsection
