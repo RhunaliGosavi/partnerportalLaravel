@@ -12,6 +12,6 @@ class CityState extends Model
     protected $table = 'city_states';
 
     protected $fillable = [
-        'pincode', 'city_name', 'state_name'
+        'pincode', 'office_city', 'state', 'circle', 'region', 'division', 'office_type', 'delivery', 'district'
     ];
 }

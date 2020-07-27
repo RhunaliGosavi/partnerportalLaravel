@@ -253,6 +253,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('city_state/import', 'CityStateController@import');
 	Route::get('city_state/delete/{id}',  'CityStateController@destroy');
 	Route::get('city_state/all', 'CityStateController@fetchAllRecords');
+	Route::get('city_state/list', 'CityStateController@getBankListByPincode');
 
 	//Baank branch Import
 	Route::get('banks', 'BankBranchController@index');

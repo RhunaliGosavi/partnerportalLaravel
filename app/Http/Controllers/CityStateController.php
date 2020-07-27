@@ -16,7 +16,7 @@ class CityStateController extends Controller
     public function import(Request $request) 
     {
         ini_set('memory_limit', -1);
-        ini_set('max_execution_time', 0);
+        ini_set('max_execution_time', 30);
 
         if ($request->method() == 'POST') {
             $requestData = $request->all();
@@ -25,11 +25,12 @@ class CityStateController extends Controller
                 return redirect()->back()->with('error', 'Excel file format invalid.');
             } else {
                 if ($request->hasFile('import_file') && $request->file('import_file')->isValid()) {
-                    $extensions = array("xls","xlsx");
+                    $extensions = array("xls","xlsx","csv");
                     $result = array($request->file('import_file')->getClientOriginalExtension());
 
                     if(in_array($result[0],$extensions)){
                         $file=$request->file('import_file');
+                        // dd($file);
                         
                         Excel::import(new CityStateImport, $file);   
                     } else {
@@ -38,7 +39,7 @@ class CityStateController extends Controller
                 }
             }
         }
-        return redirect('city_state')->with('success', 'Excel file imported successfully.');
+        return redirect('city_state')->with('success', 'Import successfully added to queue.');
     }
 
     public function destroy(Request $request, $id) 
@@ -61,8 +62,14 @@ class CityStateController extends Controller
         $query = CityState::query();
         if(isset($post['query']['generalSearch'])) {
             $query = $query->orWhere('pincode', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
-                ->orWhere('city_name', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
-                ->orWhere('state_name', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
+                ->orWhere('office_city', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('state', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('circle', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('region', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('division', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('office_type', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('delivery', 'LIKE', "%" . $post['query']['generalSearch'] . "%")
+                ->orWhere('district', 'LIKE', "%" . $post['query']['generalSearch'] . "%");
         }
         $city_states = $query->get();
         $city_states_count = count($city_states);
@@ -87,5 +94,14 @@ class CityStateController extends Controller
         $list['data'] = $city_states;
 
         return json_encode($list);
+    }
+
+    public function getBankListByPincode(Request $request) {
+        $rules = [
+			'pincode'   => 'required'
+        ];
+        $request->validate($rules);
+        $officeCity = CityState::select('id', 'office_city as city','state')->where('pincode', $request->pincode)->get();
+        return $officeCity;
     }
 }

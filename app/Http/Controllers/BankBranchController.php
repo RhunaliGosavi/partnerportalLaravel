@@ -16,7 +16,7 @@ class BankBranchController extends Controller
     public function import(Request $request) 
     {
         ini_set('memory_limit', -1);
-        ini_set('max_execution_time', 0);
+        ini_set('max_execution_time', 30);
         // ini_set('max_input_time', 60);
 
         if ($request->method() == 'POST') {
@@ -37,7 +37,7 @@ class BankBranchController extends Controller
                 }
             }
         }
-        return redirect('banks')->with('success', 'Excel file imported successfully.');
+        return redirect('banks')->with('success', 'Import successfully added to queue.');
     }
 
     public function destroy(Request $request, $id) 
