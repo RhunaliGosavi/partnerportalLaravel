@@ -88,9 +88,15 @@
               	sortable: true,
 				  
               	"columns": [
-                    { field: "pincode",title:'IFSC Code'},
-                    { field: "city_name",title:'City Name'},
-                    { field: "state_name",title:'State Name'},
+                    { field: "pincode",title:'IFSC'},
+                    { field: "office_city",title:'City'},
+                    { field: "state",title:'State'},
+                    { field: "circle",title:'Circle Name'},
+                    { field: "region",title:'Region Name'},
+                    { field: "division",title:'Division'},
+                    { field: "office_type",title:'Office Type'},
+                    { field: "delivery",title:'Delivery'},
+                    { field: "district",title:'District'},
                     { 
               			field: "Actions",
 		                width: 60,

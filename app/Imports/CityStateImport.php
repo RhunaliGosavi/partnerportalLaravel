@@ -5,12 +5,13 @@ namespace App\Imports;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Carbon;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\CityState;
 use Helper;
 
-class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow
+class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue
 {
     /**
     * @param array $row
@@ -22,15 +23,21 @@ class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow
         if(array_key_exists('pincode', $row)) {
 	        $isPincodeExists = CityState::where('pincode', $row['pincode'])->first();
 	        if(!$isPincodeExists) {
-	            $helper = new Helper;
+	            // $helper = new Helper;
 	            // $pincodeExists = $helper->checkPincodeCode($row['pincode']);
 	            
 	            // if($pincodeExists) {
 	                
-                    return new BankBranch([
+                    return new CityState([
                         'pincode' => $row['pincode'],
-                        'city_name' => $row['city_name'],
-                        'state_name' => $row['state_name']
+                        'office_city' => $row['office_name'],
+                        'state' => $row['state_name'],
+                        'circle' => $row['circle_name'],
+                        'region' => $row['region_name'],
+                        'division' => $row['division_name'],
+                        'office_type' => $row['office_type'],
+                        'delivery' => $row['delivery'],
+                        'district' => $row['district']
                     ]);
                 // }
             }
@@ -38,6 +45,6 @@ class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow
     }
 
     public function chunkSize(): int {
-        return 1000;
+        return 500;
     }
 }

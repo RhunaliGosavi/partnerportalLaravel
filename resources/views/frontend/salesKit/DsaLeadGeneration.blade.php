@@ -241,7 +241,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="BranchName">Pin Code</label>
-                            <input type="text" class="form-control" placeholder="Enter Pin Code" id="pin_code" name="pincode" value="{{old('pincode')}}">
+                            <input type="text" class="form-control" placeholder="Enter Pin Code" id="pincode" name="pincode" value="{{old('pincode')}}">
                             @if ($errors->has('pincode'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('pincode') }}
@@ -252,7 +252,12 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="upi">City</label>
-                            <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" value="Mumbai" readonly>
+                            <!-- <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" value="{{old('city')}}"> -->
+                            <span class="custome-select">
+                                <select id="city" name="city">
+                                <option value="">Select City</option>
+                                </select>
+                            </span>
                             @if ($errors->has('city'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('city') }}
@@ -263,7 +268,12 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="upi">State</label>
-                            <input type="text" class="form-control" placeholder="Enter State" id="state" name="state" value="Maharashtra" readonly>
+                            <!-- <input type="text" class="form-control" placeholder="Enter State" id="state" name="state" value="{{old('state')}}"> -->
+                            <span class="custome-select">
+                                <select id="state" name="state">
+                                <option value="">Select State</option>
+                                </select>
+                            </span>
                             @if ($errors->has('state'))
                                 <div class="form-control-feedback">
                                     {{ $errors->first('state') }}
@@ -574,6 +584,33 @@
                     $('select[name="bank_name"]').append('<option value="">Select Bank Name</option>');
                     $('select[name="branch_name"]').empty();
                     $('select[name="branch_name"]').append('<option value="">Select Branch Name</option>');
+                }
+            }
+        });
+    });
+
+    $("#pincode").on("change paste keyup", function(event){
+        event.preventDefault();
+        var pincode = $(this).val();
+        $.ajax({
+            type: "GET",
+            data: { pincode : pincode },
+            url: base_url+'/city_state/list',
+            success: function(res) {
+                if(res.length !== 0){
+                    $('select[name="city"]').empty();
+                    $.each(res, function(key, value) {
+                        $('select[name="city"]').append('<option value="'+ value.city +'">'+ value.city +'</option>');
+                    });
+                    $('select[name="state"]').empty();
+                    $.each(res, function(key, value) {
+                        $('select[name="state"]').append('<option value="'+ value.state +'">'+ value.state +'</option>');
+                    });
+                }else{
+                    $('select[name="city"]').empty();
+                    $('select[name="city"]').append('<option value="">Select Bank Name</option>');
+                    $('select[name="state"]').empty();
+                    $('select[name="state"]').append('<option value="">Select Branch Name</option>');
                 }
             }
         });

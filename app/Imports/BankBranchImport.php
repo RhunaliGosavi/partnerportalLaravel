@@ -5,12 +5,13 @@ namespace App\Imports;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Carbon;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\BankBranch;
 use Helper;
 
-class BankBranchImport implements ToModel, WithChunkReading, WithHeadingRow
+class BankBranchImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue
 {
     /**
     * @param array $row
