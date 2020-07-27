@@ -108,6 +108,23 @@
       </section>
 
 <script>
+   /*
+       (function($) {
+        $.fn.inputFilter = function(inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+            });
+        };
+        }(jQuery));*/
         $(document).on('click','.nav-item a',function() {
             $('#selectedTab').val(this.id);
             var type=(this.id=='eligibility-cal') ? 'personal_loan' :((this.id=='common-cal') ? 'part_payment' : 'collection_incentive' );
@@ -147,6 +164,7 @@
         $( document ).ready(function() {
 
             getCalView('personal_loan');
+
         });
 
         /*Semi Chart start */

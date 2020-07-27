@@ -1,80 +1,78 @@
-<div class="col-md-7 border-right">
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>balance transfer cal:Existing Outstanding (in INR)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange6" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range6"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Balance Tenure (in Months)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange7" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range7"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing Rate of Interest (in %)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange8" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range8"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing EMI (in INR)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange9" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range9"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Proposed Rate of Interest (in %)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange10" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range10"></span>
-    </div>
-    <div class="calculate_slider">
-      <div class="slider_bar">
-          <p>Cost On BT Request</p>
-          <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange11" onchange="getBalanceTransfer()">
-      </div>
-      <span id="slider_range11"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Choose Your Tenure</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange12" onchange="getBalanceTransfer()">
-        </div>
-        <span id="slider_range12"></span>
-      </div>
-  </div>
+<div class="col-sm-12 col-md-6 col-lg-8 col-xl-7 sub-select">
+    <div class="form-group d-lg-flex d-md-block">
+      <label for="choose-balance">Choose Your Preference:</label>
+        <span class="custome-select" id="choose-balance">
+            <select id="select_preference" class="changeval">
+                <option value="change in emi">Change In EMI Only</option>
+                <option value="change in tenure">Change In Tenure</option>
+                <option value="part payment">Part Payment</option>
 
-  <div class="col-md-5 border-center">
-      <div class="graph-chart">
-          <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-          <div class="graph_info">
-              <p>Revised Outstanding</p>
-              <span>₹ 25,000</span>
-          </div>
-      </div>
-      <div class="graph-chart ">
-          <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-          <div class="graph_info">
-              <p>Revised EMI</p>
-              <span>₹ 25,000</span>
-          </div>
-      </div>
-      <div class="graph-chart ">
-        <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-        <div class="graph_info">
-            <p>Revised Tenure</p>
-            <span>₹ 25,000</span>
-        </div>
+            </select>
+        </span>
     </div>
   </div>
-  <script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+  <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+</div>
+    <div class="col-md-7 border-right">
+        <div class="calculate_slider">
+            <div class="slider_bar">
+                <p>Existing Outstanding (in INR)</p>
+                <input class='slider changeval' id='s11'  min='100000' max="50000000" oninput='am11.value=s11.value' type='range' value='100000' >
+            </div>
+            <span id="slider_range"><input class='range__amount changeval' id='am11'  min='100000' max="50000000" oninput='s11.value=am11.value' type='number' value='100000'></span>
+        </div>
+        <div class="calculate_slider">
+          <div class="slider_bar">
+              <p>Balance Tenure  (in Months)</p>
+              <input class='slider changeval' id='s22'  min='12' max="18" oninput='am22.value=s22.value' type='range' value='12'>
+          </div>
+          <span id="slider_range"><input class='range__amount changeval' max="18" id='am22'  min='12' oninput='s22.value=am22.value' type='number' value='12'></span>
+      </div>
+      <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Existing ROI (In %)</p>
+            <input class='slider changeval' id='s33' max='50000000' min='0' oninput='am33.value=s33.value' type='range' value='0'>
+
+        </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am33' max='50000000' min='0' oninput='s33.value=am33.value' type='number' value='0'></span>
+
+    </div>
+    <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Balance Tenure(in Months)</p>
+            <input class='slider changeval' id='s44' min="12" max="180" oninput='am44.value=s44.value' type='range' value='12'>
+        </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am44'  min="12" max="180" oninput='s44.value=am44.value' type='number' value='12'></span>
+    </div>
+
+    <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Existing EMI(in INR)</p>
+            <input class='slider changeval' id='s55' min="12" max="180" oninput='am55.value=s55.value' type='range' value='12'>
+        </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am55'  min="12" max="180" oninput='s55.value=am55.value' type='number' value='12'></span>
+    </div>
+ </div>
+
+    <div class="col-md-5 border-center">
+
+        <div class="other-info">
+            <ul>
+                <li><label>Revised Outstansing (In INR)</label><span id="reOutstanding">0</span></li>
+                <li><label>Revised EMI (In INR)</label><span id="reEmi">0</span></li>
+                <li><label>Revised Tenure (In Months)</label><span id="reTenure">0</span></li>
+
+            </ul>
+        </div>
+    </div>
   <script>
+      $(document).ready(function(){
+    //getPresonalLoan();
+        $('.changeval').on('input',function(){
+            getBalanceTransfer();
+        });
+
+    });
     function getBalanceTransfer(){
 
         var existing_outstanding=$('#myRange6').val();

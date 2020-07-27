@@ -1106,18 +1106,18 @@ button.btn.btn-primary.btn-search:hover {
 
 .application-status.dsa-lead-generation {
   border-bottom: 1px solid #DCDBDB;
-  margin: 34px 47px;
-  padding: 0px 0 34px; }
+  margin: 0 30px;
+  padding: 30px 0; }
 
 .application-status img.add-field {
   background: #939598;
   padding: 7px;
   border-radius: 7px;
   position: relative;
-  top: 0; }
+  top: -5px; }
 
 button.btn.btn-upload {
-  padding: 7px 70px;
+  padding: 10px 70px;
   background: #ED1164;
   color: #fff; }
 
@@ -1416,7 +1416,7 @@ img.img-fluid.upload-file {
   border: 1px solid #D1D3D4;
   height: 10px; }
 
-.calculate_slider span {
+.calculate_slider .range__amount {
   background: #F2F2F2;
   font-size: 1.2rem;
   font-family: 'latobold';
@@ -1426,45 +1426,80 @@ img.img-fluid.upload-file {
   margin-left: 30px;
   width: 150px;
   padding: 10px 20px;
-  text-align: right; }
+  text-align: right;
+  border: none;
+  border-radius: 8px; }
 
 .calculate_slider p {
   color: #000;
   font-size: 1rem; }
 
+.graph-caption {
+  font-size: 1.2rem;
+  font-family: 'latobold'; }
+
 .graph-chart {
   border: 1px solid #D1D3D4;
   border-radius: 10px;
   padding: 20px;
-  margin-top: 20px;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 20px; }
 
 .graph_info {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 15px 0 15px; }
+  padding: 20px 0 0 0; }
+  .graph_info ul {
+    width: 100%; }
+    .graph_info ul li {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding-left: 20px; }
+      .graph_info ul li::before {
+        content: " ";
+        height: 10px;
+        width: 10px;
+        border-radius: 10px;
+        position: absolute;
+        background: transparent;
+        top: 7px;
+        left: 0; }
+      .graph_info ul li.legend1::before {
+        background: #97144D; }
+      .graph_info ul li.legend2::before {
+        background: #797979; }
+      .graph_info ul li label {
+        color: #000104;
+        font-family: 'latosemibold';
+        font-size: 1rem; }
+      .graph_info ul li span {
+        color: #97144D; }
 
-.graph_info p:before {
-  content: "";
-  position: absolute;
-  background: #97144D;
-  padding: 4px;
-  border-radius: 50%;
-  top: 38%;
-  left: 0; }
+.other-info {
+  padding: 20px; }
+  .other-info ul {
+    width: 100%; }
+    .other-info ul li {
+      display: flex;
+      justify-content: space-between;
+      color: #97144D; }
+      .other-info ul li label {
+        color: #000104; }
 
-.graph_info p {
-  position: relative;
-  font-size: 1.1rem;
-  color: #000;
-  font-family: 'latosemibold';
-  padding-left: 18px;
-  margin-bottom: 0; }
+.calculator_content .custom-btn {
+  padding: 6px 50px;
+  margin-top: 30px; }
 
-.graph_info span {
-  font-size: 1rem;
-  color: #97144D;
-  font-family: 'latosemibold'; }
+.area-tbl {
+  min-width: 40%;
+  margin-top: 30px; }
+  .area-tbl td {
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    padding: 5px 20px;
+    text-align: right; }
+    .area-tbl td:first-child {
+      background-color: #f5f5f5;
+      text-align: left; }
 
 .col-md-7.border-right {
   padding-right: 50px;
@@ -1586,7 +1621,13 @@ span#choose-balance {
 
   .refer-friend_image, .apply-now_image {
     justify-content: center;
-    padding-bottom: 40px; } }
+    padding-bottom: 40px; }
+
+  button.btn.btn-upload {
+    width: 100%; }
+
+  .helpdesk_head {
+    display: block; } }
 @media screen and (max-width: 575px) {
   .graph_info {
     display: block;

@@ -31,8 +31,9 @@ class calConsumerFinanceHelper
             $Emi=round($this->getEmi());
             $advancedEmi=round($this->getAdvancedEmi());
             $netLoan=round($this->getNetLoan());
+            $getApplicableAmortizationDetails=$this->getApplicableAmortizationDetails();
 
-            return array('Emi'=>$Emi,'AdvancedEMI'=>$advancedEmi,'NetLoan'=>$netLoan);
+            return array('Emi'=>$Emi,'Emi_text'=>number_format($Emi,0),'AdvancedEMI'=>$advancedEmi,'AdvancedEMI_text'=>number_format($advancedEmi,0),'NetLoan'=>$netLoan,'NetLoan_text'=>number_format($netLoan,0),'applicable_amortization_details'=>$getApplicableAmortizationDetails);
         }
         return array('error'=>$error);
 
@@ -52,6 +53,15 @@ class calConsumerFinanceHelper
         $advemi=$this->getAdvancedEmi();
         return $this->loanAmount - $advemi;
    }
+   public function getApplicableAmortizationDetails(){
+    ini_set('max_execution_time', 0);
+
+        $calPMTHelper= new AmortizationHelper();
+        //$amount,$rate,$emi
+        $schedule=$calPMTHelper->getAmortizationTbl($this->getNetLoan(),$this->roi,$this->getEmi());
+
+        return array('sum_interest'=>round($schedule['sum_interest']),'sum_interest_text'=>number_format($schedule['sum_interest'],0),'sum_principal'=>round($schedule['sum_principal']),'sum_principal_text'=>number_format($schedule['sum_principal'],0));
+    }
 
 
 }

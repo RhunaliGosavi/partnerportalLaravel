@@ -1,77 +1,91 @@
-<div class="col-md-7 border-right">
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>area conversion cal:Unit</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange6" onchange="getAreaConversion()">
-        </div>
-        <span id="slider_range6"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Balance Tenure (in Months)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange7">
-        </div>
-        <span id="slider_range7"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing Rate of Interest (in %)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange8">
-        </div>
-        <span id="slider_range8"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing EMI (in INR)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange9">
-        </div>
-        <span id="slider_range9"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Proposed Rate of Interest (in %)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange10">
-        </div>
-        <span id="slider_range10"></span>
-    </div>
-    <div class="calculate_slider">
-      <div class="slider_bar">
-          <p>Proposed Tenure (in Months)</p>
-          <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange11">
-      </div>
-      <span id="slider_range11"></span>
-    </div>
-  </div>
 
-  <div class="col-md-5 border-center">
-      <div class="graph-chart">
-          <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-          <div class="graph_info">
-              <p>Revised Outstanding</p>
-              <span>₹ 25,000</span>
-          </div>
-      </div>
-      <div class="graph-chart ">
-          <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-          <div class="graph_info">
-              <p>Revised EMI</p>
-              <span>₹ 25,000</span>
-          </div>
-      </div>
-      <div class="graph-chart ">
-        <img src="{{url('/assets_frontend/images/graph.png')}}" class="img-fluid" alt="graph">
-        <div class="graph_info">
-            <p>Revised Tenure</p>
-            <span>₹ 25,000</span>
-        </div>
+
+<div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="form-group">
+        <label for="metics">Metics</label>
+        <span class="custome-select" id="metics">
+            <select id="selectMetrics">
+            <option value="acres">Acres</option>
+            <option value="ares">Ares</option>
+            <option value="bhighas">Bhighas</option>
+            <option value="biswa">Biswa</option>
+            <option value="grounds">Grounds</option>
+            <option value="guntha">Guntha</option>
+            <option value="hectares">Hectares</option>
+            <option value="kanal">Kanal</option>
+            <option value="square foot">Square Foot</option>
+            <option value="square meter">Square Meter</option>
+            <option value="square yards">Square Yards</option>
+            </select>
+        </span>
     </div>
-  </div>
-  <script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="form-group">
+        <label for="disbursement_amt">Quantity :</label>
+        <input type="number" class="form-control" placeholder="Enter Units" id="unit">
+    </div>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-4">
+    <button type="button" class="btn btn-primary btn-search custom-btn" onclick="getAreaConversion()">Submit</button>
+</div>
+<div class="col-12" style="display:none" id="tblDiv">
+    <table class="area-tbl">
+    <tr>
+        <td>Square Foot</td>
+        <td id="sqFoot"></td>
+    </tr>
+    <tr>
+        <td>Square meters</td>
+        <td id="sqMeter"></td>
+    </tr>
+    <tr>
+        <td>Square Yards</td>
+        <td id="sqYard"></td>
+    </tr>
+    <tr>
+        <td>Hectares</td>
+        <td id="hect"></td>
+    </tr>
+    <tr>
+        <td>Bhighas</td>
+        <td id="bigh"></td>
+    </tr>
+    <tr>
+        <td>Acres</td>
+        <td id="acr"></td>
+    </tr>
+    <tr>
+        <td>Guntha</td>
+        <td id="gun"></td>
+    </tr>
+    <tr>
+        <td>Grounds</td>
+        <td id="ground"></td>
+    </tr>
+    <tr>
+        <td>Biswa</td>
+        <td id="biswa"></td>
+    </tr>
+    <tr>
+        <td>Kanal</td>
+        <td id="kanal"></td>
+    </tr>
+    <tr>
+        <td>Ares</td>
+        <td id="ares"></td>
+    </tr>
+    </table>
+</div>
+
+
+
+
   <script>
     function getAreaConversion(){
 
-        var metrics='biswa';
-        var unit=2;
+        var metrics=$('#selectMetrics').val();
+        var unit=$('#unit').val();
 
         $.ajax({
             url: base_url+'/sales/kit/get_area_conversion',
@@ -80,7 +94,18 @@
             success: function (response) {
 
                 var res=JSON.parse(response);
-
+                $('#tblDiv').show();
+                $('#sqFoot').text(res.square_foot);
+                $('#sqMeter').text(res.square_meter);
+                $('#sqYard').text(res.square_yards);
+                $('#hect').text(res.hectares);
+                $('#bigh').text(res.bhighas);
+                $('#acr').text(res.acres);
+                $('#gun').text(res.guntha);
+                $('#ground').text(res.grounds);
+                $('#biswa').text(res.biswa);
+                $('#kanal').text(res.kanal);
+                $('#ares').text(res.ares);
 
                 console.log(res);
 
