@@ -30,7 +30,6 @@ class BankBranchController extends Controller
                     $result = array($request->file('import_file')->getClientOriginalExtension());
                     if(in_array($result[0],$extensions)){
                         $file=$request->file('import_file');
-                        
                         Excel::import(new BankBranchImport, $file);   
                     } else {
                         return redirect()->back()->with('error', 'File format is invalid.');
