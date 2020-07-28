@@ -1,72 +1,106 @@
-
-<div class="col-md-7 border-right">
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Monthly Income (in INR)</p>
-            <input type="range" min="50000" max="1500000" value="50000" class="slider" id="myRange1" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Obligation (in INR)</p>
-            <input type="range" min="10000" max="100000" value="10000" class="slider" id="myRange2" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range1"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Loan Tenure (in Months)</p>
-            <input type="range" min="12" max="240" value="12" class="slider" id="myRange3" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range2"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Expected Loan Amount (in INR)</p>
-            <input type="range" min="25000" max="1500000" value="10000" class="slider" id="myRange4" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range3"></span>
-    </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Expected Rate of Interest (in %)</p>
-            <input type="range" min="10" max="30" value="10"  step="0.5" class="slider" id="myRange5" onchange="getPresonalLoan()">
-        </div>
-        <span id="slider_range4"></span>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
 </div>
+    <div class="col-md-7 border-right">
+        <div class="calculate_slider">
+            <div class="slider_bar">
+                <p>Monthly Income (in INR)</p>
+                <input class='slider changeval' id='s1'  min='0' max="20000000" oninput='am1.value=s1.value' type='range' value='0' >
+            </div>
+            <span id="slider_range"><input class='range__amount changeval' id='am1'  min='0' max="20000000" oninput='s1.value=am1.value' type='number' value='0'></span>
+        </div>
+        <div class="calculate_slider">
+          <div class="slider_bar">
+              <p>Obligation (in INR)</p>
+              <input class='slider changeval' id='s2'  min='0' max="20000000" oninput='am2.value=s2.value' type='range' value='0'>
+          </div>
+          <span id="slider_range"><input class='range__amount changeval' max="20000000" id='am2'  min='0' oninput='s2.value=am2.value' type='number' value='0'></span>
+      </div>
+      <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Loan Tenure (In Months)</p>
+            <input class='slider changeval' id='s3' max='240' min='12' oninput='am3.value=s3.value' type='range' value='12'>
 
-<div class="col-md-5 border-center">
-    <div class="graph-chart">
-        <div id="semiChart">No data to display</div>
-        <div class="graph_info">
-            <p>Loan Eligibility (Applicable)</p>
-            <span id="appAmt"></span>
         </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am3' max='240' min='12' oninput='s3.value=am3.value' type='number' value='12'></span>
+
     </div>
-    <div class="graph-chart ">
-        <div id="desiredSemiChart">No data to display</div>
-        <div class="graph_info">
-            <p>Loan Eligibility (Desired)</p>
-            <span id="desiredAmt"></span>
+    <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Loan Amount (in INR)</p>
+            <input class='slider changeval' id='s4' max='1500000' min='25000' oninput='am4.value=s4.value' type='range' value='25000'>
         </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am4' max='1500000' min='25000' oninput='s4.value=am4.value' type='number' value='25000'></span>
     </div>
-</div>
-<script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+    <div class="calculate_slider">
+        <div class="slider_bar">
+            <p>Rate Of Interest (in %)</p>
+            <input class='slider changeval' id='s5' max='30' min='10' oninput='am5.value=s5.value' type='range' value='10'>
+        </div>
+        <span id="slider_range"><input class='range__amount changeval' id='am5' max='30' min='10'  oninput='s5.value=am5.value' type='number' value='10'></span>
+    </div>
+
+
+    </div>
+
+    <div class="col-md-5 border-center">
+        <h3 class="graph-caption">Break-up of Applicable Loan Amount</h3>
+        <div class="graph-chart">
+            <div id="semiChart">No data to display</div>
+            <div class="graph_info">
+                <ul>
+                    <li class="legend1"><label>Principal Amt</label><span id="applicablePri"></span></li>
+                    <li class="legend2"><label>Interest Amt</label><span id="applicableInterest"></span></li>
+                </ul>
+            </div>
+        </div>
+        <h3 class="graph-caption">Break-up of Desired Loan Amount </h3>
+        <div class="graph-chart">
+            <div id="desiredSemiChart">No data to display</div>
+          <div class="graph_info">
+              <ul>
+                <li class="legend1"><label>Principal Amt</label><span id="desiredPri"></span></li>
+                <li class="legend2"><label>Interest Amt</label><span id="desiredInterest"></span></li>
+              </ul>
+          </div>
+      </div>
+      <div class="other-info">
+        <ul>
+            <li><label>Applicable Loan Amount (In INR)</label><span id="oploanAmount">0</span></li>
+            <li><label>Applicable EMI (In INR)</label><span id="oploanEmi">0</span></li>
+            <li><label>Desired FOIR</label><span id="opFoir">0</span></li>
+            <li><label>Desired EMI (In INR)</label><span id="opEmi">0</span></li>
+            <li><label>Desired ROI</label><span id="opRoi">0</span></li>
+        </ul>
+    </div>
+    </div>
+
+
+
 <script>
 $(document).ready(function(){
-     getPresonalLoan();
+    //getPresonalLoan();
+    $('.changeval').on('input',function(){
+        getPresonalLoan();
+    });
+   /* $(".changeval").inputFilter(function(value) {
+        return /^-?\d*$/.test(value);
+    });*/
 });
+
+
 
 function getPresonalLoan(){
 
-var monthly_income=$('#myRange1').val();
-var Obligation=$('#myRange2').val();
-var loan_tenure=$('#myRange3').val();
-var expected_loan_amount=$('#myRange4').val();
-var rate_of_interest=$('#myRange5').val();
+var monthly_income=$('#s1').val();
+var Obligation=$('#s2').val();
+var loan_tenure=$('#s3').val();
+var expected_loan_amount=$('#s4').val();
+var rate_of_interest=$('#s5').val();
 
+console.log('monthly income'+monthly_income);
+if(monthly_income<=0 || Obligation<=0 || loan_tenure<=0 || expected_loan_amount<=0 || rate_of_interest<=0){
+    return false;
+}
 
 $.ajax({
     url: base_url+'/sales/kit/get_personal_loan',
@@ -75,16 +109,41 @@ $.ajax({
     success: function (response) {
 
         var res=JSON.parse(response);
-
+        /*****applicable*****/
+        console.log(res);
+        if(res){
         var  applicableSumInt=res.applicable_amortization_details.sum_interest;
         var  applicableSumPri=res.applicable_amortization_details.sum_principal;
-        $('#appAmt').text('₹ '+res.applicable_amortization_details.sum_principal_text);
-        semiHightChart(applicableSumPri,applicableSumInt,'semiChart');
 
+
+        semiHightChart(applicableSumPri,applicableSumInt,'semiChart');
+        if(applicableSumInt<=0){
+           $('#semiChart').text('No Data Available');
+        }
+        $('#applicablePri').text('₹ '+res.applicable_amortization_details.sum_principal_text);
+        $('#applicableInterest').text('₹ '+res.applicable_amortization_details.sum_interest_text);
+
+
+        /****desired*****/
         var  DesiredSumInt=res.getDesiredAmortizationDetails.sum_interest;
         var  DesiredSumPri=res.getDesiredAmortizationDetails.sum_principal;
-        $('#desiredAmt').text('₹ '+res.getDesiredAmortizationDetails.sum_principal_text);
+
         semiHightChart(DesiredSumPri,DesiredSumInt,'desiredSemiChart');
+        if(DesiredSumInt<=0){
+           $('#desiredSemiChart').text('No Data Available');
+        }
+        $('#desiredPri').text('₹ '+res.getDesiredAmortizationDetails.sum_principal_text);
+        $('#desiredInterest').text('₹ '+res.getDesiredAmortizationDetails.sum_interest_text);
+
+        $('#opEmi').text('₹ '+res.DesiredEmai);
+        $('#opFoir').text(res.DesiredFOIR);
+        $('#opRoi').text(res.DesiredROI);
+        $('#oploanAmount').text('₹ '+res.ApplicableAmt_text);
+        $('#oploanEmi').text('₹ '+res.ApplicableEMI_text);
+
+        }
+
+        //console.log(res);
 
 
     },
@@ -98,47 +157,6 @@ $.ajax({
 }
 
 
-    /*************slider changes ********/
-
-    var slider1 = document.getElementById("myRange1");
-    var output1 = document.getElementById("slider_range");
-    output1.innerHTML = slider1.value;
-
-    slider1.oninput = function() {
-    output1.innerHTML = this.value;
-    }
-
-    var slider2 = document.getElementById("myRange2");
-    var output2 = document.getElementById("slider_range1");
-    output2.innerHTML = slider2.value;
-
-    slider2.oninput = function() {
-    output2.innerHTML = this.value;
-    }
-
-    var slider3 = document.getElementById("myRange3");
-    var output3 = document.getElementById("slider_range2");
-    output3.innerHTML = slider3.value;
-
-    slider3.oninput = function() {
-    output3.innerHTML = this.value;
-    }
-
-    var slider4 = document.getElementById("myRange4");
-    var output4 = document.getElementById("slider_range3");
-    output4.innerHTML = slider4.value;
-
-    slider4.oninput = function() {
-    output4.innerHTML = this.value;
-    }
-
-    var slider5 = document.getElementById("myRange5");
-    var output5 = document.getElementById("slider_range4");
-    output5.innerHTML = slider5.value;
-
-    slider5.oninput = function() {
-    output5.innerHTML = this.value;
-    }
 
 
 </script>

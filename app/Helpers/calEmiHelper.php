@@ -9,16 +9,16 @@ class calEmiHelper
     //$policyFOIR,$policyROI,$expectedROI in percentage
     public function __construct($roi,$loanTenure,$loanAmount)
     {
-     
+
         $this->roi=$roi;
         $this->loanTenure=$loanTenure;
         $this->loanAmount=$loanAmount;
-      
+
     }
-    
-    public function calculateEMI() 
+
+    public function calculateEMI()
     {
-       
+
         $error='';
         $error.=empty($this->roi) ? 'Ret Of Interest' :'';
         $error.=empty($this->loanTenure) ? (!empty($error)? ',':'').' Loan Tenure' : '';
@@ -28,11 +28,11 @@ class calEmiHelper
             $Emi=round($this->getEmi());
             $interestPiad=$this->gerInterestPaid();
             $totalOutFlow=$this->getTotalOutflow();
-            return array('Emi'=>$Emi,'intetest_paid'=>round($interestPiad),'total_overflow'=>round($totalOutFlow));
+            return array('Emi'=>number_format($Emi,0),'intetest_paid'=>number_format(round($interestPiad),0),'total_overflow'=>number_format(round($totalOutFlow),0));
         }
         return array('error'=>$error);
-      
-    } 
+
+    }
 
     public function getEmi(){
       $calPMTHelper= new calPMTHelper();
@@ -49,14 +49,14 @@ class calEmiHelper
         $calPMTHelper= new AmortizationHelper();
         //$amount,$rate,$emi
         $schedule=$calPMTHelper->getAmortizationTbl($this->loanAmount,$this->roi,$this->getEmi());
-       
+
         return $schedule['sum_interest'] + $schedule['sum_principal'];
 
 
     }
 
-   
-        
+
+
 }
 
 ?>

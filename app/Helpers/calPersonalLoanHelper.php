@@ -39,7 +39,7 @@ class calPersonalLoanHelper
             $getApplicableAmortizationDetails=$this->getApplicableAmortizationDetails($applicableLoanAmt,$applicableEMI,$policyROI);
             $getDesiredAmortizationDetails=$this->getDesiredAmortizationDetails($desiredEMI);
 
-            return array('ApplicableAmt'=>$applicableLoanAmt,'ApplicableEMI'=>$applicableEMI,'DesiredEmai'=>$desiredEMI,'DesiredFOIR'=>$desiredFOIR,'DesiredROI'=>$desiredROI,'applicable_amortization_details'=>$getApplicableAmortizationDetails,'getDesiredAmortizationDetails'=>$getDesiredAmortizationDetails);
+            return array('ApplicableAmt'=>round($applicableLoanAmt),'ApplicableAmt_text'=>number_format(round($applicableLoanAmt),0),'ApplicableEMI'=>$applicableEMI,'ApplicableEMI_text'=>number_format($applicableEMI,0),'DesiredEmai'=>round($desiredEMI),'DesiredEmai'=>number_format(round($desiredEMI),0),'DesiredFOIR'=>$desiredFOIR,'DesiredROI'=>$desiredROI,'applicable_amortization_details'=>$getApplicableAmortizationDetails,'getDesiredAmortizationDetails'=>$getDesiredAmortizationDetails);
         }
         return array('error'=>$error);
 

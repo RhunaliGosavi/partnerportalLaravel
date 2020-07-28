@@ -1,3 +1,5 @@
+<div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+</div>
 <div class="row border-bottom">
     <div class="col-sm-12 col-md-6 col-lg-4">
       <div class="form-group">
@@ -13,31 +15,41 @@
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
-            <label for="disbursement_amt"> lap incentive:Disbursement Amount (in INR):</label>
+            <label for="disbursement_amt"> Disbursement Amount (in INR):</label>
             <input type="number" class="form-control" placeholder="Enter Amount" id="disbursement_amt" >
         </div>
     </div>
-  </div>
-  <div class="row padding-top">
     <div class="col-sm-12 col-md-6 col-lg-4">
-      <div class="form-group">
-          <label for="incentive_eligible">Incentive Eligible (in %):</label>
-          <input type="number" class="form-control" placeholder="Enter Incentive Eligible" id="incentive_eligible" onchange="getLapIncentive()">
+        <button type="button" class="btn btn-primary btn-search custom-btn" onclick="getLapIncentive()">Submit</button>
       </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="form-group">
-            <label for="incentive_amt">Incentive Amount (in INR):</label>
-            <input type="number" class="form-control" placeholder="Enter Incentive Amount" id="incentive_amt" onchange="getLapIncentive()">
-        </div>
-    </div>
   </div>
-  <script src="{{url('/assets_frontend/js/custom.js')}}"></script>
+    <div class="row padding-top opBlock" style="display:none;">
+        <div class="col-12">
+          <table class="area-tbl">
+            <tr>
+              <td>Incentive Eligible (In %) </td>
+              <td id="inceEligible"></td>
+            </tr>
+            <tr>
+              <td>Incentive Amount (In INR) </td>
+              <td id="incAmount"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
   <script>
     function getLapIncentive(){
 
         var disbursementAmt=$('#disbursement_amt').val();
         var role=$('#role').val();
+        if(disbursementAmt==''){
+            $('.showError').show();
+            $('.showError').text('Enter disbursrment amount');
+            setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+            return false;
+        }
 
         $.ajax({
             url: base_url+'/sales/kit/get_lap_incentive',
@@ -46,9 +58,13 @@
             success: function (response) {
 
                 var res=JSON.parse(response);
-
-
-                console.log(res);
+                $('.opBlock').hide();
+                if(res){
+                    $('#inceEligible').text(res.Incentive_eligible+ ' %');
+                    $('#incAmount').text('₹ '+res.Incentive_amount);
+                    $('.opBlock').show();
+                }
+                //console.log(res);
 
             },
             error: function(jqXHR, textStatus, errorThrown) {

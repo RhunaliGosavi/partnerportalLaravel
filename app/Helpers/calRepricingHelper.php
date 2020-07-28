@@ -21,7 +21,7 @@ class calRepricingHelper
         $error='';
         $error.=empty($this->type) ? 'Type' :'';
         $error.=empty($this->existingOutstanding) ? (!empty($error)? ',':'').' Existing Outstanding' : '';
-        $error.=empty($this->existingEMI) ? (!empty($error)? ',':'').' Existing EMI' : '';
+
         $error.=empty($this->proposedROI) ? (!empty($error)? ',':'').' Proposed ROI' : '';
         $error.=empty($this->balanceTenure) ? (!empty($error)? ',':'').' Balance Tenure' : '';
         $error.=!empty($error) ? ' Can not be empty' : '';
@@ -30,7 +30,7 @@ class calRepricingHelper
           $revisedOutStanding=$this->getRevisedOutstanding();
           $revisedEMI=$this->getRevisedEMI();
           $revisedTenure=$this->getRevisedTenure();
-          return array('revisedOutStanding'=>round($revisedOutStanding),'revisedEMI'=>$revisedEMI,'revisedTenure'=>$revisedTenure);
+          return array('revisedOutStanding'=>number_format(round($revisedOutStanding),0),'revisedEMI'=>number_format(round($revisedEMI),0),'revisedTenure'=>$revisedTenure);
         }
         return array('error'=>$error);
     }

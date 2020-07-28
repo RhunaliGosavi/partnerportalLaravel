@@ -36,7 +36,7 @@ class calLoanAgainstPropertyHelper
         $desiredLtv=round($this->getDesiredLTV($policyLTV));
         $getApplicableAmortizationDetails=$this->getApplicableAmortizationDetails($this->getLoanAmount($policyFOIR),$this->getEmi($this->getLoanAmount($policyFOIR)));
         $getDesiredAmortizationDetails=$this->getDesiredAmortizationDetails($this->getDesiredEMI());
-        return array('LoanAmt'=>$loanAmt,'EMI'=>$EMI,'DesiredEmi'=>$desiredEmi,'DesiredFOIR'=>$desiredFOIR,'DesiredLTV'=>$desiredLtv,'applicable_amortization_details'=>$getApplicableAmortizationDetails,'getDesiredAmortizationDetails'=>$getDesiredAmortizationDetails);
+        return array('LoanAmt'=>$loanAmt,'LoanAmt_text'=>number_format($loanAmt,0),'EMI'=>$EMI,'EMI_text'=>number_format($EMI,0),'DesiredEmi'=>$desiredEmi,'DesiredEmi_text'=>number_format($desiredEmi,0),'DesiredFOIR'=>$desiredFOIR,'DesiredLTV'=>$desiredLtv,'applicable_amortization_details'=>$getApplicableAmortizationDetails,'getDesiredAmortizationDetails'=>$getDesiredAmortizationDetails);
      }
      return array('error'=>$error);
 
@@ -65,6 +65,7 @@ class calLoanAgainstPropertyHelper
 
    public function getDesiredEMI(){
         $calPMTHelper= new calPMTHelper();
+
         return $calPMTHelper->calPmt($this->roi,$this->loanTenure, $this->expectedLoanAmount);
    }
    public function getDesiredFOIR($policyFOIR){

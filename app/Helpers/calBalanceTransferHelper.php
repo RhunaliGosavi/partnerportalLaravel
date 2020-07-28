@@ -38,7 +38,7 @@ class calBalanceTransferHelper
              $revised_emi=$this->getRevisedEmi();
              $revisedTenure=$this->getRevisedTenure();
 
-            return array('Revised_outstanding'=> $revised_outstanding,'Revised EMI'=>$revised_emi,'revised_tenure'=> $revisedTenure);
+            return array('Revised_outstanding'=> number_format(round($revised_outstanding),0),'Revised_EMI'=>number_format(round($revised_emi),0),'revised_tenure'=> $revisedTenure);
 
         }
         return array('error'=>$error);
@@ -67,7 +67,12 @@ class calBalanceTransferHelper
         if( $this->preferenceType=='existing_emi_change_in_tenure' || $this->preferenceType=='existing_tenure_change_in_emi'){
             $calPMTHelper= new AmortizationHelper();
             //$amount,$rate,$emi
-            $schedule=$calPMTHelper->getAmortizationTbl($this->getRevisedOutstanding(),$this->proposedRoi,$this->getRevisedEmi());
+            if($this->preferenceType=='existing_emi_change_in_tenure'){
+                 $schedule=$calPMTHelper->getAmortizationTbl($this->getRevisedOutstanding(),$this->proposedRoi,$this->getRevisedEmi());
+            }
+            if($this->preferenceType=='existing_tenure_change_in_emi'){
+                $schedule=$calPMTHelper->getAmortizationTbl($this->existingOutstanding,$this->existingRoi,$this->getExistingEmi());
+            }
             if($this->preferenceType!='existing_tenure_change_in_emi' && $schedule['month']==0){
                return 'Select Preference A or C';
             }
