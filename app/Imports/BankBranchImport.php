@@ -6,12 +6,13 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Illuminate\Support\Carbon;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\BankBranch;
 use Helper;
 
-class BankBranchImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue
+class BankBranchImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue, WithBatchInserts
 {
     /**
     * @param array $row
@@ -44,6 +45,11 @@ class BankBranchImport implements ToModel, WithChunkReading, WithHeadingRow, Sho
     }
 
     public function chunkSize(): int {
+        return 1000;
+    }
+
+    public function batchSize(): int
+    {
         return 1000;
     }
 }

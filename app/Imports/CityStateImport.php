@@ -6,12 +6,14 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Illuminate\Support\Carbon;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\CityState;
 use Helper;
 
-class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue
+class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow, ShouldQueue, WithBatchInserts, WithCustomCsvSettings
 {
     /**
     * @param array $row
@@ -46,5 +48,17 @@ class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow, Shou
 
     public function chunkSize(): int {
         return 1000;
+    }
+
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+
+    public function getCsvSettings(): array
+    {
+        return [
+            'input_encoding' => 'ISO-8859-1'
+        ];
     }
 }
