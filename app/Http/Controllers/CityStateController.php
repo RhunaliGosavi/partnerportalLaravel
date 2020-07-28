@@ -29,8 +29,7 @@ class CityStateController extends Controller
                     $result = array($request->file('import_file')->getClientOriginalExtension());
 
                     if(in_array($result[0],$extensions)){
-                        $file=$request->file('import_file');
-                        // dd($file);
+                        $file=$request->file('import_file')->store('import');
                         
                         Excel::import(new CityStateImport, $file);   
                     } else {

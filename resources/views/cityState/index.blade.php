@@ -88,7 +88,7 @@
               	sortable: true,
 				  
               	"columns": [
-                    { field: "pincode",title:'IFSC'},
+                    { field: "pincode",title:'Pincode'},
                     { field: "office_city",title:'City'},
                     { field: "state",title:'State'},
                     { field: "circle",title:'Circle Name'},

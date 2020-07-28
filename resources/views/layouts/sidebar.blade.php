@@ -298,7 +298,7 @@
 					<ul class="m-menu__subnav">
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 							<span class="m-menu__link">
-								<span class="m-menu__link-text">Sales Kit</span>
+								<span class="m-menu__link-text">Masters</span>
 							</span>
 						</li>
 						<li class="m-menu__item  <?php if(preg_match("/\bcity_state\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
@@ -308,7 +308,7 @@
 								</i>
 								<span class="m-menu__link-title">
 									<span class="m-menu__link-wrap">
-										<span class="m-menu__link-text">City</span>
+										<span class="m-menu__link-text">Pincode Import</span>
 									</span>
 								</span>
 							</a>
@@ -320,7 +320,7 @@
 								</i>
 								<span class="m-menu__link-title">
 									<span class="m-menu__link-wrap">
-										<span class="m-menu__link-text">Bank Branch</span>
+										<span class="m-menu__link-text">IFSC Import</span>
 									</span>
 								</span>
 							</a>
