@@ -11,9 +11,10 @@
         </span>
     </div>
   </div>
-  <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
-</div>
+
     <div class="col-md-7 border-right">
+        <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+        </div>
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Existing Outstanding (in INR)</p>
@@ -82,7 +83,17 @@
   <script>
       $(document).ready(function(){
     //getPresonalLoan();
-        $('.changeval').on('input',function(){
+        $('.changeval').on('change',function(){
+            if(this.id!="select_preference"){
+                var validate= validateInput(this.id);
+                if(validate){
+
+                    $('.showError').show();
+                    $('.showError').text(validate);
+                    setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+                    return false;
+                }
+            }
             getBalanceTransfer();
         });
 
@@ -98,13 +109,7 @@
         var choose_your_tenure=$('#s77').val();
         var choose_your_preference=$('#select_preference').val();
 
-        console.log('outstanding'+existing_outstanding);
-        console.log('balance_tenure'+balance_tenure);
-        console.log('existing_roi'+existing_roi);
-        console.log('existing_emi'+existing_emi);
-        console.log('proposed_roi'+proposed_roi);
-        console.log('cost_of_bt_request'+cost_of_bt_request);
-        console.log('choose_your_tenure'+choose_your_tenure);
+
 
        if(existing_outstanding<=0 || balance_tenure<=0 || existing_roi<=0 ||proposed_roi<=0 || cost_of_bt_request<=0 || choose_your_tenure<=0){
            return false;
@@ -131,5 +136,39 @@
         });
 
 
+    }
+    function validateInput(id){
+
+        var max =parseInt($('#'+id).attr('max'));
+        var min =parseInt($('#'+id).attr('min'));
+        var value=parseInt($('#'+id).val());
+        var value1=$('#'+id).val();
+        if(value1!=''){
+        (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
+        }else{
+            $('#'+id).val(0);
+        }
+        var msg='';
+
+        switch (id) {
+            case 'am44':
+                msg=(value<=0 || value1=="") ? ' Enter existing EMI'  : '';
+                (msg) ? $('#s44').val(min) :  $('#s44').val(value);
+                break;
+            case 'am55':
+                msg=(value<=0 || value1=="") ? ' Enter proposed ROI'  : '';
+                (msg) ? $('#s55').val(min) :  $('#s55').val(value);
+                break;
+            case 'am66':
+                msg=(value<=0 || value1=="") ? ' Enter cost on BT request'  : '';
+                (msg) ? $('#s66').val(min) :  $('#s66').val(value);
+                break;
+            case 'am77':
+                msg=(value<=0 || value1=="") ? ' Enter Tenure'  : '';
+                (msg) ? $('#s77').val(min) :  $('#s77').val(value);
+                break;
+            }
+
+        return msg;
     }
     </script>

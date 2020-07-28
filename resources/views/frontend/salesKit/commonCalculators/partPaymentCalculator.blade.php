@@ -10,9 +10,10 @@
         </span>
     </div>
   </div>
-  <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
-</div>
+
     <div class="col-md-7 border-right">
+        <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+        </div>
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Outstanding (in INR)</p>
@@ -50,8 +51,8 @@
 
         <div class="other-info">
             <ul>
-                <li><label>Outstansing (In INR)</label><span id="outstanding">0</span></li>
-                <li><label>Revised EMI (In INR)</label><span id="reEmi">0</span></li>
+                <li><label>Outstansing (In INR)</label><span id="outstanding">₹ 0</span></li>
+                <li><label>Revised EMI (In INR)</label><span id="reEmi">₹ 0</span></li>
                 <li><label>Desired Tenure (In Months)</label><span id="desTenure">0</span></li>
 
             </ul>
@@ -63,7 +64,17 @@
   <script>
     $(document).ready(function(){
        // getLoanAgainstProperty();
-        $('.changeval').on('input',function(){
+        $('.changeval').on('change',function(){
+            if(this.id!='select_preference'){
+            var validate= validateInput(this.id);
+            if(validate){
+
+                $('.showError').show();
+                $('.showError').text(validate);
+                setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+                return false;
+            }
+        }
           getPartPayment();
         });
     });
@@ -88,8 +99,8 @@
             success: function (response) {
 
                 var res=JSON.parse(response);
-                $('#outstanding').text(res.revisedOutStanding);
-                $('#reEmi').text(res.revisedEmi);
+                $('#outstanding').text('₹ '+res.revisedOutStanding);
+                $('#reEmi').text('₹ '+res.revisedEmi);
                 $('#desTenure').text(res.revisedTenure);
 
 
@@ -104,4 +115,26 @@
 
 
     }
+    function validateInput(id){
+
+        var max =parseInt($('#'+id).attr('max'));
+        var min =parseInt($('#'+id).attr('min'));
+        var value=parseInt($('#'+id).val());
+        var value1=$('#'+id).val();
+        if(value1!=''){
+        (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
+        }else{
+            $('#'+id).val(0);
+        }
+        var msg='';
+
+        switch (id) {
+            case 'am55':
+                msg=(value<=0 || value1=="") ? ' Enter part payment'  : '';
+                (msg) ? $('#s55').val(min) :  $('#s55').val(value);
+                break;
+              }
+
+        return msg;
+        }
     </script>

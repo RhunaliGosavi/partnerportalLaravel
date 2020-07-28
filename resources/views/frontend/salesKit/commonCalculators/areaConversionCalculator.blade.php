@@ -1,6 +1,8 @@
 
-
+<div class="col-sm-12 col-md-12 col-lg-9 alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+</div>
 <div class="col-sm-12 col-md-6 col-lg-4">
+
     <div class="form-group">
         <label for="metics">Metics</label>
         <span class="custome-select" id="metics">
@@ -86,6 +88,19 @@
 
         var metrics=$('#selectMetrics').val();
         var unit=$('#unit').val();
+
+        if(metrics==''){
+            $('.showError').show();
+            $('.showError').text('Select Metrics');
+            setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+            return false;
+        }
+        if(unit==''){
+            $('.showError').show();
+            $('.showError').text('Enter units');
+            setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+            return false;
+        }
 
         $.ajax({
             url: base_url+'/sales/kit/get_area_conversion',
