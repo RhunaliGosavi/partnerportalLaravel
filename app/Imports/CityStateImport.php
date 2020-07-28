@@ -45,6 +45,6 @@ class CityStateImport implements ToModel, WithChunkReading, WithHeadingRow, Shou
     }
 
     public function chunkSize(): int {
-        return 500;
+        return 1000;
     }
 }
