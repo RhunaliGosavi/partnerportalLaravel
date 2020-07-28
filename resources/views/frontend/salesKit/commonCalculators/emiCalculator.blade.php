@@ -1,7 +1,8 @@
 
-  <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
-</div>
+
     <div class="col-md-7 border-right">
+        <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+        </div>
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Loan value(in INR)</p>
@@ -18,7 +19,7 @@
       </div>
       <div class="calculate_slider">
         <div class="slider_bar">
-            <p>Loan Tenure (In Months</p>
+            <p>Loan Tenure (In Months)</p>
             <input class='slider changeval' id='s33' max='200' min='0' oninput='am33.value=s33.value' type='range' value='0'>
 
         </div>
@@ -43,7 +44,15 @@
   <script>
       $(document).ready(function(){
     //getPresonalLoan();
-        $('.changeval').on('input',function(){
+        $('.changeval').on('change',function(){
+            var validate= validateInput(this.id);
+            if(validate){
+
+                $('.showError').show();
+                $('.showError').text(validate);
+                setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+                return false;
+            }
             getEmiCalculator();
         });
 
@@ -53,9 +62,7 @@
         var loan_amount=$('#s11').val();
         var roi=$('#s22').val();
         var loan_tenure=$('#s33').val();
-        console.log('loan_amount'+loan_amount);
-        console.log('roi'+roi);
-        console.log('loan_tenure'+loan_tenure);
+
         if(loan_amount<=0 || roi<=0 || loan_tenure<=0){
             return false;
         }
@@ -81,5 +88,31 @@
         });
 
 
+    }
+    function validateInput(id){
+
+        var max =parseInt($('#'+id).attr('max'));
+        var min =parseInt($('#'+id).attr('min'));
+        var value=parseInt($('#'+id).val());
+        var value1=$('#'+id).val();
+        if(value1!=''){
+        (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
+        }else{
+            $('#'+id).val(0);
+        }
+        var msg='';
+
+        switch (id) {
+            case 'am22':
+                msg=(value<=0 || value1=="") ? ' Enter rate of interest'  : '';
+                (msg) ? $('#s22').val(min) :  $('#s22').val(value);
+                break;
+            case 'am33':
+                msg=(value<=0 || value1=="") ? ' Enter loan tenure'  : '';
+                (msg) ? $('#s33').val(min) :  $('#s33').val(value);
+                break;
+            }
+
+        return msg;
     }
     </script>

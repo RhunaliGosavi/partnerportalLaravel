@@ -11,9 +11,10 @@
         </span>
     </div>
   </div>
-  <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
-</div>
+
     <div class="col-md-7 border-right">
+        <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+        </div>
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Existing Outstanding (in INR)</p>
@@ -58,9 +59,9 @@
 
         <div class="other-info">
             <ul>
-                <li><label>Revised Outstansing (In INR)</label><span id="reOutstanding">0</span></li>
-                <li><label>Revised EMI (In INR)</label><span id="reEmi">0</span></li>
-                <li><label>Revised Tenure (In Months)</label><span id="reTenure">0</span></li>
+                <li><label>Revised Outstansing (In INR)</label><span id="reOutstanding">₹ 0</span></li>
+                <li><label>Revised EMI (In INR)</label><span id="reEmi">₹ 0</span></li>
+                <li><label>Revised Tenure (In Months)</label><span id="reTenure"> 0</span></li>
 
             </ul>
         </div>
@@ -69,7 +70,17 @@
   <script>
     $(document).ready(function(){
     //getPresonalLoan();
-        $('.changeval').on('input',function(){
+        $('.changeval').on('change',function(){
+            if(this.id!="select_preference"){
+                var validate= validateInput(this.id);
+                if(validate){
+
+                    $('.showError').show();
+                    $('.showError').text(validate);
+                    setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+                    return false;
+                }
+            }
             getRepricing();
         });
 
@@ -97,8 +108,8 @@
             success: function (response) {
 
                 var res=JSON.parse(response);
-                $('#reOutstanding').text(res.revisedOutStanding);
-                $('#reEmi').text(res.revisedEMI);
+                $('#reOutstanding').text('₹ '+res.revisedOutStanding);
+                $('#reEmi').text('₹ '+res.revisedEMI);
                 $('#reTenure').text(res.revisedTenure);
 
                 //console.log(res);
@@ -111,5 +122,27 @@
         });
 
 
+    }
+    function validateInput(id){
+
+        var max =parseInt($('#'+id).attr('max'));
+        var min =parseInt($('#'+id).attr('min'));
+        var value=parseInt($('#'+id).val());
+        var value1=$('#'+id).val();
+        if(value1!=''){
+        (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
+        }else{
+            $('#'+id).val(0);
+        }
+        var msg='';
+
+        switch (id) {
+            case 'am33':
+                msg=(value<=0 || value1=="") ? ' Enter existing emi'  : '';
+                (msg) ? $('#s33').val(min) :  $('#s33').val(value);
+                break;
+            }
+
+        return msg;
     }
     </script>

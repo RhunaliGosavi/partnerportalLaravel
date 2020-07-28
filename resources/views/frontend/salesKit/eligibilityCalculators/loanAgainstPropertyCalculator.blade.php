@@ -1,6 +1,8 @@
-<div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
-</div>
+
     <div class="col-md-7 border-right">
+        <div class="alert alert-danger alert-dismissible fade show showError col-md-4" role="alert" style="display:none;">
+        </div>
+
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Monthly Income (in INR)</p>
@@ -55,8 +57,8 @@
             <div id="semiChart">No data to display</div>
             <div class="graph_info">
                 <ul>
-                    <li class="legend1"><label>Principal Amt</label><span id="applicablePri"></span></li>
-                    <li class="legend2"><label>Interest Amt</label><span id="applicableInterest"></span></li>
+                    <li class="legend1"><label>Principal Amt</label><span id="applicablePri">₹ 0</span></li>
+                    <li class="legend2"><label>Interest Amt</label><span id="applicableInterest">₹ 0</span></li>
                 </ul>
             </div>
         </div>
@@ -65,18 +67,18 @@
             <div id="desiredSemiChart">No data to display</div>
           <div class="graph_info">
               <ul>
-                <li class="legend1"><label>Principal Amt</label><span id="desiredPri"></span></li>
-                <li class="legend2"><label>Interest Amt</label><span id="desiredInterest"></span></li>
+                <li class="legend1"><label>Principal Amt</label><span id="desiredPri">₹ 0</span></li>
+                <li class="legend2"><label>Interest Amt</label><span id="desiredInterest">₹ 0</span></li>
               </ul>
           </div>
       </div>
       <div class="other-info">
         <ul>
-            <li><label>Applicable Loan Amount (In INR)</label><span id="oploanAmount">0</span></li>
-            <li><label>Applicable EMI (In INR)</label><span id="oploanEmi">0</span></li>
-            <li><label>Desired EMI (In INR)</label><span id="opdesEmi">0</span></li>
-            <li><label>FOIR</label><span id="foir">0</span></li>
-            <li><label>LTV</label><span id="ltv">0</span></li>
+            <li><label>Applicable Loan Amount (In INR)</label><span id="oploanAmount">₹ 0</span></li>
+            <li><label>Applicable EMI (In INR)</label><span id="oploanEmi">₹ 0</span></li>
+            <li><label>Desired EMI (In INR)</label><span id="opdesEmi">₹ 0</span></li>
+            <li><label>FOIR</label><span id="foir">0 %</span></li>
+            <li><label>LTV</label><span id="ltv">0 %</span></li>
         </ul>
     </div>
     </div>
@@ -84,7 +86,15 @@
 <script>
     $(document).ready(function(){
        // getLoanAgainstProperty();
-       $('.changeval').on('input',function(){
+       $('.changeval').on('change',function(){
+        var validate= validateInput(this.id);
+        if(validate){
+
+            $('.showError').show();
+            $('.showError').text(validate);
+            setTimeout(function(){ $(".alert-danger").fadeOut(); }, 5000);
+            return false;
+        }
         getLoanAgainstProperty();
       });
     });
@@ -99,7 +109,9 @@
         var propery_value=$('#s5').val();
         var loan_amount=$('#s6').val();
 
-
+        if(monthly_income<=0 || Obligation<=0 || loan_tenure<=0 || rate_of_interest<=0 || propery_value<=0 || loan_amount<=0){
+            return false;
+        }
 
 
         $.ajax({
@@ -144,6 +156,40 @@
 
     }
 
+    function validateInput(id){
+
+        var max =parseInt($('#'+id).attr('max'));
+        var min =parseInt($('#'+id).attr('min'));
+        var value=parseInt($('#'+id).val());
+        var value1=$('#'+id).val();
+        if(value1!=''){
+        (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
+        }else{
+            $('#'+id).val(0);
+        }
+        var msg='';
+
+        switch (id) {
+            case 'am1':
+                msg=(value<=0 || value1=="") ? ' Enter monthly income'  : '';
+                (msg) ? $('#s1').val(min) :  $('#s1').val(value);
+                break;
+            case 'am2':
+                msg=(value<=0  || value1=="") ? ' Enter Obligation' : '';
+                (msg) ? $('#s2').val(min) :  $('#s2').val(value);
+
+                break;
+
+            case 'am5':
+                msg=(value<=0  || value1=="") ? ' Enter property value' : '';
+                (msg) ? $('#s5').val(min) :  $('#s5').val(value);
+                break;
+
+
+        }
+
+        return msg;
+    }
 
 
 
