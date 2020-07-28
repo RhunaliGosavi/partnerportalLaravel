@@ -174,8 +174,9 @@ class SalesKitController extends Controller
         //proposedTenure:"Choose your Tenor
 
         $calBalanceTransfer=new calBalanceTransferHelper($existingOutstanding,$costOnBtRequest,$preferenceType,$existingRoi,$proposedTenure,$proposedRoi,$balaceTenure);
+       // $calBalanceTransfer=new calBalanceTransferHelper(2000000,15000,'existing_tenure_change_in_emi',13,180,17,120);
         $result=$calBalanceTransfer->calculateBalanceTransfer();
-        dd($result);
+        return json_encode($result);
 
     }
     public function areaConversion(Request $request){
@@ -191,10 +192,12 @@ class SalesKitController extends Controller
         $roi=$request->input('roi');
         $loanTenure=$request->input('loan_tenure');
         $loanAmount=$request->input('loan_amount');
-        //$policyFOIR,$policyROI,$expectedROI in percentage
+
         $calemi=new calEmiHelper($roi,$loanTenure,$loanAmount);
+       // $calemi=new calEmiHelper(9.50,54,100000);
         $result=$calemi->calculateEMI();
-        dd($result);
+       // dd($result);
+       return json_encode($result);
 
     }
     /******Incentive calculator******** */
@@ -211,7 +214,7 @@ class SalesKitController extends Controller
         //$bucketTYpe: 1.bkt1,bkt2,bkt3,bkt4
         $calemi=new calCollectionIncentiveHelper($type,$emiCollect,$noOfCases,$bucketTYpe,$rollback,$posOd,$posForOdCollected);
         $result=$calemi->calculateCollectionIncentive();
-        dd($result);
+        return json_encode($result);
 
     }
     public function getLapIncentive(Request $request){
@@ -222,7 +225,7 @@ class SalesKitController extends Controller
         //$role: 1.sales officer 2.portfolio manager 3.area sales manager
         $calemi=new calLapIncentiveHelper($disbursementAmt,$role);
         $result=$calemi->calculateLapIncentive();
-        dd($result);
+        return json_encode($result);
 
     }
     public function getSelectedview(Request $request){
