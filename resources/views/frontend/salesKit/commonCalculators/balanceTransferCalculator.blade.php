@@ -38,13 +38,7 @@
         <span id="slider_range"><input class='range__amount changeval' id='am33' max='18' min='12' oninput='s33.value=am33.value' type='number' value='12'></span>
 
     </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing EMI(in INR)</p>
-            <input class='slider changeval' id='s44' min="0" max="100" oninput='am44.value=s44.value' type='range' value='0'>
-        </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am44'  min="0" max="100" oninput='s44.value=am44.value' type='number' value='0'></span>
-    </div>
+   
 
     <div class="calculate_slider">
         <div class="slider_bar">
@@ -103,7 +97,7 @@
         var existing_outstanding=$('#s11').val();
         var balance_tenure=$('#s22').val();
         var existing_roi=$('#s33').val();
-        var existing_emi=$('#s44').val();
+        
         var proposed_roi=$('#s55').val();
         var cost_of_bt_request=$('#s66').val();
         var choose_your_tenure=$('#s77').val();
@@ -118,7 +112,7 @@
         $.ajax({
             url: base_url+'/sales/kit/get_balance_transfer',
             type: "post",
-            data: {'existing_outstanding':existing_outstanding,'balance_tenure':balance_tenure,'existing_roi':existing_roi,'existing_emi':existing_emi,'proposed_roi':proposed_roi,'cost_of_bt_request':cost_of_bt_request,'choose_your_tenure':choose_your_tenure,'choose_your_preference':choose_your_preference,_token: '{{csrf_token()}}'} ,
+            data: {'existing_outstanding':existing_outstanding,'balance_tenure':balance_tenure,'existing_roi':existing_roi,'proposed_roi':proposed_roi,'cost_of_bt_request':cost_of_bt_request,'choose_your_tenure':choose_your_tenure,'choose_your_preference':choose_your_preference,_token: '{{csrf_token()}}'} ,
             success: function (response) {
 
                 var res=JSON.parse(response);
@@ -151,10 +145,7 @@
         var msg='';
 
         switch (id) {
-            case 'am44':
-                msg=(value<=0 || value1=="") ? ' Enter existing EMI'  : '';
-                (msg) ? $('#s44').val(min) :  $('#s44').val(value);
-                break;
+            
             case 'am55':
                 msg=(value<=0 || value1=="") ? ' Enter proposed ROI'  : '';
                 (msg) ? $('#s55').val(min) :  $('#s55').val(value);

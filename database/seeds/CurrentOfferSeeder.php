@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CurrentOfferSeeder extends Seeder
 {
     /**
@@ -11,6 +11,7 @@ class CurrentOfferSeeder extends Seeder
      */
     public function run()
     {
+        
         DB::table('current_offers')->insertOrIgnore(array(
             array(
               'id'=>1,
