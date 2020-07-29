@@ -32,6 +32,10 @@ class DatabaseSeeder extends Seeder
             HrLoanSeeder::class,
             OtherLoanSeeder::class,
             DsaLeadSeeder::class,
+            EmployeeDashboardSeeder::class,
+            EmployeeHelpDeskSeeder::class,
+            ImportantLinkSeeder::class,
+            CurrentOfferSeeder::class,
             CollectionIncentiveSeeder::class//production
             
             

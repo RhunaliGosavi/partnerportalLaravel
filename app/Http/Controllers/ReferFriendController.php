@@ -16,7 +16,7 @@ class ReferFriendController extends Controller
 	public function referFriendRequests(Request $request) {
 		$post = $request->all();
         $list = [];
-
+      
         $refer_friend_count = ReferBuddy::count();
 
         if(array_key_exists('pagination', $post) && is_array($post['pagination']) && array_key_exists('page', $post['pagination']) && array_key_exists('perpage', $post['pagination']) && !empty($post['pagination']['perpage']) ) {
