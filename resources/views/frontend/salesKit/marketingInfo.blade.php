@@ -142,7 +142,32 @@
                                         @foreach($visual_categories as $count => $visual_category)
                                         @foreach($visual_category->marketing_visual_category as $visuals)
                                             <div class="tab-pane fade <?php if($count == 0) { echo ' show active'; } ?>" id="visual{{$visual_category->id}}" role="tabpanel" aria-labelledby="visual{{$visual_category->id}}-tab">
-                                                {!! $visuals->content_data !!}
+                                                @if($visual_category->name === Config::get('constant')['sales_kit_products']['MARKETING_INFORMATION']['VISUAL_CATEGORY'])
+                                                    @php
+                                                        $directory = "sales/kit/marketinginformation/visuals/".$visuals->id;
+                                                        $files = Storage::files('public/sales/kit/marketinginformation/visuals/'.$visuals->id);
+                                                        $fCount = 1;
+                                                        $fColumnSize = 1;
+                                                    @endphp
+                                                    <div class="row masonary_image banner-lightbox">
+                                                        @foreach($files as $file)
+                                                            @if($fCount === 1 || $fColumnSize % 12 === 0)
+                                                            @php $fColumnSize = 1; @endphp
+                                                            <div class="column">
+                                                            @endif
+                                                                <a href="#" id="link1" data-toggle="modal" data-target="#myModal">
+                                                                    <img src="{!! url('/').Storage::url($file)!!}" alt="image" class="img-fluid" />
+                                                                </a>
+                                                            @if($fCount % 12 === 0 || $fCount === count($files))
+                                                                @php $fColumnSize = 12; @endphp
+                                                                </div>
+                                                            @endif
+                                                            @php $fCount++; @endphp
+                                                        @endforeach
+                                                    </div>
+                                                @else
+                                                    {!! $visuals->content_data !!}
+                                                @endif
                                             </div>
                                         @endforeach
                                         @endforeach
@@ -155,13 +180,23 @@
             </div>
         </div>
     </section>
-    <div class="modal custom-model-popup" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <iframe src="" width="100%" height="500" id="docPath">Close</iframe>
-            </div>
+    <!-- image modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg modal-image">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body" id="showImg">
+            <!-- here we create the image dynamically -->
+          </div>
+          <div class="modal-footer">
+            <img id="download-image" src="{{url('/assets_frontend/images/img_download.svg')}}" alt="download" class="img-fluid" />
+          </div>
         </div>
+        
+      </div>
     </div>
     <script>
         $('.getDialog').click(function () {
@@ -247,6 +282,16 @@
                     }
                 }
             });
+        });
+        $( "#download-image" ).click(function() {
+            var file = document.getElementById(showImg).getElementsByTagName('img')[0]; 
+            var mysrc = file.src;
+            var a = document.createElement('a');
+            a.href = file;
+            a.download = file;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         });
     </script>
 @endsection
