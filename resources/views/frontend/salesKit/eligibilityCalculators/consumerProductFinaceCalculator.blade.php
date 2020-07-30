@@ -6,16 +6,16 @@
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Loan Amount (in INR)</p>
-                <input class='slider changeval' id='s1'  min='5000' max="1000000" oninput='am1.value=s1.value' type='range' value='0' >
+                <input class='slider changeval' id='s1'  min='5000' max="1000000" oninput='am1.value=s1.value' type='range' value='5000' >
             </div>
-            <span id="slider_range"><input class='range__amount changeval' id='am1'  min='5000' max="1000000" oninput='s1.value=am1.value' type='number' value='0'></span>
+            <span id="slider_range"><input class='range__amount changeval' id='am1'  min='5000' max="1000000" oninput='s1.value=am1.value' type='number' value='5000'></span>
         </div>
         <div class="calculate_slider">
           <div class="slider_bar">
               <p>Rate Of Intterest (in %)</p>
-              <input class='slider changeval' id='s2'  oninput='am2.value=s2.value' type='range' value='0'>
+              <input class='slider changeval' id='s2'  step="0.1" min='0' max="36" oninput='am2.value=s2.value' type='range' value='0'>
           </div>
-          <span id="slider_range"><input class='range__amount changeval' id='am2'  oninput='s2.value=am2.value' type='number' value='0'></span>
+          <span id="slider_range"><input class='range__amount changeval' step="0.1" id='am2'  min='0' max="36" oninput='s2.value=am2.value' type='number' value='0'></span>
       </div>
       <div class="calculate_slider">
         <div class="slider_bar">
@@ -29,9 +29,9 @@
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Advance EMI (In Months)</p>
-            <input class='slider changeval' id='s4' min="0" max="500" oninput='am4.value=s4.value' type='range' value='0'>
+            <input class='slider changeval' id='s4' min="0" max="8" oninput='am4.value=s4.value' type='range' value='0'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' min="0" max="500" id='am4'  oninput='s4.value=am4.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' min="0" max="8" id='am4'  oninput='s4.value=am4.value' type='number' value='0'></span>
     </div>
 
 
@@ -120,9 +120,9 @@
     }
     function validateInput(id){
 
-        var max =parseInt($('#'+id).attr('max'));
-        var min =parseInt($('#'+id).attr('min'));
-        var value=parseInt($('#'+id).val());
+        var max =parseFloat($('#'+id).attr('max'));
+        var min =parseFloat($('#'+id).attr('min'));
+        var value=parseFloat($('#'+id).val());
         var value1=$('#'+id).val();
         if(value1!=''){
         (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
@@ -132,10 +132,7 @@
         var msg='';
 
         switch (id) {
-            case 'am1':
-                msg=(value<=0 || value1=="") ? ' Enter loan amount'  : '';
-                (msg) ? $('#s1').val(min) :  $('#s1').val(value);
-                break;
+
             case 'am2':
                 msg=(value<=0  || value1=="") ? ' Enter rate of interest' : '';
                 (msg) ? $('#s2').val(min) :  $('#s2').val(value);
