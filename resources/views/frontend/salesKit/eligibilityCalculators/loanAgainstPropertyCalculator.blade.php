@@ -6,16 +6,16 @@
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Monthly Income (in INR)</p>
-                <input class='slider changeval' id='s1'  min='0' max="50000000" oninput='am1.value=s1.value' type='range' value='0' >
+                <input class='slider changeval' id='s1'  min='15000' max="10000000" oninput='am1.value=s1.value' type='range' value='15000' >
             </div>
-            <span id="slider_range"><input class='range__amount changeval' id='am1'  min='0' max="50000000" oninput='s1.value=am1.value' type='number' value='0'></span>
+            <span id="slider_range"><input class='range__amount changeval' id='am1'  min='15000' max="10000000" oninput='s1.value=am1.value' type='number' value='15000'></span>
         </div>
         <div class="calculate_slider">
           <div class="slider_bar">
               <p>Obligation (in INR)</p>
-              <input class='slider changeval' id='s2'  min='0' max="50000000" oninput='am2.value=s2.value' type='range' value='0'>
+              <input class='slider changeval' id='s2'  min='0' max="10000000" oninput='am2.value=s2.value' type='range' value='0'>
           </div>
-          <span id="slider_range"><input class='range__amount changeval' max="50000000" id='am2'  min='0' oninput='s2.value=am2.value' type='number' value='0'></span>
+          <span id="slider_range"><input class='range__amount changeval' max="10000000" id='am2'  min='0' oninput='s2.value=am2.value' type='number' value='0'></span>
       </div>
       <div class="calculate_slider">
         <div class="slider_bar">
@@ -29,16 +29,16 @@
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Rate Of Interest (in %)</p>
-            <input class='slider changeval' id='s4' max='18' min='12' oninput='am4.value=s4.value' type='range' value='12'>
+            <input class='slider changeval' id='s4' max='18' min='12' step="0.1" oninput='am4.value=s4.value' type='range' value='12'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am4' max='18' min='12' oninput='s4.value=am4.value' type='number' value='12'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am4' step="0.1" max='18' min='12' oninput='s4.value=am4.value' type='number' value='12'></span>
     </div>
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Property value</p>
-            <input class='slider changeval' id='s5' max='50000000' min='0' oninput='am5.value=s5.value' type='range' value='0'>
+            <input class='slider changeval' id='s5' max='100000000' min='100000' oninput='am5.value=s5.value' type='range' value='100000'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am5' max='50000000' min='0'  oninput='s5.value=am5.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am5' max='100000000' min='100000'  oninput='s5.value=am5.value' type='number' value='100000'></span>
     </div>
     <div class="calculate_slider">
         <div class="slider_bar">
@@ -158,9 +158,9 @@
 
     function validateInput(id){
 
-        var max =parseInt($('#'+id).attr('max'));
-        var min =parseInt($('#'+id).attr('min'));
-        var value=parseInt($('#'+id).val());
+        var max =parseFloat($('#'+id).attr('max'));
+        var min =parseFloat($('#'+id).attr('min'));
+        var value=parseFloat($('#'+id).val());
         var value1=$('#'+id).val();
         if(value1!=''){
         (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
@@ -170,19 +170,11 @@
         var msg='';
 
         switch (id) {
-            case 'am1':
-                msg=(value<=0 || value1=="") ? ' Enter monthly income'  : '';
-                (msg) ? $('#s1').val(min) :  $('#s1').val(value);
-                break;
+
             case 'am2':
                 msg=(value<=0  || value1=="") ? ' Enter Obligation' : '';
                 (msg) ? $('#s2').val(min) :  $('#s2').val(value);
 
-                break;
-
-            case 'am5':
-                msg=(value<=0  || value1=="") ? ' Enter property value' : '';
-                (msg) ? $('#s5').val(min) :  $('#s5').val(value);
                 break;
 
 

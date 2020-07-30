@@ -5,12 +5,12 @@ namespace App\Helpers;
 class calRepricingHelper
 {
 //$type: 1.part payment 2.change in emi  3.change in tenure
-    public function __construct($type,$existingOutstanding,$existingEMI,$proposedROI,$balanceTenure,$existingROI)
+    public function __construct($type,$existingOutstanding,$proposedROI,$balanceTenure,$existingROI)
     {
 
         $this->type=$type;
         $this->existingOutstanding=$existingOutstanding;
-        $this->existingEMI=$existingEMI;
+       
         $this->proposedROI=$proposedROI;
         $this->balanceTenure=$balanceTenure;
         $this->existingROI=$existingROI;

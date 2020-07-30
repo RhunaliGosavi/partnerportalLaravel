@@ -6,24 +6,24 @@
         <div class="calculate_slider">
             <div class="slider_bar">
                 <p>Loan value(in INR)</p>
-                <input class='slider changeval' id='s11'  min='100000' max="50000000" oninput='am11.value=s11.value' type='range' value='100000' >
+                <input class='slider changeval' id='s11'  min='5000' max="50000000" oninput='am11.value=s11.value' type='range' value='5000' >
             </div>
-            <span id="slider_range"><input class='range__amount changeval' id='am11'  min='100000' max="50000000" oninput='s11.value=am11.value' type='number' value='100000'></span>
+            <span id="slider_range"><input class='range__amount changeval' id='am11'  min='5000' max="50000000" oninput='s11.value=am11.value' type='number' value='5000'></span>
         </div>
         <div class="calculate_slider">
           <div class="slider_bar">
               <p>Rate Of Interest (in %)</p>
-              <input class='slider changeval' id='s22'  min='0' max="200" step=0.1 oninput='am22.value=s22.value' type='range' value='0'>
+              <input class='slider changeval' id='s22'  min='8' max="36" step=0.1 oninput='am22.value=s22.value' type='range' value='8'>
           </div>
-          <span id="slider_range"><input class='range__amount changeval' max="200"  step=0.1 id='am22'  min='0' oninput='s22.value=am22.value' type='number' value='0'></span>
+          <span id="slider_range"><input class='range__amount changeval' max="36"  step=0.1 id='am22'  min='8' oninput='s22.value=am22.value' type='number' value='8'></span>
       </div>
       <div class="calculate_slider">
         <div class="slider_bar">
             <p>Loan Tenure (In Months)</p>
-            <input class='slider changeval' id='s33' max='200' min='0' oninput='am33.value=s33.value' type='range' value='0'>
+            <input class='slider changeval' id='s33' max='180' min='6' oninput='am33.value=s33.value' type='range' value='6'>
 
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am33' max='200' min='0' oninput='s33.value=am33.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am33' max='180' min='6' oninput='s33.value=am33.value' type='number' value='6'></span>
 
     </div>
 
@@ -43,7 +43,9 @@
 
   <script>
       $(document).ready(function(){
-    //getPresonalLoan();
+        if($('#s11').val()!=0 && $('#s22').val()!=0 && $('#s33').val()!=0){
+           getEmiCalculator();
+        }
         $('.changeval').on('change',function(){
             var validate= validateInput(this.id);
             if(validate){
@@ -91,16 +93,16 @@
     }
     function validateInput(id){
 
-        var max =parseInt($('#'+id).attr('max'));
-        var min =parseInt($('#'+id).attr('min'));
-        var value=parseInt($('#'+id).val());
+        var max =parseFloat($('#'+id).attr('max'));
+        var min =parseFloat($('#'+id).attr('min'));
+        var value=parseFloat($('#'+id).val());
         var value1=$('#'+id).val();
         if(value1!=''){
         (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
         }else{
             $('#'+id).val(0);
         }
-        var msg='';
+        /*var msg='';
 
         switch (id) {
             case 'am22':
@@ -113,6 +115,6 @@
                 break;
             }
 
-        return msg;
+        return msg;*/
     }
     </script>

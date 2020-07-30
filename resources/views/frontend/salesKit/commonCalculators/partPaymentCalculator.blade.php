@@ -24,9 +24,9 @@
         <div class="calculate_slider">
           <div class="slider_bar">
               <p>Existing ROI (in %)</p>
-              <input class='slider changeval' id='s22'  min='12' max="18" oninput='am22.value=s22.value' type='range' value='12'>
+              <input class='slider changeval' id='s22'  min='12' max="18" step="0.1" oninput='am22.value=s22.value' type='range' value='12'>
           </div>
-          <span id="slider_range"><input class='range__amount changeval' max="18" id='am22'  min='12' oninput='s22.value=am22.value' type='number' value='12'></span>
+          <span id="slider_range"><input class='range__amount changeval' max="18" step="0.1" id='am22'  min='12' oninput='s22.value=am22.value' type='number' value='12'></span>
       </div>
       <div class="calculate_slider">
         <div class="slider_bar">
@@ -117,9 +117,9 @@
     }
     function validateInput(id){
 
-        var max =parseInt($('#'+id).attr('max'));
-        var min =parseInt($('#'+id).attr('min'));
-        var value=parseInt($('#'+id).val());
+        var max =parseFloat($('#'+id).attr('max'));
+        var min =parseFloat($('#'+id).attr('min'));
+        var value=parseFloat($('#'+id).val());
         var value1=$('#'+id).val();
         if(value1!=''){
         (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;

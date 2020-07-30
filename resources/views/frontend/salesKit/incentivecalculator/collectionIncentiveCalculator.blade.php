@@ -153,11 +153,10 @@
         var amountTobeCollected=$('#collectedAmount').val();
         if($type=='pickUp'){
             msg='';
-            if(emiCollect==''){
-                msg='Enter EMI collected';
-            }
             if(noOfCases==''){
-                msg='Enter number Of cases';
+                msg='Enter number of cases';
+            }else if(emiCollect==''){
+                msg='Enter EMI collected';
             }
             if(msg!=''){
                 $('.showError').show();
@@ -169,13 +168,11 @@
         }
         if($type=='preference'){
             msg='';
-            if(rollback==''){
-                msg='Enter rollback';
-            }
             if(posOd==''){
                 msg='Enter POS OD';
-            }
-            if(posForOdCollected==''){
+            }else if(rollback==''){
+                msg='Enter rollback';
+            }else if(posForOdCollected==''){
                 msg='Enter POS for OD collected';
             }
             if(msg!=''){

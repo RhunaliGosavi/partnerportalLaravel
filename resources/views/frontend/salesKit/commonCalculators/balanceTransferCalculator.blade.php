@@ -32,40 +32,34 @@
       <div class="calculate_slider">
         <div class="slider_bar">
             <p>Existing ROI (In %)</p>
-            <input class='slider changeval' id='s33' max='18' min='12' oninput='am33.value=s33.value' type='range' value='12'>
+            <input class='slider changeval' id='s33' max='18' step="0.1" min='12' oninput='am33.value=s33.value' type='range' value='12'>
 
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am33' max='18' min='12' oninput='s33.value=am33.value' type='number' value='12'></span>
+        <span id="slider_range"><input class='range__amount changeval' step="0.1" id='am33' max='18' min='12' oninput='s33.value=am33.value' type='number' value='12'></span>
 
     </div>
-    <div class="calculate_slider">
-        <div class="slider_bar">
-            <p>Existing EMI(in INR)</p>
-            <input class='slider changeval' id='s44' min="0" max="100" oninput='am44.value=s44.value' type='range' value='0'>
-        </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am44'  min="0" max="100" oninput='s44.value=am44.value' type='number' value='0'></span>
-    </div>
+
 
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Proposed ROI(in %)</p>
-            <input class='slider changeval' id='s55' min="0" max="100" oninput='am55.value=s55.value' type='range' value='0'>
+            <input class='slider changeval' id='s55' min="8" max="36" step="0.1" oninput='am55.value=s55.value' type='range' value='8'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am55'  min="10" max="100" oninput='s55.value=am55.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am55' step="0.1" min="8" max="36" oninput='s55.value=am55.value' type='number' value='8'></span>
     </div>
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Cost On BT Request(in INR)</p>
-            <input class='slider changeval' id='s66' min="0" max="10000000" oninput='am66.value=s66.value' type='range' value='0'>
+            <input class='slider changeval' id='s66' min="0" max="100000000" oninput='am66.value=s66.value' type='range' value='0'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am66'  min="0" max="10000000" oninput='s66.value=am66.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am66'  min="0" max="100000000" oninput='s66.value=am66.value' type='number' value='0'></span>
     </div>
     <div class="calculate_slider">
         <div class="slider_bar">
             <p>Choose Your Tenure(in Months)</p>
-            <input class='slider changeval' id='s77' min="0" max="500" oninput='am77.value=s77.value' type='range' value='0'>
+            <input class='slider changeval' id='s77' min="36" max="180" oninput='am77.value=s77.value' type='range' value='36'>
         </div>
-        <span id="slider_range"><input class='range__amount changeval' id='am77'  min="0" max="500" oninput='s77.value=am77.value' type='number' value='0'></span>
+        <span id="slider_range"><input class='range__amount changeval' id='am77'  min="36" max="180" oninput='s77.value=am77.value' type='number' value='36'></span>
     </div>
  </div>
 
@@ -103,7 +97,7 @@
         var existing_outstanding=$('#s11').val();
         var balance_tenure=$('#s22').val();
         var existing_roi=$('#s33').val();
-        var existing_emi=$('#s44').val();
+
         var proposed_roi=$('#s55').val();
         var cost_of_bt_request=$('#s66').val();
         var choose_your_tenure=$('#s77').val();
@@ -118,7 +112,7 @@
         $.ajax({
             url: base_url+'/sales/kit/get_balance_transfer',
             type: "post",
-            data: {'existing_outstanding':existing_outstanding,'balance_tenure':balance_tenure,'existing_roi':existing_roi,'existing_emi':existing_emi,'proposed_roi':proposed_roi,'cost_of_bt_request':cost_of_bt_request,'choose_your_tenure':choose_your_tenure,'choose_your_preference':choose_your_preference,_token: '{{csrf_token()}}'} ,
+            data: {'existing_outstanding':existing_outstanding,'balance_tenure':balance_tenure,'existing_roi':existing_roi,'proposed_roi':proposed_roi,'cost_of_bt_request':cost_of_bt_request,'choose_your_tenure':choose_your_tenure,'choose_your_preference':choose_your_preference,_token: '{{csrf_token()}}'} ,
             success: function (response) {
 
                 var res=JSON.parse(response);
@@ -139,9 +133,9 @@
     }
     function validateInput(id){
 
-        var max =parseInt($('#'+id).attr('max'));
-        var min =parseInt($('#'+id).attr('min'));
-        var value=parseInt($('#'+id).val());
+        var max =parseFloat($('#'+id).attr('max'));
+        var min =parseFloat($('#'+id).attr('min'));
+        var value=parseFloat($('#'+id).val());
         var value1=$('#'+id).val();
         if(value1!=''){
         (value < min) ? $('#'+id).val(min) : ((value > max)  ? $('#'+id).val(max) : $('#'+id).val(value) ) ;
@@ -151,22 +145,13 @@
         var msg='';
 
         switch (id) {
-            case 'am44':
-                msg=(value<=0 || value1=="") ? ' Enter existing EMI'  : '';
-                (msg) ? $('#s44').val(min) :  $('#s44').val(value);
-                break;
-            case 'am55':
-                msg=(value<=0 || value1=="") ? ' Enter proposed ROI'  : '';
-                (msg) ? $('#s55').val(min) :  $('#s55').val(value);
-                break;
+
+
             case 'am66':
                 msg=(value<=0 || value1=="") ? ' Enter cost on BT request'  : '';
                 (msg) ? $('#s66').val(min) :  $('#s66').val(value);
                 break;
-            case 'am77':
-                msg=(value<=0 || value1=="") ? ' Enter Tenure'  : '';
-                (msg) ? $('#s77').val(min) :  $('#s77').val(value);
-                break;
+
             }
 
         return msg;

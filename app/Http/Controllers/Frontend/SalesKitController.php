@@ -149,14 +149,14 @@ class SalesKitController extends Controller
     public function getRepricing(Request $request){
         $type=$request->input('type');
         $existingOutstanding=$request->input('existing_outstanding');
-        $existingEMI=$request->input('existing_emi');
+        
         $proposedROI=$request->input('proposed_roi');
         $balanceTenure=$request->input('balance_tenure');
         $existingROI=$request->input('existing_roi');
 
          //$type: 1.part payment 2.change in emi  3.change in tenure
-        $calRepricing=new calRepricingHelper($type,$existingOutstanding,$existingEMI,$proposedROI,$balanceTenure,$existingROI);
-       // $calRepricing=new calRepricingHelper('part payment',4500000,49549,17,240,12);
+        $calRepricing=new calRepricingHelper($type,$existingOutstanding,$proposedROI,$balanceTenure,$existingROI);
+       // $calRepricing=new calRepricingHelper('part payment',4500000,17,240,12);
         $result=$calRepricing->calculateRepricing();
         return json_encode($result);
 
