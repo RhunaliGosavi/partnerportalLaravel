@@ -13,7 +13,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="{{url('sales/kit/products/'.$loan_products->id)}}">Loan Product</a></li>
+                <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Loan Product</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@if($loan_products) {{$loan_products->name}} @endIf </li>
             </ol>
             </nav>

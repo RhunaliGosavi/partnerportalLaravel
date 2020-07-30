@@ -2,12 +2,25 @@
 @section('title')
 	Corporate Presentations
 @endsection
-@section('content')
+@section('breadcum')
   <section class="page-top">
+    <div class="back-btn">
+        <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
+    </div>
     <div class="page-heading">
       <h1>Corporate Presentations</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
+          <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
+          <li class="breadcrumb-item active" aria-current="page"> Corporate Presentations</li>
+        </ol>
+      </nav>
     </div>
   </section>
+@endsection
+@section('content')
   <section class="page-content-box">
       <div class="application-status helpdesk">
           <div class="helpdesk_head">

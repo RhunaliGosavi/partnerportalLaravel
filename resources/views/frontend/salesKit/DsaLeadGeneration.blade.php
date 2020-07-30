@@ -13,8 +13,8 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
-        <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}"> DSA Onboarding Details</a></li>
-        <li class="breadcrumb-item"><a class="text-dark" href="{{url('sales/kit/dsaleadgeneration')}}">DSA Lead Generation</a></li>
+        <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}">DSA Onboarding Details</a></li>
+        <li class="breadcrumb-item active" aria-current="page">DSA Lead Generation</li>
       </ol>
     </nav>
   </div>

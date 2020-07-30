@@ -24,21 +24,21 @@ a.btn.document-button:focus {
     DSA Onboarding
 @endsection
 @section('breadcum')
-<section class="page-top">
-          <div class="back-btn">
-             <button class="btn" href="{{ url()->previous() }}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></button>
-          </div>
-          <div class="page-heading">
-            <h1>DSA Onboarding Details</h1>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
-                <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
-              </ol>
-            </nav>
-          </div>
-        </section>
+  <section class="page-top">
+    <div class="back-btn">
+      <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
+    </div>
+    <div class="page-heading">
+      <h1>DSA Onboarding Details</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{url('sales/kit')}}">Sales Kit</a></li>
+          <li class="breadcrumb-item"><a href="{{url('sales/kit/dsaonboarding')}}" class="text-dark">DSA Onboarding Details</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
 @endsection
 @section('content')
 
