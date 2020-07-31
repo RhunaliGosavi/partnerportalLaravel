@@ -14,7 +14,7 @@ class LoadProductSeeder extends Seeder
      */
     public function run()
     {
-       
+
         DB::table('loan_products')->insert(array(
                 array(
                   'id'=>1,
@@ -36,14 +36,33 @@ class LoadProductSeeder extends Seeder
                 ),
                 array(
                     'id'=>3,
-                    'name' => 'Loan Against SEcurities',
-                    'slug' => Str::slug('Loan Against SEcurities'),
+                    'name' => 'Loan Against Securities',
+                    'slug' => Str::slug('Loan Against Securities'),
                     // 'icon' => 'product-pic3.png',
                     'description' => 'Do you have an urgent need for cash? Enjoy the flexibility of liquidity along with access to cash without selling off your securities, with Axis Bank’s Loan Against Securities. Get high-value loans upto 85% of the value of your securities at attractive interest rates and avail of overdraft facilities against your shares and mutual funds, bonds and life insurance policies. Before you apply for Loan Against Securities with Axis Bank, make sure to read the features and benefits listed below.',
                     'created_at'=>now(),
                     'updated_at'=>now()
                 ),
+                array(
+                    'id'=>4,
+                    'name' => 'Consumer Product Finance',
+                    'slug' => Str::slug('Consumer Product Finance'),
+                    // 'icon' => 'product-pic3.png',
+                    'description' => 'Consumer product finance',
+                    'created_at'=>now(),
+                    'updated_at'=>now()
+                ),
+                array(
+                    'id'=>5,
+                    'name' => 'Personal Loan',
+                    'slug' => Str::slug('Personal Loan'),
+                    // 'icon' => 'product-pic3.png',
+                    'description' => 'Consumer product finance',
+                    'created_at'=>now(),
+                    'updated_at'=>now()
+                ),
+
               ));
-    
+
     }
 }

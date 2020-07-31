@@ -490,7 +490,7 @@ footer {
         .login-page .right-sec .logo {
           display: block; } }
   .login-page .login-form {
-    width: 60%; }
+    width: 350px; }
     @media screen and (max-width: 575px) {
       .login-page .login-form {
         width: 80%; } }
@@ -1715,5 +1715,58 @@ div#showImg {
     @media screen and (max-width: 991px) {
       .calculator_content .sub-select {
         position: static; } }
+
+.choose-login {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 30px; }
+  .choose-login .choose-login-in {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 50px;
+    margin-bottom: 0; }
+    .choose-login .choose-login-in input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer; }
+    .choose-login .choose-login-in .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 50px;
+      width: 100%;
+      padding: 15px 10px 10px 50px;
+      text-transform: uppercase; }
+      .choose-login .choose-login-in .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 10px;
+        left: 10px;
+        width: 32px;
+        height: 32px;
+        background: url("../images/login-check.png"); }
+    .choose-login .choose-login-in input:checked ~ .checkmark:after {
+      display: block; }
+    .choose-login .choose-login-in input:checked ~ .checkmark {
+      background-color: #fff;
+      border-radius: 30px;
+      color: #97144D; }
+
+.table-custome-style {
+  margin-top: 20px; }
+  .table-custome-style th {
+    font-weight: normal;
+    font-family: 'latobold';
+    background-color: #f9f9f9;
+    font-size: 0.9rem; }
 
 /*# sourceMappingURL=style.css.map */

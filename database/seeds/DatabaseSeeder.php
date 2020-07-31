@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       
+
         $this->call([
             UserTableSeeder::class,
             IncentiveSlabSeeder::class,//production
@@ -22,23 +22,23 @@ class DatabaseSeeder extends Seeder
             MarketingVisualSeeder::class,
             SalesContestSeeder::class,
             CustomerSchemeSeeder::class,
-            DsaOnboardingSeeder::class,
-            CorporatePresentationSeeder::class,
+            //DsaOnboardingSeeder::class,
+           // CorporatePresentationSeeder::class,
             SalesKitProductSeeder::class,
             DocumentChecklistCategorySeeder::class,
             DocumentChecklistProductSeeder::class,
             EmployeeSeeder::class,
-            ReferFriendSeeder::class,
-            HrLoanSeeder::class,
-            OtherLoanSeeder::class,
-            DsaLeadSeeder::class,
-            EmployeeDashboardSeeder::class,
-            EmployeeHelpDeskSeeder::class,
+           // ReferFriendSeeder::class,
+           // HrLoanSeeder::class,
+            //OtherLoanSeeder::class,
+            //DsaLeadSeeder::class,
+            //EmployeeDashboardSeeder::class,
+           // EmployeeHelpDeskSeeder::class,
             ImportantLinkSeeder::class,
             CurrentOfferSeeder::class,
             CollectionIncentiveSeeder::class//production
-            
-            
-        ]);      
+
+
+        ]);
     }
 }

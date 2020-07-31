@@ -13,7 +13,7 @@ class SalesContestSeeder extends Seeder
      */
     public function run()
     {
-       
+
         DB::table('sales_contests')->insert(array(
             array(
               'id'=>1,
@@ -39,7 +39,23 @@ class SalesContestSeeder extends Seeder
                 'created_at'=>now(),
                 'updated_at'=>now()
             ),
-           
+            array(
+                'id'=>4,
+                'loan_product_id' => 4,
+                'content_data' => "<b>Short Description 3</b>: Lorem ipsum onsectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam",
+                'file_path'=>'temp2.pdf',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'id'=>5,
+                'loan_product_id' => 5,
+                'content_data' => "<b>Short Description 3</b>: Lorem ipsum onsectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam",
+                'file_path'=>'temp2.pdf',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+
         ));
     }
 }

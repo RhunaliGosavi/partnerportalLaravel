@@ -31,8 +31,20 @@ class DocumentChecklistCategorySeeder extends Seeder
                 'created_at'=>now(),
                 'updated_at'=>now()
             ),
-            
-           
+            array(
+                'id'=>4,
+                'name' => 'type 4',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+            array(
+                'id'=>5,
+                'name' => 'type 5',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ),
+
+
         ));
     }
 }

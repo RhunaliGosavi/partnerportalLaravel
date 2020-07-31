@@ -36,7 +36,7 @@ class EmployeeSeeder extends Seeder
             'manager_employee_id'=>'23447',
             'status'=>1,
             ),
-            array(
+            /*array(
              'employee_id'=>'2',
             'name'=>'Shweta Desai',
             'email'=>'Shweta@gmail.com',
@@ -123,7 +123,7 @@ class EmployeeSeeder extends Seeder
             'reporting_manager_name'=>'mina',
             'manager_employee_id'=>'8978',
             'status'=>1,
-            ),
+            ),*/
 
         ));
     }
