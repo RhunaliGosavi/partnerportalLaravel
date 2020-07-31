@@ -8,7 +8,7 @@
     <div class="container-fluid ">
       <div class="row">
         <div class="col-lg-2 col-6  p-0 left-sec">
-          <a href="#" class="logo"><img src="{{url('/assets_frontend/images/axis-logo.svg')}}" class="img-fluid"></a>
+          <a href="{{url('/dashboard')}}" class="logo"><img src="{{url('/assets_frontend/images/axis-logo.svg')}}" class="img-fluid"></a>
         </div>
         <div class="col-lg-10 col-6 p-0 right-sec">
           <div class="row m-0">

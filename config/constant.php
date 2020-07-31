@@ -10,9 +10,7 @@ return [
 		'PRODUCT_FAQ' => 'Product FAQ',
 		'CURRENT_OFFERS' => 'Current Offers',
 		'MARKETING_INFORMATION' => [
-			'VISUAL_CATEGORY' => [
-				'BANNER' => 'Offer or Scheme Related Banners'
-			]
+			'VISUAL_CATEGORY' => 'Advertisement Banners'
 		]
 	]
 ];
