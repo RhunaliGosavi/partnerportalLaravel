@@ -20,10 +20,10 @@ class ApplyNowRequestController extends Controller
 		
 		$rules = [
 			'loan_type'		=> 'required',
-			// 'employee_id'   => 'required',
+			'employee_id'   => 'required',
 			'name' 			=> 'required',
 			'mobile_number' => 'required',
-			'loan_product_id' 		=> 'required',
+			// 'loan_product_id' 		=> 'required',
 			'loan_amount' 			=> 'required',
 			'prefered_contact_time' => 'required',
 		];
@@ -34,6 +34,7 @@ class ApplyNowRequestController extends Controller
 		$request->validate($rules, $messages);
 		if(1 == $request->loan_type) {
 			$loan = new HrLoan;
+			$loan->designation  = $request->designation;
 		} else {
 			$loan = new OtherLoan;
 			$loan->loan_product_id  = $request->loan_product_id;

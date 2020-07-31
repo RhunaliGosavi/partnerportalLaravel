@@ -83,7 +83,18 @@
 	                                @endif
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 designation_block">
+                                <div class="form-group">
+                                    <label for="designation">Designation</label>
+                                    <input type="text" class="form-control" placeholder="Enter Designation" id="designation" name="designation" value="{{old('designation')}}">
+                                    @if ($errors->has('designation'))
+                                    <div class="form-control-feedback">
+	                                    {{ $errors->first('designation') }}
+	                                </div>
+	                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 loan_product_block">
                                 <div class="form-group">
                                     <label for="loan_Product">Loan product</label>
                                     <span class="custome-select" id="loan_Product">
@@ -146,9 +157,13 @@
     		if(type == 1) {
     			$('#hr_loan').show();
     			$('#other_loan').hide();
+                $('.designation_block').show();
+                $('.loan_product_block').hide();
     		} else {
     			$('#hr_loan').hide();
     			$('#other_loan').show();
+                $('.designation_block').hide();
+                $('.loan_product_block').show();
     		}
     	});
     	var type = $('#loan-type option:selected').val();
@@ -156,9 +171,13 @@
 		if(type == 1) {
 			$('#hr_loan').show();
 			$('#other_loan').hide();
+                $('.designation_block').show();
+                $('.loan_product_block').hide();
 		} else {
 			$('#hr_loan').hide();
 			$('#other_loan').show();
+                $('.designation_block').hide();
+                $('.loan_product_block').show();
 		}
     </script>
 @endsection
