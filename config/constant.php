@@ -22,5 +22,9 @@ return [
         'personal_loan'=>'Leads.PL@axisfinance.in'
 
 
-    ]
+    ],
+    'email_group_Ids' => [
+		'DSA_Empanelment' => 'ratankumar.kupte@wwindia.com'
+		// 'DSA_Empanelment' => 'Channel.payout@axisfinance.in'
+	]
 ];
