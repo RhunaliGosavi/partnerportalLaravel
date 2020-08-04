@@ -24,6 +24,7 @@ class EmployeeHelpDeskController extends Controller
         $rules = [
             'file' => 'required|mimes:pdf',
             'title'    => 'required',
+            'download_flag'    => 'required',
         ];
 
         $request->validate($rules);
@@ -40,7 +41,7 @@ class EmployeeHelpDeskController extends Controller
             $filesize=number_format($filesize / 1048576,2);
             $request->file('file')->storeAs('public/employee/helpdesk/upload',$fileNameToStore);
             $process = EmployeeHelpdesk::create(
-                ['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize]
+                ['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize,'download_flag'=>$request->download_flag == 1 ? true : false]
                 );
                 if(! $process){
                 return redirect()->back()->with('error', 'Failed To Update Data'); 
@@ -109,6 +110,7 @@ class EmployeeHelpDeskController extends Controller
             $rules = [
                 'file' => 'required|mimes:pdf',
                 'title'    => 'required',
+                'download_flag'    => 'required',
             ];
 
             $request->validate($rules);
@@ -135,7 +137,7 @@ class EmployeeHelpDeskController extends Controller
        }
 
        $process = EmployeeHelpdesk::where('id', $request->input('id'))
-       ->update(['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize]);
+       ->update(['file_path' =>$fileNameToStore,'name'=>$title,'file_size_in_mb'=>$filesize,'download_flag'=>$request->download_flag == 1 ? true : false]);
 
         if(! $process){
             return redirect()->back()->with('error', 'Failed To Update Data'); 

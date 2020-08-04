@@ -61,6 +61,15 @@ class LoadProductSeeder extends Seeder
                     'created_at'=>now(),
                     'updated_at'=>now()
                 ),
+                array(
+                    'id'=>6,
+                    'name' => 'Unapproved sourcing',
+                    'slug' => Str::slug('Unapproved sourcing'),
+                    // 'icon' => 'product-pic3.png',
+                    'description' => 'Unapproved sourcing',
+                    'created_at'=>now(),
+                    'updated_at'=>now()
+                ),
 
               ));
 

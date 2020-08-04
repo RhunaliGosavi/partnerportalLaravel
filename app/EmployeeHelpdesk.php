@@ -14,6 +14,6 @@ class EmployeeHelpdesk extends Model
   
 
     protected $fillable = [
-        'name', 'file_path', 'file_size_in_mb'
+        'name', 'file_path', 'file_size_in_mb', 'download_flag'
     ];
 }

@@ -38,6 +38,24 @@
 	                                @endif
 								</div>
 							</div>
+							<div class="form-group m-form__group row {{ $errors->has('download_flag') ? 'has-danger' : ''}}">
+								<label class="col-3 col-form-label">Allow To Download</label>
+								<div class="col-md-4 m-radio-inline">
+									<label class="m-radio m-radio--solid">
+										<input type="radio" name="download_flag" value="1" @if(old('download_flag')) checked="checked" @endif> Yes
+										<span></span>
+									</label>
+									<label class="m-radio m-radio--solid">
+										<input type="radio" name="download_flag" value="0" @if(!old('download_flag')) checked="checked" @endif> No
+										<span></span>
+									</label>
+									@if ($errors->has('download_flag'))
+                                    <div class="form-control-feedback">
+	                                    {{ $errors->first('download_flag') }}
+	                                </div>
+	                                @endif
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="m-portlet__foot m-portlet__foot--fit">
