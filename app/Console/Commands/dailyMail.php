@@ -45,8 +45,8 @@ class dailyMail extends Command
      */
     public function handle()
     {
-        //$productArray=array('hrid', Config::get('constant')['APPLY_NOW_MAIL']['business_loan'],Config::get('constant')['APPLY_NOW_MAIL']['loan_against_property'], Config::get('constant')['APPLY_NOW_MAIL']['loan_against_securities'],Config::get('constant')['APPLY_NOW_MAIL']['consumer_product_finance'],Config::get('constant')['APPLY_NOW_MAIL']['personal_loan']);
-       $productArray=array('rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com');
+        $productArray=array(Config::get('constant')['APPLY_NOW_MAIL']['hr_loan'], Config::get('constant')['APPLY_NOW_MAIL']['business_loan'],Config::get('constant')['APPLY_NOW_MAIL']['loan_against_property'], Config::get('constant')['APPLY_NOW_MAIL']['loan_against_securities'],Config::get('constant')['APPLY_NOW_MAIL']['consumer_product_finance'],Config::get('constant')['APPLY_NOW_MAIL']['personal_loan']);
+        //$productArray=array('rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com');
         foreach ($productArray as $key => $value) {
             if($key==0){
                 $raw=Excel::raw(new HRLoanExport(null,'hrLoan'), BaseExcel::XLSX) ;
