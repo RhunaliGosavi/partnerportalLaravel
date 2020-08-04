@@ -27,6 +27,8 @@ use App\Helpers\calLapIncentiveHelper;
 use App\Helpers\calLoanAgainstPropertyHelper;
 use App\Helpers\calPartPaymentHelper;
 use App\Helpers\calRepricingHelper;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DsaLeadMail;
 
 class SalesKitController extends Controller
 {
@@ -279,8 +281,8 @@ class SalesKitController extends Controller
         $rules = [
 			'bank_acc_number' => 'required',
 			'ifsc_code'   => 'required',
-            'bank_name'	=> 'required',
-			'branch_name' => 'required',
+            // 'bank_name'	=> 'required',
+			// 'branch_name' => 'required',
 			'upi_id' 		=> 'required',
 			'name' 			=> 'required',
             'mobile_number' => 'required',
@@ -292,8 +294,8 @@ class SalesKitController extends Controller
             'address_line1' => 'required',
             'address_line2' => 'required',
             'pincode'       => 'required',
-            'city'          => 'required',
-            'state'         => 'required',
+            // 'city'          => 'required',
+            // 'state'         => 'required',
             'agency_name'   => 'required',
             'gst_number'    => 'required',
             'official_email' => 'required',
@@ -315,37 +317,21 @@ class SalesKitController extends Controller
         $file1NameToStore = NULL;
         $file2NameToStore = NULL;
         if($request->hasFile('address_proof_doc')){
-            $extensions = array("pdf","doc","docx","png","jpeg","jpg");
-            $result = array($request->file('address_proof_doc')->getClientOriginalExtension());
-            if(in_array($result[0],$extensions)){
-                $filenameWithExt = $request->file('address_proof_doc')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('address_proof_doc')->getClientOriginalExtension();
-                $filename = preg_replace('/\s+/', '_',trim($filename));
-                $file1NameToStore = $filename.'_'.time().'.'.$extension;
-                $filesize=$request->file('address_proof_doc')->getSize();
-                $filesize=number_format($filesize / 1048576,2);
-                $request->file('address_proof_doc')->storeAs('public/sales/kit/dsaleadgenerate',$file1NameToStore);
-            }else{
+            $file1NameToStore = $this->upload_file($request->file('address_proof_doc'));
+            if($file1NameToStore == false) {
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
         }
         if($request->hasFile('pan_card_doc')){
-            $extensions2 = array("pdf","doc","docx","png","jpeg","jpg");
-            $result2 = array($request->file('pan_card_doc')->getClientOriginalExtension());
-            if(in_array($result2[0],$extensions2)){
-                $filenameWithExt2 = $request->file('pan_card_doc')->getClientOriginalName();
-                $filename2 = pathinfo($filenameWithExt2, PATHINFO_FILENAME);
-                $extension2 = $request->file('pan_card_doc')->getClientOriginalExtension();
-                $filename2 = preg_replace('/\s+/', '_',trim($filename2));
-                $file2NameToStore = $filename2.'_'.time().'.'.$extension2;
-                $filesize2=$request->file('pan_card_doc')->getSize();
-                $filesize2=number_format($filesize2 / 1048576,2);
-                $request->file('pan_card_doc')->storeAs('public/sales/kit/dsaleadgenerate',$file2NameToStore);
-            }else{
+            $file2NameToStore = $this->upload_file($request->file('pan_card_doc'));
+            if($file2NameToStore == false) {
                 return redirect()->back()->with('error', 'File format is invalid.');
             }
         }
+        $documents = [
+            'address_proof_doc' => $request->file('address_proof_doc'),
+            'pan_card_doc' => $request->file('pan_card_doc')
+        ];
         $request->validate($rules, $messages);
         $lead_generated_source = (Employee::find($user->id)) ? Config::get('constant')['user_types']['AFL_EMPLOYEE'] : Config::get('constant')['user_types']['BUSSINESS_PARTNER'];
         $dsaLead = new DsaLead;
@@ -376,6 +362,26 @@ class SalesKitController extends Controller
         $dsaLead->address_proof_doc = $file1NameToStore;
         $dsaLead->pan_card_doc = $file2NameToStore;
         $dsaLead->save();
-        return redirect('sales/kit/dsaleadgeneration')->with('success','Lead added successfully.');
+        Mail::to($dsaLead->email)->send(new DsaLeadMail($dsaLead, $documents));
+        Mail::to(Config::get('constant')['email_group_Ids']['DSA_Empanelment'])->send(new DsaLeadMail($dsaLead, $documents));
+        return back()->with('success', 'Lead added successfully.');
+    }
+
+    public function upload_file($file) {
+        $extensions = array("pdf","doc","docx","png","jpeg","jpg");
+        $result = array($file->getClientOriginalExtension());
+        if(in_array($result[0],$extensions)){
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_',trim($filename));
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $filesize=$file->getSize();
+            $filesize=number_format($filesize / 1048576,2);
+            $file->storeAs('public/sales/kit/dsaleadgenerate',$fileNameToStore);
+            return $fileNameToStore;
+        }else{
+            return false;
+        }
     }
 }

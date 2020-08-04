@@ -35,8 +35,8 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('sales/kit/marketing/visuals','Frontend\SalesKitController@fetchMarketingVisuals');
 	Route::post('dashboard/getappdetails','Frontend\DashboardController@getEmployeeAppDetails');
 
+	Route::post('sales/kit/add_dsaleadgeneration','Frontend\SalesKitController@addDSALead');
 	Route::get('sales/kit/dsaleadgeneration','Frontend\SalesKitController@DSALeadGeneration');
-	Route::post('sales/kit/dsaleadgeneration','Frontend\SalesKitController@addDSALead');
 	Route::get('sales/kit/corporatepresentation','Frontend\SalesKitController@corporatepresentation');
 
 	Route::get('important/links','Frontend\LinkController@index');

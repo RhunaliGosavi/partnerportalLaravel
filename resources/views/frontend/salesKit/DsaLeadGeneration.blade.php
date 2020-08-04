@@ -22,7 +22,7 @@
 @endsection
 @section('content')
 <section class="page-content-box">
-    <form action="{{url('sales/kit/dsaleadgeneration')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{url('sales/kit/add_dsaleadgeneration')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="application-status dsa-lead-generation">
             <h2 class="mb-3">Bank Account Details</h2>

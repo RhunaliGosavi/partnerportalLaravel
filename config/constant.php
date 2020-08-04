@@ -11,6 +11,11 @@ return [
 		'CURRENT_OFFERS' => 'Current Offers',
 		'MARKETING_INFORMATION' => [
 			'VISUAL_CATEGORY' => 'Advertisement Banners'
-		]
+			]
+		],
+		
+	'email_group_Ids' => [
+		'DSA_Empanelment' => 'ratankumar.kupte@wwindia.com'
+		// 'DSA_Empanelment' => 'Channel.payout@axisfinance.in'
 	]
 ];
