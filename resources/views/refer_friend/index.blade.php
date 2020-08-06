@@ -25,7 +25,7 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
+
 			table = $('#refer_friend').mDatatable( {
                 data: {
                     type: 'remote',
@@ -77,6 +77,15 @@
                     		}
 	                    }
 					},
+                    { field: "relation_with_customer.relationship",title:'Relationship With Customer', template:function(row) {
+                    		if(row.source_user_id && row.relation_with_customer.relationship) {
+                    			return row.relation_with_customer.relationship;
+                    		} else {
+                    			return '-';
+                    		}
+	                    }
+					},
+                    { field: "name",title:'Applicant Name'},
                     { field: "email",title:'Email'},
                     { field: "mobile_number",title:'Mobile Number'},
                     { field: "loan_product",title:'Loan Product', template:function(row) {

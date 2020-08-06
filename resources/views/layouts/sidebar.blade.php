@@ -1,4 +1,4 @@
-<?php 
+<?php
     $urlString = url()->current();
 ?>
 <!-- BEGIN: Left Aside -->
@@ -60,17 +60,27 @@
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  <?php if(preg_match("/\breferFriendRequests\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
-				<a href="{{url('referFriendRequests')}}" class="m-menu__link ">
+			<li class="m-menu__item  <?php if(preg_match("/\breferCustomer\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+				<a href="{{url('referCustomer')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
 						<span class="m-menu__link-wrap">
-							<span class="m-menu__link-text">Refer Friend Requests</span>
+							<span class="m-menu__link-text">Refer Customer</span>
+						</span>
+					</span>
+				</a>
+            </li>
+            <li class="m-menu__item  <?php if(preg_match("/\brelationshipWithCustomer\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+				<a href="{{url('relationshipWithCustomer')}}" class="m-menu__link ">
+					<i class="m-menu__link-icon flaticon-user-settings"></i>
+					<span class="m-menu__link-title">
+						<span class="m-menu__link-wrap">
+							<span class="m-menu__link-text">Relationship With Customer</span>
 						</span>
 					</span>
 				</a>
 			</li>
-			<li class="m-menu__item  <?php if(preg_match("/\bapplyNowRequests\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
+			<!--<li class="m-menu__item  <?php if(preg_match("/\bapplyNowRequests\b/i", $urlString)) { echo 'm-menu__item--active'; } ?>" aria-haspopup="true">
 				<a href="{{url('applyNowRequests')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
 					<span class="m-menu__link-title">
@@ -79,7 +89,7 @@
 							</span>
 					</span>
 				</a>
-			</li>
+			</li>-->
 			<!-- <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
 				<a href="{{url('salesProduct')}}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-user-settings"></i>
