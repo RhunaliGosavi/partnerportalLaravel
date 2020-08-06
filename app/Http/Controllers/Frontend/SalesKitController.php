@@ -364,7 +364,7 @@ class SalesKitController extends Controller
         $dsaLead->save();
         Mail::to($dsaLead->email)->send(new DsaLeadMail($dsaLead, $documents));
         Mail::to(Config::get('constant')['email_group_Ids']['DSA_Empanelment'])->send(new DsaLeadMail($dsaLead, $documents));
-        return back()->with('success', 'Lead added successfully.');
+        return view('frontend.salesKit.DsaLeadGeneration')->with('success', 'Lead added successfully.');
     }
 
     public function upload_file($file) {
