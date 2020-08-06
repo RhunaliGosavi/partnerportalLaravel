@@ -4,19 +4,24 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Exports\ReferFriendExport;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\LoanProduct;
+use App\Mail\ReferCustomerMail;
 use App\ReferBuddy;
+use App\RelationshipWithCustomer;
 use Auth;
 use Mail;
 use Maatwebsite\Excel\Excel as BaseExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Config;
+use Illuminate\Support\Facades\DB;
 
 class ReferFriendController extends Controller
 {
     public function index() {
-    	$data['loan_products'] = LoanProduct::get();
+        $data['loan_products'] = LoanProduct::get();
+        $data['relationship'] = RelationshipWithCustomer::get();
     	return view('frontend.refer_friend.index', $data);
 	}
 
@@ -28,11 +33,13 @@ class ReferFriendController extends Controller
 			'email' 		=> 'required',
 			'loan_product_id' 		=> 'required',
 			'loan_amount' 			=> 'required',
-			'prefered_contact_time' => 'required',
+            'prefered_contact_time' => 'required',
+            'relWithCustomer'=>'required'
 		];
 
 		$messages = [
-			'loan_product_id.required' => 'Please select loan product'
+            'loan_product_id.required' => 'Please select loan product',
+            'relWithCustomer.required' => 'Please select relationship with customer'
 		];
 		$request->validate($rules, $messages);
 
@@ -43,7 +50,8 @@ class ReferFriendController extends Controller
 		$refer->loan_product_id = $request->loan_product_id;
 		$refer->loan_amount 	= $request->loan_amount;
 		$refer->prefered_contact_time = date('Y-m-d H:i:s',strtotime($request->prefered_contact_time));
-		$refer->source_user_id  = Auth::user()->id;
+        $refer->source_user_id  = Auth::user()->id;
+        $refer->relation_with_customer_id  = $request->relWithCustomer;
         $refer->save();
         /******Rhuna : send mail*****/
         switch ($request->loan_product_id) {
@@ -73,15 +81,19 @@ class ReferFriendController extends Controller
         /******Rhuna : send mail*****/
          //$to_mail='rhuna0606@gmail.com';
          $raw= Excel::raw(new ReferFriendExport($refer->id), BaseExcel::XLSX) ;
+         $userSubject="User Test";
+         $CustSubject="customer Test";
+         SendEmail::dispatch('frontend.refer_friend.userCustomerLeadGenerationMail',$userSubject,Auth::user()->email);
+         SendEmail::dispatch('frontend.refer_friend.userCustomerLeadGenerationMail',$CustSubject,$refer->email);
          $data = array('name'=>"");
+
          Mail::send('frontend.apply_now_requests.ApplyNowMail', $data, function($message) use($raw,$to_mail,$fileName) {
 
              $message->to($to_mail, 'Axis Bank')->subject
                 ('Refer Your  Friend Lead Details');
-             $message->from('axisBnak@gmail.com','Axis Bank');
-             $message->attachData($raw, $fileName.'.xlsx');
+              $message->attachData($raw, $fileName.'.xlsx');
           });
         /******Rhuna : send mail*****/
-		return redirect('refer/friend')->with('success','Refer friend added successfully.');
+		return redirect('refer/customer')->with('success','Refer friend added successfully.');
 	}
 }

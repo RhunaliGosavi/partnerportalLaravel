@@ -8,11 +8,11 @@
         <a class="btn" href="{{url()->previous()}}"><img src="{{url('/assets_frontend/images/back-btn-icon.png')}}"></a>
       </div>
       <div class="page-heading">
-        <h1>Refer your friend</h1>
+        <h1>Refer Customer</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{url('refer/friend')}}">Refer your friend</a></li>
+            <li class="breadcrumb-item"><a href="{{url('refer/customer')}}">Refer Customer</a></li>
           </ol>
         </nav>
       </div>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <h2 class="mb-3">Refer Your Friend</h2>
+                    <h2 class="mb-3">Refer Customer</h2>
                     <p>Refer a friend by submitting following information</p>
                     @if(session('success'))
                     	<p>{{session('success')}}</p>
@@ -67,6 +67,27 @@
 	                                    {{ $errors->first('email') }}
 	                                </div>
 	                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="loanProduct">Relationship With Customer</label>
+                                    <span class="custome-select">
+                                        <select name="relWithCustomer">
+                                        	@if(count($relationship))
+                                        		@foreach($relationship as $rel)
+                                          			<option value="{{$rel->id}}">{{$rel->relationship}}</option>
+                                          		@endforeach
+                                        	@else
+                                          		<option value="">Select Product</option>
+                                        	@endif
+                                        </select>
+                                        @if ($errors->has('loan_product_id'))
+	                                    <div class="form-control-feedback">
+		                                    {{ $errors->first('loan_product_id') }}
+		                                </div>
+		                                @endif
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-6">

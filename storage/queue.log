@@ -1,0 +1,177 @@
+[2020-08-05 10:05:02][2] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-05 10:06:33][2] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-05 10:08:04][2] Processing: App\Jobs\SendEmail
+[2020-08-05 10:08:09][2] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 04:42:55][1] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][2] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][3] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][4] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][5] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][5] Failed:     App\Jobs\SendEmail
+[2020-08-06 04:42:55][6] Processing: App\Jobs\SendEmail
+[2020-08-06 04:42:55][6] Failed:     App\Jobs\SendEmail
+[2020-08-06 04:50:41][7] Processing: App\Jobs\SendEmail
+[2020-08-06 04:50:41][7] Failed:     App\Jobs\SendEmail
+[2020-08-06 04:52:20][8] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 04:53:50][8] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 04:53:59][9] Processing: App\Jobs\SendEmail
+[2020-08-06 04:53:59][9] Failed:     App\Jobs\SendEmail
+[2020-08-06 04:54:41][10] Processing: App\Jobs\SendEmail
+[2020-08-06 04:54:46][10] Processed:  App\Jobs\SendEmail
+[2020-08-06 05:11:38][11] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][12] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][13] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][14] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][15] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][15] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:11:38][16] Processing: App\Jobs\SendEmail
+[2020-08-06 05:11:38][16] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:13:50][17] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][18] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][19] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][20] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][21] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][21] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:13:50][22] Processing: App\Jobs\SendEmail
+[2020-08-06 05:13:50][22] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:15:03][23] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:16:17][24] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:16:34][23] Processing: App\Jobs\SendEmail
+[2020-08-06 05:16:34][23] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:17:33][25] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:19:03][25] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:20:34][25] Processing: App\Jobs\SendEmail
+[2020-08-06 05:20:40][25] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:21:49][26] Processing: App\Jobs\SendEmail
+[2020-08-06 05:21:50][27] Processing: App\Jobs\SendEmail
+[2020-08-06 05:21:50][28] Processing: App\Jobs\SendEmail
+[2020-08-06 05:21:50][29] Processing: App\Jobs\SendEmail
+[2020-08-06 05:21:50][29] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:21:57][26] Processed:  App\Jobs\SendEmail
+[2020-08-06 05:25:06][30] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:25:11][31] Processing: App\Jobs\SendEmail
+[2020-08-06 05:25:11][31] Failed:     App\Jobs\SendEmail
+[2020-08-06 05:26:37][30] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:28:08][30] Processing: App\Jobs\SendEmail
+[2020-08-06 05:28:13][30] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:38:10][32] Processing: App\Jobs\SendEmail
+[2020-08-06 05:38:10][33] Processing: App\Jobs\SendEmail
+[2020-08-06 05:38:10][34] Processing: App\Jobs\SendEmail
+[2020-08-06 05:38:10][35] Processing: App\Jobs\SendEmail
+[2020-08-06 05:38:10][35] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:39:40][32] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:41:11][32] Processing: App\Jobs\SendEmail
+[2020-08-06 05:41:16][32] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:42:39][36] Processing: App\Jobs\SendEmail
+[2020-08-06 05:42:40][37] Processing: App\Jobs\SendEmail
+[2020-08-06 05:42:40][38] Processing: App\Jobs\SendEmail
+[2020-08-06 05:42:40][39] Processing: App\Jobs\SendEmail
+[2020-08-06 05:42:40][39] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:44:09][36] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:45:40][36] Processing: App\Jobs\SendEmail
+[2020-08-06 05:45:45][36] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 05:47:14][40] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:48:45][40] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 05:51:01][40] Processing: App\Jobs\SendEmail
+[2020-08-06 05:51:06][40] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 06:08:18][41] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:09:50][41] Processing: App\Jobs\SendEmail
+[2020-08-06 06:09:50][41] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:12:03][42] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:13:33][42] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:15:05][42] Processing: App\Jobs\SendEmail
+[2020-08-06 06:15:05][42] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:20:09][43] Processing: App\Jobs\SendEmail
+[2020-08-06 06:20:09][43] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:20:09][44] Processing: App\Jobs\SendEmail
+[2020-08-06 06:20:09][44] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:21:01][45] Processing: App\Jobs\SendEmail
+[2020-08-06 06:21:01][46] Processing: App\Jobs\SendEmail
+[2020-08-06 06:21:01][47] Processing: App\Jobs\SendEmail
+[2020-08-06 06:21:01][47] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:22:34][48] Processing: App\Jobs\SendEmail
+[2020-08-06 06:22:34][49] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:22:41][48] Processed:  App\Jobs\SendEmail
+[2020-08-06 06:24:05][49] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:25:35][49] Processing: App\Jobs\SendEmail
+[2020-08-06 06:25:40][49] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 06:26:25][50] Processing: App\Jobs\SendEmail
+[2020-08-06 06:26:27][51] Processing: App\Jobs\SendEmail
+[2020-08-06 06:26:32][50] Processed:  App\Jobs\SendEmail
+Killed
+[2020-08-06 06:27:57][51] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:29:27][51] Processing: App\Jobs\SendEmail
+[2020-08-06 06:29:45][51] Failed:     App\Jobs\SendEmail
+Killed
+[2020-08-06 06:32:13][52] Processing: App\Jobs\SendEmail
+[2020-08-06 06:32:14][53] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:32:24][53] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:33:44][52] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:34:23][54] Processing: App\Jobs\SendEmail
+[2020-08-06 06:34:24][55] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:34:30][55] Processed:  App\Jobs\SendEmail
+[2020-08-06 06:35:41][56] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:35:46][57] Processing: App\Jobs\SendEmail
+[2020-08-06 06:35:53][57] Processed:  App\Jobs\SendEmail
+[2020-08-06 06:35:53][54] Processing: App\Jobs\SendEmail
+[2020-08-06 06:35:53][54] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:37:11][56] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:38:41][56] Processing: App\Jobs\SendEmail
+[2020-08-06 06:38:41][56] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:39:50][58] Processing: App\Jobs\SendEmail
+[2020-08-06 06:39:52][59] Processing: App\Jobs\SendEmail
+[2020-08-06 06:39:56][58] Processed:  App\Jobs\SendEmail
+Killed
+[2020-08-06 06:40:19][60] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:40:25][61] Processing: App\Jobs\SendEmail
+[2020-08-06 06:40:32][61] Processed:  App\Jobs\SendEmail
+[2020-08-06 06:41:23][59] Processing: App\Jobs\SendEmail
+[2020-08-06 06:41:23][59] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:41:50][60] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:42:49][62] Processing: App\Jobs\SendEmail
+[2020-08-06 06:42:50][63] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:42:56][63] Processed:  App\Jobs\SendEmail
+[2020-08-06 06:43:20][60] Processing: App\Jobs\SendEmail
+[2020-08-06 06:43:20][60] Failed:     App\Jobs\SendEmail
+[2020-08-06 06:44:19][62] Processing: App\Jobs\SendEmail
+Killed
+[2020-08-06 06:45:50][62] Processing: App\Jobs\SendEmail
+[2020-08-06 06:45:55][62] Failed:     App\Jobs\SendEmail
+Killed

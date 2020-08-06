@@ -60,11 +60,11 @@
                         <a class="nav-link" href="{{url('application/status/tracker')}}">Application Status Tracker</a>
                     </li>
                     <li class="nav-item <?php if(preg_match("/\brefer\b/i", $urlString)) { echo 'active'; } ?>">
-                        <a class="nav-link" href="{{url('refer/friend')}}">Refer Your Friend</a>
+                        <a class="nav-link" href="{{url('refer/customer')}}">Refer Customer</a>
                     </li>
-                    <li class="nav-item <?php if(preg_match("/\bapply\b/i", $urlString)) { echo 'active'; } ?>">
+                   <!-- <li class="nav-item <?php if(preg_match("/\bapply\b/i", $urlString)) { echo 'active'; } ?>">
                         <a class="nav-link" href="{{url('apply/now')}}">Apply Now</a>
-                    </li>
+                    </li>-->
 
                   </ul>
                 </div>

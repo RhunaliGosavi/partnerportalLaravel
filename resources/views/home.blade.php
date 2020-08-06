@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="m-demo-icon">
-                                <a href="{{url('/referFriendRequests')}}" border='0'>
+                                <a href="{{url('/referCustomer')}}" border='0'>
                                     <div class="m-demo-icon__preview">
                                         <i class="flaticon-users"></i>
                                     </div>

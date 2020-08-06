@@ -40,11 +40,11 @@ Route::group(['middleware' => ['web','auth:employees']], function() {
 	Route::get('sales/kit/corporatepresentation','Frontend\SalesKitController@corporatepresentation');
 
 	Route::get('important/links','Frontend\LinkController@index');
-	Route::get('refer/friend', 'Frontend\ReferFriendController@index');
-	Route::get('apply/now', 'Frontend\ApplyNowRequestController@index');
+	Route::get('refer/customer', 'Frontend\ReferFriendController@index');
+	//Route::get('apply/now', 'Frontend\ApplyNowRequestController@index');
 
 	Route::post('refer_friend', 'Frontend\ReferFriendController@store');
-    Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
+   // Route::post('apply_now', 'Frontend\ApplyNowRequestController@store');
 
 	Route::get('application/status/tracker', 'Frontend\ApplicationStatusTracker@index');
 	Route::post('application/status', 'Frontend\ApplicationStatusTracker@getAppStatus');
@@ -116,9 +116,20 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('employee-helpdesk/update','EmployeeHelpDeskController@update');
 
 
-	Route::get('referFriendRequests',      'ReferFriendController@index');
+	Route::get('referCustomer',      'ReferFriendController@index');
 	Route::get('fetchReferFriendRequests', 'ReferFriendController@referFriendRequests');
-	Route::get('referFriendExport', 	   'ReferFriendController@export');
+    Route::get('referFriendExport', 	   'ReferFriendController@export');
+
+    Route::get('relationship_with_customer/create','ReferFriendController@showRelationshipWithCustomer');
+    Route::post('relationship_with_customer/store', 		'ReferFriendController@store');
+    Route::get('relationshipWithCustomer', 		'ReferFriendController@showList');
+    Route::get('fetchRelationshipWithCustomer', 		'ReferFriendController@fetchRelationshipWithCustomer');
+    Route::get('relationshipWithCustomer/delete/{id}',  'ReferFriendController@delete');
+    Route::get('/relationshipwithCustomer/edit/{id}',  'ReferFriendController@edit');
+    Route::post('/relationshipWithCustomer/update/{id}',  'ReferFriendController@update');
+
+
+
 
 	Route::get('applyNowRequests', 	'ApplyNowRequestController@index');
 	Route::get('fetchHRLoans', 		'ApplyNowRequestController@fetchHRLoans');

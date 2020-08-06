@@ -16,11 +16,11 @@ class ReferFriendExport implements FromView
     public function view(): View
     {
         if($this->id){
-            $this->query= ReferBuddy::with('employee')->where('refer_buddy.id',$this->id)->get();
+            $this->query= ReferBuddy::with('employee')->with('relation_with_customer')->where('refer_buddy.id',$this->id)->get();
          }else if($this->otherLoanType){
-             $this->query= ReferBuddy::with('employee')->where('refer_buddy.loan_product_id',$this->otherLoanType)->where('refer_buddy.created_at', '>', DB::raw('NOW() - INTERVAL 24 HOUR'))->get();
+             $this->query= ReferBuddy::with('employee')->with('relation_with_customer')->where('refer_buddy.loan_product_id',$this->otherLoanType)->where('refer_buddy.created_at', '>', DB::raw('NOW() - INTERVAL 24 HOUR'))->get();
          }else{
-            $this->query=ReferBuddy::with('employee')->get();
+            $this->query=ReferBuddy::with('employee')->with('relation_with_customer')->get();
          }
 
         return view('exports.refer_friend', [

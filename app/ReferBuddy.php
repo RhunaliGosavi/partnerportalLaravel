@@ -25,4 +25,8 @@ class ReferBuddy extends Model
     public function loan_product(){
         return $this->belongsTo('App\LoanProduct','loan_product_id');
     }
+    // Fetch Relationship
+    public function relation_with_customer(){
+        return $this->belongsTo('App\RelationshipWithCustomer','relation_with_customer_id');
+    }
 }
