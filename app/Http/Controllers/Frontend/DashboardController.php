@@ -70,7 +70,7 @@ class DashboardController extends Controller
         $type=$request->input('type');
 
        DB::enableQueryLog();
-       $result=EmployeeDashboard::select("employee_application_details.*", DB::raw("DATE_FORMAT(employee_application_details.sanctioned_date, '%d/%m/%Y') as sanctioned_date , DATE_FORMAT(employee_application_details.disbursement_date, '%d/%m/%Y') as disbursement_date,DATE_FORMAT(employee_application_details.application_login_date, '%d/%m/%Y') as application_login_date"));
+       $result=EmployeeDashboard::select("employee_application_details.*", DB::raw("DATE_FORMAT(employee_application_details.sanctioned_date, '%d/%m/%Y') as sanctioned_date , DATE_FORMAT(employee_application_details.disbursement_date, '%d/%m/%Y') as disbursement_date,DATE_FORMAT(employee_application_details.application_login_date, '%d/%m/%Y') as application_login_date,DATE_FORMAT(employee_application_details.declined_date, '%d/%m/%Y') as declined_date"));
        if($type=="sanctioned"){
             $result->where('sanctioned_date','>=',$startDate)
                 ->where('sanctioned_date','<=',$enddate)
@@ -88,7 +88,7 @@ class DashboardController extends Controller
        }
        if($type=='disbursed'){
                $result->leftJoin('application_disburse_details', 'employee_application_details.id', '=', 'application_disburse_details.application_tbl_id')
-                    ->select("employee_application_details.*", DB::raw("DATE_FORMAT(application_disburse_details.disbursement_date, '%d/%m/%Y') as disbursement_date_partial,DATE_FORMAT(employee_application_details.sanctioned_date, '%d/%m/%Y') as sanctioned_date , DATE_FORMAT(employee_application_details.disbursement_date, '%d/%m/%Y') as disbursement_date,DATE_FORMAT(employee_application_details.application_login_date, '%d/%m/%Y') as application_login_date,application_disburse_details.disbursed_amount as disbursed_amount_partial"))
+                    ->select("employee_application_details.*", DB::raw("DATE_FORMAT(application_disburse_details.disbursement_date, '%d/%m/%Y') as disbursement_date_partial,DATE_FORMAT(employee_application_details.sanctioned_date, '%d/%m/%Y') as sanctioned_date , DATE_FORMAT(employee_application_details.disbursement_date, '%d/%m/%Y') as disbursement_date,DATE_FORMAT(employee_application_details.application_login_date, '%d/%m/%Y') as application_login_date,DATE_FORMAT(employee_application_details.declined_date, '%d/%m/%Y') as declined_date,application_disburse_details.disbursed_amount as disbursed_amount_partial"))
                     ->where('employee_application_details.disbursement_date','>=',$startDate)
                     ->where('employee_application_details.disbursement_date','<=',$enddate)
                     ->where(function($q) {

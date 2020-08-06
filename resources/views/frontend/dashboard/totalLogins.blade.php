@@ -1,4 +1,11 @@
 @extends('frontend.layouts.app')
+<style>
+.table td, 
+.table th {
+    white-space: nowrap;
+    width: 1%;
+}
+</style>
 @section('title')
 	Total Logins
 @endsection
@@ -106,14 +113,14 @@
                       <th>Applied Amount</th>
                       <th>Login Date</th>
                       <th>Status</th>
-                      <th>Sanctioned Amount</th>
+                      <!-- <th>Sanctioned Amount</th>
                       <th>Sanctioned Date</th>
                       <th>Disbursed Amount</th>
                       <th>Disbursement Date</th>
                       <th>Sales Officer</th>
                       <th>Sales Supervisor</th>
                       <th>Sourcing Location</th>
-                      <th>Sourcing Agency</th>
+                      <th>Sourcing Agency</th> -->
                     </tr>
                   </thead>
                   <tbody id="loginDetails">
@@ -203,7 +210,7 @@
             if(res.length>0){
                 $.each(res, function(key, value) {
 
-                        html+='<tr><td>'+(key+1)+'</td><td>'+res[key]['application_number']+'</td><td>'+res[key]['customer_name']+'</td><td>'+res[key]['product_type']+'</td><td>'+res[key]['applied_amount']+'</td><td>'+res[key]['application_login_date']+'</td><td>'+res[key]['application_status']+'</td><td>'+res[key]['sanctioned_amount']+'</td><td>'+res[key]['sanctioned_date']+'</td><td>'+res[key]['disbursed_amount']+'</td><td>'+res[key]['disbursement_date']+'</td><td>'+res[key]['sales_officer_name']+'</td><td>'+res[key]['sales_supervisors_name']+'</td><td>'+res[key]['sourcing_location']+'</td><td>'+res[key]['sourcing_agency']+'</td></tr>';
+                        html+='<tr><td>'+(key+1)+'</td><td>'+res[key]['application_number']+'</td><td>'+res[key]['customer_name']+'</td><td>'+res[key]['product_type']+'</td><td>'+res[key]['applied_amount']+'</td><td>'+res[key]['application_login_date']+'</td><td>'+res[key]['application_status']+'</td></tr>';
 
                 });
             }else{
