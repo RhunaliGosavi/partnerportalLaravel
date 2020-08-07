@@ -29,7 +29,7 @@ class RelationshipWithCustomerSeeder extends Seeder
                     'id'=>3,
                    
                     'relationship'=>'Family',
-                    'relationship'=>'Existing Customer',
+                    
                     
                     
                     ),
