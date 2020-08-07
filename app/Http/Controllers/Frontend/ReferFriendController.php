@@ -81,8 +81,8 @@ class ReferFriendController extends Controller
         /******Rhuna : send mail*****/
          //$to_mail='rhuna0606@gmail.com';
          $raw= Excel::raw(new ReferFriendExport($refer->id), BaseExcel::XLSX) ;
-         $userSubject="User Test";
-         $CustSubject="customer Test";
+         $userSubject="Refer Customer Lead Generation";
+         $CustSubject="Refer Customer Lead Generation";
          SendEmail::dispatch('frontend.refer_friend.userCustomerLeadGenerationMail',$userSubject,Auth::user()->email);
          SendEmail::dispatch('frontend.refer_friend.userCustomerLeadGenerationMail',$CustSubject,$refer->email);
          $data = array('name'=>"");
@@ -90,7 +90,7 @@ class ReferFriendController extends Controller
          Mail::send('frontend.apply_now_requests.ApplyNowMail', $data, function($message) use($raw,$to_mail,$fileName) {
 
              $message->to($to_mail, 'Axis Bank')->subject
-                ('Refer Your  Friend Lead Details');
+                ('Refer Customer Lead Details');
               $message->attachData($raw, $fileName.'.xlsx');
           });
         /******Rhuna : send mail*****/

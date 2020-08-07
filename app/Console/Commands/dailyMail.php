@@ -48,7 +48,12 @@ class dailyMail extends Command
         $productArray=array(Config::get('constant')['APPLY_NOW_MAIL']['hr_loan'], Config::get('constant')['APPLY_NOW_MAIL']['business_loan'],Config::get('constant')['APPLY_NOW_MAIL']['loan_against_property'], Config::get('constant')['APPLY_NOW_MAIL']['loan_against_securities'],Config::get('constant')['APPLY_NOW_MAIL']['consumer_product_finance'],Config::get('constant')['APPLY_NOW_MAIL']['personal_loan']);
         //$productArray=array('rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com','rhuna0606@gmail.com');
         foreach ($productArray as $key => $value) {
-            if($key==0){
+           if($key!=0){
+            $raw= Excel::raw(new ReferFriendExport(null,$key), BaseExcel::XLSX) ;
+            $subject="Refer Customer Lead Details";
+            $this->sendMailToProduct($key,$value,$raw,$subject);
+           }
+            /*if($key==0){
                 $raw=Excel::raw(new HRLoanExport(null,'hrLoan'), BaseExcel::XLSX) ;
                 $subject="Apply Now Lead Details";
                 $this->sendMailToProduct($key,$value,$raw,$subject);
@@ -59,12 +64,12 @@ class dailyMail extends Command
                 $raw2= Excel::raw(new ReferFriendExport(null,$key), BaseExcel::XLSX) ;
                 $tyeArray=array($raw1,$raw2);
                 foreach ($tyeArray as $key1 => $raw) {
-                    $subject=($key1==0)? 'Apply Now Lead Details' : 'Refer Your Friend Lead Details';
+                    $subject=($key1==0)? 'Apply Now Lead Details' : 'Refer Customer Lead Details';
                     $this->sendMailToProduct($key,$value,$raw,$subject);
                 }
-            }
+            }*/
 
-             //$this->info($key);
+
 
         }
 
@@ -95,7 +100,7 @@ class dailyMail extends Command
 
                 $message->to($value, 'Axis Bank')->subject
                    ($subject);
-                $message->from('axisBnak@gmail.com','Axis Bank');
+
                 $message->attachData($raw, $fileName.'.xlsx');
              });
              return true;
