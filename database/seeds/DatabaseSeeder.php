@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DocumentChecklistCategorySeeder::class,
             DocumentChecklistProductSeeder::class,
             EmployeeSeeder::class,
+            RelationshipWithCustomerSeeder::class,
            // ReferFriendSeeder::class,
            // HrLoanSeeder::class,
             //OtherLoanSeeder::class,
