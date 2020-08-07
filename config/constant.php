@@ -2,7 +2,7 @@
 return [
 	'user_types' => [
 		'AFL_EMPLOYEE' => 1,
-		'BUSSINESS_PARTNERdasdad' => 2,
+		'BUSSINESS_PARTNER' => 2,
 	],
 
 	'sales_kit_products' => [
