@@ -1,4 +1,12 @@
 @extends('frontend.layouts.app')
+<style>
+  .isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+  }
+</style>
 @section('title')
 	Employee Helpdesk
 @endsection
@@ -40,7 +48,13 @@
                       <td>{{$desk->name}}</td>
                       <td>{{$desk->file_size_in_mb}}</td>
                       <td><a href="{{url('/storage/employee/helpdesk/upload/').'/'.$desk->file_path}}" target="_blank">View</a></td>
-                      <td><a href="{{url('/storage/employee/helpdesk/upload/').'/'.$desk->file_path}}" download="{{$desk->file_path}}"><img src="{{url('/assets_frontend/images/down-arrow.png')}}" alt="download" class="img-fluid"/></a></td>
+                      <td>
+                      @if($desk->download_flag)
+                        <a href="{{url('/storage/employee/helpdesk/upload/').'/'.$desk->file_path}}" download="{{$desk->file_path}}"><img src="{{url('/assets_frontend/images/down-arrow.png')}}" alt="download" class="img-fluid"/></a>
+                      @else
+                        <a class="isDisabled"><img src="{{url('/assets_frontend/images/down-arrow.png')}}" alt="download" class="img-fluid"/></a>
+                      @endif
+                      </td>
                   </tr>
                 
                   @endforeach

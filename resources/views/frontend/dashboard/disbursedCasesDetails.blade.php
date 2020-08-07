@@ -1,4 +1,11 @@
 @extends('frontend.layouts.app')
+<style>
+.table td, 
+.table th {
+    white-space: nowrap;
+    width: 1%;
+}
+</style>
 @section('title')
 	Disbursed Cases
 @endsection
@@ -103,17 +110,9 @@
                       <th>Application No.</th>
                       <th>Customer Name</th>
                       <th>Product Type</th>
-                      <th>Applied Amount</th>
-                      <th>Login Date</th>
-                      <th>Status</th>
-                      <th>Sanctioned Amount</th>
-                      <th>Sanctioned Date</th>
                       <th>Disbursed Amount</th>
                       <th>Disbursement Date</th>
-                      <th>Sales Officer</th>
-                      <th>Sales Supervisor</th>
-                      <th>Sourcing Location</th>
-                      <th>Sourcing Agency</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody id="loginDetails">
@@ -207,7 +206,7 @@
                         var disbursement_date=(appStatus.trim()!='Partially Disbursed') ? res[key]['disbursement_date'] : res[key]['disbursement_date_partial'];
                         var disbursed_amount=(appStatus.trim()!='Partially Disbursed') ? res[key]['disbursed_amount'] : res[key]['disbursed_amount_partial'];
 
-                        html+='<tr><td>'+(key+1)+'</td><td>'+res[key]['application_number']+'</td><td>'+res[key]['customer_name']+'</td><td>'+res[key]['product_type']+'</td><td>'+res[key]['applied_amount']+'</td><td>'+res[key]['application_login_date']+'</td><td>'+res[key]['application_status']+'</td><td>'+res[key]['sanctioned_amount']+'</td><td>'+res[key]['sanctioned_date']+'</td><td>'+disbursed_amount+'</td><td>'+disbursement_date+'</td><td>'+res[key]['sales_officer_name']+'</td><td>'+res[key]['sales_supervisors_name']+'</td><td>'+res[key]['sourcing_location']+'</td><td>'+res[key]['sourcing_agency']+'</td></tr>';
+                        html+='<tr><td>'+(key+1)+'</td><td>'+res[key]['application_number']+'</td><td>'+res[key]['customer_name']+'</td><td>'+res[key]['product_type']+'</td><td>'+disbursed_amount+'</td><td>'+disbursement_date+'</td><td>'+res[key]['application_status']+'</td></tr>';
 
                 });
             }else{
